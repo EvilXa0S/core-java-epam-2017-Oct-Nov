@@ -1,4 +1,6 @@
-package com.epam.courses.jf.practice.common.first;
+package bborzdov.first;
+
+import com.epam.courses.jf.practice.common.first.ISolver;
 
 import java.math.BigDecimal;
 import java.util.*;
