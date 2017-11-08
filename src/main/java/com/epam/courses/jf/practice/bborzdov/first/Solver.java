@@ -1,4 +1,4 @@
-package bborzdov.first;
+package com.epam.courses.jf.practice.bborzdov.first;
 
 import com.epam.courses.jf.practice.common.first.ISolver;
 
