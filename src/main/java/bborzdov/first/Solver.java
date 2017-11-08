@@ -16,37 +16,6 @@ public class Solver implements ISolver {
         scanner = new Scanner(System.in);
     }
 
-    public static void main(String[] args) {
-        Solver solver = new Solver();
-        solver.task1();
-        solver.task2();
-        solver.task3();
-        solver.task4();
-        solver.task5();
-        solver.task6();
-        solver.task7();
-        solver.task8();
-        solver.task9();
-        solver.task10();
-        solver.task11();
-        solver.task12();
-        solver.task13();
-        solver.task14();
-        solver.task15();
-        solver.task16();
-        solver.task17();
-        solver.task18();
-        solver.task19();
-        solver.task20();
-        solver.task21();
-        solver.task22();
-        solver.task23();
-        solver.task24();
-        solver.task25();
-        solver.task26();
-        solver.task27();
-    }
-
     /**
      * Ввести N строк (каждая с новой строки). Найти среди них самую короткую и самую длинную.
      * Вывести найденные строки и их длину. Если строк, удовлетворяющих условию,
