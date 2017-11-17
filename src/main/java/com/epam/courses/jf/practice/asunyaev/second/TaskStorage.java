@@ -2,67 +2,66 @@ package com.epam.courses.jf.practice.asunyaev.second;
 
 import com.epam.courses.jf.practice.common.second.*;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class TaskStorage implements ITaskStorage {
 
     public <T extends ITestableTask> T getSolver(Class<T> taskInterface) {
-        if (taskInterface == ITestableTask1.class) {
+
+        if (taskInterface.equals(ITestableTask1.class)) {
             return (T) new Task1();
         }
-        if (taskInterface == ITestableTask2.class) {
+        if (taskInterface.equals(ITestableTask2.class)) {
             return (T) new Task2();
         }
-        if (taskInterface == ITestableTask3.class) {
+        if (taskInterface.equals(ITestableTask3.class)) {
             return (T) new Task3();
         }
-        if (taskInterface == ITestableTask4.class) {
+        if (taskInterface.equals(ITestableTask4.class)) {
             return (T) new Task4();
         }
-        if (taskInterface == ITestableTask5.class) {
+        if (taskInterface.equals(ITestableTask5.class)) {
             return (T) new Task5();
         }
-        if (taskInterface == ITestableTask6.class) {
+        if (taskInterface.equals(ITestableTask6.class)) {
             return (T) new Task6();
         }
-        if (taskInterface == ITestableTask7.class) {
+        if (taskInterface.equals(ITestableTask7.class)) {
             return (T) new Task7();
         }
-        if (taskInterface == ITestableTask8.class) {
+        if (taskInterface.equals(ITestableTask8.class)) {
             return (T) new Task8();
         }
-        if (taskInterface == ITestableTask9.class) {
+        if (taskInterface.equals(ITestableTask9.class)) {
             return (T) new Task9();
         }
-        if (taskInterface == ITestableTask10.class) {
+        if (taskInterface.equals(ITestableTask10.class)) {
             return (T) new Task10();
         }
-        if (taskInterface == ITestableTask11.class) {
+        if (taskInterface.equals(ITestableTask11.class)) {
             return (T) new Task11();
         }
-        if (taskInterface == ITestableTask12.class) {
+        if (taskInterface.equals(ITestableTask12.class)) {
             return (T) new Task12();
         }
-        if (taskInterface == ITestableTask13.class) {
+        if (taskInterface.equals(ITestableTask13.class)) {
             return (T) new Task13();
         }
-        if (taskInterface == ITestableTask14.class) {
+        if (taskInterface.equals(ITestableTask14.class)) {
             return (T) new Task14();
         }
-        if (taskInterface == ITestableTask15.class) {
+        if (taskInterface.equals(ITestableTask15.class)) {
             return (T) new Task15();
         }
-        if (taskInterface == ITestableTask16.class) {
+        if (taskInterface.equals(ITestableTask16.class)) {
             return (T) new Task16();
         }
-        if (taskInterface == ITestableTask17.class) {
+        if (taskInterface.equals(ITestableTask17.class)) {
             return (T) new Task17();
         }
-        if (taskInterface == ITestableTask18.class) {
+        if (taskInterface.equals(ITestableTask18.class)) {
             return (T) new Task18();
         }
-        if (taskInterface == ITestableTask19.class) {
+        if (taskInterface.equals(ITestableTask19.class)) {
             return (T) new Task19();
         }
         return null;
