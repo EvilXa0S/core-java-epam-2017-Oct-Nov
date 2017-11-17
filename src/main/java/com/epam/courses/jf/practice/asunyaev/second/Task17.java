@@ -34,7 +34,7 @@ public class Task17 implements ITestableTask17 {
 
         return intersectionPoints.get(intersectionPoints.firstKey());
     }
-    
+
 
     private I2DPoint getIntersectionPoint(ISegment segment1, ISegment segment2) {
         I2DPoint p1 = segment1.first();
