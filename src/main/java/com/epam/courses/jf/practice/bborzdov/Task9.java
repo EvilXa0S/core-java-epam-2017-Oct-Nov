@@ -28,7 +28,7 @@ public class Task9 implements ITestableTask9 {
         for (int i = 0; i < strings.size(); i++) {
             String[] split = strings.get(i).split(" ");
             if(split.length > 1){
-                strings.remove(strings.get(i));
+                strings.remove(i);
                 strings.addAll(Arrays.asList(split));
             }
             if(!caseSensitive.contains(strings.get(i).toLowerCase())){
