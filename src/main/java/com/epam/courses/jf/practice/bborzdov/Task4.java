@@ -2,7 +2,6 @@ package com.epam.courses.jf.practice.bborzdov;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask4;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
