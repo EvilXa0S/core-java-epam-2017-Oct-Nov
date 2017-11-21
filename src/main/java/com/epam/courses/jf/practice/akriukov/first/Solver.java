@@ -575,6 +575,21 @@ public class Solver implements ISolver{
         matrixOutput(matrix);
     }
 
+    @Override
+    public void task22() {
+        Scanner scanner = new Scanner(System.in);
+        int matrixDim = scanner.nextInt(); //matrix dimension
+
+        int[][] matrix = new int[matrixDim][matrixDim];
+        for (int row = 0; row < matrixDim; ++row) {
+            for (int col = 0; col < matrixDim; ++col) {
+                matrix[row][col] = (int) Math.round(scanner.nextDouble());
+            }
+        }
+
+        matrixOutput(matrix);
+    }
+
     /**
      * Custom comparator for task2()
      * Firstly compares string length. If length is the same, then compare by symbol codes
