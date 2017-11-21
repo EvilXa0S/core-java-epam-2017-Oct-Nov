@@ -328,17 +328,7 @@ public class Solver implements ISolver{
         Scanner scanner = new Scanner(System.in);
         int k = scanner.nextInt(); //move position
         int[][] inMatrix = matrixInput();
-        int dim = inMatrix.length;
-        int[][] outMatrix = new int[dim][dim];
-        for (int i = 0; i < dim; i++) {
-            for (int j = 0; j < dim; j++) {
-                if (k >= 0) {
-                    outMatrix[(i + k) % dim][j] = inMatrix[i][j]; //move rows down
-                } else {
-                    outMatrix[i][j] = inMatrix[(i - k) % dim][j]; //move rows up
-                }
-            }
-        }
+        int[][] outMatrix = moveRows(inMatrix, k);
         matrixOutput(outMatrix);
 
     }
@@ -521,6 +511,39 @@ public class Solver implements ISolver{
         matrixOutputNonSquare(outMatrix);
     }
 
+    @Override
+    public void task20() {
+        int moveRowPosition = Integer.parseInt(readLineFromConsole()); //throws exception if copy-paste input data in console, but with typing works good
+        int moveColumnPosition = Integer.parseInt(readLineFromConsole()); //use scanner for copy-paste
+        int inMatrix[][] = matrixInput();
+        int minElement = Integer.MAX_VALUE;
+        int dim = inMatrix.length;
+        int minElementRowPosition = 0;
+        int minElementColumnPosition = 0;
+        for (int i = 0; i < dim; i++) { //search min element in matrix
+            for (int j = 0; j < dim; j++) {
+                if (minElement > inMatrix[i][j]) {
+                    minElement = inMatrix[i][j];
+                    minElementRowPosition = i;
+                    minElementColumnPosition = j;
+                }
+            }
+        }
+        for (int j = 0; j < dim; j++) { //moving rows
+            int[] buffer = new int[dim];
+            buffer[j] = inMatrix[moveRowPosition][j];
+            inMatrix[moveRowPosition][j] = inMatrix[minElementRowPosition][j];
+            inMatrix[minElementRowPosition][j] = buffer[j];
+        }
+        for (int i = 0; i < dim; i++) { //moving columns
+            int[] buffer = new int[dim];
+            buffer[i] = inMatrix[i][moveColumnPosition];
+            inMatrix[i][moveColumnPosition] = inMatrix[i][minElementColumnPosition];
+            inMatrix[i][minElementColumnPosition] = buffer[i];
+        }
+        matrixOutput(inMatrix);
+    }
+
     /**
      * Custom comparator for task2()
      * Firstly compares string length. If length is the same, then compare by symbol codes
@@ -611,13 +634,51 @@ public class Solver implements ISolver{
     }
 
     /**
-     * Search element in matrix and delete rows and columns where element were found
-     * @param elementToDelete
+     * Cyclic move rows in matrix on movePosition times
+     * If movePosition > 0 then mowing down
+     * If movePosition < 0 then mowing up
+     * If movePosition == 0 then matrix stand still
      * @param inMatrix
-     * @return matrix with remaining elements
+     * @param movePosition
+     * @return matrix with moved rows
      */
-    public static int[][] deleteElementFromMatrix(int elementToDelete, int[][] inMatrix) {
-        return null;
+    public static int[][] moveRows(int[][] inMatrix, int movePosition) {
+        int dim = inMatrix.length;
+        int[][] outMatrix = new int[dim][dim];
+        for (int i = 0; i < dim; i++) {
+            for (int j = 0; j < dim; j++) {
+                if (movePosition >= 0) {
+                    outMatrix[(i + movePosition) % dim][j] = inMatrix[i][j]; //move rows down
+                } else {
+                    outMatrix[i][j] = inMatrix[(i - movePosition) % dim][j]; //move rows up
+                }
+            }
+        }
+        return outMatrix;
+    }
+
+    /**
+     * Cyclic move columns in matrix on movePosition times
+     * If movePosition > 0 then mowing right
+     * If movePosition < 0 then mowing left
+     * If movePosition == 0 then matrix stand still
+     * @param inMatrix
+     * @param movePosition
+     * @return matrix with moved rows
+     */
+    public static int[][] moveColumns(int[][] inMatrix, int movePosition) {
+        int dim = inMatrix.length;
+        int[][] outMatrix = new int[dim][dim];
+        for (int j = 0; j < dim; j++) {
+            for (int i = 0; i < dim; i++) {
+                if (movePosition >= 0) {
+                    outMatrix[i][(j + movePosition) % dim] = inMatrix[i][j]; //move rows right
+                } else {
+                    outMatrix[i][j] = inMatrix[i][(j - movePosition) % dim]; //move rows left
+                }
+            }
+        }
+        return outMatrix;
     }
 
 }
