@@ -506,6 +506,7 @@ public class Solver implements ISolver{
             }
             outMatrixRows++;
         }
+
         System.out.println(outMatrixRows);
         System.out.println(outMatrixColumns);
         matrixOutputNonSquare(outMatrix);
@@ -515,33 +516,63 @@ public class Solver implements ISolver{
     public void task20() {
         int moveRowPosition = Integer.parseInt(readLineFromConsole()); //throws exception if copy-paste input data in console, but with typing works good
         int moveColumnPosition = Integer.parseInt(readLineFromConsole()); //use scanner for copy-paste
-        int inMatrix[][] = matrixInput();
+        int matrix[][] = matrixInput();
         int minElement = Integer.MAX_VALUE;
-        int dim = inMatrix.length;
+        int dim = matrix.length;
         int minElementRowPosition = 0;
         int minElementColumnPosition = 0;
+
         for (int i = 0; i < dim; i++) { //search min element in matrix
             for (int j = 0; j < dim; j++) {
-                if (minElement > inMatrix[i][j]) {
-                    minElement = inMatrix[i][j];
+                if (minElement > matrix[i][j]) {
+                    minElement = matrix[i][j];
                     minElementRowPosition = i;
                     minElementColumnPosition = j;
                 }
             }
         }
+
         for (int j = 0; j < dim; j++) { //moving rows
             int[] buffer = new int[dim];
-            buffer[j] = inMatrix[moveRowPosition][j];
-            inMatrix[moveRowPosition][j] = inMatrix[minElementRowPosition][j];
-            inMatrix[minElementRowPosition][j] = buffer[j];
+            buffer[j] = matrix[moveRowPosition][j];
+            matrix[moveRowPosition][j] = matrix[minElementRowPosition][j];
+            matrix[minElementRowPosition][j] = buffer[j];
         }
+
         for (int i = 0; i < dim; i++) { //moving columns
             int[] buffer = new int[dim];
-            buffer[i] = inMatrix[i][moveColumnPosition];
-            inMatrix[i][moveColumnPosition] = inMatrix[i][minElementColumnPosition];
-            inMatrix[i][minElementColumnPosition] = buffer[i];
+            buffer[i] = matrix[i][moveColumnPosition];
+            matrix[i][moveColumnPosition] = matrix[i][minElementColumnPosition];
+            matrix[i][minElementColumnPosition] = buffer[i];
         }
-        matrixOutput(inMatrix);
+
+        matrixOutput(matrix);
+    }
+
+    @Override
+    public void task21() {
+        int[][] matrix = matrixInput();
+        int dim = matrix.length;
+
+        for (int i = 0; i < dim; i++) {
+            for (int j = 0; j < dim - 1; j++) {
+                if (matrix[i][j] == 0) {
+                    if (matrix[i][j + 1] == 0) {
+                        for (int k = j + 2; k < dim; k++) {
+                            if (matrix[i][k] != 0) {
+                                matrix[i][j] = matrix[i][k];
+                                matrix[i][k] = 0;
+                            }
+                        }
+                    } else {
+                        matrix[i][j] = matrix[i][j + 1];
+                        matrix[i][j + 1] = 0;
+                    }
+                }
+            }
+        }
+
+        matrixOutput(matrix);
     }
 
     /**
