@@ -590,6 +590,29 @@ public class Solver implements ISolver{
         matrixOutput(matrix);
     }
 
+    @Override
+    //TODO
+    public void task23() {
+    }
+
+    @Override
+    public void task24() {
+
+        int[][] matrix = matrixInput();
+
+        Arrays.sort(matrix, (o1, o2) -> {
+            int sum1 = 0;
+            int sum2 = 0;
+            for (int i = 0; i < matrix.length; i++) {
+                sum1 += o1[i];
+                sum2 += o2[i];
+            }
+            return sum1 - sum2;
+        });
+
+        matrixOutput(matrix);
+    }
+
     /**
      * Custom comparator for task2()
      * Firstly compares string length. If length is the same, then compare by symbol codes
