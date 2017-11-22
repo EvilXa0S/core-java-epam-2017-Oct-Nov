@@ -35,7 +35,6 @@ public class Task17 implements ITestableTask17 {
         return intersectionPoints.get(intersectionPoints.firstKey());
     }
 
-
     private I2DPoint getIntersectionPoint(ISegment segment1, ISegment segment2) {
         I2DPoint p1 = segment1.first();
         I2DPoint p2 = segment1.second();
@@ -83,6 +82,5 @@ public class Task17 implements ITestableTask17 {
         double u = ((x4 - x3)*(y1 - y3) - (y4 - y3)*(x1 - x3))/((y4 - y3)*(x2 - x1) - (x4 - x3)*(y2 - y1));
         return new Point2D(x1 + u*(x2 - x1), y1 + u*(y2 - y1));
     }
-
 
 }
