@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class Point2D implements I2DPoint, Serializable, Comparable<Point2D> {
     private double x;
     private double y;
-    private double distance;
+    private double distance = 0;
     public Point2D(double x, double y){
         this.x = x;
         this.y = y;

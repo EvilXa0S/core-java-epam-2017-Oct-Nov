@@ -18,7 +18,7 @@ public class Task16 implements ITestableTask16 {
         double radius = (double) radiusInt / 2;
         SortedMap<I2DPoint, Double> points = new TreeMap<>();
         for (int i = (int)(center.getY() + radius); i > (center.getY() - radius - 1) ; i--) {
-            for (int j = (int)(center.getX() - radius); j <(center.getX()+radius+1) ; j++) {
+            for (int j = (int)(center.getX() - radius); j < (center.getX()+radius+1) ; j++) {
                 Point2D point = new Point2D(j,i);
                 BigDecimal distance =new BigDecimal(Task15.distance(point,center));
                 distance = distance.setScale(4, BigDecimal.ROUND_DOWN);
