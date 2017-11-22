@@ -2,11 +2,13 @@ package com.epam.courses.jf.practice.danilBay.first;
 
 import com.epam.courses.jf.practice.common.first.ISolver;
 
+import java.io.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
 import java.util.regex.Pattern;
 
+import static java.lang.Math.abs;
 import static java.lang.Math.max;
 import static java.lang.Math.sqrt;
 
@@ -794,10 +796,250 @@ public class Solver implements ISolver {
         }
     }
     public void task21(){
+        Scanner in = new Scanner(System.in);
+
+
+
+        int b = in.nextInt();
+        int[][] res = new int[b][b];
+        for (int i = 0; i < b; i++)
+            for (int j = 0; j < b; j++)
+                res[i][j] = in.nextInt();
+
+        for(int i=0;i<b;i++){
+
+            for(int j=0;j<b;j++)
+                for(int k=j+1;k<b;k++){
+                    if(res[i][j]==0 && res[i][k]!=0){
+                        res[i][j]=res[i][k];
+                        res[i][k]=0;
+                       // j++;k++;
+                    }
+
+                }
+
+        }
+        System.out.println(b);
+        for (int i = 0; i < b; i++){
+            for (int j = 0; j < b; j++)
+                System.out.print(res[i][j]+"    ");
+
+            System.out.println();
+            }
+
+    }
+
+    public void task22(){
+        Scanner in = new Scanner(System.in);
+        int b = in.nextInt();
+        in.nextLine();
+        int[][] res = new int[b][b];
+        for (int i = 0; i < b; i++) {
+
+            for (int j = 0; j < b; j++) {
+                  res[i][j] = (int) Math.round(in.nextDouble());
+
+            }
+        }
+        System.out.println(b);
+        for (int i = 0; i < b; i++){
+            for (int j = 0; j < b; j++)
+                System.out.print(res[i][j]+"    ");
+
+            System.out.println();
+        }
+    }
+    public void task23(){
+        Scanner in = new Scanner(System.in);
+        Set<Integer> rows=new HashSet<>();
+        Set<Integer> cols=new HashSet<>();
+
+        int b = in.nextInt();
+        int[][] res = new int[b][b];
+        for (int i = 0; i < b; i++)
+            for (int j = 0; j < b; j++)
+                res[i][j] = in.nextInt();
+
+        int counter=0;//результат. количество седловых точек
+        for(int i=0;i<b;i++) {
+
+            if(!rows.contains(i))
+            for (int j = 0; j < b; j++) {
+                if (!cols.contains(j)){
+                    boolean flag=true;
+                    for(int n=0;n<b;n++){
+                        if(res[i][j]>res[i][n]){
+                            flag=false;
+                            break;
+                        }
+                    }
+                    if(flag)
+                    for(int n=0;n<b;n++){
+                        if(res[i][j]<res[n][j]){
+                            flag=false;
+                            break;
+                        }
+                    }
+                    if(flag) {
+                        rows.add(i);
+                        cols.add(j);
+                        counter++;
+                        break;
+                    }
+                }
+
+            }
+
+        }
+        System.out.println(counter);
+    }
+    public void task24(){
+        Scanner in = new Scanner(System.in);
+        LinkedList<Integer> conseq=new LinkedList<>();
+
+        int b = in.nextInt();
+        int[][] res = new int[b][b];
+        int sum1;
+        for (int i = 0; i < b; i++) {
+            sum1=0;
+            for (int j = 0; j < b; j++) {
+                res[i][j] = in.nextInt();
+                sum1+=res[i][j];
+            }
+            if(conseq.isEmpty()) {
+                conseq.add(0, i);
+                continue;
+            }
+            for(int k=0;k<conseq.size();k++){
+                int sum2=0;
+                for(int z=0;z<b;z++) {
+
+                    sum2 += res[conseq.get(k)][z];
+                }
+                if(sum1<sum2){
+                    conseq.add(k,i);
+                    break;
+                }
+
+            }
+        }
+
+        System.out.println(b);
+        for(int x : conseq) {
+            for (int i = 0; i < b; i++) {
+                System.out.print(res[x][i] + "    ");
+            }
+            System.out.println();
+        }
+
+    }
+    public void task25(){
+
+    }
+    public void task26(){
+
+    }
+    public void task27(){
+        Scanner in = new Scanner(System.in);
+        LinkedList<Integer> conseq=new LinkedList<>();
+
+        int b = in.nextInt();
+        int[][] res = new int[b][b];
+        int sum1,sum2;
+        for (int i = 0; i < b; i++) {
+            for (int j = 0; j < b; j++) {
+                res[i][j] = in.nextInt();
+
+            }
+        }
+        for(int j=0;j<b;j++){
+
+            sum1=0;
+            for(int i=0;i<b;i++) {
+                sum1 += abs(res[i][j]);
+            }
+            if(conseq.isEmpty()) {
+                conseq.add(j);
+                continue;
+            }
+            for(int k=0;k<conseq.size();k++){
+                sum2=0;
+                for(int z=0;z<b;z++) {
+
+                    sum2 += abs(res[z][conseq.get(k)]);
+                }
+                if(sum1>=sum2){
+                    conseq.add(k,j);
+                    break;
+                }
+                else if((k+1)==conseq.size()) {
+                    conseq.add(j);
+                    break;
+                }
+
+            }
+        }
+
+        System.out.println(b);
+        for(int i = 0; i < b; i++) {
+            for (int x:conseq) {
+                System.out.print(res[i][x] + "    ");
+            }
+            System.out.println();
+        }
 
     }
     public static void main(String[] args) {
-        Solver a=new Solver();
-        a.task9();
+//        try(FileInputStream fin=new FileInputStream("C:\\Users\\dana\\Desktop\\Новая папка (3)\\3D модель для МК\\vertexes1.bin");
+//            FileWriter fos=new FileWriter(new File("C:\\Users\\dana\\Desktop\\Новая папка (3)\\3D модель для МК\\vertC.c"));
+//           )
+//        {
+//            ArrayList<Byte> buffer = new ArrayList<>(fin.available());
+//            // считываем буфер
+//            short f= (short) 0xde00;
+//            int i=-1;
+//            int byteCounter=0;
+//            for(int j=0;j<fin.available();j++){
+//                buffer.add((byte)fin.read());
+//
+//            }
+//            ArrayList<Integer> res=new ArrayList<>();
+//            int tempa=0;
+//            int b1,b2,b3,b4;
+//            for(int k=0;k<buffer.size();k+=4){
+//                if(k%16==0){
+//
+//                    continue;
+//                }
+//                tempa=0;
+//                b1=buffer.get(k)<<24;
+//                b2=buffer.get(k+1)<<16;
+//                b3=buffer.get(k+2)<<8;
+//                b4=(int)buffer.get(k+3);
+//                tempa=b1|b2|b3|b4;
+//                res.add(tempa);
+//            }
+//
+//            StringBuilder str=new StringBuilder();
+//            str.append('{');
+//            for(int x: res){
+//                str.append(x);
+//                str.append(',');
+//            }
+//            str.append('}');
+//
+//            fos.write(str.toString());
+//
+//        }
+//
+//
+//        catch(IOException ex){
+//
+//            System.out.println(ex.getMessage());
+//        }
+//        Solver a=new Solver();
+//        a.task22();
+        Solver m= new Solver();
+        m.task27();
     }
 }
