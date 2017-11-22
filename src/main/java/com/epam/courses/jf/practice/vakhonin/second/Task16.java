@@ -257,30 +257,22 @@ public class Task16 implements ITestableTask16 {
             }
         };
 
-
-
         Queue<I2DPoint> queue = new PriorityQueue<>(comparator);
-        SortedMap<I2DPoint, Double> map = new TreeMap<>(comparator);
 
+        I2DPoint point;
 
-        Point2D point = new Point2D(j,k);
-
-        int xStart = (int) (center.getX() - radius);
-        int xFinish = (int) (center.getX() + radius);
-        int yStart = (int) (center.getY() - radius);
-        int yFinish = (int) (center.getY() + radius);
-        for (int x = xStart; x <= xFinish; x++) {
-            for (int y = yStart; y <= yFinish; y++) {
-                I2DPoint currentPoint = new Point2D(x, y);
-                if (dist(currentPoint, center) < radius) {
-                    map.put(currentPoint, dist(currentPoint,center));
-                    queue.offer(currentPoint);
+        int xFirst = (int) (center.getX() - radius - 1);
+        int xEnd = (int) (center.getX() + radius + 1);
+        int yFirst = (int) (center.getY() - radius - 1);
+        int yEnd = (int) (center.getY() + radius + 1);
+        for (int x = xFirst; x <= xEnd; x++) {
+            for (int y = yFirst; y <= yFirst; y++) {
+                point = new Point2D(x, y);
+                if (dist(point, center) < radius) {
+                    queue.offer(point);
                 }
             }
         }
-
-
-
 
 
 
@@ -291,16 +283,17 @@ public class Task16 implements ITestableTask16 {
             writer.write("\n");
 
 
-            if(!map.isEmpty()) {
-                for (SortedMap.Entry<I2DPoint, Double> entry : map.entrySet()) {
-                    writer.write(String.valueOf(entry.getKey().getX()));
-                    writer.write(" ");
-                    writer.write(String.valueOf(entry.getKey().getY()));
-                    writer.write(" ");
-                    writer.write(String.valueOf(dist(entry.getKey(), center)));
-                    writer.write("\n");
-                }
+
+            while(! queue.isEmpty()){
+                point = queue.poll();
+                writer.write(String.valueOf(point.getX()));
+                writer.write(" ");
+                writer.write(String.valueOf(point.getY()));
+                writer.write(" ");
+                writer.write(String.valueOf(dist(point, center)));
+                writer.write("\n");
             }
+
 //            while (!queue.isEmpty()) {
 //                I2DPoint currentPoint = queue.poll();
 //                writer.write(String.valueOf(currentPoint.getX()));
