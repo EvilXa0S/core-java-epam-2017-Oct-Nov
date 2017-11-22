@@ -55,10 +55,10 @@ public class Task15 implements ITestableTask15 {
 
         return fileWithLines;
     }
-    private double distance(I2DPoint a, I2DPoint b){
+    static double distance(I2DPoint a, I2DPoint b){
         double x = a.getX() - b.getX();
         double y = a.getY() - b.getY();
-        double res = Math.abs(Math.pow(x,2) - Math.pow(y,2));
+        double res = Math.abs(Math.pow(x,2) + Math.pow(y,2));
         return Math.sqrt(res);
     }
     private class FileWithLines implements IFileWithLines{
