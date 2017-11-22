@@ -736,54 +736,92 @@ public class Solver implements ISolver {
     /////////////////////////////////////
     public void task25() {
         int[][] matrix = readMatrix(new Scanner(System.in));
-        Map<Integer, int[]> map = new HashMap<>();
         int counter = 0;
+        boolean flag = true;
 
         for(int i=0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
-                int[] numbers;
-                int numberOfNeighbours = neighbours(matrix, i, j);
-                numbers = new int[numberOfNeighbours];
-                System.out.println("Indexes: I: " + i + " J: " + j);
-                System.out.println();
-                int extraIndex;
+                int new_i;
+                int new_j;
+                int numberOfNeighbours;
+                int n;
+
+                n = matrix.length - 1;
+                numberOfNeighbours = neighbours(matrix, i, j);
+                flag = true;
                 for(int k=0; k < numberOfNeighbours; k++) {
-                    extraIndex = k;
-                    if(i == 0)
-                        extraIndex += 1;
-                    if(j == 0)
-                        extraIndex += 1;
-                    if(i == matrix.length-1)
-                        extraIndex -= 1;
-                    if(j == matrix.length-1)
-                        extraIndex -= 1;
-                    int new_i = (i + (extraIndex-1) * ((extraIndex+1)%2));
-                    int new_j = Math.abs(j + (extraIndex-2) * (extraIndex%2));
-                    System.out.println("new_i: " + new_i);
-                    System.out.println("new_j: " + new_j);
-                    numbers[k] = matrix[new_i][new_j];
-                    System.out.println();
+                    if(i==0 && j==0 || i==n && j==n || i==n && j==0 || i==0 && j==n) {
+                        new_i = i - ((2 * i / n) - 1)*(k % 2);
+                        new_j = j - ((2 * j / n) - 1)*((k+1) % 2);
+                    } else if(i==n || i==0 ) {
+                        new_i = i - ((2 * i / n) - 1) * (k % 2);
+                        new_j = j + (k-1) * ((k+1) % 2);
+                    } else if(j==n || j==0) {
+                        new_i = i + (k-1) * ((k+1) % 2);
+                        new_j = j - ((2 * j / n) - 1)*(k % 2);
+                    } else {
+                        new_i = i + (k-2) * (k % 2);
+                        new_j = j + (k-1) * ((k+1) % 2);
+                    }
+
+                    if(matrix[new_i][new_j] <= matrix[i][j]) {
+                        flag = false;
+                        break;
+                    }
                 }
-                map.put(matrix[i][j], numbers);
+                if(flag == true)
+                    counter++;
             }
         }
-
-        for(int key: map.keySet()) {
-            int[] row = map.get(key);
-            boolean checkIfKeyIsMin = true;
-            for(int elem: row)
-                if(elem <= key)
-                    checkIfKeyIsMin = false;
-            if(checkIfKeyIsMin == true)
-                counter++;
-        }
-
         System.out.println(counter);
     }
     /////////////////////////////////////
     public void task26() {
+        int[][] matrix = readMatrix(new Scanner(System.in));
+        List<Integer> list = new ArrayList<>();
+        int counter = 0;
+        boolean flag = true;
 
+        for(int i=0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                int new_i;
+                int new_j;
+                int numberOfNeighbours;
+                int n;
+
+                n = matrix.length - 1;
+                numberOfNeighbours = neighbours(matrix, i, j);
+                flag = true;
+                for(int k=0; k < numberOfNeighbours; k++) {
+                    if(i==0 && j==0 || i==n && j==n || i==n && j==0 || i==0 && j==n) {
+                        new_i = i - ((2 * i / n) - 1)*(k % 2);
+                        new_j = j - ((2 * j / n) - 1)*((k+1) % 2);
+                    } else if(i==n || i==0 ) {
+                        new_i = i - ((2 * i / n) - 1) * (k % 2);
+                        new_j = j + (k-1) * ((k+1) % 2);
+                    } else if(j==n || j==0) {
+                        new_i = i + (k-1) * ((k+1) % 2);
+                        new_j = j - ((2 * j / n) - 1)*(k % 2);
+                    } else {
+                        new_i = i + (k-2) * (k % 2);
+                        new_j = j + (k-1) * ((k+1) % 2);
+                    }
+
+                    if(matrix[new_i][new_j] >= matrix[i][j]) {
+                        flag = false;
+                        break;
+                    }
+                }
+                if(flag == true)
+                    list.add(matrix[i][j]);
+            }
+        }
+        if(list.size() == 0)
+            System.out.println("NOT FOUND");
+        else
+            System.out.println(Collections.max(list));
     }
+
     public void task27() {
         int[][] matrix = readMatrix(new Scanner(System.in));
         List<int[]> colList = new ArrayList<>();
@@ -821,17 +859,13 @@ public class Solver implements ISolver {
             }
         });
 
-        System.out.println(colList.size());
-        for(int[] r: colList) {
-            int counter = 0;
-            for (int elem : r) {
-                System.out.print(elem);
-                if (++counter != r.length)
-                    System.out.print("\t");
-            }
+        for (int i = 0; i < colList.size(); i++) {
             System.out.println();
+            for (int j = 0; j < colList.size(); j++)
+                System.out.print(colList.get(j)[i] + "\t");
         }
     }
+
 
     private String noDuplicatedChars(String word) {
         String result = "";
