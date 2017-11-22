@@ -31,18 +31,19 @@ public class Point2D implements I2DPoint, Comparable<I2DPoint>, Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || !(o instanceof I2DPoint)) return false;
-        I2DPoint point2D = (I2DPoint) o;
-        return Math.abs(point2D.getX() -  X) < 0.0001 && Math.abs(point2D.getY() - Y) < 0.0001;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Point2D point2D = (Point2D) o;
+
+        if (Double.compare(point2D.getX(), X) != 0) return false;
+        return Double.compare(point2D.getY(), Y) == 0;
     }
+
 
     @Override
     public int hashCode() {
-        int result;
-        long temp = Double.doubleToLongBits(X);
-        result = (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(Y);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        int result = (int) X;
+        result = 31 * result + (int) Y;
         return result;
     }
 
