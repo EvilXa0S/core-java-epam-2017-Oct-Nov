@@ -6,10 +6,6 @@ import java.math.BigDecimal;
 import java.util.*;
 
 public class Solver implements ISolver {
-    public static void main(String[] args) {
-        Solver s = new Solver();
-        s.task12();
-    }
 
     public void task1() {
         Scanner input = new Scanner(System.in);
@@ -315,6 +311,8 @@ public class Solver implements ISolver {
         for(int[] row: matrix)
             map.put(new Integer(row[col]), row);
 
+        System.out.println(matrix.length);
+
         for(int[] row: map.values()) {
             int counter = 0;
             for (int elem : row) {
@@ -322,6 +320,7 @@ public class Solver implements ISolver {
                 if (++counter != row.length)
                     System.out.print("\t");
             }
+            System.out.println();
         }
     }
 
@@ -351,10 +350,15 @@ public class Solver implements ISolver {
             resultingMatrix[index] = matrix[i];
         }
 
+        System.out.println(resultingMatrix.length);
         for(int[] row: resultingMatrix) {
+            int counter = 0;
+            for (int elem : row) {
+                System.out.print(elem);
+                if (++counter != row.length)
+                    System.out.print("\t");
+            }
             System.out.println();
-            for (int elem : row)
-                System.out.print(elem + "\t");
         }
     }
 
@@ -420,15 +424,16 @@ public class Solver implements ISolver {
         for(int i=0; i < matrix.length; i++)
             newMatrix[i] = tempMatrix[tempMatrix.length - i - 1];
 
+        System.out.println(newMatrix.length);
+
         for(int[] row: newMatrix) {
             int counter = 0;
             for (int elem : row) {
                 System.out.print(elem);
-                if (++counter == row.length)
+                if (++counter != row.length)
                     System.out.print("\t");
             }
-            if(!row.equals(newMatrix[newMatrix.length-1]))
-                System.out.println();
+            System.out.println();
         }
     }
 
@@ -478,6 +483,9 @@ public class Solver implements ISolver {
             }
             row++;
         }
+
+        System.out.println(result.length);
+        System.out.println(result[0].length);
 
         for(int[] r: result) {
             int counter = 0;
@@ -539,10 +547,17 @@ public class Solver implements ISolver {
             row++;
         }
 
+        System.out.println(newMatrix.length);
+        System.out.println(newMatrix[0].length);
+
         for(int[] r: newMatrix) {
+            int counter = 0;
+            for (int elem : r) {
+                System.out.print(elem);
+                if (++counter != r.length)
+                    System.out.print("\t");
+            }
             System.out.println();
-            for (int elem : r)
-                System.out.print(elem + "\t");
         }
 
     }
@@ -583,10 +598,15 @@ public class Solver implements ISolver {
             newMatrix[i][minCol] = temp;
         }
 
+        System.out.println(newMatrix.length);
         for(int[] r: newMatrix) {
+            int counter = 0;
+            for (int elem : r) {
+                System.out.print(elem);
+                if (++counter != r.length)
+                    System.out.print("\t");
+            }
             System.out.println();
-            for (int elem : r)
-                System.out.print(elem + "\t");
         }
     }
 
@@ -607,10 +627,15 @@ public class Solver implements ISolver {
             newMatrix[row] = newRow;
         }
 
+        System.out.println(newMatrix.length);
         for(int[] r: newMatrix) {
+            int counter = 0;
+            for (int elem : r) {
+                System.out.print(elem);
+                if (++counter != r.length)
+                    System.out.print("\t");
+            }
             System.out.println();
-            for (int elem : r)
-                System.out.print(elem + "\t");
         }
     }
 
@@ -623,10 +648,15 @@ public class Solver implements ISolver {
                 longMatrix[i][j] = (int)Math.round(doubleMatrix[i][j]);
             }
 
+        System.out.println(longMatrix.length);
         for(int[] r: longMatrix) {
+            int counter = 0;
+            for (int elem : r) {
+                System.out.print(elem);
+                if (++counter != r.length)
+                    System.out.print("\t");
+            }
             System.out.println();
-            for (long elem : r)
-                System.out.print(elem + "\t");
         }
     }
 
@@ -692,10 +722,15 @@ public class Solver implements ISolver {
         });
 
 
-        for(int[] row: matrixList) {
+        System.out.println(matrixList.size());
+        for(int[] r: matrixList) {
+            int counter = 0;
+            for (int elem : r) {
+                System.out.print(elem);
+                if (++counter != r.length)
+                    System.out.print("\t");
+            }
             System.out.println();
-            for (int elem : row)
-                System.out.print(elem + "\t");
         }
     }
     /////////////////////////////////////
@@ -786,10 +821,15 @@ public class Solver implements ISolver {
             }
         });
 
-        for (int i = 0; i < colList.size(); i++) {
+        System.out.println(colList.size());
+        for(int[] r: colList) {
+            int counter = 0;
+            for (int elem : r) {
+                System.out.print(elem);
+                if (++counter != r.length)
+                    System.out.print("\t");
+            }
             System.out.println();
-            for (int j = 0; j < colList.size(); j++)
-                System.out.print(colList.get(j)[i] + "\t");
         }
     }
 
