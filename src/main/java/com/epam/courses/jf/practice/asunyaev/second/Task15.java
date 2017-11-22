@@ -18,7 +18,7 @@ public class Task15 implements ITestableTask15 {
         for (I2DPoint point : points) {
             pointsWithCheck.put(point, true);
         }
-        
+
         for (Map.Entry<I2DPoint, Boolean> point1 : pointsWithCheck.entrySet()) {
             double x1 = point1.getKey().getX();
             double y1 = point1.getKey().getY();
