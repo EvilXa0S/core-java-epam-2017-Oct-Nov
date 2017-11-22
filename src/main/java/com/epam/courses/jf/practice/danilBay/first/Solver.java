@@ -973,8 +973,12 @@ public class Solver implements ISolver {
 
                     sum2 += abs(res[z][conseq.get(k)]);
                 }
-                if(sum1>=sum2){
+                if(sum1>sum2){
                     conseq.add(k,j);
+                    break;
+                }
+                else if(sum1==sum2){
+                    conseq.add(k+1,j);
                     break;
                 }
                 else if((k+1)==conseq.size()) {
@@ -1045,6 +1049,6 @@ public class Solver implements ISolver {
 //        Solver a=new Solver();
 //        a.task22();
         Solver m= new Solver();
-        m.task24();
+        m.task27();
     }
 }
