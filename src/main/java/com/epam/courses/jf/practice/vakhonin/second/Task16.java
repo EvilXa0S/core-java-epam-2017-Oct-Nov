@@ -28,11 +28,10 @@ public class Task16 implements ITestableTask16 {
         }
     }
 
-    public double calculateDistance(I2DPoint point1, I2DPoint point2){
+    public static double calculateDistance(I2DPoint point1, I2DPoint point2){
         double dist = Math.sqrt(Math.pow(point1.getX() - point2.getX(), 2) + Math.pow(point1.getY() - point2.getY(), 2));
         return dist;
     }
-
 
     public boolean isPointInCircle(I2DPoint point, I2DPoint center, int radius){
 
@@ -49,10 +48,35 @@ public class Task16 implements ITestableTask16 {
 //    static Logger log = Logger.getLogger(Task16.class.getName());
 
     String stringOfPointForFile(I2DPoint point, I2DPoint center){
-        String str = String.valueOf(point.getX()) + " " + String.valueOf(point.getY()) + " " + String.valueOf(calculateDistance(point, center) + "\n");
+        String str = String.valueOf(point.getX()) + "\t" + String.valueOf(point.getY()) + "\t" + String.valueOf(calculateDistance(point, center) + "\n");
         return str;
     }
 
+    List<String> readFile(File file){
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))){
+
+            String str;
+            List<String> result = new ArrayList<>();
+
+            while ((str = reader.readLine()) != null) {
+                result.add(str);
+            }
+
+            return result;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    I2DPoint stringToPoint(String string){
+        String[] splitString = string.split("\\t");
+        Double x = Double.parseDouble(splitString[0]);
+        Double y = Double.parseDouble(splitString[1]);
+        I2DPoint point = new Point2D(x, y);
+        return point;
+    }
 
     @Override
     public IFileWithPoints analyze(I2DPoint center, int radius, File output) {
@@ -96,21 +120,17 @@ public class Task16 implements ITestableTask16 {
 
 
 
-            writer.write(String.valueOf(center.getX()));
-            writer.write(" ");
-            writer.write(String.valueOf(center.getY()));
-            writer.write("\n");
+//            writer.write(String.valueOf(center.getX()));
+//            writer.write(" ");
+//            writer.write(String.valueOf(center.getY()));
+//            writer.write("\n");
+
+            writer.write(stringOfPointForFile(center, center));
 
             for (Map.Entry<I2DPoint, Double> entry : map.entrySet()) {
                 point = entry.getKey();
                 writer.write(stringOfPointForFile(point, center));
 
-//                writer.write(String.valueOf(point.getX()));
-//                writer.write(" ");
-//                writer.write(String.valueOf(point.getY()));
-//                writer.write(" ");
-//                writer.write(String.valueOf(calculateDistance(point, center)));
-//                writer.write("\n");
             }
 
         } catch (IOException e) {
@@ -132,32 +152,24 @@ public class Task16 implements ITestableTask16 {
             this.comparator = comparator;
         }
 
-        public File getFile() {
+        public File getFile(){
             return file;
         }
 
         public SortedMap<I2DPoint, Double> getPoints() {
-            try (BufferedReader reader = new BufferedReader(new FileReader(file))){
-                String[] centerInfo =  reader.readLine().split("\\s");
-                double centerX = Double.parseDouble(centerInfo[0]);
-                double centerY = Double.parseDouble(centerInfo[1]);
 
+            List<String> pointsString = readFile(file);
+            SortedMap<I2DPoint, Double> pointsMap = new TreeMap<>(comparator);
 
-                I2DPoint center = new Point2D(centerX, centerY);
-
-                SortedMap<I2DPoint, Double> points = new TreeMap<>(comparator);
-                String string;
-                while ((string = reader.readLine()) != null) {
-                    String[] row = string.split("\\s");
-                    I2DPoint currentPoint = new Point2D(Double.parseDouble(row[0]), Double.parseDouble(row[1]));
-                    points.put(currentPoint, Double.parseDouble(row[2]));
-                }
-//                log.info(mapString(points));
-                return points;
-            } catch (IOException e) {
-                e.printStackTrace();
+            I2DPoint center = stringToPoint(pointsString.get(0));
+            int size = pointsString.size();
+            I2DPoint point;
+            for(int j = 1; j < size; j++){
+                point = stringToPoint(pointsString.get(j));
+                pointsMap.put(point, Task16.calculateDistance(point, center));
             }
-            return null;
+
+            return pointsMap;
         }
     }
 }
