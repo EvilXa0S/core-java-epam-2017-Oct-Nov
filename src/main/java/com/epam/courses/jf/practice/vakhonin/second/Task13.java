@@ -26,7 +26,7 @@ public class Task13 implements ITestableTask13{
             Set<Integer> set;
             for(int j = 0; j < numberNodes; j++){
                 set = new HashSet<>();
-                set.add(j);
+//                set.add(j);
                 map.put(j, new HashSet<>(set));
             }
         }
