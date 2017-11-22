@@ -204,19 +204,16 @@ public class Task16 implements ITestableTask16 {
         }
     }
 
-//    TODO: SQRT!!!
 
-
-    public double distance(I2DPoint point1, I2DPoint point2){
-        double result;
-        result = Math.sqrt(Math.pow(point1.getX() - point2.getX(), 2) + Math.pow(point1.getY() - point2.getY(), 2));
-        return result;
+    public double calculateDistance(I2DPoint point1, I2DPoint point2){
+        double dist = Math.sqrt(Math.pow(point1.getX() - point2.getX(), 2) + Math.pow(point1.getY() - point2.getY(), 2));
+        return dist;
     }
 
 
     public boolean isPointInCircle(I2DPoint point, I2DPoint center, int radius){
 
-        double distance = distance(point, center);
+        double distance = calculateDistance(point, center);
 
         if(distance < Double.valueOf(radius)){
             return true;
@@ -226,8 +223,7 @@ public class Task16 implements ITestableTask16 {
         }
 
     }
-    static Logger log = Logger.getLogger(Task16.class.getName());
-
+//    static Logger log = Logger.getLogger(Task16.class.getName());
 
 
     String mapString(Map<I2DPoint, Double> map){
@@ -240,14 +236,14 @@ public class Task16 implements ITestableTask16 {
 
     @Override
     public IFileWithPoints analyze(I2DPoint center, int radius, File output) {
-        int integerCenterX = (int) center.getX();
-        int integerCenterY = (int) center.getY();
-        int j = integerCenterX;
-        int k = integerCenterY;
+
+
+        double xCenter = (int) center.getX();
+        double yCenter = (int) center.getY();
 
         Comparator<I2DPoint> comparator = (p1, p2) -> {
-            Double distance1 = dist(p1, center);
-            Double distance2 = dist(p2, center);
+            Double distance1 = calculateDistance(p1, center);
+            Double distance2 = calculateDistance(p2, center);
             int comparison = distance1.compareTo(distance2);
             if(comparison == 0){
                 return -1;
@@ -257,21 +253,22 @@ public class Task16 implements ITestableTask16 {
             }
         };
 
-        Queue<I2DPoint> queue = new PriorityQueue<>(comparator);
+//        Queue<I2DPoint> queue = new PriorityQueue<>(comparator);
         SortedMap<I2DPoint, Double> map = new TreeMap<>(comparator);
 
         I2DPoint point;
 
-        int xFirst = (int) (center.getX() - radius - 1);
-        int xEnd = (int) (center.getX() + radius + 1);
-        int yFirst = (int) (center.getY() - radius - 1);
-        int yEnd = (int) (center.getY() + radius + 1);
-        for (int x = xFirst; x <= xEnd; x++) {
-            for (int y = yFirst; y <= yEnd; y++) {
-                point = new Point2D(x, y);
-                if (dist(point, center) < radius) {
-                    map.put(point, dist(point, center));
-                    queue.offer(point);
+        int xFirst = (int) (xCenter - radius - 1);
+        int xEnd = (int) (xCenter + radius + 1);
+        int yFirst = (int) (yCenter - radius - 1);
+        int yEnd = (int) (yCenter + radius + 1);
+
+        for (int j = xFirst; j <= xEnd; j++) {
+            for (int k = yFirst; k <= yEnd; k++) {
+                point = new Point2D(j, k);
+                if (calculateDistance(point, center) < radius) {
+                    map.put(point, calculateDistance(point, center));
+//                    queue.offer(point);
                 }
             }
         }
@@ -302,7 +299,7 @@ public class Task16 implements ITestableTask16 {
                 writer.write(" ");
                 writer.write(String.valueOf(point.getY()));
                 writer.write(" ");
-                writer.write(String.valueOf(dist(point, center)));
+                writer.write(String.valueOf(calculateDistance(point, center)));
                 writer.write("\n");
             }
 
@@ -313,9 +310,6 @@ public class Task16 implements ITestableTask16 {
         return new FileWithPoints(output, comparator);
     }
 
-    private double dist (I2DPoint point1, I2DPoint point2) {
-        return Math.sqrt(Math.pow(point1.getX() - point2.getX(), 2) +  Math.pow(point1.getY() - point2.getY(), 2));
-    }
 
     private class FileWithPoints implements IFileWithPoints {
 
