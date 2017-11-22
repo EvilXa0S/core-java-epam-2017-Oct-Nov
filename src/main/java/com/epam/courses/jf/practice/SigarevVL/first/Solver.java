@@ -269,16 +269,16 @@ public class Solver implements ISolver{
                 characterSet.add(string.charAt(i));
             }
             if (characterSet.size() == string.length()) {
-                resultString.append(" ").append(string);
+                resultString.append(string).append(" ");
                 countOfUniqueWords = false;
             }
             characterSet.clear();
         }
 
         if (countOfUniqueWords) {
-            System.out.print("NOT FOUND");
+            System.out.println("NOT FOUND");
         } else {
-            System.out.print(resultString.toString());
+            System.out.println(resultString.toString().trim());
         }
         scanner.close();
     }
@@ -902,9 +902,10 @@ public class Solver implements ISolver{
     @Override
     public void task22() {
         Scanner scanner = new Scanner(System.in);
-        final int matrixDimension = scanner.nextInt();
+        scanner.useLocale(Locale.FRANCE);
 
-        double matrix[][] = new double[matrixDimension][matrixDimension];
+        final int matrixDimension = scanner.nextInt();
+        long matrix[][] = new long[matrixDimension][matrixDimension];
 
         for (int i = 0; i < matrixDimension; i++) {
             for (int j = 0; j < matrixDimension; j++) {
@@ -913,8 +914,8 @@ public class Solver implements ISolver{
         }
 
         System.out.println(matrixDimension);
-        for (double i[] : matrix) {
-            for (double j : i) {
+        for (long i[] : matrix) {
+            for (long j : i) {
                 System.out.print(j + "\t");
             }
             System.out.println();
