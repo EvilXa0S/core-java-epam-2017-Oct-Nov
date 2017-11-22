@@ -6,6 +6,10 @@ import java.math.BigDecimal;
 import java.util.*;
 
 public class Solver implements ISolver {
+    public static void main(String[] args) {
+        Solver s = new Solver();
+        s.task12();
+    }
 
     public void task1() {
         Scanner input = new Scanner(System.in);
@@ -19,9 +23,9 @@ public class Solver implements ISolver {
             String s = input.nextLine();
             if(i == 0)
                 minString = s;
-            if(s.length() > maxString.length())
+            if(s.length() >= maxString.length())
                 maxString = s;
-            if(s.length() < minString.length())
+            if(s.length() <= minString.length())
                 minString = s;
         }
 
@@ -43,11 +47,13 @@ public class Solver implements ISolver {
         Collections.sort(list, new Comparator() {
 
             @Override
-            public int compare(Object s1, Object s2) {
-                if(((String) s1).length() < ((String) s2).length())
+            public int compare(Object o1, Object o2) {
+                String s1 = (String)o1;
+                String s2 = (String)o2;
+                if(s1.length() < s2.length())
                     return -1;
-                else if(((String) s1).length() < ((String) s2).length()) {
-                    return ((String) s1).compareTo((String) s2);
+                else if(s1.length() == s2.length()) {
+                    return s1.compareTo(s2);
                 }
                 else
                     return 1;
@@ -55,7 +61,7 @@ public class Solver implements ISolver {
         });
 
         for(String s: list)
-            System.out.printf("(%d) : %s\n", s.length(), s);
+            System.out.printf("(%d): \"%s\"%n", s.length(), s);
     }
 
     public void task3() {
@@ -84,7 +90,7 @@ public class Solver implements ISolver {
         Scanner input = new Scanner(System.in);
         String[] sentence;
         int minNumberOfChars;
-        String minWord = "";
+        String minWord;
 
         int number = input.nextInt();
         input.nextLine();
@@ -92,11 +98,12 @@ public class Solver implements ISolver {
 
         sentence = s.split(" ");
         minNumberOfChars = sentence[0].length();
+        minWord = sentence[0];
         for(String word: sentence) {
-            String noDuplicates = word.replaceAll("()","");
+            String noDuplicates = noDuplicatedChars(word);
             if(noDuplicates.length() < minNumberOfChars) {
                 minNumberOfChars = noDuplicates.length();
-                minWord = noDuplicates;
+                minWord = word;
             }
         }
         System.out.println(minWord);
@@ -134,6 +141,7 @@ public class Solver implements ISolver {
         Scanner input = new Scanner(System.in);
         String[] sentence;
         int counter = 0;
+        boolean noAscendingWords = true;
 
         input.nextInt();
         input.nextLine();
@@ -141,6 +149,15 @@ public class Solver implements ISolver {
 
         sentence = s.split(" ");
 
+        for(String word: sentence) {
+            if(hasAscendingChars(word)) {
+                noAscendingWords = false;
+                System.out.println(word);
+                break;
+            }
+        }
+         if(noAscendingWords == true)
+             System.out.println("NOT FOUND");
     }
 
     public void task7() {
@@ -153,24 +170,29 @@ public class Solver implements ISolver {
         input.nextInt();
         input.nextLine();
         s = input.nextLine();
+
         sentence = s.split(" ");
         resultingString = new LinkedHashSet<>();
 
         for(String word: sentence) {
             String newWord = word.toLowerCase();
-            if(newWord.matches("^(?!.*(.).*\\1)[a-z]+$"))
+            String noDuplicates = new String(noDuplicatedChars(newWord));
+            if(newWord.equals(noDuplicates))
                 resultingString.add(word);
         }
 
-        for(String word: resultingString)
-            System.out.print(word + " ");
+        if(resultingString.isEmpty())
+            System.out.println("NOT FOUND");
+        else
+            for(String word: resultingString)
+                System.out.println(word);
 
     }
 
     public void task8() {
         Scanner input = new Scanner(System.in);
         String[] sentence;
-        int resultNumber = Integer.MAX_VALUE;
+        String resultNumber = "";
         int counter = 0;
 
         input.nextInt();
@@ -180,22 +202,18 @@ public class Solver implements ISolver {
         sentence = s.split(" ");
 
         for(String word: sentence) {
-            int number = 10;
-            try{
-                number = Integer.parseInt(word);
-            } catch (NumberFormatException e) { }
+            if(word.matches("\\D*"))
+                continue;
 
-            if(counter == 2) break;
+            String reversedNumber = new String((new StringBuffer(word)).reverse());
 
-            int reversedNumber = Integer.parseInt(new String(new StringBuffer(String.valueOf(number)).reverse()));
-
-            if(number == reversedNumber) {
+            if(word.equals(reversedNumber)) {
                 counter += 1;
-                resultNumber = number;
+                resultNumber = word;
             }
         }
 
-        if(resultNumber == Integer.MAX_VALUE)
+        if(resultNumber.equals(""))
             System.out.println("NOT FOUND");
         else
             System.out.println(resultNumber);
@@ -204,8 +222,14 @@ public class Solver implements ISolver {
     public void task9() {
         Scanner input = new Scanner(System.in);
         int number = input.nextInt();
+        input.nextLine();
+
         for (int i = 1; i <= number*number; i++) {
-            System.out.print(i + "\t");
+            if(i%number == 0)
+                System.out.print(i);
+            else
+                System.out.print(i + "\t");
+
             if(i%number == 0)
                 System.out.println();
         }
@@ -234,7 +258,7 @@ public class Solver implements ISolver {
         } else {
             BigDecimal root1 = (new BigDecimal((double)((-b - Math.sqrt(discriminant)) / (2 * a))));
             BigDecimal root2 = (new BigDecimal((double)((-b + Math.sqrt(discriminant)) / (2 * a))));
-            System.out.printf("Two solutions: %.2f, %.2f", root1.setScale(2, BigDecimal.ROUND_HALF_UP), root2.setScale(2, BigDecimal.ROUND_HALF_UP));
+            System.out.println("Two solutions: " +  root1.setScale(2, BigDecimal.ROUND_HALF_UP) + ", " + root2.setScale(2, BigDecimal.ROUND_HALF_UP));
         }
     }
 
@@ -292,9 +316,12 @@ public class Solver implements ISolver {
             map.put(new Integer(row[col]), row);
 
         for(int[] row: map.values()) {
-            System.out.println();
-            for (int elem : row)
-                System.out.print(elem + "\t");
+            int counter = 0;
+            for (int elem : row) {
+                System.out.print(elem);
+                if (++counter != row.length)
+                    System.out.print("\t");
+            }
         }
     }
 
@@ -334,25 +361,27 @@ public class Solver implements ISolver {
     public void task14() {
         Scanner input = new Scanner(System.in);
         int[] numbers;
-        int maxCounter = 1;
+        int maxCounter = 0;
         int counter = 1;
 
         int n = input.nextInt();
+        input.nextLine();
+
         numbers = new int[n];
         for(int i=0; i < n; i++)
             numbers[i] = input.nextInt();
 
         for(int i=0; i < numbers.length-1; i++) {
-            if(numbers[i] >= numbers[i+1])
+            if(numbers[i] >= numbers[i+1]) {
                 counter = 1;
-            else
+                continue;
+            } else
                 counter++;
             if(counter > maxCounter)
                 maxCounter = counter;
         }
 
         System.out.println(maxCounter);
-
     }
 
     public void task15() {
@@ -392,9 +421,14 @@ public class Solver implements ISolver {
             newMatrix[i] = tempMatrix[tempMatrix.length - i - 1];
 
         for(int[] row: newMatrix) {
-            System.out.println();
-            for (int elem : row)
-                System.out.print(elem + "\t");
+            int counter = 0;
+            for (int elem : row) {
+                System.out.print(elem);
+                if (++counter == row.length)
+                    System.out.print("\t");
+            }
+            if(!row.equals(newMatrix[newMatrix.length-1]))
+                System.out.println();
         }
     }
 
@@ -446,9 +480,14 @@ public class Solver implements ISolver {
         }
 
         for(int[] r: result) {
+            int counter = 0;
+            for (int elem : r) {
+                if(++counter == r.length)
+                    System.out.print(elem);
+                else
+                    System.out.print(elem + "\t");
+            }
             System.out.println();
-            for (int elem : r)
-                System.out.print(elem + "\t");
         }
     }
 
@@ -577,13 +616,14 @@ public class Solver implements ISolver {
 
     public void task22() {
         double[][] doubleMatrix = readDoubleMatrix(new Scanner(System.in));
-        long[][] longMatrix = new long[doubleMatrix.length][doubleMatrix[0].length];
+        int[][] longMatrix = new int[doubleMatrix.length][doubleMatrix[0].length];
 
         for(int i=0; i < doubleMatrix.length; i++)
-            for(int j=0; j < doubleMatrix[0].length; j++)
-                longMatrix[i][j] = Math.round(doubleMatrix[i][j]);
+            for(int j=0; j < doubleMatrix[0].length; j++) {
+                longMatrix[i][j] = (int)Math.round(doubleMatrix[i][j]);
+            }
 
-        for(long[] r: longMatrix) {
+        for(int[] r: longMatrix) {
             System.out.println();
             for (long elem : r)
                 System.out.print(elem + "\t");
@@ -751,6 +791,24 @@ public class Solver implements ISolver {
             for (int j = 0; j < colList.size(); j++)
                 System.out.print(colList.get(j)[i] + "\t");
         }
+    }
+
+    private String noDuplicatedChars(String word) {
+        String result = "";
+        for(int i = 0; i < word.length(); i++)
+            if(!result.contains("" + word.charAt(i)))
+                result += word.charAt(i);
+        return result;
+    }
+
+    private boolean hasAscendingChars(String word) {
+        if(word.length() <= 1)
+            return false;
+        for(int i=0; i < word.length() - 1; i++) {
+            if(word.charAt(i) >= word.charAt(i+1))
+                return false;
+        }
+        return true;
     }
 
     private int[][] readMatrix(Scanner scanner) {
