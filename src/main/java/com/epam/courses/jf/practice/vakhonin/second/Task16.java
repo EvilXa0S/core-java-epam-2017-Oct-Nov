@@ -266,7 +266,7 @@ public class Task16 implements ITestableTask16 {
         int yFirst = (int) (center.getY() - radius - 1);
         int yEnd = (int) (center.getY() + radius + 1);
         for (int x = xFirst; x <= xEnd; x++) {
-            for (int y = yFirst; y <= yFirst; y++) {
+            for (int y = yFirst; y <= yEnd; y++) {
                 point = new Point2D(x, y);
                 if (dist(point, center) < radius) {
                     queue.offer(point);
