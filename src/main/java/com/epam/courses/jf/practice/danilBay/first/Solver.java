@@ -920,25 +920,30 @@ public class Solver implements ISolver {
                     conseq.add(k,i);
                     break;
                 }
+                else if((k+1)==conseq.size()) {
+                    conseq.add(i);
+                    break;
+                }
 
             }
         }
 
         System.out.println(b);
         for(int x : conseq) {
-            for (int i = 0; i < b; i++) {
+            for (int i = 0; i < (b-1); i++) {
                 System.out.print(res[x][i] + "    ");
             }
+            System.out.print(res[x][b-1]);
             System.out.println();
         }
 
     }
-    public void task25(){
-
-    }
-    public void task26(){
-
-    }
+//    public void task25(){
+//
+//    }
+//    public void task26(){
+//
+//    }
     public void task27(){
         Scanner in = new Scanner(System.in);
         LinkedList<Integer> conseq=new LinkedList<>();
@@ -1040,6 +1045,6 @@ public class Solver implements ISolver {
 //        Solver a=new Solver();
 //        a.task22();
         Solver m= new Solver();
-        m.task27();
+        m.task24();
     }
 }
