@@ -25,6 +25,9 @@ public class Task2 implements ITestableTask2 {
     public Set<File> getFiles(File directory) {
         File[] start={directory};
         deepDarkFantasy(start);
+
+        fileSet.remove(directory);
+
         return fileSet;
     }
 
