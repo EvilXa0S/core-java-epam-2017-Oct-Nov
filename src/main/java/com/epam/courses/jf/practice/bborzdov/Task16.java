@@ -15,14 +15,10 @@ public class Task16 implements ITestableTask16 {
     @Override
     public IFileWithPoints analyze(I2DPoint center, int radiusInt, File output) {
         FileWithPoints file = new FileWithPoints(output);
-        double radius = radiusInt / 2;
+        double radius = (double) radiusInt / 2;
         SortedMap<I2DPoint, Double> points = new TreeMap<>();
-        int decimal = (int) center.getY();
-        double stepY = 1 - (center.getY() - decimal);
-        decimal = (int) center.getX();
-        double stepX = 1 - (center.getX() - decimal);
-        for (double i = (center.getY() + radius); i > (center.getY() - radius -1) ; i -= stepY) {
-            for (double j = (center.getX() - radius); j <(center.getX()+radius+1) ; j += stepX) {
+        for (int i = (int)(center.getY() + radius); i > (center.getY() - radius - 1) ; i--) {
+            for (int j = (int)(center.getX() - radius); j <(center.getX()+radius+1) ; j++) {
                 Point2D point = new Point2D(j,i);
                 BigDecimal distance =new BigDecimal(Task15.distance(point,center));
                 distance = distance.setScale(4, BigDecimal.ROUND_DOWN);
