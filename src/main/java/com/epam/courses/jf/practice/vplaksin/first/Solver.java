@@ -425,7 +425,7 @@ public class Solver implements ISolver {
         final int n = Integer.parseInt(scanner.nextLine());
 
         int[][] result = new int[n][n];
-        int k = 0;
+        int k = 1;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 result[i][j] = k;
