@@ -53,13 +53,11 @@ public class Task19 implements ITestableTask19{
                         ds = lengthLap - (startPositionJ - startPositionK);
                     }
 
-
                     numberOfOvertakings += ((speedJ-speedK) * numberLaps / speedJ);
 
-                    if ((((speedJ-speedK) * numberLaps * lengthLap) % speedJ) > ds){
+                    if ( ( ( (speedJ-speedK) * numberLaps * lengthLap) / (speedJ) - numberOfOvertakings*lengthLap) > ds){
                         numberOfOvertakings ++;
                     }
-                    
                 }
             }
         }
