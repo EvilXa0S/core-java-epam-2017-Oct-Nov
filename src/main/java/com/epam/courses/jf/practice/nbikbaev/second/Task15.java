@@ -19,7 +19,7 @@ public class Task15 implements ITestableTask15 {
                 if (point1.equals(point2)) {
                     continue;
                 }
-                lines.add(new Line(point1, point2));
+                lines.add(new LineImpl(point1, point2));
             }
             for (ILine line : lines) {
                 for (I2DPoint testingPoint : points) {
@@ -61,42 +61,6 @@ public class Task15 implements ITestableTask15 {
         @Override
         public Set<ILine> getLines() {
             return lines;
-        }
-    }
-
-    private class Line implements ILine {
-
-        private Set<I2DPoint> points;
-
-        public Line(I2DPoint point1, I2DPoint point2) {
-            this.points = new HashSet<>();
-            points.add(point1);
-            points.add(point2);
-        }
-
-        @Override
-        public Set<I2DPoint> getPoints() {
-            return points;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof Line)) return false;
-            Line line = (Line) o;
-            return Objects.equals(points, line.points);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(points);
-        }
-
-        @Override
-        public String toString() {
-            return "Line{" +
-                    "points=" + points +
-                    '}';
         }
     }
 
