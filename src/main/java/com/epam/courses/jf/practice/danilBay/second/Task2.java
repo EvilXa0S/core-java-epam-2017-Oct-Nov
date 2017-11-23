@@ -23,14 +23,14 @@ public class Task2 implements ITestableTask2 {
     @Override
     public Set<File> getFiles(File directory) {
         deepDarkFantasy(directory.listFiles());
-//        int cnt = 1;
-//        for (File x : fileSet)
-//            System.out.println(x.getName() + "  " + cnt++);
+        int cnt = 1;
+        for (File x : fileSet)
+            System.out.println(x.getName() + "  " + cnt++);
         return fileSet;
     }
 
     public static void main(String[] args) {
         Task2 m = new Task2();
-        m.getFiles(new File("C:\\xampp"));
+        m.getFiles(new File("C:\\Users\\dana\\IdeaProjects"));
     }
 }
