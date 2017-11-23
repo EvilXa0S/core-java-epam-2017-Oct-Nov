@@ -22,11 +22,13 @@ public class Task19 implements ITestableTask19{
             }
         };
 
-        Set<ICar> carTreeSet = new TreeSet<>(cars);
+//        Set<ICar> carTreeSet = new TreeSet<>(cars);
 
-        List<ICar> carList = new ArrayList<>(carTreeSet);
+        List<ICar> carList = new ArrayList<>(cars);
 
-        int size = carTreeSet.size();
+        carList.sort(comparator);
+
+        int size = cars.size();
 
         ICar carJ, carK;
         int speedJ, speedK;
