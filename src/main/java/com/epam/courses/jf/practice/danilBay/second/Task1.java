@@ -31,7 +31,7 @@ public class Task1 implements ITestableTask1 {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        int d= 33024;
         return inStr;
     }
 

@@ -7,26 +7,30 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Task2 implements ITestableTask2 {
-    static private Set<File>fileSet = new HashSet<>();
-    static private File[]deepDarkFantasy(File[] fileArrray){
+    static private Set<File> fileSet = new HashSet<>();
 
-            for (File x: fileArrray) {
-                fileSet.add(x);
-                if(!(x.listFiles() ==null)){
+    static private File[] deepDarkFantasy(File[] fileArrray) {
 
-                    deepDarkFantasy(x.listFiles());
-                }
+        for (File x : fileArrray) {
+            fileSet.add(x);
+            if (!(x.listFiles() == null)) {
+                deepDarkFantasy(x.listFiles());
             }
+        }
         return null;
     }
+
     @Override
     public Set<File> getFiles(File directory) {
         deepDarkFantasy(directory.listFiles());
+//        int cnt = 1;
+//        for (File x : fileSet)
+//            System.out.println(x.getName() + "  " + cnt++);
         return fileSet;
     }
 
     public static void main(String[] args) {
-        Task2 m=new Task2();
+        Task2 m = new Task2();
         m.getFiles(new File("C:\\xampp"));
     }
 }
