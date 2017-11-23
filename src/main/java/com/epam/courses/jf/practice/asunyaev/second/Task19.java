@@ -22,7 +22,7 @@ public class Task19 implements ITestableTask19 {
     @Override
     public int getNumberOvertaking(Set<ICar> cars, long lengthLap, int numberLaps) {
         int numberOvertaking = 0;
-        ArrayList<ICar> carsList = new ArrayList<>(cars);
+        List<ICar> carsList = new ArrayList<>(cars);
         carsList.sort(Comparator.comparingInt(ICar::getSpeed).reversed());
         for (int i = 0; i < carsList.size(); i++) {
             ICar firstCar = carsList.get(i);
