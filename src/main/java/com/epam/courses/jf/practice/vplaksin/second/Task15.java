@@ -12,8 +12,19 @@ import java.util.HashSet;
 import java.io.IOException;
 import java.util.Set;
 
+/**
+ * На плоскости задано N точек.
+ * Вывести в файл описания всех прямых, которые проходят более чем через 2 точки из заданных.
+ */
 public class Task15 implements ITestableTask15 {
 
+    /**
+     * Осуществляет анализ переданных точек, вычисляя линии, которые проходят более чем через 2 точки.
+     *
+     * @param points Множество точек на плоскости.
+     * @param output Файл для вывода результатов.
+     * @return Файл с результатами анализа.
+     */
     @Override
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {
         Set<ILine> lines = new HashSet<>();
@@ -49,6 +60,7 @@ public class Task15 implements ITestableTask15 {
         return new FileWithLines(output, lines);
     }
 
+    //Файл, содержащий результаты анализа.
     private class FileWithLines implements IFileWithLines {
 
         private File file;
@@ -62,6 +74,7 @@ public class Task15 implements ITestableTask15 {
             writeLinesToFile(lines);
         }
 
+        //Запись линий в файл
         private void writeLinesToFile(Set<ILine> lines) {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 for (ILine line : lines) {
@@ -85,6 +98,7 @@ public class Task15 implements ITestableTask15 {
             return file;
         }
 
+        //Извлекает из файла информацию о хранящихся в нем линиях.
         @Override
         public Set<ILine> getLines() {
             Set<ILine> result = new HashSet<>();
@@ -109,6 +123,7 @@ public class Task15 implements ITestableTask15 {
         }
     }
 
+    //Прямая, заданная точками, входящими в исходное множество.
     private class Line implements ILine {
 
         private Set<I2DPoint> set = new HashSet<>();

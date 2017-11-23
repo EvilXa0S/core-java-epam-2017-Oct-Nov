@@ -9,6 +9,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.File;
 import java.io.IOException;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -16,14 +18,23 @@ import java.util.TreeMap;
 import static java.lang.Math.round;
 import static java.lang.Math.sqrt;
 
+/**
+ * На клетчатой бумаге нарисован круг (задается центром и радиусом).
+ * Координаты центра круга могут быть дробными числами (например [0.3, 0.7]).
+ * Вывести в файл все точки с целочисленными координатами, лежащие внутри круга (лежащие на окружности не учитывать).
+ * Выводить в порядке возрастания расстояния от точки до центра круга.
+ * Использовать класс PriorityQueue.
+ */
 public class Task16 implements ITestableTask16 {
 
+    //Расстояние от точки до центра
     private static double distance(I2DPoint center, I2DPoint point) {
         double x = center.getX() - point.getX();
         double y = center.getY() - point.getY();
         return sqrt(x * x + y * y);
     }
 
+    //Сравнение расстояний от точек до центра
     private static int compare(I2DPoint point1, I2DPoint point2, I2DPoint center) {
         double distance1 = distance(center, point1);
         double distance2 = distance(center, point2);
@@ -43,27 +54,36 @@ public class Task16 implements ITestableTask16 {
         }
     }
 
+    /**
+     * Осуществляет анализ точек, находя среди них попавших внутрь круга.
+     *
+     * @param center Точка, в которой расположен центр круга.
+     * @param radius Радиус круга.
+     * @param output Файл для вывода результатов.
+     * @return Файл с результатами анализа.
+     */
     @Override
     public IFileWithPoints analyze(I2DPoint center, int radius, File output) {
         double xCenter = center.getX();
         double yCenter = center.getY();
         FileWithPoints result = new FileWithPoints(output);
-        SortedMap<I2DPoint, Double> map = new TreeMap<>((point1, point2) -> compare(point1, point2, center));
+        Queue<I2DPoint> queue = new PriorityQueue<>((point1, point2) -> compare(point1, point2, center));
 
         for (int x = (int) round(xCenter - radius); x < (int) round(xCenter + radius); x++) {
             for (int y = (int) round(yCenter - radius); y < (int) round(yCenter + radius); y++) {
                 I2DPoint point = new Point2D(x, y);
                 Double distance = distance(center, point);
                 if (distance < radius) {
-                    map.put(point, distance);
+                    queue.add(point);
                 }
             }
         }
 
-        result.writePointsToFile(center, map);
+        result.writePointsToFile(center, queue);
         return result;
     }
 
+    //Файл, содержащий результаты анализа.
     private class FileWithPoints implements IFileWithPoints {
 
         private File file;
@@ -72,17 +92,18 @@ public class Task16 implements ITestableTask16 {
             this.file = file;
         }
 
-        private void writePointsToFile(I2DPoint center, SortedMap<I2DPoint, Double> map) {
+        //Запись точек вместе с расстоянием до центра в файл
+        private void writePointsToFile(I2DPoint center, Queue<I2DPoint> queue) {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 writer.write(String.valueOf(center.getX()) + " ");
                 writer.write(String.valueOf(center.getY()) + "\n");
 
-                for (I2DPoint point : map.keySet()) {
+                for (I2DPoint point : queue) {
                     writer.write(String.valueOf(point.getX()));
                     writer.write(' ');
                     writer.write(String.valueOf(point.getY()));
                     writer.write(' ');
-                    writer.write(String.valueOf(map.get(point)));
+                    writer.write(String.valueOf(distance(center, point)));
                     writer.write('\n');
                 }
             } catch (IOException e) {
@@ -95,6 +116,7 @@ public class Task16 implements ITestableTask16 {
             return file;
         }
 
+        //Считать точки из файла
         @Override
         public SortedMap<I2DPoint, Double> getPoints() {
             SortedMap<I2DPoint, Double> result = new TreeMap<>();

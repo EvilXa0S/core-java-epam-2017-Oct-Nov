@@ -3,13 +3,20 @@ package com.epam.courses.jf.practice.vplaksin.second;
 import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask17;
 
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
+import java.util.HashSet;
 
-import static java.lang.Math.min;
-
+/**
+ * На плоскости задано N отрезков (2 <= N <= 20).
+ * Найти точку (возможно несколько) пересечения двух отрезков, имеющую минимальную абсциссу.
+ * Использовать класс TreeMap.
+ */
 public class Task17 implements ITestableTask17 {
 
+    //Находим параметры линии по отрезку
     private static double[] line(ISegment segment) {
         I2DPoint first = segment.first();
         I2DPoint second = segment.second();
@@ -35,6 +42,7 @@ public class Task17 implements ITestableTask17 {
         return new double[]{A, B, C};
     }
 
+    //Проверяем находится ли точка на отрезке, если она уже на прямой, содержащей эту точке
     private static boolean isPointOnLine(I2DPoint point, ISegment segment) {
         I2DPoint first = segment.first();
         I2DPoint second = segment.second();
@@ -52,6 +60,7 @@ public class Task17 implements ITestableTask17 {
         }
     }
 
+    //Находим пересечение отрезков
     private static I2DPoint intersection(ISegment segment1, ISegment segment2) {
         I2DPoint first1 = segment1.first();
         I2DPoint second1 = segment1.second();
@@ -106,35 +115,38 @@ public class Task17 implements ITestableTask17 {
         return null;
     }
 
+    /**
+     * Осуществляет анализ переданных отрезков.
+     *
+     * @param segments Множество отрезков.
+     * @return Множество точек пересечения, имеющих минимальную абсциссу.
+     */
     @Override
     public Set<I2DPoint> analyze(Set<ISegment> segments) {
-        Set<I2DPoint> intersections = new HashSet<>();
-        double min = 0;
-        boolean isMinInitialised = false;
+        SortedMap<Double, Set<I2DPoint>> map = new TreeMap<>();
+
         for (ISegment segment1 : segments) {
             for (ISegment segment2 : segments) {
                 I2DPoint point = intersection(segment1, segment2);
                 if (point != null) {
-                    intersections.add(point);
-                    if (isMinInitialised) {
-                        min = min(min, point.getX());
+                    if (map.containsKey(point.getX())) {
+                        map.get(point.getX()).add(point);
                     } else {
-                        min = point.getX();
-                        isMinInitialised = true;
+                        Set<I2DPoint> set = new HashSet<>();
+                        set.add(point);
+                        map.put(point.getX(), set);
                     }
                 }
             }
         }
-
-        Set<I2DPoint> result = new HashSet<>();
-        for (I2DPoint point : intersections) {
-            if (point.getX() == min) {
-                result.add(point);
-            }
+        if (!map.isEmpty()) {
+            return map.get(map.firstKey());
+        } else {
+            return Collections.emptySet();
         }
-        return result;
     }
 
+    //Отрезок
     private class Segment implements ISegment {
 
         private I2DPoint first;

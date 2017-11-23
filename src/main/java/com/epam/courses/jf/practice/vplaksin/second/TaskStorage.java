@@ -2,8 +2,15 @@ package com.epam.courses.jf.practice.vplaksin.second;
 
 import com.epam.courses.jf.practice.common.second.*;
 
+/**
+ * Хранилище для объектов, осуществляющих решение задач.
+ */
 public class TaskStorage implements ITaskStorage {
 
+    /**
+     * @param taskInterface Интерфейс требуемой задачи.
+     * @return Сущность, решающую указанную задачу.
+     */
     @Override
     public <T extends ITestableTask> T getSolver(Class<T> taskInterface) {
 

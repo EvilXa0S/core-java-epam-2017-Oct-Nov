@@ -8,17 +8,33 @@ import java.util.Iterator;
 
 import static java.lang.Math.abs;
 
+/**
+ * Реализовать структуру хранения чисел на базе Java Framework Collections с поддержкой следующих операций:
+ * 1) Добавление/удаление числа (уникальность хранимых элементов не обязательна).
+ * 2) Поиск числа, наиболее близкого к заданному (т.е. модуль разницы
+ */
 public class Task14 implements ITestableTask14 {
 
+    /**
+     * @param required Тип, которым типизируется создаваемая коллекция.
+     * @return Коллекция для хранения чисел с поддержкой операций добавления/удаления и поиска числа.
+     */
     @Override
     public <T extends Number> INumberCollection<T> createCollection(Class<T> required) {
         return new NumberCollection<>();
     }
 
+    /**
+     * Коллекция для хранения чисел.
+     */
     private class NumberCollection<T extends Number> implements INumberCollection<T> {
 
         private ArrayList<T> list = new ArrayList<>();
 
+        /**
+         * @param value Эталонное значение.
+         * @return Число, наиболее близкое к заданному или null, если коллекция пустая.
+         */
         @Override
         public T nearest(T value) {
             if (list.isEmpty()) {

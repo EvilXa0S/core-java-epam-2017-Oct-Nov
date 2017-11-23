@@ -2,6 +2,9 @@ package com.epam.courses.jf.practice.vplaksin.second;
 
 import com.epam.courses.jf.practice.common.second.I2DPoint;
 
+/**
+ * Точка на двумерной плоскости.
+ */
 public class Point2D implements I2DPoint {
 
     private double x;
@@ -12,11 +15,17 @@ public class Point2D implements I2DPoint {
         this.y = y;
     }
 
+    /**
+     * Значение абсциссы
+     */
     @Override
     public double getX() {
         return x;
     }
 
+    /**
+     * Значение ординаты
+     */
     @Override
     public double getY() {
         return y;
