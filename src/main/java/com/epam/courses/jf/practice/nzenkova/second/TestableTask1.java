@@ -7,11 +7,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
+/**
+ * Input strings from a file, write strings in a list
+ * Output strings to a file in reverse order
+ */
 public class TestableTask1 implements ITestableTask1{
     @Override
+    /*(
+     * @param input -- a input file
+     * @param output -- a output file
+     * @return a list of strings in direct order
+     */
     public List<String> reverseFile(File input, File output) {
-        ArrayList<String> list = new ArrayList<>();
+        List<String> list = new ArrayList<>();
 
         try (BufferedReader in = new BufferedReader(new FileReader(input))) {
             String line;
