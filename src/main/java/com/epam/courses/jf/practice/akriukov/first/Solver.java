@@ -5,6 +5,7 @@ import com.epam.courses.jf.practice.common.first.ISolver;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.*;
@@ -12,34 +13,35 @@ import java.util.*;
 import static java.math.BigDecimal.ROUND_HALF_UP;
 
 public class Solver implements ISolver{
-    public static void main(String [] args) {
+    /*public static void main(String [] args) {
         Solver solver = new Solver();
-        solver.task25();
-    }
+        solver.task1();
+    }*/
 
     @Override
     public void task1() {
-            int numberOfLines = Integer.parseInt(readLineFromConsole());
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int numberOfLines = Integer.parseInt(readLineFromConsole(reader));
 
-            int minLength = Integer.MAX_VALUE;
-            int maxLength = Integer.MIN_VALUE;
-            String minString = "";
-            String maxString = "";
+        int minLength = Integer.MAX_VALUE;
+        int maxLength = Integer.MIN_VALUE;
+        String minString = "";
+        String maxString = "";
 
-            for (int i = 0; i < numberOfLines; i++) {
-                String s = readLineFromConsole();
-                if (minLength >= s.length()) {
-                    minLength = s.length();
-                    minString = s;
-                }
-                if (maxLength <= s.length()) {
-                    maxLength = s.length();
-                    maxString = s;
-                }
-
+        for (int i = 0; i < numberOfLines; i++) {
+            String s = readLineFromConsole(reader);
+            if (minLength >= s.length()) {
+                minLength = s.length();
+                minString = s;
             }
-            System.out.printf("MIN (%d): \"%s\"%n", minLength, minString);
-            System.out.printf("MAX (%d): \"%s\"%n", maxLength, maxString);
+            if (maxLength <= s.length()) {
+                maxLength = s.length();
+                maxString = s;
+            }
+
+        }
+        System.out.printf("MIN (%d): \"%s\"%n", minLength, minString);
+        System.out.printf("MAX (%d): \"%s\"%n", maxLength, maxString);
     }
 
     @Override
@@ -71,10 +73,11 @@ public class Solver implements ISolver{
 
     @Override
     public void task4() {
-        int numberOfWords = Integer.parseInt(readLineFromConsole());
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int numberOfWords = Integer.parseInt(readLineFromConsole(reader));
         int minNumberOfLetters = Integer.MAX_VALUE;
         String minNumberOfLetterString = "";
-        String[] strings = readLineFromConsole().split(" ");
+        String[] strings = readLineFromConsole(reader).split(" ");
         for (String s : strings) {
             Set<Character> word = new HashSet<>();
             for (int i = 0; i < s.length(); i++) {
@@ -90,7 +93,8 @@ public class Solver implements ISolver{
 
     @Override
     public void task5() {
-        int numberOfWords = Integer.parseInt(readLineFromConsole());
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int numberOfWords = Integer.parseInt(readLineFromConsole(reader));
         Set<Character> vowels = new HashSet<>();
         vowels.add('a');
         vowels.add('e');
@@ -98,7 +102,7 @@ public class Solver implements ISolver{
         vowels.add('o');
         vowels.add('u');
         vowels.add('y');
-        String[] strings = readLineFromConsole().split(" ");
+        String[] strings = readLineFromConsole(reader).split(" ");
         int wordsWithEqualVowelsNConsonants = 0;
 
         for (String str : strings) {
@@ -128,8 +132,9 @@ public class Solver implements ISolver{
 
     @Override
     public void task6() {
-        int numberOfWords = Integer.parseInt(readLineFromConsole());
-        String[] strings = readLineFromConsole().split(" ");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int numberOfWords = Integer.parseInt(readLineFromConsole(reader));
+        String[] strings = readLineFromConsole(reader).split(" ");
         for (String str : strings) {
             int charIntValueToCompare = 0;
             boolean wordFound = false;
@@ -158,8 +163,9 @@ public class Solver implements ISolver{
 
     @Override
     public void task7() {
-        int numberOfWords = Integer.parseInt(readLineFromConsole());
-        String[] strings = readLineFromConsole().split(" ");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int numberOfWords = Integer.parseInt(readLineFromConsole(reader));
+        String[] strings = readLineFromConsole(reader).split(" ");
         Set<String> printedWords = new HashSet<>();
         for (String str : strings) {
             if (printedWords.contains(str)) {
@@ -182,7 +188,8 @@ public class Solver implements ISolver{
 
     @Override
     public void task8() {
-        int numberOfWords = Integer.parseInt(readLineFromConsole());
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int numberOfWords = Integer.parseInt(readLineFromConsole(reader));
         HashSet<Character> numbers = new HashSet<>();
         numbers.add('0');
         numbers.add('1');
@@ -194,7 +201,7 @@ public class Solver implements ISolver{
         numbers.add('7');
         numbers.add('8');
         numbers.add('9');
-        String[] strings = readLineFromConsole().split(" ");
+        String[] strings = readLineFromConsole(reader).split(" ");
         String[] palindromes = new String[2];
         int palindromeNumbersFound = 0;
 
@@ -231,7 +238,8 @@ public class Solver implements ISolver{
 
     @Override
     public void task9() {
-        int matrixDim = Integer.parseInt(readLineFromConsole());
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int matrixDim = Integer.parseInt(readLineFromConsole(reader));
         int counter = 1;
         for (int i = 0; i < matrixDim; i++) {
             for (int j = 0; j <matrixDim; j++) {
@@ -256,7 +264,8 @@ public class Solver implements ISolver{
     @Override
     public void task11() {
         try {
-            int monthNumber = Integer.parseInt(readLineFromConsole());
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            int monthNumber = Integer.parseInt(readLineFromConsole(reader));
 
             /*if (monthNumber < 1 || monthNumber > 12) { //easy mode
                 System.out.println("INCORRECT INPUT DATA");
@@ -517,8 +526,9 @@ public class Solver implements ISolver{
 
     @Override
     public void task20() {
-        int moveRowPosition = Integer.parseInt(readLineFromConsole()); //throws exception if copy-paste input data in console, but with typing works good
-        int moveColumnPosition = Integer.parseInt(readLineFromConsole()); //use scanner for copy-paste
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int moveRowPosition = Integer.parseInt(readLineFromConsole(reader)); //throws exception if copy-paste input data in console, but with typing works good
+        int moveColumnPosition = Integer.parseInt(readLineFromConsole(reader)); //use scanner for copy-paste
         int matrix[][] = matrixInput();
         int minElement = Integer.MAX_VALUE;
         int dim = matrix.length;
@@ -642,22 +652,23 @@ public class Solver implements ISolver{
      * @return String[]
      */
     public static String[] readLinesToStringArray() {
-            int numberOfLines = Integer.parseInt(readLineFromConsole());
-            String[] lines = new String[numberOfLines];
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int numberOfLines = Integer.parseInt(readLineFromConsole(reader));
+        String[] lines = new String[numberOfLines];
 
-            for (int i = 0; i < numberOfLines; i++) {
-                lines[i] = readLineFromConsole();
-            }
-            return lines;
+        for (int i = 0; i < numberOfLines; i++) {
+            lines[i] = readLineFromConsole(reader);
+        }
+        return lines;
     }
 
     /**
      * Reads one line from console
      * @return entered in console line or null
      */
-    public static String readLineFromConsole() {
+    public static String readLineFromConsole(BufferedReader reader) {
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             return reader.readLine();
         } catch (IOException e) {
             e.printStackTrace();

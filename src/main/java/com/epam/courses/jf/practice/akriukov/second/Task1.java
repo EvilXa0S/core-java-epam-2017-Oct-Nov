@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ITestableTask1Impl implements ITestableTask1 {
+public class Task1 implements ITestableTask1 {
     @Override
     public List<String> reverseFile(File input, File output) {
         List<String> strings = new ArrayList<>();
