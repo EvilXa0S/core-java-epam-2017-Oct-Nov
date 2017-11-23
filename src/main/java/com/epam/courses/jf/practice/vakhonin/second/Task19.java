@@ -35,6 +35,8 @@ public class Task19 implements ITestableTask19{
 
         int numberOfOvertakings = 0;
 
+        long ds, startPositionJ, startPositionK;
+
         for(int j = 0; j < (size-1); j++){
             carJ = carList.get(j);
             speedJ = carJ.getSpeed();
@@ -42,7 +44,22 @@ public class Task19 implements ITestableTask19{
                 for(int k = j+1; k < size; k++){
                     carK = carList.get(k);
                     speedK = carK.getSpeed();
-                    numberOfOvertakings +=(int) (((double)(numberLaps * (speedJ - speedK) * lengthLap - speedJ * (carK.getStartPosition() - carJ.getStartPosition()))) / (carJ.getSpeed() * numberLaps * lengthLap));
+                    startPositionJ = carJ.getStartPosition();
+                    startPositionK = carK.getStartPosition();
+                    if(startPositionK > startPositionJ){
+                        ds = startPositionK - startPositionJ;
+                    }
+                    else{
+                        ds = lengthLap - (startPositionJ - startPositionK);
+                    }
+
+
+                    numberOfOvertakings += ((speedJ-speedK) * numberLaps / speedJ);
+
+                    if ((((speedJ-speedK) * numberLaps * lengthLap) % speedJ) > ds){
+                        numberOfOvertakings ++;
+                    }
+                    
                 }
             }
         }
