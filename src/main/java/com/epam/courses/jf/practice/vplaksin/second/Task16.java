@@ -103,7 +103,7 @@ public class Task16 implements ITestableTask16 {
                 String s = reader.readLine();
                 String[] splited = s.split("\\s");
                 final I2DPoint center = new Point2D(Double.parseDouble(splited[0]), Double.parseDouble(splited[1]));
-                result = new TreeMap<>((point1,point2)->compare(point1,point2,center));
+                result = new TreeMap<>((point1, point2) -> compare(point1, point2, center));
 
                 while ((s = reader.readLine()) != null) {
                     splited = s.split("\\s");
