@@ -590,15 +590,15 @@ public class Solver implements ISolver {
             boolean flag = false;
 
             for(int j = 0; j < size; j++){
+
                 if(!flag && inputArray[i][j] > 0){
+
                     flag = true;
                 }
                 else if(flag && inputArray[i][j] < 0){
+
                     result += inputArray[i][j];
-                    /*result += inputArray[i][j];
-                    if (inputArray[i][j + 1] < 0 && j != size - 1) {
-                        break;
-                    }*/
+
                 } else if (flag && inputArray[i][j] > 0) {
                     break;
                 }
@@ -641,15 +641,15 @@ public class Solver implements ISolver {
     //TODO: Shit to be done
     @Override
     public void task17() {
-        Scanner inputData = new Scanner(System.in);
-
-        int size = 0;
-
-        if (inputData.hasNextInt()) {
-            size = Integer.parseInt(inputData.nextLine());
-        }
-
-        int[][] inputArray = new int[size][size];
+//        Scanner inputData = new Scanner(System.in);
+//
+//        int size = 0;
+//
+//        if (inputData.hasNextInt()) {
+//            size = Integer.parseInt(inputData.nextLine());
+//        }
+//
+//        int[][] inputArray = new int[size][size];
 
     }
 

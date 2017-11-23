@@ -2,30 +2,23 @@ package com.epam.courses.jf.practice.hkryzhik.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask6;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Task6 implements ITestableTask6 {
     @Override
     public HashMap<Integer, Integer> addPolynomials(HashMap<Integer, Integer> first, HashMap<Integer, Integer> second) {
 
-        HashMap<Integer, Integer> result = new HashMap<>(first);
+        HashMap<Integer, Integer> finalResult = new HashMap<>();
 
-        result.putAll(second);
+        Map<Integer, Integer> result = Stream.concat(first.entrySet().stream(), second.entrySet()
+                .stream()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, Integer::sum));
 
-        if(first.size() > second.size()){
-            second.keySet().forEach(e -> {
-                if(first.containsKey(e)) {
-                    result.put(e, first.get(e) + second.get(e));
-                }
-            });
-        }else {
-            first.keySet().forEach(e -> {
-                if(second.containsKey(e)){
-                    result.put(e, first.get(e) + second.get(e));
-                }
-            });
-        }
-        return result;
+        result.entrySet().forEach(entry -> finalResult.put(entry.getKey(), entry.getValue()));
+
+        return finalResult;
     }
 }
