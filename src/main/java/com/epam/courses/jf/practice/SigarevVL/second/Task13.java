@@ -2,16 +2,24 @@ package com.epam.courses.jf.practice.SigarevVL.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask13;
 
+/**
+ * Интерфейс для юнит-тестирования задания №13.
+ *
+ * Реализовать класс Graph, представляющий собой неориентированный граф.
+ * В конструкторе класса передается количество вершин в графе.
+ * Методы должны поддерживать быстрое добавление и удаление ребер.
+ */
 public class Task13 implements ITestableTask13 {
 
     @Override
     public AbstractGraph createGraph(int numberNodes) {
+
         return new Graph(numberNodes);
     }
 
     public class Graph extends AbstractGraph {
 
-        /** Количество вершин */
+        /** Матрица смежности */
         boolean graph[][];
 
         public Graph(int numberNodes) {
@@ -26,6 +34,7 @@ public class Task13 implements ITestableTask13 {
          */
         @Override
         public void addEdge(int first, int second) {
+
             graph[first][second] = true;
         }
 
@@ -36,6 +45,7 @@ public class Task13 implements ITestableTask13 {
          */
         @Override
         public void removeEdge(int first, int second) {
+
             graph[first][second] = false;
         }
 
@@ -45,6 +55,7 @@ public class Task13 implements ITestableTask13 {
          * @param second Вторая вершина.
          */
         public  boolean isExistEdge(int first, int second) {
+
             return graph[first][second];
         }
 
