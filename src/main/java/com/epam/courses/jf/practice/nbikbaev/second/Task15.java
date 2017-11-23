@@ -3,7 +3,10 @@ package com.epam.courses.jf.practice.nbikbaev.second;
 import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask15;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class Task15 implements ITestableTask15 {
@@ -29,7 +32,14 @@ public class Task15 implements ITestableTask15 {
                 }
             }
         }
-
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
+            for (ILine line : lines) {
+                writer.write(line.toString());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return new FileWithLines(output, lines);
     }
 
@@ -80,6 +90,13 @@ public class Task15 implements ITestableTask15 {
         @Override
         public int hashCode() {
             return Objects.hash(points);
+        }
+
+        @Override
+        public String toString() {
+            return "Line{" +
+                    "points=" + points +
+                    '}';
         }
     }
 
