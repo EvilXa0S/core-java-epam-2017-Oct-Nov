@@ -34,7 +34,7 @@ public class Task19 implements ITestableTask19{
         int speedJ, speedK;
 
         int numberOfOvertakings = 0;
-
+        int nOfOvertakings;
         long ds, startPositionJ, startPositionK;
 
         for(int j = 0; j < (size-1); j++){
@@ -52,10 +52,10 @@ public class Task19 implements ITestableTask19{
                     else{
                         ds = lengthLap - (startPositionJ - startPositionK);
                     }
+                    nOfOvertakings = ((speedJ-speedK) * numberLaps / speedJ);
+                    numberOfOvertakings += nOfOvertakings;
 
-                    numberOfOvertakings += ((speedJ-speedK) * numberLaps / speedJ);
-
-                    if ( ( ( (speedJ-speedK) * numberLaps * lengthLap) / (speedJ) - numberOfOvertakings*lengthLap) > ds){
+                    if ( ( ( (speedJ-speedK) * numberLaps * lengthLap) / (speedJ) - nOfOvertakings*lengthLap) > ds){
                         numberOfOvertakings ++;
                     }
                 }
