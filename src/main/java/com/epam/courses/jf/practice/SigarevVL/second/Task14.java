@@ -32,14 +32,24 @@ public class Task14 implements ITestableTask14 {
         NavigableSet<T> set = new TreeSet<>();
         @Override
         public T nearest(T value) {
-            double bigger = set.ceiling(value).doubleValue() - value.doubleValue();
-            double less = value.doubleValue() - set.floor(value).doubleValue();
-
-            if (bigger >= less) {
+            double bigger;
+            double less;
+            if (set.ceiling(value) != null && set.floor(value) != null) {
+                bigger = set.ceiling(value).doubleValue() - value.doubleValue();
+                less = value.doubleValue() - set.floor(value).doubleValue();
+                if ( bigger >= less ) {
+                    return set.floor(value);
+                } else {
+                    return set.ceiling(value);
+                }
+            } else if (set.floor(value) == null && set.ceiling(value) != null) {
+                return set.ceiling(value);
+            } else if (set.floor(value) != null) {
                 return set.floor(value);
             } else {
-                return set.ceiling(value);
+                return null;
             }
+
         }
     }
 }
