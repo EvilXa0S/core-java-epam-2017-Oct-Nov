@@ -242,7 +242,7 @@ public class Utils {
     }
 
     /**
-     * Removes columns and rows specified in rowSet and columnSet from specified matrix
+     * Removes columns and rows specified in rowSet and columnSet from specified square matrix
      *
      * @param matrix    Target matrix
      * @param dimension Matrix dimension
@@ -251,12 +251,26 @@ public class Utils {
      * @return Matrix which not containing specified rows and columns
      */
     public static int[][] removeColumnsAndRows(int[][] matrix, int dimension, Collection<Integer> rowSet, Collection<Integer> columnSet) {
-        int[][] result = new int[dimension - rowSet.size()][dimension - columnSet.size()];
+        return removeColumnsAndRows(matrix, dimension, dimension, rowSet, columnSet);
+    }
+
+    /**
+     * Removes columns and rows specified in rowSet and columnSet from specified rectangular matrix
+     *
+     * @param matrix    Target matrix
+     * @param width     Matrix width
+     * @param height    Matrix height
+     * @param rowSet    The set of rows to be deleted
+     * @param columnSet The set of columns to be deleted
+     * @return Matrix which not containing specified rows and columns
+     */
+    public static int[][] removeColumnsAndRows(int[][] matrix, int width, int height, Collection<Integer> rowSet, Collection<Integer> columnSet) {
+        int[][] result = new int[height - rowSet.size()][width - columnSet.size()];
         int k = 0;
-        for (int i = 0; i < dimension; i++) {
+        for (int i = 0; i < height; i++) {
             int n = 0;
             if (!(rowSet.contains(i))) {
-                for (int j = 0; j < dimension; j++) {
+                for (int j = 0; j < width; j++) {
                     if (!(columnSet.contains(j))) {
                         result[k][n] = matrix[i][j];
                         n++;
@@ -267,6 +281,7 @@ public class Utils {
         }
         return result;
     }
+
 
     /**
      * Swaps the elements at the specified positions in the specified array.
