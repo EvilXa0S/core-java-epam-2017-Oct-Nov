@@ -411,21 +411,42 @@ public class Solver implements ISolver {
         }
     }
 
+    /**
+     * Реализация метода для юнит-тестирования задания №10.
+     *
+     * Написать программу, позволяющую корректно находить корни квадратного уравнения.
+     * Параметры уравнения должны задаваться из стандартного входа.
+     *
+     * Формат входных данных:
+     * Во входном потоке последовательно расположены три целочисленных коэффициента A, B и C,
+     * задающие уравнение в общем виде.
+     *
+     * Формат выходных данных:
+     * В результате решения уравнения может быть получено три варианта ответа:
+     * No solution
+     * One solution: корень уравнения
+     * Two solutions: первый корень уравнения, второй корень уравнения
+     * В результате выполнения метода task10, в выходной поток посылается строка,
+     * соответствующая найденному решению. Значения корней округляются до 2 знаков после запятой.
+     * Использовать округление BigDecimal.HALF_UP. В качестве десятичного разделителя используется точка.
+     */
     @Override
     public void task10() {
         Scanner scan = new Scanner(System.in);
         double a = Double.valueOf(scan.next());
         double b = Double.valueOf(scan.next());
         double c = Double.valueOf(scan.next());
-        double d = Math.pow(b, 2) - 4*a*c;
-
+        double d = Math.pow(b, 2) - 4 * a * c;
         if (d == 0) {
-            BigDecimal solution = new BigDecimal((double) (-b + Math.sqrt(d))/(2*a));
+            BigDecimal solution = new BigDecimal((double) (-b + Math.sqrt(d)) / (2 * a));
             System.out.println("One solution: " + solution.setScale(2, RoundingMode.HALF_UP ).stripTrailingZeros());
         } else if (d > 0) {
-            BigDecimal solution1 = new BigDecimal((double) (-b - Math.sqrt(d))/(2*a));
-            BigDecimal solution2 = new BigDecimal( (double) (-b + Math.sqrt(d))/(2*a));
-            System.out.println("Two solutions: " + solution1.setScale(2, RoundingMode.HALF_UP ).stripTrailingZeros() + ", " + solution2.setScale(2, RoundingMode.HALF_UP ).stripTrailingZeros());
+            BigDecimal solution1 = new BigDecimal((double) (-b - Math.sqrt(d)) / (2 * a));
+            BigDecimal solution2 = new BigDecimal((double) (-b + Math.sqrt(d)) / (2 * a));
+            System.out.println("Two solutions: "
+                    + solution1.setScale(2, RoundingMode.HALF_UP ).stripTrailingZeros()
+                    + ", "
+                    + solution2.setScale(2, RoundingMode.HALF_UP ).stripTrailingZeros());
         } else {
             System.out.println("No solution");
         }
