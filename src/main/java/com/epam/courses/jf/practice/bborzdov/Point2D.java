@@ -12,8 +12,8 @@ public class Point2D implements I2DPoint, Serializable, Comparable<Point2D> {
     private double y;
     private double distance = 0;
     public Point2D(double x, double y){
-        this.x = x;
-        this.y = y;
+        this.x = x == -0d ? 0d : x;
+        this.y = y == -0d ? 0d : y;
     }
     @Override
     public double getX() {
