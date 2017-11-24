@@ -9,16 +9,17 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Input strings from a file, write strings in a list
- * Output strings to a file in reverse order
+ * Input strings from the file, write strings in the list.
+ * Output strings to the file in reverse order.
  */
 public class TestableTask1 implements ITestableTask1{
-    @Override
+
     /**
-     * @param input A input file
-     * @param output A output file
-     * @return A list of strings in direct order
+     * @param input The input file.
+     * @param output The output file.
+     * @return The list of strings in direct order.
      */
+    @Override
     public List<String> reverseFile(File input, File output) {
         List<String> list = new ArrayList<>();
 
