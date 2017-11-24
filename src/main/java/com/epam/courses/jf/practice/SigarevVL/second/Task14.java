@@ -20,17 +20,17 @@ public class Task14 implements ITestableTask14 {
 
     @Override
     public <T extends Number> INumberCollection<T> createCollection(Class<T> required) {
-        return new INumberCollectionImpl<>();
+        return new INumberCollectionImpl<T>();
     }
 
     /**
      * Коллекция для хранения чисел.
      */
-    public class INumberCollectionImpl <T extends Number> extends ArrayList<T> implements  INumberCollection<T> {
+    private class INumberCollectionImpl <T extends Number> extends ArrayList<T> implements  INumberCollection<T> {
 
         List<T> list = new ArrayList<>();
         @Override
-        public T nearest(T value) {
+        public T nearest(Number value) {
             double subMod = Math.abs(list.get(0).doubleValue() - value.doubleValue());
             T minimal = list.get(0);
             Iterator<T> iterator = list.iterator();
