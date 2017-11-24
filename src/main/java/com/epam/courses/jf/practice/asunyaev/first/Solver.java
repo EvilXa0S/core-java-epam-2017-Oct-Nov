@@ -10,12 +10,25 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Solver implements ISolver {
-
-    public static void main(String[] args) {
-        Solver solver = new Solver();
-        solver.task14();
-    }
-
+    /**
+     * Реализация метода для юнит-тестирования задания №1.
+     *
+     * Ввести N строк (каждая с новой строки).
+     * Найти среди них самую короткую и самую длинную. Вывести найденные строки и их длину.
+     * Если строк, удовлетворяющих условию, более одной - вывести последнюю из них.
+     *
+     * Формат входных данных:
+     * N (целое число, 0 < N < 100) - количество доступных для чтения строк
+     * Строка_1
+     * Строка_2
+     * ...
+     * Строка_N
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task1 в выходной поток должны быть выведены две строки следующего вида:
+     * System.out.printf("MIN (%d): \"%s\"%n", minLength, minString);
+     * System.out.printf("MAX (%d): \"%s\"%n", maxLength, maxString);
+     */
     @Override
     public void task1() {
         Scanner scan = new Scanner(System.in);
@@ -26,24 +39,19 @@ public class Solver implements ISolver {
         int minLength = 80;
         String maxString = "";
         String minString = "";
-
         scan.nextLine();
-
         for (int i = 0; i < N; i++) {
             currentString = scan.nextLine();
             currentLength = currentString.length();
-
             if (currentLength >= maxLength) {
                 maxLength = currentLength;
                 maxString = currentString;
             }
-
             if (currentLength <= minLength) {
                 minLength = currentLength;
                 minString = currentString;
             }
         }
-
         System.out.printf("MIN (%d): \"%s\"%n", minLength, minString);
         System.out.printf("MAX (%d): \"%s\"%n", maxLength, maxString);
     }
