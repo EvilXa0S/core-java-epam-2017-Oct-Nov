@@ -11,6 +11,8 @@ import java.util.regex.Pattern;
 
 public class Solver implements ISolver {
 
+    private final String NOT_FOUND = "NOT FOUND";
+
     /**
      * Реализация метода для юнит-тестирования задания №1.
      *
@@ -242,34 +244,45 @@ public class Solver implements ISolver {
         System.out.println(result);
     }
 
+    /**
+     * Реализация метода для юнит-тестирования задания №5.
+     *
+     * Ввести N слов. Найти слово, символы в котором идут в строгом порядке возрастания их кодов.
+     * Если таких слов несколько, найти первое из них.
+     *
+     * Формат входных данных:
+     * N (целое число) - количество слов в строке
+     * Строка, содержащая указанное количество слов, разделенных пробелами
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task6 в выходной поток должно быть выведено слово,
+     * коды символов которого следуют в порядке возрастания (каждый следующий строго больше предыдущего).
+     * В случае, если такое слово не найдено, в поток должно быть выведено "NOT FOUND".
+     * Слова состоящие из одного символа не учитывать.
+     */
     @Override
     public void task6() {
         Scanner scan = new Scanner(System.in);
         int N = scan.nextInt();
         String currentWord;
         int wordsCounter = 0;
-
         cycle:
         for (int i = 0; i < N; i++) {
             currentWord = scan.next();
-
             if (currentWord.length() == 1) {
                 continue;
             }
-
             for (int j = 0; j < currentWord.length() - 1; j++) {
                 if (currentWord.codePointAt(j+1) <= currentWord.codePointAt(j)) {
                     continue cycle;
                 }
             }
-
             wordsCounter++;
             System.out.println(currentWord);
             break;
         }
-
         if (wordsCounter == 0) {
-            System.out.println("NOT FOUND");
+            System.out.println(NOT_FOUND);
         }
     }
 
