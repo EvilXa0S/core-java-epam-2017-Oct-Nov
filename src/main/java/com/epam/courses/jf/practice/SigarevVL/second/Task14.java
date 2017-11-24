@@ -56,8 +56,28 @@ public class Task14 implements ITestableTask14 {
         }
 
         @Override
+        public boolean isEmpty() {
+            return list.isEmpty();
+        }
+
+        @Override
+        public boolean contains(Object o) {
+            return list.contains(o);
+        }
+
+        @Override
         public Iterator<T> iterator() {
-           return list.iterator();
+            return list.iterator();
+        }
+
+        @Override
+        public Object[] toArray() {
+            return list.toArray();
+        }
+
+        @Override
+        public <T1> T1[] toArray(T1[] a) {
+            return list.toArray(a);
         }
 
         @Override
@@ -68,6 +88,31 @@ public class Task14 implements ITestableTask14 {
         @Override
         public boolean remove(Object o) {
             return list.remove(o);
+        }
+
+        @Override
+        public boolean containsAll(Collection<?> c) {
+            return list.containsAll(c);
+        }
+
+        @Override
+        public boolean addAll(Collection<? extends T> c) {
+            return list.addAll(c);
+        }
+
+        @Override
+        public boolean removeAll(Collection<?> c) {
+            return list.removeAll(c);
+        }
+
+        @Override
+        public boolean retainAll(Collection<?> c) {
+            return retainAll(c);
+        }
+
+        @Override
+        public void clear() {
+            list.clear();
         }
     }
 }
