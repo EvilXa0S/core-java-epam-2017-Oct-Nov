@@ -158,35 +158,45 @@ public class Solver implements ISolver {
         }
     }
 
+    /**
+     * Реализация метода для юнит-тестирования задания №4.
+     *
+     * Ввести N слов, состоящих из символов английского алфавита. Найти слово, в котором число различных символов минимально.
+     * Символы верхнего и нижнего регистра считать различными. Если таких слов несколько, найти первое из них.
+     *
+     * Формат входных данных:
+     * N (целое число) - количество слов в строке
+     * Строка, содержащая указанное количество слов, разделенных пробелами
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task4 в выходной поток должно быть выведено слово, содержащее наименьшее число различных символов.
+     */
     @Override
     public void task4() {
         Scanner scan = new Scanner(System.in);
         int N = scan.nextInt();
         scan.nextLine();
         class Pair {
-            String word;
-            HashSet uniqueLetters;
+            private String word;
+            private Set uniqueLetters;
 
-            public Pair (String word, HashSet uniqueLetters) {
+            public Pair (String word, Set uniqueLetters) {
                this.word = word;
                this.uniqueLetters = uniqueLetters;
             }
         }
-
         List<Pair> words = new ArrayList<>();
         String currentWord;
         String maxWord = "";
         int maxLength = 80;
-
         for (int i = 0; i < N; i++) {
             currentWord = scan.next();
-            HashSet letters = new HashSet();
+            Set letters = new HashSet();
             for (int j = 0; j < currentWord.length(); j++) {
                 letters.add(Character.codePointAt(currentWord, j));
             }
             words.add(new Pair(currentWord, letters));
         }
-
         for(int i = 0; i < N; i++) {
             int currentLength = words.get(i).uniqueLetters.size();
             if (currentLength < maxLength) {
