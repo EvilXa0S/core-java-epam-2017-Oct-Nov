@@ -18,6 +18,9 @@ public class Task17 implements ITestableTask17{
                         segment1.second().equals(segment2.second())){
                     continue;
                 }
+                if(map.containsValue(new HashSet<>(Arrays.asList(segment1,segment2)))){
+                    continue;
+                }
                 I2DPoint p = getPoint(segment1, segment2);
                 if(p == null){
                     continue;
