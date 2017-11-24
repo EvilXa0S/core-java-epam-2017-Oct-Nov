@@ -6,20 +6,27 @@ import java.io.File;
 import java.util.Set;
 import java.util.TreeSet;
 
+/**
+ * Create a bunch of files and directories, which include in a specified directory
+ * and its subdirectory
+ */
 
 public class TestableTask2 implements ITestableTask2 {
     private Set<File> set = new TreeSet<>();
 
     @Override
+    /**
+     * @param directory A root directory
+     * @return A bunch of files and directories
+     */
     public Set<File> getFiles(File directory) {
         getAll(directory.listFiles());
         return set;
     }
 
     /**
-     * обход всех вложенных файлов и директорий
-     *
-     * @param files массив файлов и директорий
+     * A bypass of all embedded files and directories
+     * @param files An array of files and directories
      */
     private void getAll(File[] files) {
         for (File file : files) {
