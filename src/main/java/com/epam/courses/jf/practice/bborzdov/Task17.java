@@ -2,8 +2,8 @@ package com.epam.courses.jf.practice.bborzdov;
 
 import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask17;
-import java.util.Set;
-import java.util.TreeSet;
+
+import java.util.*;
 
 /**
  * Created by bogdan on 23.11.17.
@@ -11,8 +11,7 @@ import java.util.TreeSet;
 public class Task17 implements ITestableTask17{
     @Override
     public Set<I2DPoint> analyze(Set<ISegment> segments) {
-        TreeSet<I2DPoint> points = new TreeSet<>();
-
+        TreeMap<I2DPoint, Set<ISegment>> map = new TreeMap<>();
         for (ISegment segment1 : segments) {
             for (ISegment segment2 : segments) {
                 if(segment1.first().equals(segment2.first()) &&
@@ -23,19 +22,20 @@ public class Task17 implements ITestableTask17{
                 if(p == null){
                     continue;
                 }
-                if(points.size()==0){
-                    points.add(p);
-                }else {
-                    if(points.first().getX() > p.getX()){
-                        points.clear();
-                        points.add(p);
-                    }else if (points.first().getX() == p.getX()){
-                        points.add(p);
-                    }
+                if(map.isEmpty()){
+                    map.put(p, new HashSet<>(Arrays.asList(segment1,segment2)));
+                    continue;
                 }
+                if(map.firstKey().getX() > p.getX()){
+                    map.clear();
+                    map.put(p, new HashSet<>(Arrays.asList(segment1,segment2)));
+                }else if (map.firstKey().getX() == p.getX()){
+                    map.put(p, new HashSet<>(Arrays.asList(segment1,segment2)));
+                }
+
             }
         }
-        return points;
+        return map.keySet();
     }
     private double[] getSegmentEquation(ISegment segment){
         double k;
