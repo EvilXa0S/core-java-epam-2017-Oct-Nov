@@ -60,6 +60,9 @@ public class TaskStorage implements ITaskStorage {
         if(taskInterface.isInstance(new Task17())){
             return taskInterface.cast(new Task17());
         }
+        if(taskInterface.isInstance(new Task18())){
+            return taskInterface.cast(new Task18());
+        }
         return null;
     }
 }
