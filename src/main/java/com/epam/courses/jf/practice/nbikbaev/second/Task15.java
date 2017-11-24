@@ -21,17 +21,26 @@ public class Task15 implements ITestableTask15 {
                 }
                 lines.add(new LineImpl(point1, point2));
             }
-            for (ILine line : lines) {
-                for (I2DPoint testingPoint : points) {
-                    if (line.getPoints().contains(testingPoint)) {
-                        continue;
-                    }
-                    if (isBelongsToLine(testingPoint, line)) {
-                        line.getPoints().add(testingPoint);
-                    }
+            findLines(points, lines);
+        }
+        writeToFile(output, lines);
+        return new FileWithLines(output, lines);
+    }
+
+    private void findLines(Set<I2DPoint> points, Set<ILine> lines) {
+        for (ILine line : lines) {
+            for (I2DPoint testingPoint : points) {
+                if (line.getPoints().contains(testingPoint)) {
+                    continue;
+                }
+                if (isBelongsToLine(testingPoint, line)) {
+                    line.getPoints().add(testingPoint);
                 }
             }
         }
+    }
+
+    private void writeToFile(File output, Set<ILine> lines) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
             for (ILine line : lines) {
                 writer.write(line.toString());
@@ -40,7 +49,6 @@ public class Task15 implements ITestableTask15 {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new FileWithLines(output, lines);
     }
 
     private class FileWithLines implements IFileWithLines {
