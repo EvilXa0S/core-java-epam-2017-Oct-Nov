@@ -6,28 +6,27 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.time.Month;
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.IntStream;
 
 public class Solver implements ISolver {
 
     @Override
     public void task1() {
-        int n;
+        int numberOfLines;
         String maxString = null;
         String minString = null;
         int minLength = 0;
         int maxLength = 0;
         try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
             String strLine = in.readLine();
-            n = Integer.valueOf(strLine);
+            numberOfLines = Integer.valueOf(strLine);
             strLine = in.readLine();
             maxString = strLine;
             minString = strLine;
-            for (int i = 0; i < n - 1; i++) {
+            for (int i = 0; i < numberOfLines - 1; i++) {
                 strLine = in.readLine();
                 if (strLine.length() >= maxString.length()) {
                     maxString = strLine;
@@ -47,12 +46,12 @@ public class Solver implements ISolver {
 
     @Override
     public void task2() {
-        int n;
+        int numberOfLines;
         try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
             String strLine = in.readLine();
-            n = Integer.valueOf(strLine);
+            numberOfLines = Integer.valueOf(strLine);
             List<String> strings = new ArrayList<>();
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < numberOfLines; i++) {
                 strings.add(in.readLine());
             }
             strings.sort((o1, o2) -> {
@@ -72,12 +71,12 @@ public class Solver implements ISolver {
 
     @Override
     public void task3() {
-        int n;
+        int numberOfLines;
         try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
             String strLine = in.readLine();
-            n = Integer.valueOf(strLine);
+            numberOfLines = Integer.valueOf(strLine);
             List<String> strings = new ArrayList<>();
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < numberOfLines; i++) {
                 strings.add(in.readLine());
             }
             strings.sort(Comparator.comparingInt(String::length));
@@ -85,7 +84,7 @@ public class Solver implements ISolver {
             for (String s : strings) {
                 totalLength += s.length();
             }
-            int average = totalLength / n;
+            int average = totalLength / numberOfLines;
             System.out.printf("AVERAGE (%d)%n", average);
             for (String s : strings) {
                 if (s.length() < average) {
@@ -99,24 +98,24 @@ public class Solver implements ISolver {
 
     @Override
     public void task4() {
-        int n;
+        int numberOfWords;
         try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
             String strLine = in.readLine();
-            n = Integer.valueOf(strLine);
+            numberOfWords = Integer.valueOf(strLine);
             int min = Integer.MAX_VALUE;
             String minWord = null;
             strLine = in.readLine();
             String[] words = strLine.trim().split(" ");
-            Set<Character> uniqKeys = new HashSet<>();
-            for (int i = 0; i < n; i++) {
+            Set<Character> uniqueChars = new HashSet<>();
+            for (int i = 0; i < numberOfWords; i++) {
                 for (int k = 0; k < words[i].length(); k++) {
-                    uniqKeys.add(words[i].charAt(k));
+                    uniqueChars.add(words[i].charAt(k));
                 }
-                if (uniqKeys.size() < min) {
-                    min = uniqKeys.size();
+                if (uniqueChars.size() < min) {
+                    min = uniqueChars.size();
                     minWord = words[i];
                 }
-                uniqKeys.clear();
+                uniqueChars.clear();
             }
             System.out.println(minWord);
 
@@ -127,11 +126,11 @@ public class Solver implements ISolver {
 
     @Override
     public void task5() {
-        int k = 0;
+        int result = 0;
         Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
+        int numberOfWords = scanner.nextInt();
         Pattern vowelPattern = Pattern.compile("[AEIOUaeiou]");
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < numberOfWords; i++) {
             String word = scanner.next();
             if (word.matches("[A-Za-z]+")) {
                 int vowelCount = 0;
@@ -140,20 +139,20 @@ public class Solver implements ISolver {
                     vowelCount++;
                 }
                 if (vowelCount * 2 == word.length()) {
-                    k++;
+                    result++;
                 }
             }
         }
-        System.out.println(k);
+        System.out.println(result);
     }
 
     @Override
     @SuppressWarnings("unused")
     public void task6() {
         try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
-            int k = 0;
+            int wordCounter = 0;
             String result = null;
-            int n = Integer.valueOf(in.readLine());
+            int numberOfWords = Integer.valueOf(in.readLine());
             String sentence = in.readLine();
             for (String word : sentence.trim().split(" ")) {
                 if (word.length() == 1) {
@@ -166,9 +165,9 @@ public class Solver implements ISolver {
                 Arrays.sort(letters);
                 String sortedWord = new String(letters);
                 if (sortedWord.equals(word)) {
-                    k++;
+                    wordCounter++;
                     result = word;
-                    if (k == 1) {
+                    if (wordCounter == 1) {
                         break;
                     }
                 }
@@ -187,7 +186,7 @@ public class Solver implements ISolver {
     @SuppressWarnings("unused")
     public void task7() {
         try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
-            int n = Integer.valueOf(in.readLine());
+            int numberOfWords = Integer.valueOf(in.readLine());
             String[] words = in.readLine().trim().split(" ");
             Set<Character> wordSet = new HashSet<>();
             StringBuilder result = new StringBuilder();
@@ -221,7 +220,7 @@ public class Solver implements ISolver {
         try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
             boolean palindromeExists = false;
             String result = null;
-            int n = Integer.valueOf(in.readLine());
+            int numberOfWords = Integer.valueOf(in.readLine());
             String data = in.readLine();
             Pattern pattern = Pattern.compile("([0-9]+)");
             Matcher matcher = pattern.matcher(data);
@@ -249,10 +248,10 @@ public class Solver implements ISolver {
     @Override
     public void task9() {
         try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
-            int n = Integer.valueOf(in.readLine());
-            for (int i = 1; i <= n * n; i++) {
+            int matrixDimension = Integer.valueOf(in.readLine());
+            for (int i = 1; i <= matrixDimension * matrixDimension; i++) {
                 System.out.print(i);
-                if ((i % n) == 0) {
+                if ((i % matrixDimension) == 0) {
                     System.out.println();
                 } else {
                     System.out.print("\t");
@@ -305,46 +304,10 @@ public class Solver implements ISolver {
                 System.out.println("INCORRECT INPUT DATA");
                 return;
             }
-
-            switch (month) {
-                case 1:
-                    System.out.println("January");
-                    break;
-                case 2:
-                    System.out.println("February");
-                    break;
-                case 3:
-                    System.out.println("March");
-                    break;
-                case 4:
-                    System.out.println("April");
-                    break;
-                case 5:
-                    System.out.println("May");
-                    break;
-                case 6:
-                    System.out.println("June");
-                    break;
-                case 7:
-                    System.out.println("July");
-                    break;
-                case 8:
-                    System.out.println("August");
-                    break;
-                case 9:
-                    System.out.println("September");
-                    break;
-                case 10:
-                    System.out.println("October");
-                    break;
-                case 11:
-                    System.out.println("November");
-                    break;
-                case 12:
-                    System.out.println("December");
-                    break;
-                default:
-                    System.out.println("INCORRECT INPUT DATA");
+            if (!(month >= 1 && month <= 12)) {
+                System.out.println("INCORRECT INPUT DATA");
+            } else {
+                System.out.println(Month.of(month));
             }
         }
     }
@@ -352,13 +315,13 @@ public class Solver implements ISolver {
     @Override
     public void task12() {
         try (Scanner scanner = new Scanner(System.in)) {
-            final int columnNumber = scanner.nextInt();
+            final int columnIndex = scanner.nextInt();
             int dimension = scanner.nextInt();
             int[][] matrix = new int[dimension][dimension];
             Utils.readMatrix(scanner, dimension, matrix);
             Arrays.sort(matrix, (o1, o2) -> {
-                Integer numOfKeys1 = o1[columnNumber];
-                Integer numOfKeys2 = o2[columnNumber];
+                Integer numOfKeys1 = o1[columnIndex];
+                Integer numOfKeys2 = o2[columnIndex];
                 return numOfKeys1.compareTo(numOfKeys2);
             });
             System.out.println(dimension);
@@ -393,15 +356,15 @@ public class Solver implements ISolver {
     @Override
     public void task14() {
         try (Scanner scanner = new Scanner(System.in)) {
-            int n = scanner.nextInt();
+            int numberOfInts = scanner.nextInt();
             int maxLength = 0;
             int startPosition = 0;
             int lastLength;
-            int[] data = new int[n];
-            for (int i = 0; i < n; i++) {
+            int[] data = new int[numberOfInts];
+            for (int i = 0; i < numberOfInts; i++) {
                 data[i] = scanner.nextInt();
             }
-            for (int i = 0; i < n - 1; i++) {
+            for (int i = 0; i < numberOfInts - 1; i++) {
                 if (!(data[i + 1] > data[i])) {
                     startPosition = i;
                 }
@@ -409,8 +372,8 @@ public class Solver implements ISolver {
                 if ((lastLength > 1 && lastLength > maxLength)) {
                     maxLength = lastLength;
                 }
-                if (lastLength == n - 1) {
-                    maxLength = n;
+                if (lastLength == numberOfInts - 1) {
+                    maxLength = numberOfInts;
                 }
             }
             System.out.println(maxLength);
@@ -547,7 +510,7 @@ public class Solver implements ISolver {
 
     @Override
     public void task21() {
-        int k = 0;
+        int numberOfZeros = 0;
         try (Scanner scanner = new Scanner(System.in)) {
             int dimension = scanner.nextInt();
             int[][] matrix = new int[dimension][dimension];
@@ -555,17 +518,17 @@ public class Solver implements ISolver {
             for (int i = 0; i < dimension; i++) {
                 for (int j = 0; j < dimension; j++) {
                     if (matrix[i][j] == 0) {
-                        k++;
+                        numberOfZeros++;
                     }
                 }
-                for (int m = 0; m < k; m++) {
+                for (int m = 0; m < numberOfZeros; m++) {
                     for (int j = 0; j < dimension - 1; j++) {
                         if (matrix[i][j] == 0) {
                             Utils.swap(matrix[i], j, j + 1);
                         }
                     }
                 }
-                k = 0;
+                numberOfZeros = 0;
             }
             System.out.println(dimension);
             Utils.printMatrix(matrix, System.out);
@@ -593,7 +556,7 @@ public class Solver implements ISolver {
     public void task23() {
         try (Scanner scanner = new Scanner(System.in)) {
             int dimension = scanner.nextInt();
-            int k = 0;
+            int numberOfSaddlePoints = 0;
             int[][] matrix = new int[dimension][dimension];
             Utils.readMatrix(scanner, dimension, matrix);
             for (int i = 0; i < dimension; i++) {
@@ -601,11 +564,11 @@ public class Solver implements ISolver {
                     int min = Utils.getRowMinElement(matrix, i);
                     int max = Utils.getColumnMaxElement(matrix, j);
                     if (min == max && matrix[i][j] == min) {
-                        k++;
+                        numberOfSaddlePoints++;
                     }
                 }
             }
-            System.out.println(k);
+            System.out.println(numberOfSaddlePoints);
         }
     }
 
@@ -623,7 +586,7 @@ public class Solver implements ISolver {
 
     @Override
     public void task25() {
-        int k = 0;
+        int numberOfLocalMinimums = 0;
         try (Scanner scanner = new Scanner(System.in)) {
             int dimension = scanner.nextInt();
             int[][] matrix = new int[dimension][dimension];
@@ -631,12 +594,12 @@ public class Solver implements ISolver {
             for (int i = 0; i < dimension; i++) {
                 for (int j = 0; j < dimension; j++) {
                     if (Utils.isLocalMinimum(matrix, i, j)) {
-                        k++;
+                        numberOfLocalMinimums++;
                     }
                 }
             }
         }
-        System.out.println(k);
+        System.out.println(numberOfLocalMinimums);
     }
 
     @Override
