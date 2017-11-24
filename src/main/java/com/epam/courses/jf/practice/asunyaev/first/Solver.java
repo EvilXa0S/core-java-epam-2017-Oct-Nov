@@ -10,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Solver implements ISolver {
+
     /**
      * Реализация метода для юнит-тестирования задания №1.
      *
@@ -93,18 +94,14 @@ public class Solver implements ISolver {
                 line = s;
             }
         }
-
         List<Pair> lines = new ArrayList<>();
         String currentString;
-
         scan.nextLine();
-
         for (int i = 0; i < N; i++) {
             currentString = scan.nextLine();
             lines.add(new Pair(currentString.length(), currentString));
         }
-
-        lines.sort(new Comparator<Pair>() {
+        lines.sort(new Comparator<>() {
             @Override
             public int compare(Pair o1, Pair o2) {
                 if (o1.length.compareTo(o2.length) == 0) {
@@ -114,7 +111,6 @@ public class Solver implements ISolver {
                 }
             }
         });
-
         for (int i = 0; i < N; i++) {
             System.out.printf("(%d): \"%s\"%n", lines.get(i).length, lines.get(i).line);
         }
