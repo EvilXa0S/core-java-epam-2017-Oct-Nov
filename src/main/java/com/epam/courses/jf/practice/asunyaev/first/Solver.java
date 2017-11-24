@@ -245,7 +245,7 @@ public class Solver implements ISolver {
     }
 
     /**
-     * Реализация метода для юнит-тестирования задания №5.
+     * Реализация метода для юнит-тестирования задания №6.
      *
      * Ввести N слов. Найти слово, символы в котором идут в строгом порядке возрастания их кодов.
      * Если таких слов несколько, найти первое из них.
@@ -286,6 +286,21 @@ public class Solver implements ISolver {
         }
     }
 
+    /**
+     * Реализация метода для юнит-тестирования задания №7.
+     *
+     * Ввести N слов. Найти слова, состоящие только из различных символов.
+     * В случае, если слово встречается более одного раза - вывести его единожды.
+     *
+     * Формат входных данных:
+     * N (целое число) - количество слов в строке
+     * Строка, содержащая указанное количество слов, разделенных пробелами
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task7 в выходной поток должна быть выведена строка,
+     * содержащая найденные слова, разделенные пробелами. В случае, если не найдено ни одного слова,
+     * удовлетворяющего условию - в поток должно быть выведено "NOT FOUND".
+     */
     @Override
     public void task7() {
         Scanner scan = new Scanner(System.in);
@@ -296,24 +311,20 @@ public class Solver implements ISolver {
         cycle:
         for (int i = 0; i < N; i++) {
             currentWord = scan.next();
-
             if (currentWord.length() == 1) {
                 words.add(currentWord);
                 continue;
             }
-
             for (int j = 1; j < currentWord.length(); j++) {
                 String subString = currentWord.substring(0, j);
                 if (subString.indexOf(currentWord.charAt(j)) != -1) {
                     continue cycle;
                 }
-
             }
             words.add(currentWord);
         }
-
         if (words.size() == 0) {
-            System.out.println("NOT FOUND");
+            System.out.println(NOT_FOUND);
         } else {
             int i = 0;
             for (String word : words) {
