@@ -50,19 +50,19 @@ public class Task14 implements ITestableTask14 {
 
         }
 
-        @Override
-        public int size() {
-            return list.size();
-        }
-
 //        @Override
-//        public Iterator<T> iterator() {
-//            return list.iterator();
+//        public int size() {
+//            return list.size();
 //        }
-
-        @Override
-        public boolean add(T t) {
-            return list.add(t);
-        }
+//
+////        @Override
+////        public Iterator<T> iterator() {
+////            return list.iterator();
+////        }
+//
+//        @Override
+//        public boolean add(T t) {
+//            return list.add(t);
+//        }
     }
 }
