@@ -1,11 +1,9 @@
 package com.epam.courses.jf.practice.danilBay.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask6;
-import com.sun.tools.corba.se.idl.InterfaceGen;
+
 
 import java.util.HashMap;
-
-import static sun.tools.jstat.Alignment.keySet;
 
 public class Task6 implements ITestableTask6{
     @Override
