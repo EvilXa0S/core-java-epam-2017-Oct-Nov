@@ -2,6 +2,7 @@ package com.epam.courses.jf.practice.nzenkova.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask1;
 
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,10 +14,10 @@ import java.util.List;
  */
 public class TestableTask1 implements ITestableTask1{
     @Override
-    /*(
-     * @param input -- a input file
-     * @param output -- a output file
-     * @return a list of strings in direct order
+    /**
+     * @param input A input file
+     * @param output A output file
+     * @return A list of strings in direct order
      */
     public List<String> reverseFile(File input, File output) {
         List<String> list = new ArrayList<>();
