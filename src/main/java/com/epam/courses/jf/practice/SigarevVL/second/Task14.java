@@ -31,38 +31,23 @@ public class Task14 implements ITestableTask14 {
     private class INumberCollectionImpl <T extends Number> extends ArrayList<T> implements  INumberCollection<T> {
 
         List<T> list = new ArrayList<>();
-//        @Override
-//        public T nearest(Number value) {
-//            double subMod = Math.abs(list.get(0).doubleValue() - value.doubleValue());
-//            T minimal = list.get(0);
-//            Iterator<T> iterator = list.iterator();
-//            while (iterator.hasNext()) {
-//                if (Math.abs(iterator.next().doubleValue() - value.doubleValue()) < subMod) {
-//                    minimal = iterator.next();
-//                }
-//            }
-//            return minimal ;
-//
-//        }
-
         @Override
-        public T nearest(T value) {
-            if (list.isEmpty()) {
-                return null;
-            }
+        public T nearest(Number value) {
+//            if (list.isEmpty()) {
+//                return null;
+//            }
 
-            T nearest = list.get(0);
-            double doubleValue = value.doubleValue();
-            double minDifference = abs(nearest.doubleValue());
+            double subMod = Math.abs(list.get(0).doubleValue() - value.doubleValue());
+            T minimal = list.get(0);
+            for (T element : list) {
 
-            for (T t : list) {
-                if (abs(doubleValue - t.doubleValue()) < minDifference) {
-                    minDifference = abs(doubleValue - t.doubleValue());
-                    nearest = t;
+                if (abs(element.doubleValue() - value.doubleValue()) < subMod) {
+                    subMod = abs(element.doubleValue() - value.doubleValue());
+                    minimal = element;
                 }
             }
+            return minimal ;
 
-            return nearest;
         }
 
         @Override
@@ -70,10 +55,10 @@ public class Task14 implements ITestableTask14 {
             return list.size();
         }
 
-        @Override
-        public Iterator<T> iterator() {
-            return list.iterator();
-        }
+//        @Override
+//        public Iterator<T> iterator() {
+//            return list.iterator();
+//        }
 
         @Override
         public boolean add(T t) {
