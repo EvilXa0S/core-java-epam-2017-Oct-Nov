@@ -8,18 +8,18 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * The strings, which make up the poems, write to a list.
+ * The strings, which make up the poems, write to the list.
  * Sort strings in ascending order of their length.
  */
 
 public class TestableTask3 implements ITestableTask3 {
-    @Override
     /**
-     * Forms an ordered list of lines from the poems of given author.
+     * Forms the ordered list of lines from the poems of given author.
      * @param poems The list of the assayed  poems.
      * @param author The author whose poems will be chosen.
-     * @return An ordered list of lines, which make up the poems of given author.
+     * @return The ordered list of lines, which make up the poems of given author.
      */
+    @Override
     public List<String> sortPoems(Set<IPoem> poems, String author) {
         List<String> list = new ArrayList<>();
         for (IPoem poem : poems) {
