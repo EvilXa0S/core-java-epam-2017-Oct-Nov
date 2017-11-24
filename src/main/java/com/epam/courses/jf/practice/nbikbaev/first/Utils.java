@@ -1,7 +1,9 @@
 package com.epam.courses.jf.practice.nbikbaev.first;
 
 
-import java.io.PrintStream;
+import com.epam.courses.jf.practice.common.second.I2DPoint;
+
+import java.io.*;
 import java.util.*;
 
 public class Utils {
@@ -421,6 +423,17 @@ public class Utils {
             for (int j = 0; j < m[0].length; j++)
                 temp[j][i] = m[i][j];
         return temp;
+    }
+
+    public static <T> void writeToFile(File output, Collection<T> collection) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
+            for (T element : collection) {
+                writer.write(element.toString());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

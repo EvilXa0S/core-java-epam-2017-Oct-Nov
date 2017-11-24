@@ -1,9 +1,14 @@
 package com.epam.courses.jf.practice.nbikbaev.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask1;
+import com.epam.courses.jf.practice.nbikbaev.first.Utils;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
 
 public class Task1 implements ITestableTask1 {
     @Override
@@ -17,14 +22,7 @@ public class Task1 implements ITestableTask1 {
             e.printStackTrace();
         }
         Collections.reverse(strings);
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(output))) {
-            for (String string : strings) {
-                bufferedWriter.write(string);
-                bufferedWriter.newLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Utils.writeToFile(output, strings);
         Collections.reverse(strings);
         return strings;
     }
