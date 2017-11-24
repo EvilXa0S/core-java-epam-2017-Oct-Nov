@@ -2,8 +2,7 @@ package com.epam.courses.jf.practice.SigarevVL.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask14;
 
-import java.util.NavigableSet;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Интерфейс для юнит-тестирования задания №14.
@@ -27,28 +26,20 @@ public class Task14 implements ITestableTask14 {
     /**
      * Коллекция для хранения чисел.
      */
-    public class INumberCollectionImpl <T extends Number> extends TreeSet<T> implements  INumberCollection<T> {
+    public class INumberCollectionImpl <T extends Number> extends ArrayList<T> implements  INumberCollection<T> {
 
-        NavigableSet<T> set = new TreeSet<>();
+        List<T> list = new ArrayList<>();
         @Override
         public T nearest(T value) {
-            double bigger;
-            double less;
-            if (set.ceiling(value) != null && set.floor(value) != null) {
-                bigger = set.ceiling(value).doubleValue() - value.doubleValue();
-                less = value.doubleValue() - set.floor(value).doubleValue();
-                if ( bigger >= less ) {
-                    return set.floor(value);
-                } else {
-                    return set.ceiling(value);
+            double subMod = Math.abs(list.get(0).doubleValue() - value.doubleValue());
+            T minimal = list.get(0);
+            Iterator<T> iterator = list.iterator();
+            while (iterator.hasNext()) {
+                if (Math.abs(iterator.next().doubleValue() - value.doubleValue()) < subMod) {
+                    minimal = iterator.next();
                 }
-            } else if (set.floor(value) == null && set.ceiling(value) != null) {
-                return set.ceiling(value);
-            } else if (set.floor(value) != null) {
-                return set.floor(value);
-            } else {
-                return null;
             }
+            return minimal ;
 
         }
     }
