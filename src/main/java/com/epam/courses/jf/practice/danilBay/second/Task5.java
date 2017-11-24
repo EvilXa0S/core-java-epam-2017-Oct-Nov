@@ -20,5 +20,6 @@ public class Task5 implements ITestableTask5 {
         }
         double res=resistance.divide(new BigDecimal(measurements.size())).doubleValue();
         return res;
+
     }
 }
