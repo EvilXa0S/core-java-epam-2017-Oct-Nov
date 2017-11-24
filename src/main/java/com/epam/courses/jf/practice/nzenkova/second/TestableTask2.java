@@ -14,19 +14,19 @@ import java.util.TreeSet;
 public class TestableTask2 implements ITestableTask2 {
     private Set<File> set = new TreeSet<>();
 
-    @Override
     /**
-     * @param directory A root directory
-     * @return A bunch of files and directories
+     * @param directory The root directory.
+     * @return The bunch of files and directories.
      */
+    @Override
     public Set<File> getFiles(File directory) {
         getAll(directory.listFiles());
         return set;
     }
 
     /**
-     * A bypass of all embedded files and directories
-     * @param files An array of files and directories
+     * The bypass of all embedded files and directories.
+     * @param files The array of files and directories.
      */
     private void getAll(File[] files) {
         for (File file : files) {
