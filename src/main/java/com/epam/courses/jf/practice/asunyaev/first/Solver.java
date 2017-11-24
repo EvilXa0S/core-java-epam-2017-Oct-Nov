@@ -338,28 +338,40 @@ public class Solver implements ISolver {
         System.out.println();
     }
 
+    /**
+     * Реализация метода для юнит-тестирования задания №8.
+     *
+     * Ввести N слов. Помимо обычных слов, во входной последовательности могут встречаться целые числа.
+     * Среди них необходимо найти число-палиндром (одинаково читающееся в обоих направлениях).
+     * Если таких чисел больше одного, найти второе из них. Ограничения на размер числа нет.
+     * Одна цифра является палиндромом. Числа могут быть большими.
+     *
+     * Формат входных данных:
+     * N (целое число) - количество слов в строке
+     * Строка, содержащая указанное количество слов, разделенных пробелами
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task8 в выходной поток должны быть выведено найденное число-палиндром.
+     * В случае, если не найдено ни одного такого числа - в поток должно быть выведено "NOT FOUND".
+     */
     @Override
     public void task8() {
         Scanner scan = new Scanner(System.in);
         int N = scan.nextInt();
         String currentWord;
-        ArrayList<String> palyndroms = new ArrayList<String>();
+        List<String> palyndroms = new ArrayList<>();
         scan.nextLine();
-
-
         for (int i = 0; i < N; i++) {
             currentWord = scan.next();
-
             if (isNumeric(currentWord)) {
                 if (isPalyndrom(currentWord)) {
                     palyndroms.add(currentWord);
                 }
             }
         }
-
         switch (palyndroms.size()) {
             case 0:
-                System.out.println("NOT FOUND");
+                System.out.println(NOT_FOUND);
                 break;
             case 1:
                 System.out.println(palyndroms.get(0));
@@ -368,7 +380,6 @@ public class Solver implements ISolver {
                 System.out.println(palyndroms.get(1));
                 break;
         }
-
     }
 
     @Override
