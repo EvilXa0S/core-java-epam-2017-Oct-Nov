@@ -8,9 +8,14 @@ import java.util.LinkedList;
 public class Task11 implements ITestableTask11 {
     @Override
     public String emulate(ArrayList<String> peoples) {
+//
+//        while(peoples.size() != 1){
+//            for(int i = 0; i < peoples.size(); i += 2){
+//
+//            }
+//        }
 
-
-        return null;
+    return null;
     }
 
     @Override

@@ -19,11 +19,13 @@ public class Task9 implements ITestableTask9 {
 
         HashSet<String> resultSet = new HashSet<>();
 
-        try {
-            checkingWords = Files.lines(Paths.get(input.getPath())).collect(Collectors.toList());
+        if(input.canRead() && input.exists()){
+            try {
+                checkingWords = Files.lines(Paths.get(input.getPath())).collect(Collectors.toList());
 
-        }catch (IOException e){
-            e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         checkingWords.forEach(e -> resultSet.add(e.toLowerCase()));
