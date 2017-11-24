@@ -85,12 +85,12 @@ public class Solver implements ISolver {
         Scanner scan = new Scanner(System.in);
         int N = scan.nextInt();
         class Pair {
-            Integer length;
-            String line;
+            private Integer length;
+            private String line;
 
-            public Pair(Integer i, String s) {
-                length = i;
-                line = s;
+            public Pair(Integer length, String line) {
+                this.length = length;
+                this.line = line;
             }
         }
         List<Pair> lines = new ArrayList<>();
