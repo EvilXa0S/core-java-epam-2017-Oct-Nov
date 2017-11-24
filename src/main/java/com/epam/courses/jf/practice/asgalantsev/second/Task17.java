@@ -25,22 +25,19 @@ public class Task17 implements ITestableTask17 {
                 double X = X(a1, a2, b1, b2);
                 double Y = Y(a1, a2, b1, b2);
 
-                System.out.println("X: " + X);
-                System.out.println("Y: " + Y);
-                System.out.println();
 
-//                if(X < minX)
-//                    map.put(X, new I2DPoint(X, Y) {
-//                        @Override
-//                        public double getX() {
-//                            return 0;
-//                        }
-//
-//                        @Override
-//                        public double getY() {
-//                            return 0;
-//                        }
-//                    });
+                if(X < minX)
+                    map.put(X, new I2DPoint() {
+                        @Override
+                        public double getX() {
+                            return X;
+                        }
+
+                        @Override
+                        public double getY() {
+                            return Y;
+                        }
+                    });
             }
         }
 

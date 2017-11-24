@@ -7,6 +7,10 @@ import java.util.*;
 
 public class Solver implements ISolver {
 
+    public static void main(String[] args) {
+        (new Solver()).task26();
+    }
+
     public void task1() {
         Scanner input = new Scanner(System.in);
         String minString = "";
@@ -733,11 +737,16 @@ public class Solver implements ISolver {
             System.out.println();
         }
     }
-    /////////////////////////////////////
+    
     public void task25() {
         int[][] matrix = readMatrix(new Scanner(System.in));
         int counter = 0;
         boolean flag = true;
+
+        if(matrix.length == 1) {
+            System.out.println(matrix[0][0]);
+            return;
+        }
 
         for(int i=0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
@@ -751,17 +760,32 @@ public class Solver implements ISolver {
                 flag = true;
                 for(int k=0; k < numberOfNeighbours; k++) {
                     if(i==0 && j==0 || i==n && j==n || i==n && j==0 || i==0 && j==n) {
-                        new_i = i - ((2 * i / n) - 1)*(k % 2);
+                        new_i = i - ((2 * i / n) - 1)*(k % 2) - ((int)(k - k%2) / 2)*((2 * i / n) - 1);
                         new_j = j - ((2 * j / n) - 1)*((k+1) % 2);
                     } else if(i==n || i==0 ) {
-                        new_i = i - ((2 * i / n) - 1) * (k % 2);
-                        new_j = j + (k-1) * ((k+1) % 2);
+                        if(k > 2) {
+                            new_i = i - ((2 * i / n) - 1);
+                            new_j = j + (2 * (k - 4) + 1);
+                        } else {
+                            new_i = i - ((2 * i / n) - 1) * (k % 2);
+                            new_j = j + (k - 1) * ((k + 1) % 2);
+                        }
                     } else if(j==n || j==0) {
-                        new_i = i + (k-1) * ((k+1) % 2);
-                        new_j = j - ((2 * j / n) - 1)*(k % 2);
+                        if(k > 2) {
+                            new_j = j - ((2 * j / n) - 1);
+                            new_i = i + (2 * (k - 4) + 1);
+                        } else {
+                            new_i = i + (k - 1) * ((k + 1) % 2);
+                            new_j = j - ((2 * j / n) - 1) * (k % 2);
+                        }
                     } else {
-                        new_i = i + (k-2) * (k % 2);
-                        new_j = j + (k-1) * ((k+1) % 2);
+                        if(k > 3) {
+                            new_i = i + (k-6) * (k % 2);
+                            new_j = j + (k-5) * ((k+1) % 2);
+                        } else {
+                            new_i = i + (k - 2) * (k % 2);
+                            new_j = j + (k - 1) * ((k + 1) % 2);
+                        }
                     }
 
                     if(matrix[new_i][new_j] <= matrix[i][j]) {
@@ -775,12 +799,17 @@ public class Solver implements ISolver {
         }
         System.out.println(counter);
     }
-    /////////////////////////////////////
+
     public void task26() {
         int[][] matrix = readMatrix(new Scanner(System.in));
         List<Integer> list = new ArrayList<>();
         int counter = 0;
         boolean flag = true;
+
+        if(matrix.length == 1) {
+            System.out.println(matrix[0][0]);
+            return;
+        }
 
         for(int i=0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
@@ -792,19 +821,35 @@ public class Solver implements ISolver {
                 n = matrix.length - 1;
                 numberOfNeighbours = neighbours(matrix, i, j);
                 flag = true;
+
                 for(int k=0; k < numberOfNeighbours; k++) {
                     if(i==0 && j==0 || i==n && j==n || i==n && j==0 || i==0 && j==n) {
-                        new_i = i - ((2 * i / n) - 1)*(k % 2);
+                        new_i = i - ((2 * i / n) - 1)*(k % 2) - ((int)(k - k%2) / 2)*((2 * i / n) - 1);
                         new_j = j - ((2 * j / n) - 1)*((k+1) % 2);
                     } else if(i==n || i==0 ) {
-                        new_i = i - ((2 * i / n) - 1) * (k % 2);
-                        new_j = j + (k-1) * ((k+1) % 2);
+                        if(k > 2) {
+                            new_i = i - ((2 * i / n) - 1);
+                            new_j = j + (2 * (k - 4) + 1);
+                        } else {
+                            new_i = i - ((2 * i / n) - 1) * (k % 2);
+                            new_j = j + (k - 1) * ((k + 1) % 2);
+                        }
                     } else if(j==n || j==0) {
-                        new_i = i + (k-1) * ((k+1) % 2);
-                        new_j = j - ((2 * j / n) - 1)*(k % 2);
+                        if(k > 2) {
+                            new_j = j - ((2 * j / n) - 1);
+                            new_i = i + (2 * (k - 4) + 1);
+                        } else {
+                            new_i = i + (k - 1) * ((k + 1) % 2);
+                            new_j = j - ((2 * j / n) - 1) * (k % 2);
+                        }
                     } else {
-                        new_i = i + (k-2) * (k % 2);
-                        new_j = j + (k-1) * ((k+1) % 2);
+                        if(k > 3) {
+                            new_i = i + (k-6) * (k % 2);
+                            new_j = j + (k-5) * ((k+1) % 2);
+                        } else {
+                            new_i = i + (k - 2) * (k % 2);
+                            new_j = j + (k - 1) * ((k + 1) % 2);
+                        }
                     }
 
                     if(matrix[new_i][new_j] >= matrix[i][j]) {
@@ -859,10 +904,15 @@ public class Solver implements ISolver {
             }
         });
 
+        System.out.println(colList.size());
         for (int i = 0; i < colList.size(); i++) {
+            int counter = 0;
+            for (int j = 0; j < colList.size(); j++) {
+                System.out.print(colList.get(j)[i]);
+                if (++counter != colList.size())
+                    System.out.print("\t");
+            }
             System.out.println();
-            for (int j = 0; j < colList.size(); j++)
-                System.out.print(colList.get(j)[i] + "\t");
         }
     }
 
@@ -938,10 +988,10 @@ public class Solver implements ISolver {
     private int neighbours(int[][] M, int i, int j) {
         int len = M.length - 1;
         if(i%len == 0 && j%len == 0)
-            return 2;
-        else if(i%len == 0 || j%len == 0)
             return 3;
+        else if(i%len == 0 || j%len == 0)
+            return 5;
         else
-            return 4;
+            return 8;
     }
 }
