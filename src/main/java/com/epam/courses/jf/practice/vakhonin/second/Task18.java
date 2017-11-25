@@ -5,6 +5,7 @@ import com.epam.courses.jf.practice.common.second.ITestableTask18;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class Task18 implements ITestableTask18{
 
@@ -163,7 +164,7 @@ public class Task18 implements ITestableTask18{
 //        return map;
 //    }
 
-
+    private static Logger log = Logger.getLogger(Task18.class.getName());
 
 
     @Override
@@ -173,11 +174,11 @@ public class Task18 implements ITestableTask18{
         int height = matrix.getHeight();
         Map<String, Integer> map = new HashMap<>();
         Map<String, Integer> result = new HashMap<>();
-        int maxNumber = 1;
+        int maxNumber = 0;
         for (int j = 0; j < height; j++) {
             for (int k = 0; k < wigth; k++) {
                 map = getInfoAboutMaxSubMatrixFromIndexes(matrix, j, k);
-                if(map.get("maxNumber") >= maxNumber){
+                if(map.get("maxNumber") > maxNumber){
                     result = map;
                 }
             }
@@ -185,12 +186,16 @@ public class Task18 implements ITestableTask18{
 
         int[][] resMatrix = new int[result.get("subHieght")][result.get("subWidth")];
 
+
+
+
         for (int j = 0; j < result.get("subHieght"); j++) {
             for (int k = 0; k < result.get("subWidth"); k++) {
                 resMatrix[j][k] = result.get("value");
             }
         }
 
+        log.info(resMatrix.toString());
 
 
         return new RectangularIntegerMatrix(resMatrix);
