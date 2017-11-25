@@ -9,7 +9,18 @@ import java.io.IOException;
 import java.util.HashMap;
 
 
+/**
+ * Specify a file, which contains english words (without punctuation marks).
+ * Find all different words and calculate their frequency.
+ * Words that differ only in the case of letters aren't assumed to be the same.
+ * Use HashMap.
+ */
 public class TestableTask10 implements ITestableTask10 {
+    /**
+     * Calculate the amount of entries of each word into the file.
+     * @param input A file with the initial data.
+     * @return A set of the pairs: <the word, the amount of entries into the file>.
+     */
     @Override
     public HashMap<String, Integer> countNumberWords(File input) {
         HashMap<String, Integer> words = new HashMap<>();
