@@ -180,6 +180,7 @@ public class Task18 implements ITestableTask18{
             for (int k = 0; k < wigth; k++) {
                 map = getInfoAboutMaxSubMatrixFromIndexes(matrix, j, k);
                 if(map.get("maxNumber") > maxNumber){
+                    maxNumber = map.get("maxNumber");
                     result = map;
                 }
             }
