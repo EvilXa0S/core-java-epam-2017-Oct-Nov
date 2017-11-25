@@ -637,7 +637,7 @@ public class Solver implements ISolver {
         }
 
     }
-    
+
     @Override
     public void task17() {
 
@@ -869,7 +869,6 @@ public class Solver implements ISolver {
 
     }
 
-    //TODO: Shit to be done
     @Override
     public void task20(){
 
@@ -925,31 +924,24 @@ public class Solver implements ISolver {
             }
         }
 
-        int[][] outputArray = new int[size][size];
+        int[] tempArray;
+
+        tempArray = inputArray[minX];
+
+        inputArray[minX] = inputArray[X];
+
+        inputArray[X] = tempArray;
 
         for (int i = 0; i < size; i++) {
 
-            for (int j = 0; j < size; j++) {
+            int tmp;
 
-                int tmp = inputArray[i][j];
+            tmp = inputArray[i][minY];
 
-                if(i == X){
+            inputArray[i][minY] = inputArray[i][Y];
 
-                    outputArray[i][j] = inputArray[minX][j];
+            inputArray[i][Y] = tmp;
 
-                    outputArray[minX][j] = tmp;
-
-                }if(j == Y) {
-
-                    outputArray[i][j] = inputArray[i][minY];
-
-                    outputArray[i][minY] = tmp;
-
-                }else{
-
-                    outputArray[i][j] = inputArray[i][j];
-                }
-            }
         }
 
         System.out.println(size);
@@ -957,9 +949,9 @@ public class Solver implements ISolver {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 if(j == size - 1){
-                    System.out.printf("%d", outputArray[i][j]);
+                    System.out.printf("%d", inputArray[i][j]);
                 }else{
-                    System.out.printf("%d ", outputArray[i][j]);
+                    System.out.printf("%d ", inputArray[i][j]);
                 }
             }
             System.out.println();
