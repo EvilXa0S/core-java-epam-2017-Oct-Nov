@@ -42,7 +42,6 @@ public class Task18 implements ITestableTask18{
         }
 
     }
-
     Map<String, Integer> getInfoAboutMaxSubMatrixFromIndexes(IRectangularIntegerMatrix matrix, int j, int k){
         int value = matrix.getValue(k, j);
         int colValue = value;
@@ -58,10 +57,12 @@ public class Task18 implements ITestableTask18{
         int number = 1;
 
 
-        while ((rowValue == value) && (indexJ != (hieght - 1))) {
+        while ((indexJ != (hieght)) && (matrix.getValue(indexK, indexJ) == value)) {
             subHieght++;
+            System.out.println(subHieght);
             indexJ++;
-            rowValue = matrix.getValue(indexK, indexJ);
+
+
         }
 
         number = subHieght;
@@ -69,24 +70,30 @@ public class Task18 implements ITestableTask18{
         map.put("maxNumber", maxNumber);
         map.put("subWidth", subWidth);
         map.put("subHieght", subHieght);
-        map.put("value", matrix.getValue(indexK, indexJ));
+        map.put("value", value);
+        System.out.println(map);
+
+        subWidth++; // = 2
+        indexK++;   // = 1
+        indexJ = j; // = 0
 
 
-        subWidth++;
-        indexK++;
-        indexJ = j;
 
 
 
+        while (( matrix.getValue(indexK, indexJ) == value) && (indexK != width)) {
 
-
-        while (( matrix.getValue(indexK, indexJ) == value) && (indexK != (width - 1))) {
-            while ((matrix.getValue(indexK, indexJ) == value) && (indexJ != (j + subHieght - 1))) {
+            while ((indexJ != (j + subHieght)) && (matrix.getValue(indexK, indexJ) == value)) {
                 indexJ++;
+
             }
-            subHieght = indexJ - j + 1;
-            number = subHieght * subWidth;
+            indexJ--;
+            subHieght = indexJ - j + 1; // = 2
+            System.out.println("subHieght = " + subHieght);
+            number = subHieght * subWidth; // = 4
+            System.out.println("number = " + number);
             if(number > maxNumber){
+                maxNumber = number;
                 map.put("maxNumber", maxNumber);
                 map.put("subWidth", subWidth);
                 map.put("subHieght", subHieght);
@@ -99,6 +106,62 @@ public class Task18 implements ITestableTask18{
         }
         return map;
     }
+//    Map<String, Integer> getInfoAboutMaxSubMatrixFromIndexes(IRectangularIntegerMatrix matrix, int j, int k){
+//        int value = matrix.getValue(k, j);
+//        int colValue = value;
+//        int rowValue = value;
+//        int indexJ = j;
+//        int indexK = k;
+//        int subWidth = 1;
+//        int hieght = matrix.getHeight();
+//        int subHieght = 0;
+//        int width = matrix.getWidth();
+//        Map<String, Integer> map = new HashMap<>();
+//        int numberOfCol = 1;
+//        int number = 1;
+//
+//
+//        while ((rowValue == value) && (indexJ != (hieght - 1))) {
+//            subHieght++;
+//            indexJ++;
+//            rowValue = matrix.getValue(indexK, indexJ);
+//        }
+//
+//        number = subHieght;
+//        int maxNumber = number;
+//        map.put("maxNumber", maxNumber);
+//        map.put("subWidth", subWidth);
+//        map.put("subHieght", subHieght);
+//        map.put("value", matrix.getValue(indexK, indexJ));
+//
+//
+//        subWidth++;
+//        indexK++;
+//        indexJ = j;
+//
+//
+//
+//
+//
+//        while (( matrix.getValue(indexK, indexJ) == value) && (indexK != (width - 1))) {
+//            while ((matrix.getValue(indexK, indexJ) == value) && (indexJ != (j + subHieght - 1))) {
+//                indexJ++;
+//            }
+//            subHieght = indexJ - j + 1;
+//            number = subHieght * subWidth;
+//            if(number > maxNumber){
+//                map.put("maxNumber", maxNumber);
+//                map.put("subWidth", subWidth);
+//                map.put("subHieght", subHieght);
+//                map.put("value", matrix.getValue(indexK, indexJ));
+//            }
+//
+//            subWidth++;
+//            indexK++;
+//            indexJ = j;
+//        }
+//        return map;
+//    }
 
 
 
