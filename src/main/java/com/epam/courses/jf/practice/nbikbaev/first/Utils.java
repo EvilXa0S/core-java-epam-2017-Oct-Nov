@@ -1,8 +1,6 @@
 package com.epam.courses.jf.practice.nbikbaev.first;
 
 
-import com.epam.courses.jf.practice.common.second.I2DPoint;
-
 import java.io.*;
 import java.util.*;
 
@@ -225,9 +223,9 @@ public class Utils {
      */
     public static int getColumnMaxElement(int[][] matrix, int column) {
         int max = matrix[0][column];
-        for (int i = 0; i < matrix.length; i++) {
-            if (matrix[i][column] > max) {
-                max = matrix[i][column];
+        for (int[] rows : matrix) {
+            if (rows[column] > max) {
+                max = rows[column];
             }
         }
         return max;
@@ -348,7 +346,7 @@ public class Utils {
     }
 
     private static boolean isLowerThanRowNeighbors(int[][] matrix, int i, int j) {
-        boolean result = false;
+        boolean result;
         if (i == 0) {
             result = matrix[i][j] < matrix[i + 1][j];
         } else if (i < matrix.length - 1) {
@@ -361,25 +359,32 @@ public class Utils {
 
 
     public static boolean isLocalMaximum(int[][] matrix, int i, int j) {
+        boolean greaterColumnNeighbors;
         boolean greaterRowNeighbors;
-        boolean greaterColumnsNeighbors;
         boolean greaterThanDiagonalNeighbors;
         int dimension = matrix.length;
         if (dimension == 1) {
             return true;
         }
+        greaterColumnNeighbors = isGreaterThanColumnNeighbors(matrix, i, j);
         greaterRowNeighbors = isGreaterThanRowNeighbors(matrix, i, j);
-        greaterColumnsNeighbors = isGreaterThanColumnNeighbors(matrix, i, j);
         greaterThanDiagonalNeighbors = isGreaterThanDiagonalNeighbors(matrix, i, j);
 
-        return greaterColumnsNeighbors && greaterRowNeighbors && greaterThanDiagonalNeighbors;
+        return greaterRowNeighbors && greaterColumnNeighbors && greaterThanDiagonalNeighbors;
     }
 
+    /**
+     *
+     * @param matrix
+     * @param i
+     * @param j
+     * @return
+     */
     private static boolean isGreaterThanDiagonalNeighbors(int[][] matrix, int i, int j) {
         int dimension = matrix.length;
         boolean result = true;
         if (i > 0 && i <= dimension - 1 && j < dimension - 1 && j >= 0) {
-            result = result && matrix[i][j] > matrix[i - 1][j + 1];
+            result = matrix[i][j] > matrix[i - 1][j + 1];
         }
         if (i > 0 && i <= dimension - 1 && j > 0 && j <= dimension - 1) {
             result = result && matrix[i][j] > matrix[i - 1][j - 1];
@@ -393,7 +398,16 @@ public class Utils {
         return result;
     }
 
-    private static boolean isGreaterThanColumnNeighbors(int[][] matrix, int i, int j) {
+    /**
+     * Returns true if matrix element e[i][j] greater than e[i+1][j] and e[i-1][j], otherwise returns false.
+     * If one of the neighbors does not exist compares with e[i+1][j] or e[i-1][j]
+     *
+     * @param matrix Matrix that contains element with row index i and column index j
+     * @param i      Element row index
+     * @param j      Element column index
+     * @return true, if matrix element is greater row neighbors, false if not
+     */
+    private static boolean isGreaterThanRowNeighbors(int[][] matrix, int i, int j) {
         boolean result;
         if (j == 0) {
             result = matrix[i][j] > matrix[i][j + 1];
@@ -405,7 +419,17 @@ public class Utils {
         return result;
     }
 
-    private static boolean isGreaterThanRowNeighbors(int[][] matrix, int i, int j) {
+
+    /**
+     * Returns true if matrix element e[i][j] greater than e[i+1][j] and e[i-1][j], otherwise returns false.
+     * If one of the neighbors does not exist compares with e[i+1][j] or e[i-1][j]
+     *
+     * @param matrix Matrix that contains element with row index i and column index j
+     * @param i      Element row index
+     * @param j      Element column index
+     * @return true, if matrix element is greater column neighbors, false if not
+     */
+    private static boolean isGreaterThanColumnNeighbors(int[][] matrix, int i, int j) {
         boolean result;
         if (i == 0) {
             result = matrix[i][j] > matrix[i + 1][j];
@@ -417,6 +441,12 @@ public class Utils {
         return result;
     }
 
+    /**
+     * Returns transposed matrix of given matrix
+     *
+     * @param m Matrix to be transposed
+     * @return Transposed matrix
+     */
     public static int[][] transposeMatrix(int[][] m) {
         int[][] temp = new int[m[0].length][m.length];
         for (int i = 0; i < m.length; i++)
@@ -425,9 +455,16 @@ public class Utils {
         return temp;
     }
 
-    public static <T> void writeToFile(File output, Collection<T> collection) {
+    /**
+     * Prints specified collection to {@link File}
+     *
+     * @param output     Target file
+     * @param collection Collection to be printed
+     * @param <E>        The class of the objects in the collection
+     */
+    public static <E> void writeCollectionToFile(File output, Collection<E> collection) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
-            for (T element : collection) {
+            for (E element : collection) {
                 writer.write(element.toString());
                 writer.newLine();
             }
