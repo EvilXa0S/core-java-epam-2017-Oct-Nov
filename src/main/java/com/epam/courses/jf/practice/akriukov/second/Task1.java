@@ -23,7 +23,7 @@ public class Task1 implements ITestableTask1 {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
             for (int i = strings.size() - 1; i >= 0; i--) {
-                writer.write(strings.get(i) + "\n\r");
+                writer.write(strings.get(i) + "\n");
             }
         } catch (IOException e) {
             e.printStackTrace();

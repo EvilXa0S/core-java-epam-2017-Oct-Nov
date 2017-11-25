@@ -13,10 +13,6 @@ import java.util.*;
 import static java.math.BigDecimal.ROUND_HALF_UP;
 
 public class Solver implements ISolver{
-    /*public static void main(String [] args) {
-        Solver solver = new Solver();
-        solver.task12();
-    }*/
 
     @Override
     public void task1() {
