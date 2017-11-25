@@ -637,19 +637,67 @@ public class Solver implements ISolver {
         }
 
     }
-
-    //TODO: Shit to be done
+    
     @Override
     public void task17() {
-//        Scanner inputData = new Scanner(System.in);
-//
-//        int size = 0;
-//
-//        if (inputData.hasNextInt()) {
-//            size = Integer.parseInt(inputData.nextLine());
-//        }
-//
-//        int[][] inputArray = new int[size][size];
+
+        Scanner inputData = new Scanner(System.in);
+
+        int size = 0;
+
+        if(inputData.hasNextInt()){
+
+            size = Integer.parseInt(inputData.nextLine());
+        }
+
+        double[][] inputArray = new double[size][size];
+
+        for (int i = 0; i < size; i++) {
+
+            String[] lineBuffer = inputData.nextLine().split(" ");
+
+            for (int j = 0; j < size; j++) {
+
+                inputArray[i][j] = Integer.parseInt(lineBuffer[j]);
+
+            }
+        }
+
+        double determinant = 1;
+
+        for (int rowIndex = 0; rowIndex < size; ++rowIndex) {
+            int lead = -1;
+            for (int i = rowIndex; i < size; ++i) {
+                if (inputArray[i][rowIndex] != 0
+                        && (lead == -1
+                        || Math.abs(inputArray[i][rowIndex]) > Math.abs(inputArray[lead][rowIndex]))
+                        ) {
+                    lead = i;
+                }
+            }
+            if (lead == -1) {
+                determinant = 0;
+                break;
+            }
+
+            double[] tmp = inputArray[rowIndex];
+            inputArray[rowIndex] = inputArray[lead];
+            inputArray[lead] = tmp;
+
+            if ((lead - rowIndex) % 2 == 1) {
+                determinant *= -1;
+            }
+            determinant *= inputArray[rowIndex][rowIndex];
+
+            for (int i = rowIndex + 1; i < size; ++i) {
+                double multiplier = inputArray[i][rowIndex] / inputArray[rowIndex][rowIndex];
+                for (int j = rowIndex; j < size; ++j) {
+                    inputArray[i][j] -= inputArray[rowIndex][j] * multiplier;
+                }
+            }
+        }
+
+        System.out.printf("%.0f%n", determinant);
 
     }
 
@@ -825,6 +873,97 @@ public class Solver implements ISolver {
     @Override
     public void task20(){
 
+        Scanner inputData = new Scanner(System.in);
+
+        int X = 0;
+        int Y = 0;
+
+        int size = 0;
+
+        if(inputData.hasNextInt()){
+
+            X = Integer.parseInt(inputData.nextLine());
+        }
+        if(inputData.hasNextInt()){
+
+            Y = Integer.parseInt(inputData.nextLine());
+        }
+        if(inputData.hasNextInt()){
+
+            size = Integer.parseInt(inputData.nextLine());
+        }
+
+        int[][] inputArray = new int[size][size];
+
+
+        for (int i = 0; i < size; i++) {
+
+            String[] lineBuffer = inputData.nextLine().split(" ");
+
+            for (int j = 0; j < size; j++) {
+
+                inputArray[i][j] = Integer.parseInt(lineBuffer[j]);
+
+            }
+        }
+
+        int minValue = 0;
+        int minX = 0;
+        int minY = 0;
+
+        //finding min value
+        for(int i = 0; i < size; i++){
+
+            for(int j = 0; j < size; j++){
+
+                if(inputArray[i][j] < minValue){
+
+                    minValue = inputArray[i][j];
+                    minX = i;
+                    minY = j;
+                }
+            }
+        }
+
+        int[][] outputArray = new int[size][size];
+
+        for (int i = 0; i < size; i++) {
+
+            for (int j = 0; j < size; j++) {
+
+                int tmp = inputArray[i][j];
+
+                if(i == X){
+
+                    outputArray[i][j] = inputArray[minX][j];
+
+                    outputArray[minX][j] = tmp;
+
+                }if(j == Y) {
+
+                    outputArray[i][j] = inputArray[i][minY];
+
+                    outputArray[i][minY] = tmp;
+
+                }else{
+
+                    outputArray[i][j] = inputArray[i][j];
+                }
+            }
+        }
+
+        System.out.println(size);
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if(j == size - 1){
+                    System.out.printf("%d", outputArray[i][j]);
+                }else{
+                    System.out.printf("%d ", outputArray[i][j]);
+                }
+            }
+            System.out.println();
+        }
     }
 
     @Override
