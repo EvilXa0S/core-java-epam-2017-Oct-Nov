@@ -44,10 +44,11 @@ public class TestableTask18 implements ITestableTask18 {
                     d2[j] = stack.isEmpty() ? matrix.getHeight() : stack.peek();
                     stack.push(j);
                 }
-                int max =  Math.max (ans, (i - d[0]) * (d2[0] - d1[0] - 1));
+                //int max =  Math.max (ans, (i - d[0]) * (d2[0] - d1[0] - 1));
                 for (int j=0; j<matrix.getWidth(); ++j){
+                    int max = ans;
                     ans = Math.max (ans, (i - d[j]) * (d2[j] - d1[j] - 1));
-                    if(ans>max){
+                    if(ans-max!=0){
 
                         rowsCols[0] =d[j]+1;
                         rowsCols[1] = i;
