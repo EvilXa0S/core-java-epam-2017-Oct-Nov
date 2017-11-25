@@ -6,8 +6,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+/**
+ * There are N persons in he circle.
+ * On each iteration of the cycle a person is excluded (through one, starting from the first), until the only one remains.
+ * Dropping out of a circle means removing an item from the source list.
+ * Develop two solutions, which are modeling the process.
+ * The first solution uses ArrayList, the second -- LinkedList.
+ */
 
 public class TestableTask11 implements ITestableTask11 {
+    /**
+     * Execute an execute of the posed task.
+     * @param peoples The list of the names of the members.
+     * @return The name of the last remaining.
+     */
     @Override
     public String emulate(ArrayList<String> peoples) {
         int out = 0;
@@ -18,6 +30,11 @@ public class TestableTask11 implements ITestableTask11 {
         return peoples.get(0);
     }
 
+    /**
+     * Execute an execute of the posed task.
+     * @param peoples The list of the names of the members.
+     * @return The name of the last remaining.
+     */
     @Override
     public String emulate(LinkedList<String> peoples) {
         Iterator iter = peoples.iterator();
