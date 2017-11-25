@@ -18,6 +18,7 @@ public class Task2 implements ITestableTask2 {
 
         for(File f: directory.listFiles()){
             if(f.isDirectory()){
+                allFiles.add(f);
                 allFiles.addAll(getFiles(f));
             }
             else{
