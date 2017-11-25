@@ -38,5 +38,4 @@ public class TestableTask13 implements ITestableTask13 {
             return graph[first][second] == 1;
         }
     }
-
 }
