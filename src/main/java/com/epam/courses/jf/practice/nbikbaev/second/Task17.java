@@ -14,9 +14,7 @@ public class Task17 implements ITestableTask17 {
         for (int i = 0; i < segments.size(); i++) {
             for (int j = 0; j < segmentList.size(); j++) {
                 I2DPoint point = getIntersectionPoint(segmentList.get(i), segmentList.get(j));
-                if (point != null) {
-                    map.put(i + j, point);
-                }
+                map.put(i + j, point);
             }
         }
         I2DPoint min = Collections.min(map.values(), Comparator.comparingDouble(I2DPoint::getX));
@@ -43,12 +41,9 @@ public class Task17 implements ITestableTask17 {
         double segment1XY = x1 * y2 - y1 * x2;
         double segment2XY = x3 * y4 - y3 * x4;
         double commonDenominator = ((x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4));
-        if (commonDenominator != 0) {
-            double pX = (segment1XY * (x3 - x4) - (x1 - x2) * segment2XY) / commonDenominator;
-            double pY = (segment1XY * (y3 - y4) - (y1 - y2) * segment2XY) / commonDenominator;
-            return new Point2DImpl(pX, pY);
-        }
-        return null;
+        double pX = (segment1XY * (x3 - x4) - (x1 - x2) * segment2XY) / commonDenominator;
+        double pY = (segment1XY * (y3 - y4) - (y1 - y2) * segment2XY) / commonDenominator;
+        return new Point2DImpl(pX, pY);
     }
 
 }
