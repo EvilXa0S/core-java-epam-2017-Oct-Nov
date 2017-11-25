@@ -6,13 +6,6 @@ import java.util.*;
 
 public class Task11 implements ITestableTask11 {
 
-    public static void main(String [] args) {
-
-        ArrayList<String> list = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5"));
-        Task11 task = new Task11();
-        task.emulate(list);
-    }
-
     @Override
     public String emulate(ArrayList<String> peoples) {
         return removeOneOverOne(peoples);
