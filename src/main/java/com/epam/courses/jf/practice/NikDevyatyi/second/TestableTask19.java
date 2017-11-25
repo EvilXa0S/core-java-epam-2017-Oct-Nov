@@ -27,7 +27,7 @@ public class TestableTask19 implements ITestableTask19 {
                 double lmda2 = 1/(double)v2;
                 double summ;
                 if(strt1>strt2){
-                    summ = -startLenght1/startLenght2*(lmda1/lmda2-1)+(lmda1/lmda2-1)*n;
+                    summ = 1-(startLenght1/startLenght2)*(lmda1/lmda2-1)+(lmda1/lmda2-1)*n;
                 }else if (strt1<strt2){
                     summ = (lmda1/lmda2-1)*(n)+startLenght2/startLenght1*(lmda1/lmda2-1)-1;
                 }
