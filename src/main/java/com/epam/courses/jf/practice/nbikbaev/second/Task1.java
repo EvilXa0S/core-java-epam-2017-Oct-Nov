@@ -22,7 +22,7 @@ public class Task1 implements ITestableTask1 {
             e.printStackTrace();
         }
         Collections.reverse(strings);
-        Utils.writeToFile(output, strings);
+        Utils.writeCollectionToFile(output, strings);
         Collections.reverse(strings);
         return strings;
     }
