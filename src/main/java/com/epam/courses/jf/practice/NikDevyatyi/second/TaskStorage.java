@@ -39,6 +39,33 @@ public class TaskStorage implements ITaskStorage {
         }switch (taskInterface.getSimpleName()){
             case "ITestableTask10":
                 return (T) new  TestableTask10();
+        }switch (taskInterface.getSimpleName()){
+            case "ITestableTask11":
+                return (T) new  TestableTask11();
+        }switch (taskInterface.getSimpleName()){
+            case "ITestableTask12":
+                return (T) new  TestableTask12();
+        }switch (taskInterface.getSimpleName()){
+            case "ITestableTask13":
+                return (T) new  TestableTask13();
+        }switch (taskInterface.getSimpleName()){
+            case "ITestableTask14":
+                return (T) new  TestableTask14();
+        }switch (taskInterface.getSimpleName()){
+            case "ITestableTask15":
+                return (T) new  TestableTask15();
+        }switch (taskInterface.getSimpleName()){
+            case "ITestableTask16":
+                return (T) new  TestableTask16();
+        }switch (taskInterface.getSimpleName()){
+            case "ITestableTask17":
+                return (T) new  TestableTask17();
+        }switch (taskInterface.getSimpleName()){
+            case "ITestableTask18":
+                return (T) new  TestableTask18();
+        }switch (taskInterface.getSimpleName()){
+            case "ITestableTask19":
+                return (T) new  TestableTask19();
         }
 
         return null;
