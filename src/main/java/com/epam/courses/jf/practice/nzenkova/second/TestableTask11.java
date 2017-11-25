@@ -16,7 +16,7 @@ import java.util.LinkedList;
 
 public class TestableTask11 implements ITestableTask11 {
     /**
-     * Execute an execute of the posed task.
+     * Execute an emulation execute of the posed task.
      * @param peoples The list of the names of the members.
      * @return The name of the last remaining.
      */
@@ -31,7 +31,7 @@ public class TestableTask11 implements ITestableTask11 {
     }
 
     /**
-     * Execute an execute of the posed task.
+     * Execute an emulation of the posed task.
      * @param peoples The list of the names of the members.
      * @return The name of the last remaining.
      */
