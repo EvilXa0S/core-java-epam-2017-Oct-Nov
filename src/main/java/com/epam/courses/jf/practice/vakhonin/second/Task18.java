@@ -2,6 +2,7 @@ package com.epam.courses.jf.practice.vakhonin.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask18;
 
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
@@ -184,9 +185,8 @@ public class Task18 implements ITestableTask18{
             }
         }
 
-        int[][] resMatrix = new int[result.get("subHieght")][result.get("subWidth")];
-
-
+        int[][] resMatrix;
+        resMatrix = new int[result.get("subHieght")][result.get("subWidth")];
 
 
         for (int j = 0; j < result.get("subHieght"); j++) {
@@ -195,7 +195,7 @@ public class Task18 implements ITestableTask18{
             }
         }
 
-        log.info(resMatrix.toString());
+        log.info(Arrays.deepToString(resMatrix));
 
 
         return new RectangularIntegerMatrix(resMatrix);
