@@ -10,38 +10,34 @@ import java.util.LinkedList;
 public class TestableTask11 implements ITestableTask11 {
     @Override
     public String emulate(ArrayList<String> peoples) {
-        while (peoples.size()>1){
+        boolean flag = true;
+        while (peoples.size() > 1) {
             Iterator<String> iterator = peoples.iterator();
-            while (iterator.hasNext()){
-                if(iterator.hasNext()){
-                    iterator.next();
+            while (iterator.hasNext()) {
+                iterator.next();
+                if (flag) {
                     iterator.remove();
-                    if(iterator.hasNext()){
-                        iterator.next();
-                    }
                 }
+                flag = !flag;
             }
         }
-        return Arrays.toString(peoples.toArray());
+        return peoples.get(0);
     }
 
     @Override
     public String emulate(LinkedList<String> peoples) {
-        while (peoples.size()>1){
+        boolean flag = true;
+        while (peoples.size() > 1) {
             Iterator<String> iterator = peoples.iterator();
-            while (iterator.hasNext()){
-                if(iterator.hasNext()){
-                    iterator.next();
+            while (iterator.hasNext()) {
+                iterator.next();
+                if (flag) {
                     iterator.remove();
-                    if(iterator.hasNext()){
-                        iterator.next();
-                    }
                 }
+                flag = !flag;
             }
         }
-
-
-        return Arrays.toString(peoples.toArray());
-
+        return peoples.get(0);
     }
+
 }
