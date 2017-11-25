@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Task2 implements ITestableTask2 {
+
     @Override
     public Set<File> getFiles(File directory) {
         Set<File> set = new TreeSet<>();
