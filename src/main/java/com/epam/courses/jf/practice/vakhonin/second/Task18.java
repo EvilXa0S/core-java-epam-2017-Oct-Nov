@@ -81,7 +81,7 @@ public class Task18 implements ITestableTask18{
 
 
 
-        while (( matrix.getValue(indexK, indexJ) == value) && (indexK != width)) {
+        while ((indexK != width) && ( matrix.getValue(indexK, indexJ) == value)) {
 
             while ((indexJ != (j + subHieght)) && (matrix.getValue(indexK, indexJ) == value)) {
                 indexJ++;
