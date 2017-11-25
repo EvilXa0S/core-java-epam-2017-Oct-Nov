@@ -15,7 +15,7 @@ import static java.math.BigDecimal.ROUND_HALF_UP;
 public class Solver implements ISolver{
     /*public static void main(String [] args) {
         Solver solver = new Solver();
-        solver.task1();
+        solver.task12();
     }*/
 
     @Override
@@ -323,14 +323,9 @@ public class Solver implements ISolver{
     public void task12() {
         Scanner scanner = new Scanner(System.in);
         int k = scanner.nextInt(); //column to sort
-        int[][] matrix = matrixInput();
+        int[][] matrix = matrixInput(scanner);
 
-        Arrays.sort(matrix, new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                return o1[k] - o2[k];
-            }
-        });
+        Arrays.sort(matrix, (o1, o2) -> o1[k] - o2[k]);
 
         matrixOutput(matrix);
     }
@@ -339,7 +334,7 @@ public class Solver implements ISolver{
     public void task13() {
         Scanner scanner = new Scanner(System.in);
         int k = scanner.nextInt(); //move position
-        int[][] inMatrix = matrixInput();
+        int[][] inMatrix = matrixInput(scanner);
         int[][] outMatrix = moveRows(inMatrix, k);
         matrixOutput(outMatrix);
 
@@ -376,7 +371,8 @@ public class Solver implements ISolver{
 
     @Override
     public void task16() {
-        int[][] inMatrix = matrixInput();
+        Scanner scanner = new Scanner(System.in);
+        int[][] inMatrix = matrixInput(scanner);
         int dim = inMatrix.length;
         int[][] outMatrix = new int[dim][dim];
 
@@ -390,7 +386,8 @@ public class Solver implements ISolver{
 
     @Override
     public void task17() {
-        int[][] matrix = matrixInput();
+        Scanner scanner = new Scanner(System.in);
+        int[][] matrix = matrixInput(scanner);
         int dim = matrix.length;
         int res = determinant(dim, matrix);
         System.out.println(res);
@@ -430,7 +427,8 @@ public class Solver implements ISolver{
 
     @Override
     public void task18() {
-        int inMatrix[][] = matrixInput();
+        Scanner scanner = new Scanner(System.in);
+        int inMatrix[][] = matrixInput(scanner);
         int maxElement = Integer.MIN_VALUE;
         for (int i = 0; i < inMatrix.length; i++) { //search max element in matrix
             for (int j = 0; j < inMatrix.length; j++) {
@@ -473,7 +471,8 @@ public class Solver implements ISolver{
 
     @Override
     public void task19() {
-        int inMatrix[][] = matrixInput();
+        Scanner scanner = new Scanner(System.in);
+        int inMatrix[][] = matrixInput(scanner);
         Set<Integer> linesToDelete = new HashSet<>();
         for (int i = 0; i < inMatrix.length; i++) { //search zero rows
             boolean zeroRow = true;
@@ -529,7 +528,8 @@ public class Solver implements ISolver{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int moveRowPosition = Integer.parseInt(readLineFromConsole(reader)); //throws exception if copy-paste input data in console, but with typing works good
         int moveColumnPosition = Integer.parseInt(readLineFromConsole(reader)); //use scanner for copy-paste
-        int matrix[][] = matrixInput();
+        Scanner scanner = new Scanner(System.in);
+        int matrix[][] = matrixInput(scanner);
         int minElement = Integer.MAX_VALUE;
         int dim = matrix.length;
         int minElementRowPosition = 0;
@@ -564,7 +564,8 @@ public class Solver implements ISolver{
 
     @Override
     public void task21() {
-        int[][] matrix = matrixInput();
+        Scanner scanner = new Scanner(System.in);
+        int[][] matrix = matrixInput(scanner);
         int dim = matrix.length;
 
         for (int i = 0; i < dim; i++) {
@@ -610,8 +611,8 @@ public class Solver implements ISolver{
 
     @Override
     public void task24() {
-
-        int[][] matrix = matrixInput();
+        Scanner scanner = new Scanner(System.in);
+        int[][] matrix = matrixInput(scanner);
 
         Arrays.sort(matrix, (o1, o2) -> {
             int sum1 = 0;
@@ -668,7 +669,6 @@ public class Solver implements ISolver{
      */
     public static String readLineFromConsole(BufferedReader reader) {
         try {
-//            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             return reader.readLine();
         } catch (IOException e) {
             e.printStackTrace();
@@ -680,8 +680,7 @@ public class Solver implements ISolver{
      * Reads square matrix from console
      * @return matrix
      */
-    public static int[][] matrixInput() {
-        Scanner scanner = new Scanner(System.in);
+    public static int[][] matrixInput(Scanner scanner) {
         int matrixDim = scanner.nextInt(); //matrix dimension
 
         int[][] matrix = new int[matrixDim][matrixDim];
