@@ -1,15 +1,14 @@
 package com.epam.courses.jf.practice.nzenkova.second;
 
+
 import com.epam.courses.jf.practice.common.second.ITestableTask14;
-import com.sun.istack.internal.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-
-public class TestableTask14 implements ITestableTask14 {
+public class TestableTask14 implements ITestableTask14{
     @Override
     public <T extends Number> ITestableTask14.INumberCollection<T> createCollection(Class<T> required) {
         return new NumberCollection<T>();
@@ -57,13 +56,13 @@ public class TestableTask14 implements ITestableTask14 {
             return list.contains(o);
         }
 
-        @NotNull
+
         @Override
         public Iterator iterator() {
             return list.iterator();
         }
 
-        @NotNull
+
         @Override
         public Object[] toArray() {
             return list.toArray();
@@ -84,7 +83,7 @@ public class TestableTask14 implements ITestableTask14 {
         }
 
         @Override
-        public boolean addAll(@NotNull Collection c) {
+        public boolean addAll(Collection c) {
             return list.addAll(c);
         }
 
@@ -94,23 +93,22 @@ public class TestableTask14 implements ITestableTask14 {
         }
 
         @Override
-        public boolean retainAll(@NotNull Collection c) {
+        public boolean retainAll(Collection c) {
             return list.retainAll(c);
         }
 
         @Override
-        public boolean removeAll(@NotNull Collection c) {
+        public boolean removeAll(Collection c) {
             return list.removeAll(c);
         }
 
         @Override
-        public boolean containsAll(@NotNull Collection c) {
+        public boolean containsAll( Collection c) {
             return list.containsAll(c);
         }
 
-        @NotNull
         @Override
-        public Object[] toArray(@NotNull Object[] a) {
+        public Object[] toArray(Object[] a) {
             return list.toArray(a);
         }
     }
