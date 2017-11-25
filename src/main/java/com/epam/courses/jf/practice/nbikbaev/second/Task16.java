@@ -2,6 +2,7 @@ package com.epam.courses.jf.practice.nbikbaev.second;
 
 import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask16;
+import com.epam.courses.jf.practice.nbikbaev.first.Utils;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,7 +17,7 @@ public class Task16 implements ITestableTask16 {
         SortedMap<I2DPoint, Double> map = new TreeMap<>((o1, o2) ->
                 (distance(o1, center) < distance(o2, center)) ? -1 : 1);
         findPoints(center, radius, map);
-        writeToFile(output, map);
+        Utils.writeCollectionToFile(output, map.keySet());
         return new FileWithPoints(output, map);
     }
 
@@ -29,17 +30,6 @@ public class Task16 implements ITestableTask16 {
                     map.put(point, testRadius);
                 }
             }
-        }
-    }
-
-    private void writeToFile(File output, SortedMap<I2DPoint, Double> map) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
-            for (I2DPoint point : map.keySet()) {
-                writer.write(point.toString());
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
