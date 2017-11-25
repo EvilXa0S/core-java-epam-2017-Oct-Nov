@@ -521,10 +521,10 @@ public class Solver implements ISolver{
 
     @Override
     public void task20() {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        int moveRowPosition = Integer.parseInt(readLineFromConsole(reader)); //throws exception if copy-paste input data in console, but with typing works good
-        int moveColumnPosition = Integer.parseInt(readLineFromConsole(reader)); //use scanner for copy-paste
         Scanner scanner = new Scanner(System.in);
+        int moveRowPosition = scanner.nextInt(); //throws exception if copy-paste input data in console, but with typing works good
+        int moveColumnPosition = scanner.nextInt(); //use scanner for copy-paste
+
         int matrix[][] = matrixInput(scanner);
         int minElement = Integer.MAX_VALUE;
         int dim = matrix.length;
