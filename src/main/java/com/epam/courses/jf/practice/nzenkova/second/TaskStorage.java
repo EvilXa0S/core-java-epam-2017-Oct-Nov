@@ -2,6 +2,9 @@ package com.epam.courses.jf.practice.nzenkova.second;
 
 import com.epam.courses.jf.practice.common.second.ITaskStorage;
 
+/**
+ * Task2.
+ */
 public class TaskStorage implements ITaskStorage{
     @Override
     public <T extends ITestableTask> T getSolver(Class<T> taskInterface) {
