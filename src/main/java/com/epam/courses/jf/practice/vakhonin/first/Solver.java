@@ -154,7 +154,7 @@ public class Solver implements ISolver {
         }
 
         System.out.println(countOfWords);
-    }   // DOING!
+    }   // READY!
 
     public void task6() {
         Scanner in = new Scanner(System.in);
@@ -168,11 +168,12 @@ public class Solver implements ISolver {
         }
 
         for (String word: words) {
-            for (char ch: word.toCharArray()) {
-                if (word.length() == 1) {
-                    break;
-                }
+            if (word.length() == 1) {
+                result = word;
+                break;
+            }
 
+            for (char ch: word.toCharArray()) {
                 code = (int) ch;
 
                 if (code > previousCode) {
@@ -191,17 +192,16 @@ public class Solver implements ISolver {
         }
 
         System.out.printf("%s%n", result);
-    }   // DOING!
+    }   // READY!
 
     public void task7() {
-        Scanner in;
-        int numberOfStrings, wordsSize;
+        Scanner in = new Scanner(System.in);
+        int numberOfWords = Integer.valueOf(in.nextLine());
+        int wordsSize;
+        numberOfWords = Integer.valueOf(in.nextLine());
 
-        in = new Scanner(System.in);
-        numberOfStrings = Integer.valueOf(in.nextLine());
-
-        String[] strings = new String[numberOfStrings];
-        for (int j = 0; j < numberOfStrings; j++) {
+        String[] strings = new String[numberOfWords];
+        for (int j = 0; j < numberOfWords; j++) {
             strings[j] = in.next();
         }
 
@@ -210,63 +210,67 @@ public class Solver implements ISolver {
 
         StringBuilder result;
         result = new StringBuilder("");
-        Set<String> words = new LinkedHashSet<>();
+//        Set<String> words = new LinkedHashSet<>();
+        Set<String> wordsSet = new HashSet<>();
 
-        for (String string : strings) {
+        for (String word: strings) {
+//            charSet = new LinkedHashSet();
+            charSet = new HashSet();
+            length = word.length();
 
-            charSet = new LinkedHashSet();
-            length = string.length();
-            for (Character ch : string.toCharArray()) {
+            for (Character ch : word.toCharArray()) {
                 charSet.add(ch);
             }
 
             if (length == charSet.size()) {
-                words.add(string);
+                wordsSet.add(word);
             }
         }
 
-        wordsSize = words.size();
+        wordsSize = wordsSet.size();
 
         if (wordsSize == 0) {
-            result.append("NOT FOUND");
-        } else {
-            for (String s: words){
+            result.append(NOT_FOUND);
+        }
+        else {
+            for (String s: wordsSet) {
                 result.append(s);
                 result.append(" ");
             }
+
             result.deleteCharAt(result.length() - 1);
         }
+
         System.out.println(result.toString());
     }   // DOING!
-
-
-//
+    
     public void task8() {
         Scanner in = new Scanner(System.in);
         int n = Integer.valueOf(in.nextLine());
-
         List<String> stringList = new ArrayList<>();
+
         for (int j = 0; j < n; j++) {
             stringList.add(in.next());
         }
+
         int counter = 0;
-        String result = "NOT FOUND";
+        String result = NOT_FOUND;
         StringBuffer strBuf;
-        for(String str: stringList){
-            if(str.matches("^\\d+$")){
+
+        for (String str: stringList) {
+            if (str.matches("^\\d+$")) {
                 strBuf = new StringBuffer(str);
                 strBuf.reverse();
-                if(strBuf.toString().equals(str)){
+
+                if (strBuf.toString().equals(str)) {
                     result = str;
                     counter++;
-                    if(counter == 2){
+
+                    if (counter == 2) {
                         break;
                     }
                 }
-
             }
-
-
         }
 
         System.out.printf("%s%n", result);
