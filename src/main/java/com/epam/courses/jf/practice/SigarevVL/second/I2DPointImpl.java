@@ -23,6 +23,14 @@ public class I2DPointImpl implements I2DPoint{
     }
 
     @Override
+    public String toString() {
+        return "I2DPointImpl{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof I2DPointImpl)) return false;
