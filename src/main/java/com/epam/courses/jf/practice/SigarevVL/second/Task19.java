@@ -11,8 +11,8 @@ public class Task19 implements ITestableTask19 {
         int countOfAllOvertake = 0;
         List<ICar> carsList = new ArrayList<>(cars);
         Collections.sort(carsList, (o1, o2) -> o1.getSpeed() > o2.getSpeed() ? 1 : -1 );
-        for (int i = carsList.size(); i >= 0; i--) {
-            for (int j = carsList.size(); j >=0; j--) {
+        for (int i = carsList.size()- 1; i >= 0; i--) {
+            for (int j = carsList.size() - 1; j >=0; j--) {
                 countOfAllOvertake += overtakeCountBetweenTwoCars(carsList.get(i),
                         carsList.get(j), lengthLap, numberLaps);
             }
