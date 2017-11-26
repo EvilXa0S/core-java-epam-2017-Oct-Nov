@@ -158,46 +158,41 @@ public class Solver implements ISolver {
 
     public void task6() {
         Scanner in = new Scanner(System.in);
+
         int numberOfWords = Integer.valueOf(in.next());
-        int code, previousCode = -1;
+        int code, prevCode = -1;
         String result = NOT_FOUND;
-        String[] words = new String[numberOfWords];
+        String[] strings = new String[numberOfWords];
 
         for (int j = 0; j < numberOfWords; j++) {
-            words[j] = in.next();
+            strings[j] = in.next();
         }
 
-        for (String word: words) {
+        for (String word: strings) {
             if (word.length() == 1) {
-                break;
+                continue;
             }
 
-            for (char ch: word.toCharArray()) {
+            for (Character ch : word.toCharArray()) {
                 code = (int) ch;
 
-                if (code > previousCode) {
-                    previousCode = code;
+                if (code > prevCode) {
+                    prevCode = code;
                 }
                 else {
-                    previousCode = -1;
+                    prevCode = -1;
                     break;
                 }
             }
 
-            if (previousCode != -1) {
+            if (prevCode != -1) {
                 result = word;
                 break;
             }
         }
 
-        if (result.equals("")) {
-            System.out.printf("%s%n", "NOT FOUND");
-        } else {
-            System.out.printf("%s%n", result);
-        }
-
-//        System.out.printf("%s%n", result);
-    }   // READY!
+        System.out.printf("%s%n", result);
+    }   // DOING!
 
     public void task7() {
         Scanner in = new Scanner(System.in);
