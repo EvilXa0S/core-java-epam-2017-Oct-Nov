@@ -40,7 +40,7 @@ public class Task17 implements ITestableTask17 {
 
                     if (0 <= kA && kA <= 1 && 0 <= kB && kB <=1) {
                         double X = x1 + kA * (x2 - x1);
-                        double Y = y1 + kB * (y2 - y1);
+                        double Y = y1 + kA * (y2 - y1);
 
                         if (firstTime){
                             minX = X;
@@ -54,7 +54,7 @@ public class Task17 implements ITestableTask17 {
                 }
             }
         }
-        
+
         return crossPointsSet;
     }
 
