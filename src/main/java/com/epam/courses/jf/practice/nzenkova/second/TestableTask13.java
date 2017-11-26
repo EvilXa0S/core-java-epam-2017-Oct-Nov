@@ -24,6 +24,7 @@ public class TestableTask13 implements ITestableTask13 {
      * Add, remove and check of the existence of the arcs are allowed.
      */
     class Graph extends AbstractGraph {
+
         private int[][] graph;
 
         public Graph(int numberNodes) {
@@ -33,9 +34,9 @@ public class TestableTask13 implements ITestableTask13 {
 
 
         /**
-         *
-         * @param first Первая связываемая вершина.
-         * @param second Вторая связываемая вершина.
+         * Add the arc to the graph.
+         * @param first The first vertex.
+         * @param second The second vertex.
          */
         @Override
         public void addEdge(int first, int second) {
@@ -43,9 +44,9 @@ public class TestableTask13 implements ITestableTask13 {
         }
 
         /**
-         *
-         * @param first Первая освобождаемая от связи вершина.
-         * @param second Вторая освобождаемая от связи вершина.
+         * Delete the arc from the graph.
+         * @param first The first vertex, which releases from the connection.
+         * @param second The second vertex, which releases from the connection.
          */
         @Override
         public void removeEdge(int first, int second) {
@@ -53,9 +54,9 @@ public class TestableTask13 implements ITestableTask13 {
         }
 
         /**
-         *
-         * @param first Первая вершина.
-         * @param second Вторая вершина.
+         * Check of the existence of the arc.
+         * @param first The first vertex.
+         * @param second The second vertex.
          * @return
          */
         @Override
