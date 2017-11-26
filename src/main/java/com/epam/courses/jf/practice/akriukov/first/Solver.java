@@ -658,6 +658,16 @@ public class Solver implements ISolver{
 
     }
 
+    @Override
+    public void task26() {
+
+    }
+
+    @Override
+    public void task27() {
+
+    }
+
     /**
      * Custom comparator for task2()
      * Firstly compares string length. If length is the same, then compare by symbol codes
