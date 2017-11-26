@@ -377,7 +377,6 @@ public class Solver implements ISolver {
         System.out.println(result);
     }   // READY!
 
-
     public void task12() {
         Scanner in = new Scanner(System.in);
         int numberOfColumn = in.nextInt();
@@ -387,62 +386,41 @@ public class Solver implements ISolver {
         printMatrix(matrix);
     }   // READY!
 
-    //
     public void task13() {
-        Scanner in;
-        int n, k, length, shift;
-        Integer[][] matrix;
-        StringBuilder stringMatrix;
+        Scanner in = new Scanner(System.in);
+        int k = in.nextInt();
+        int[][] matrix = enterMatrix(in);
+        int size = matrix.length;
+        int shift = -(size + k % size) % size + size;
+        int[][] newMatrix = new int[size][size];
 
-        in = new Scanner(System.in);
-
-
-        //        System.out.println("Enter displacement quantity:");
-        k = in.nextInt();
-
-
-        matrix = enterMatrixInteger(in);
-
-        n = matrix.length;
-
-        Integer[][] newMatrix = new Integer[n][n];
-
-        shift = -(n + k % n) % n + n;
-
-//        stringMatrix = new StringBuilder();
-
-        for (int j = 0; j < n; j++) {
-            for (int q = 0; q < n; q++) {
-                newMatrix[j][q] = matrix[(j + shift) % n][q];
-//                stringMatrix.append(matrix[(j + shift) % n][q] + "\t");
+        for (int j = 0; j < size; j++) {
+            for (int m = 0; m < size; m++) {
+                newMatrix[j][m] = matrix[(m + shift) % size][m];
             }
         }
 
-        System.out.println(n);
+        System.out.println(size);
+        printMatrix(newMatrix);
+    }   // READY!
 
-        printMatrixInteger(newMatrix);
-    }   // DOING!
-
-    //
     public void task14() {
-        Scanner in;
-        int n, count, max, result;
-        int[] seq;
+        Scanner in = new Scanner(System.in);
+        int n = Integer.valueOf(in.nextLine());
+        int[] seq = new int[n];
+        int count = 1;
+        int max = 1;
+        int result;
 
-        in = new Scanner(System.in);
-        n = Integer.valueOf(in.nextLine());
-        seq = new int[n];
         for (int j = 0; j < n; j++) {
             seq[j] = in.nextInt();
         }
 
-        count = 1;
-        max = 1;
-
         for (int j = 1; j < n; j++) {
             if (seq[j] > seq[j - 1]) {
                 count++;
-            } else {
+            }
+            else {
                 max = count;
                 count = 1;
             }
@@ -451,38 +429,34 @@ public class Solver implements ISolver {
         if (count > max) {
             max = count;
         }
+
         if (max == 1) {
             result = 0;
-        } else {
+        }
+        else {
             result = max;
         }
 
         System.out.println(result);
-    }   // DOING!
+    }   // READY!
 
-    //
     public void task15() {
-        Scanner in;
-        int n, sumIn, sumOut;
-        Integer[][] matrix;
+        Scanner in = new Scanner(System.in);
+        int sumOfRow;
+        int totalSum = 0;
+        int[][] matrix = enterMatrix(in);
+        int size = matrix.length;
 
-        in = new Scanner(System.in);
-//        System.out.println("Enter matrix dimension:");
-//        n = Integer.valueOf(in.nextLine());
-//        matrix = new Integer[n][n];
 
-        matrix = enterMatrixInteger(in);
-        n = matrix.length;
-        sumOut = 0;
-
-        for (int k = 0; k < n; k++) {
-
+        for (int[] row: matrix) {
             int counter = 0;
             int index1 = -1;
             int index2 = -1;
-            for (int j = 0; !((counter == 2) || (j == n)); j++) {
-                if (matrix[k][j] > 0) {
+
+            for (int j = 0; !((counter == 2) || (j == size)); j++) {
+                if (row[j] > 0) {
                     counter++;
+
                     if (index1 > -1) {
                         index2 = j;
                     } else {
@@ -491,202 +465,165 @@ public class Solver implements ISolver {
                 }
             }
 
-            sumIn = 0;
+            sumOfRow = 0;
 
             if ((counter == 2) && ((index2 - index1) > 1)) {
                 for (int j = index1 + 1; j < index2; j++) {
-                    sumIn += matrix[k][j];
+                    sumOfRow += row[j];
                 }
             }
-            sumOut += sumIn;
+
+            totalSum += sumOfRow;
         }
-        System.out.println(sumOut);
-    }   // DOING!
+        System.out.println(totalSum);
+    }   // READY!
 
-    //
-//    //TODO: где-то нужно еще какие то размерности выводить...
-//    //TODO: compareToIgnoreCase
-//    //TODO: корни уравнения, разобрать все случаи
-//    //TODO: седловые точки в 23. что делать, если минимальный элемент в нескольких экзамеплярах ?
+    //TODO: седловые точки в 23. что делать, если минимальный элемент в нескольких экзамеплярах ?
+
     public void task16() {
-        Scanner in;
-        int n, length;
-        Integer[][] matrix, matrixNew;
-//        StringBuilder stringMatrix;
+        Scanner in = new Scanner(System.in);
+        int[][] matrix = enterMatrix(in);
+        int size = matrix.length;
+        int[][] matrixNew = new int[size][size];
 
-        in = new Scanner(System.in);
-//        System.out.println("Enter matrix dimension:");
-//        n = in.nextInt();
-        matrix = enterMatrixInteger(in);
-        n = matrix.length;
-        matrixNew = new Integer[n][n];
-//        System.out.println("Enter matrix of " + n + "x" + n + ":");
-        for (int j = 0; j < n; j++) {
-            for (int q = 0; q < n; q++) {
-//                matrix[j][q] = in.nextInt();
-                matrixNew[n - q - 1][j] = matrix[j][q];
+        for (int j = 0; j < size; j++) {
+            for (int q = 0; q < size; q++) {
+                matrixNew[size - q - 1][j] = matrix[j][q];
             }
         }
-        System.out.println(n);
-        printMatrixInteger(matrixNew);
-    }   // DOING!
 
-    //
+        System.out.println(size);
+        printMatrix(matrixNew);
+    }   // READY!
+
     public void task17() {
         Scanner in = new Scanner(System.in);
-
-        Integer[][] matrix;
-        matrix = enterMatrixInteger(in);
-
-        Integer element;
+        int[][] matrix = enterMatrix(in);
+        int size = matrix.length;
+        int el;
         int det = 1;
-        int length = matrix.length;
-        for (int j = 0; j < length; j++) {
 
-            for (int k = j; k < length; k++) {
-                element = matrix[j][k];
-                if (!element.equals(0)) {
+        for (int j = 0; j < size; j++) {
+            for (int k = j; k < size; k++) {
+                el = matrix[j][k];
+
+                if (el != 0) {
                     swapRows(matrix, j, k);
                     break;
                 }
+
                 det = 0;
                 break;
             }
 
             if (det != 0) {
-                for (int k = j + 1; k < length; k++) {
-                    for (int i = length - 1; i >= j; i--) {
+                for (int k = j + 1; k < size; k++) {
+                    for (int i = size - 1; i >= j; i--) {
                         matrix[k][i] = matrix[j][j] * matrix[k][i] - matrix[k][j] * matrix[j][i];
                     }
                 }
             }
         }
 
-
         if (det != 0) {
-//            printMatrixInteger(matrix);
-            det = matrix[length - 1][length - 1];
-            for (int j = 0; j < length; j++) {
-                for (int k = 0; k < (length - j - 2); k++) {
+            det = matrix[size - 1][size - 1];
+
+            for (int j = 0; j < size; j++) {
+                for (int k = 0; k < (size - j - 2); k++) {
                     det /= matrix[j][j];
                 }
             }
         }
+
         System.out.println(det);
-    }   // DOING!
+    }   // READY!
 
-    //
     public void task18() {
-        int n, max, k, i;
-        Integer[][] matrix, matrixNew;
-        Set<Integer> rows, columns;
         Scanner in = new Scanner(System.in);
-        matrix = enterMatrixInteger(in);
-        n = matrix.length;
+        int[][] matrix = enterMatrix(in);
+        int size = matrix.length;
+        Set<Integer> rows = new HashSet();
+        Set<Integer> columns = new HashSet();
+        int max = matrix[0][0];
 
-        rows = new HashSet();
-        columns = new HashSet();
-
-        max = matrix[0][0];
-
-        for (int j = 0; j < n; j++) {
-            for (int q = 0; q < n; q++) {
+        for (int j = 0; j < size; j++) {
+            for (int q = 0; q < size; q++) {
                 if (matrix[j][q] >= max) {
-                    if (matrix[j][q] == max) {
-                        rows.add(j);
-                        columns.add(q);
-                    } else {
+                    if (matrix[j][q] != max) {
                         rows = new HashSet();
                         columns = new HashSet();
-                        rows.add(j);
-                        columns.add(q);
                         max = matrix[j][q];
                     }
-                }
 
+                    rows.add(j);
+                    columns.add(q);
+                }
             }
         }
 
-        matrixNew = new Integer[n - rows.size()][n - columns.size()];
+        int[][] matrixNew = new int[size - rows.size()][size - columns.size()];
+        int i, k = 0;
 
-        k = 0;
-        for (int j = 0; j < n; j++) {
+        for (int j = 0; j < size; j++) {
             if (!rows.contains(j)) {
                 i = 0;
-                for (int q = 0; q < n; q++) {
+
+                for (int q = 0; q < size; q++) {
                     if (!columns.contains(q)) {
                         matrixNew[k][i] = matrix[j][q];
                         i++;
                     }
                 }
+
                 k++;
             }
         }
+
         System.out.println(matrixNew.length);
         System.out.println(matrixNew[0].length);
+        printMatrix(matrixNew);
+    }   // READY!
 
-        printMatrixInteger(matrixNew);
-    }   // DOING!
 
-    //
+    int[][] matrixWithoutZeroRows(int[][] matrix){
+
+        List<int[]> listOfRows = new ArrayList<>();
+        boolean isZerosRow;
+
+        for (int[] row: matrix) {
+            isZerosRow = true;
+
+            for (int x: row) {
+                if (x != 0) {
+                    isZerosRow = false;
+                    break;
+                }
+            }
+
+            if (isZerosRow) {
+                listOfRows.add(row);
+            }
+        }
+
+        int[][] newMatrix = new int[listOfRows.size()][matrix.length];
+
+
+        for (int j = 0; j < listOfRows.size(); j++) {
+            newMatrix[j] = listOfRows.get(j);
+        }
+
+        return newMatrix;
+    }
+
     public void task19() {
-        int n, i, k, numberOfZeros;
-        Integer[][] matrix, matrixNew;
-        Set<Integer> rows, columns;
         Scanner in = new Scanner(System.in);
-        matrix = enterMatrixInteger(in);
-        n = matrix.length;
-
-        rows = new HashSet();
-        columns = new HashSet();
-
-        for (int j = 0; j < n; j++) {
-            numberOfZeros = 0;
-            for (int q = 0; q < n; q++) {
-                if (matrix[j][q] != 0) {
-                    break;
-                }
-                numberOfZeros++;
-            }
-            if (numberOfZeros == n) {
-                rows.add(j);
-            }
-        }
-
-        for (int j = 0; j < n; j++) {
-            numberOfZeros = 0;
-            for (int q = 0; q < n; q++) {
-                if (matrix[q][j] != 0) {
-                    break;
-                }
-                numberOfZeros++;
-            }
-            if (numberOfZeros == n) {
-                columns.add(j);
-            }
-        }
-
-        matrixNew = new Integer[n - rows.size()][n - columns.size()];
-
-        k = 0;
-        for (int j = 0; j < n; j++) {
-            if (!rows.contains(j)) {
-                i = 0;
-                for (int q = 0; q < n; q++) {
-                    if (!columns.contains(q)) {
-                        matrixNew[k][i] = matrix[j][q];
-                        i++;
-                    }
-                }
-                k++;
-            }
-        }
-
-        System.out.println(matrixNew.length);
-        System.out.println(matrixNew[0].length);
-
-        printMatrixInteger(matrixNew);
-    }   // DOING!
+        int[][] matrix = enterMatrix(in);
+        int[][] tMatrix = transposeMatrix(matrixWithoutZeroRows(matrix));
+        int[][] resultMatrix = transposeMatrix(matrixWithoutZeroRows(tMatrix));
+        System.out.println(resultMatrix.length);
+        System.out.println(resultMatrix[0].length);
+        printMatrix(resultMatrix);
+    }   // READY!
 
     //
     public void task20() {
@@ -1023,9 +960,8 @@ public class Solver implements ISolver {
         return sum;
     }
 
-    public void swapRows(Integer[][] matrix, int j, int k) {
-        Integer[] temp;
-        temp = matrix[j];
+    public void swapRows(int[][] matrix, int j, int k) {
+        int[] temp = matrix[j];
         matrix[j] = matrix[k];
         matrix[k] = temp;
     }
@@ -1126,6 +1062,24 @@ public class Solver implements ISolver {
     }
 
     //
+    public int[][] transposeMatrix(int[][] matrix) {
+        int n, m;
+        int[][] matrixNew;
+        n = matrix.length;
+        m = matrix[0].length;
+
+        matrixNew = new int[m][n];
+
+        for (int j = 0; j < n; j++) {
+            for (int k = 0; k < m; k++) {
+                matrixNew[k][j] = matrix[j][k];
+            }
+        }
+
+        return matrixNew;
+    }
+
+
     public Integer[][] transposeMatrix(Integer[][] matrix) {
         int n, m;
         Integer[][] matrixNew;
