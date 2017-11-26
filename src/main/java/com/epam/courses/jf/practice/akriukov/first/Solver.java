@@ -253,7 +253,7 @@ public class Solver implements ISolver{
         int b = reader.nextInt();
         int c = reader.nextInt();
         int d = b * b - 4 * a * c;
-        
+
         if (d < 0) {
             System.out.println("No solution");
         } else if (d == 0) {
@@ -371,11 +371,30 @@ public class Solver implements ISolver{
 
     }
 
-    /* TODO: do later
     @Override
     public void task15() {
+        Scanner scanner = new Scanner(System.in);
+        int dim = scanner.nextInt();
+        int[][] a = new int[dim][dim];
 
-    }*/
+        int sum = 0;
+        for (int i = 0; i < dim; i++) {
+            int count = 0;
+
+            for (int j = 0; j < dim; j++) {
+                a[i][j] = scanner.nextInt();
+                if (a[i][j] > 0) {
+                    count++;
+                }
+                if (count == 1 && a[i][j] < 0) {
+                    sum += a[i][j];
+                }
+            }
+
+        }
+
+        System.out.println(sum);
+    }
 
     @Override
     public void task16() {
