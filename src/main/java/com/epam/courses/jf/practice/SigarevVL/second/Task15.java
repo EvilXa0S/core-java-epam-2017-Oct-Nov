@@ -68,7 +68,7 @@ public class Task15 implements ITestableTask15 {
 
         public IFileWithLinesImpl(File file, Set<ILine> set) {
             this.file = file;
-            this.set.addAll(set);
+            this.set = new HashSet<>(set);
         }
 
         /**
