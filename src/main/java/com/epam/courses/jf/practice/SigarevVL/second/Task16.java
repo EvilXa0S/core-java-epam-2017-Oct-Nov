@@ -26,10 +26,8 @@ public class Task16 implements ITestableTask16 {
             }
         });
 
-
-
         for (int i = (int) Math.floor(radius + centerY); i
-                >= (int) Math.floor(- (radius + centerY)); i--) {
+                >= (int) Math.floor( -(radius + centerY)); i--) {
 
             for (int j = (int) Math.floor(radius + centerX); j
                     >= (int) Math.floor( - (radius + centerX)); j--)  {
@@ -42,6 +40,7 @@ public class Task16 implements ITestableTask16 {
                 }
             }
         }
+        
 
         try (PrintWriter writer = new PrintWriter(output)) {
             for (Map.Entry<I2DPoint, Double> entry : sortedMap.entrySet()) {
@@ -51,8 +50,6 @@ public class Task16 implements ITestableTask16 {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
 
         return new IFileWithPointsImpl(output, sortedMap);
     }
@@ -74,7 +71,7 @@ public class Task16 implements ITestableTask16 {
 
         @Override
         public SortedMap<I2DPoint, Double> getPoints() {
-            return null;
+            return sortedMap;
         }
     }
 
