@@ -21,7 +21,7 @@ public class Task9 implements ITestableTask9{
                     res.remove(buf);
                 }
                 else res.add(buf);
-                
+
             }
             fileScanner.close();
         } catch (FileNotFoundException e) {

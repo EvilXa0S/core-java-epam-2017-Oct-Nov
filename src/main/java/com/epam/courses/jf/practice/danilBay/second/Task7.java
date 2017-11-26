@@ -16,7 +16,7 @@ public class Task7 implements ITestableTask7 {
         for(int i=0; i< first.size();i++)
             for(int j=0; j< second.size();j++){
                 buf = result.get(i*j);
-                result.add(i*j,buf + first.get(i)*second.get(j));
+                result.set(i*j,buf + first.get(i)*second.get(j));
             }
         return result;
     }
