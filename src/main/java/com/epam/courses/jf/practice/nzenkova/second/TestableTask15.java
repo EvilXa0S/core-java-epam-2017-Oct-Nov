@@ -109,7 +109,7 @@ public class TestableTask15 implements ITestableTask15{
             this.points = points;
         }
 
-       
+
         @Override
         public Set<I2DPoint> getPoints() {
             Set<I2DPoint> resPoints = new HashSet<>();
