@@ -593,17 +593,11 @@ public class Solver implements ISolver {
         boolean isZerosRow;
 
         for (int[] row: matrix) {
-            isZerosRow = true;
-
             for (int x: row) {
                 if (x != 0) {
-                    isZerosRow = false;
+                    listOfRows.add(row);
                     break;
                 }
-            }
-
-            if (isZerosRow) {
-                listOfRows.add(row);
             }
         }
 
