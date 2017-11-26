@@ -388,21 +388,23 @@ public class Solver implements ISolver {
 
     public void task13() {
         Scanner in = new Scanner(System.in);
-        int k = in.nextInt();
-        int[][] matrix = enterMatrix(in);
+        int k, shift;
+        int[][] matrix;
+        k = in.nextInt();
+        matrix = enterMatrix(in);
         int size = matrix.length;
-        int shift = -(size + k % size) % size + size;
-        int[][] newMatrix = new int[size][size];
+        Integer[][] newMatrix = new Integer[size][size];
+        shift = -(size + k % size) % size + size;
 
         for (int j = 0; j < size; j++) {
-            for (int m = 0; m < size; m++) {
-                newMatrix[j][m] = matrix[(m + shift) % size][m];
+            for (int q = 0; q < size; q++) {
+                newMatrix[j][q] = matrix[(j + shift) % size][q];
             }
         }
 
         System.out.println(size);
-        printMatrix(newMatrix);
-    }   // READY!
+        printMatrixInteger(newMatrix);
+    }   // DOING!
 
     public void task14() {
         Scanner in = new Scanner(System.in);
