@@ -654,8 +654,8 @@ public class Solver implements ISolver {
         Scanner in = new Scanner(System.in);
         double[][] matrix = enterMatrixDouble(in);
         int size = matrix.length;
-        int[][] matrixNew = new int[size][size];
-
+        int[][] matrixNew;
+        matrixNew = new int[size][size];
         for (int j = 0; j < size; j++) {
             for (int k = 0; k < size; k++) {
                 matrixNew[j][k] = (int) Math.round(matrix[j][k]);
@@ -855,7 +855,7 @@ public class Solver implements ISolver {
 
         for (int j = 0; j < size; j++) {
             for (int q = 0; q < size; q++) {
-                matrix[j][q] = in.nextInt();
+                matrix[j][q] = in.nextDouble();
             }
         }
 
