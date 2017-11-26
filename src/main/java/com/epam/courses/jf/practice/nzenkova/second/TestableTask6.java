@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 /**
  * Add two polynomials, if the coefficients of the polynomials are kept in HashMap.
- * A degree of the element of the polynomial is a key, a coefficient of the element of the polynomial is a value.
+ * A degree of the element of the polynomial is the key, a coefficient of the element of the polynomial is the value.
  * The coefficients of the polynomials, whose keys aren't be in a map, are equal to zero.
  */
 public class TestableTask6 implements ITestableTask6 {
