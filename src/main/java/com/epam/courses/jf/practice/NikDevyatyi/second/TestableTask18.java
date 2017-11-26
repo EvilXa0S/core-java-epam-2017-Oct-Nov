@@ -72,7 +72,7 @@ public class TestableTask18 implements ITestableTask18 {
                 }
             }
 
-        }
+        }/*
         int k = ferstFinish - ferstStart + 1;
         int l = secondFinish - secondStart + 1;
         int[][] subMatrix = new int[k][l];
@@ -80,8 +80,19 @@ public class TestableTask18 implements ITestableTask18 {
             for (int j = secondStart; j <= secondFinish; j++) {
                 subMatrix[j - secondStart][i - secondFinish] = matrix.getValue(i, j);
             }
+        }*/
+        return  generateSubMatrix(matrix,ferstStart,ferstFinish,secondFinish,secondStart);//generateSubMatrix(matrix, ferstStart, ferstFinish, secondStart, secondFinish);
+    }
+    IRectangularIntegerMatrix generateSubMatrix(IRectangularIntegerMatrix matrix, int iStart, int iFinish, int jStart, int jFinish) {
+        int n = iFinish - iStart + 1;
+        int m = jFinish - jStart + 1;
+        int[][] subMatrix = new int[m][n];
+        for (int i = iStart; i <= iFinish; i++) {
+            for (int j = jStart; j <= jFinish; j++) {
+                subMatrix[j - jStart][i - iStart] = matrix.getValue(i, j);
+            }
         }
-        return new RectangularIntegerMatrix(subMatrix);//generateSubMatrix(matrix, ferstStart, ferstFinish, secondStart, secondFinish);
+        return new RectangularIntegerMatrix(subMatrix);
     }
 
 
@@ -111,6 +122,23 @@ public class TestableTask18 implements ITestableTask18 {
         @Override
         public int getValue(int indexWidth, int indexHeight) {
             return matrix[indexHeight][indexWidth];
+        }
+        @Override
+        public boolean equals(Object other) {
+            if (this == other) return true;
+            if (other == null || !(other instanceof IRectangularIntegerMatrix)) return false;
+            IRectangularIntegerMatrix matrix = (IRectangularIntegerMatrix) other;
+            if (getHeight() != matrix.getHeight() || getWidth() != matrix.getWidth()) {
+                return false;
+            }
+            for (int row = 0; row < getHeight(); row++) {
+                for (int col = 0; col < getWidth(); col++) {
+                    if (getValue(col, row) != matrix.getValue(col, row)) {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
 
 
