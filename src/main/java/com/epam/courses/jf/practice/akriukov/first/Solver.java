@@ -246,16 +246,28 @@ public class Solver implements ISolver{
         }
     }
 
-    /*@Override
+    @Override
     public void task10() {
-        //TODO: decide use double or BigDecimal
-        String[] coefficients = readLineFromConsole().split(" ");
-        BigDecimal a = new BigDecimal(coefficients[0]);
-        BigDecimal b = new BigDecimal(coefficients[1]);
-        BigDecimal c = new BigDecimal(coefficients[2]);
-        BigDecimal d = b.multiply(b).add(a.multiply(c).multiply(new BigDecimal("4")).negate()); //d = b * b - 4 * a * c
-        BigDecimal x1 = d.sqrt(MathContext.DECIMAL64);
-    }*/
+        Scanner reader = new Scanner(System.in);
+        int a = reader.nextInt();
+        int b = reader.nextInt();
+        int c = reader.nextInt();
+        int d = b * b - 4 * a * c;
+        
+        if (d < 0) {
+            System.out.println("No solution");
+        } else if (d == 0) {
+            BigDecimal x = new BigDecimal(-(double) b / (2 * a));
+            x.setScale(2, BigDecimal.ROUND_HALF_UP);
+            System.out.println("One solution: " + x);
+        } else {
+            BigDecimal x1 = new BigDecimal(((-b) - Math.sqrt((double) d)) / (2 * a))
+                    .setScale(2, BigDecimal.ROUND_HALF_UP);
+            BigDecimal x2 = new BigDecimal(((-b) + Math.sqrt((double) d)) / (2 * a))
+                    .setScale(2, BigDecimal.ROUND_HALF_UP);
+            System.out.println("Two solutions: " + x1 + ", " + x2);
+        }
+    }
 
     @Override
     public void task11() {
@@ -524,7 +536,6 @@ public class Solver implements ISolver{
         Scanner scanner = new Scanner(System.in);
         int moveRowPosition = scanner.nextInt(); //throws exception if copy-paste input data in console, but with typing works good
         int moveColumnPosition = scanner.nextInt(); //use scanner for copy-paste
-
         int matrix[][] = matrixInput(scanner);
         int minElement = Integer.MAX_VALUE;
         int dim = matrix.length;
