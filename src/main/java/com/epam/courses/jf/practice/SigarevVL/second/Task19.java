@@ -32,12 +32,19 @@ public class Task19 implements ITestableTask19 {
         double car1RaceTime = car1LapTime * numberLaps;
 
 
-        double meetingTime = (Math.abs(car2.getStartPosition() - car1.getStartPosition())
+        double meetingTime = ((car2.getStartPosition() - car1.getStartPosition())
                 / (car1.getSpeed() - car2.getSpeed()));
 
-        if (car1RaceTime > meetingTime) {
-            car1RaceTime -= meetingTime;
-            overtakeCount++;
+        if (meetingTime > 0) {
+            if (car1RaceTime > meetingTime) {
+                car1RaceTime -= meetingTime;
+                overtakeCount++;
+            }
+        } else {
+            if (car1RaceTime > Math.abs(meetingTime) + car1LapTime) {
+                car1RaceTime -= Math.abs(meetingTime) + car1LapTime;
+                overtakeCount++;
+            }
         }
 /*
         while (car1RaceTime > car1LapTime) {
