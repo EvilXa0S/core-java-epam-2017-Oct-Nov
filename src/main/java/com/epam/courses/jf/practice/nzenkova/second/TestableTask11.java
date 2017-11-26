@@ -46,7 +46,7 @@ public class TestableTask11 implements ITestableTask11 {
                 iter.next();
                 if (out % 2 == 0) {
                     iter.remove();
-                    out = 1;
+                    out = 0;
                 }
 
             } else {
