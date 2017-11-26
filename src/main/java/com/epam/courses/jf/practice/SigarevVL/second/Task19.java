@@ -46,17 +46,19 @@ public class Task19 implements ITestableTask19 {
                 overtakeCount++;
             }
         }
-/*
-        while (car1RaceTime > car1LapTime) {
+
+         do {
             meetingTime = (Math.abs(car2.getSpeed() * car1LapTime)
                     / (car1.getSpeed() - car2.getSpeed())) + car1LapTime;
 
             if (car1RaceTime > meetingTime) {
                 car1RaceTime -= meetingTime;
                 overtakeCount++;
+            } else {
+                break;
             }
-        }
-*/
+         } while (car1RaceTime > car1LapTime);
+
         return overtakeCount;
     }
 
