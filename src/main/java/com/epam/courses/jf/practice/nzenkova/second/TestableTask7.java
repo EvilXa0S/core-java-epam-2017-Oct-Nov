@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *
  * Multiply two polynomials of the default degree.
  * The element of the list with the index i corresponds to the coefficient of the degree i.
  * The degree of the resultant polynomials is equal to the sum of the maximum nonzero degrees of the initial polynomials.
