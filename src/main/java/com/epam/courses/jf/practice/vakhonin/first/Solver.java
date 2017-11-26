@@ -190,7 +190,13 @@ public class Solver implements ISolver {
             }
         }
 
-        System.out.printf("%s%n", result);
+        if (result.equals("")) {
+            System.out.printf("%s%n", "NOT FOUND");
+        } else {
+            System.out.printf("%s%n", result);
+        }
+
+//        System.out.printf("%s%n", result);
     }   // READY!
 
     public void task7() {
