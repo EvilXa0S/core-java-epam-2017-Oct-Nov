@@ -9,6 +9,7 @@ public class Task11 implements ITestableTask11 {
     @Override
     public String emulate(ArrayList<String> peoples) {
         for(int i=0; peoples.size()>1; i+=2){
+
             peoples.remove(i%peoples.size());
         }
         return peoples.get(0);
@@ -20,5 +21,15 @@ public class Task11 implements ITestableTask11 {
             peoples.remove(i%peoples.size());
         }
         return peoples.get(0);
+    }
+
+    public static void main(String[] args) {
+        ArrayList <Integer>d =new ArrayList(15);
+        d.add(2);
+        d.add(6);
+        d.add(5);
+        System.out.println(d.size());
+        d.remove(1);
+        System.out.println(d.size());
     }
 }
