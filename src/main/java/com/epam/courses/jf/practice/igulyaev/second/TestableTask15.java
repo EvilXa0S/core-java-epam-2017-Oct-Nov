@@ -101,6 +101,8 @@ public class TestableTask15 implements ITestableTask15 {
 
         Line(I2DPoint a, I2DPoint b){
             points = new HashSet<>();
+            points.add(a);
+            points.add(b);
         }
 
         @Override
