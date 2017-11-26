@@ -7,6 +7,9 @@ import java.util.*;
 
 public class Solver implements ISolver {
 
+    static final String NOT_FOUND = "NOT FOUND";
+
+
     public void task1() {
         Scanner in= new Scanner(System.in);
         int numberOfStrings = Integer.valueOf(in.nextLine());
@@ -88,14 +91,14 @@ public class Solver implements ISolver {
                 System.out.printf("(%d): \"%s\"%n", length, string);
             }
         }
-    }   // DOING!
+    }   // READY!
 
     public void task4() {
         Scanner in = new Scanner(System.in);
-        int n = Integer.valueOf(in.nextLine());
+        int numberOfWords = Integer.valueOf(in.nextLine());
         List<String> wordList = new ArrayList<>();
 
-        for (int j = 0; j < n; j++) {
+        for (int j = 0; j < numberOfWords; j++) {
             wordList.add(in.next());
         }
 
@@ -120,88 +123,76 @@ public class Solver implements ISolver {
         }
 
         System.out.println(word);
-    }   // DOING!
-//
+    }   // READY!
+
     public void task5() {
         Scanner in = new Scanner(System.in);
-        int n = Integer.valueOf(in.nextLine());
-//        in = new Scanner(System.in);
-        List<String> stringList = new ArrayList<String>();
-        for (int j = 0; j < n; j++) {
-            stringList.add(in.next());
+        int length;
+        int numberOfWords = Integer.valueOf(in.nextLine());
+        List<String> wordList = new ArrayList<>();
+
+        for (int j = 0; j < numberOfWords; j++) {
+            wordList.add(in.next());
         }
 
+        int countOfVowels, countOfWords = 0;
 
-        int length;
-        int countOfVowels, countOfWords;
-        countOfWords = 0;
-        for (String s : stringList) {
-            length = s.length();
-            if (((length % 2) == 0) && (s.matches("^[a-zA-Z]+$"))) {
+        for (String word : wordList) {
+            length = word.length();
+            if (((length % 2) == 0) && (word.matches("^[a-zA-Z]+$"))) {
                 countOfVowels = 0;
-                for (Character ch : s.toCharArray()) {
+                for (Character ch : word.toCharArray()) {
                     if ((ch.toString()).matches("(?i:[aeiouy])")) {
                         countOfVowels++;
                     }
                 }
 
-
                 if (countOfVowels * 2 == length) {
                     countOfWords++;
                 }
-
             }
         }
 
         System.out.println(countOfWords);
-
     }   // DOING!
-//
+
     public void task6() {
         Scanner in = new Scanner(System.in);
-        int numberOfStrings, last, it;
-        String result;
+        int numberOfWords = Integer.valueOf(in.next());
+        int code, previousCode = -1;
+        String result = NOT_FOUND;
+        String[] words = new String[numberOfWords];
 
-//        in = new Scanner(System.in);
-        numberOfStrings = Integer.valueOf(in.next());
-
-        String[] strings = new String[numberOfStrings];
-//        in = new Scanner(System.in);
-        for (int j = 0; j < numberOfStrings; j++) {
-            strings[j] = in.next();
+        for (int j = 0; j < numberOfWords; j++) {
+            words[j] = in.next();
         }
 
-        result = "";
-        last = -1;
-
-        for (String string : strings) {
-
-            for (Character ch : string.toCharArray()) {
-                if (string.length() == 1) {
-                    break;
-                }
+        for (String word: words) {
+            for (char ch: word.toCharArray()) {
+//                if (word.length() == 1) {
+//                    break;
+//                }
 //
-                it = (int) ch;
-                if (it > last) {
-                    last = it;
-                } else {
-                    last = -1;
+                code = (int) ch;
+
+                if (code > previousCode) {
+                    previousCode = code;
+                }
+                else {
+                    previousCode = -1;
                     break;
                 }
             }
-            if (last != -1) {
-                result = string;
+
+            if (previousCode != -1) {
+                result = word;
                 break;
             }
         }
 
-        if (result.equals("")) {
-            System.out.printf("%s%n", "NOT FOUND");
-        } else {
-            System.out.printf("%s%n", result);
-        }
+        System.out.printf("%s%n", result);
     }   // DOING!
-//
+
     public void task7() {
         Scanner in;
         int numberOfStrings, wordsSize;
