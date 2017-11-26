@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Define a set, which is based on a set of integers.
+ * Define a set, which is based on a set of the integers.
  * Create the methods for definition of the intersection and the union of the sets.
  * It's forbidden to modify the original sets.
  */
