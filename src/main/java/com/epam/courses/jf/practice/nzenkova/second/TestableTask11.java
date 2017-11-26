@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
- * There are N persons in he circle.
+ * There are N persons in the circle.
  * On each iteration of the cycle a person is excluded (through one, starting from the first), until the only one remains.
  * Dropping out of a circle means removing an item from the source list.
  * Develop two solutions, which are modeling the process.
@@ -42,11 +42,11 @@ public class TestableTask11 implements ITestableTask11 {
         int out = 1;
         while (peoples.size() > 1) {
             if (iter.hasNext()) {
-                out++;
+                ++out;
                 iter.next();
                 if (out % 2 == 0) {
                     iter.remove();
-                    out = 0;
+                    out = 1;
                 }
 
             } else {
