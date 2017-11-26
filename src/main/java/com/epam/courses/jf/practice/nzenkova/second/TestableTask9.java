@@ -12,7 +12,7 @@ import java.util.HashSet;
 /**
  * Specify a file, which contains english words (without punctuation marks).
  * Find all different words.
- * Words that differ only in the case of letters are assumed to be the same.
+ * The words that differ only in the case of letters are assumed to be the same.
  * Use HashSet.
  */
 public class TestableTask9 implements ITestableTask9 {
@@ -34,7 +34,6 @@ public class TestableTask9 implements ITestableTask9 {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return strings;
     }
 }
