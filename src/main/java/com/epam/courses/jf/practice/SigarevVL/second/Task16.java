@@ -4,6 +4,8 @@ import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask16;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
@@ -40,14 +42,15 @@ public class Task16 implements ITestableTask16 {
                 }
             }
         }
-        
 
         try (PrintWriter writer = new PrintWriter(output)) {
             for (Map.Entry<I2DPoint, Double> entry : sortedMap.entrySet()) {
                 writer.write(entry.getKey().toString()
                         + entry.getValue() + "\n");
             }
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
