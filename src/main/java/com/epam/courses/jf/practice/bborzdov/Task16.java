@@ -32,6 +32,7 @@ public class Task16 implements ITestableTask16 {
             for (I2DPoint point : points.keySet()) {
                 objectOutputStream.writeObject(point);
             }
+            objectOutputStream.close();
         }catch (IOException e){
             System.out.println("Failed when writing to file!\n");
             e.printStackTrace();
@@ -58,6 +59,7 @@ public class Task16 implements ITestableTask16 {
                     Point2D point =(Point2D) ois.readObject();
                     points.put(point,point.getDistance());
                 }
+                ois.close();
             }catch (IOException | ClassNotFoundException e){
                 System.out.println("Fail when reading from file\n");
             }
