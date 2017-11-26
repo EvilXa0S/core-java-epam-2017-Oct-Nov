@@ -19,7 +19,7 @@ public class TestableTask10 implements ITestableTask10 {
     /**
      * Calculate the amount of entries of each word into the file.
      * @param input A file with the initial data.
-     * @return A set of the pairs: <the word, the amount of entries into the file>.
+     * @return A set of the pairs: <the word, the amount of entries into the file>..
      */
     @Override
     public HashMap<String, Integer> countNumberWords(File input) {
