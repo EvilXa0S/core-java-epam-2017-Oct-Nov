@@ -9,7 +9,7 @@ import java.util.List;
  * Не используя вспомогательных объектов и не изменяя размера списка,
  *    переставить элементы списка так, чтобы сначала шли числа, не превосходящие X, а затем числа, большие X.
  */
-public interface ITestableTask12 extends ITaskStorage.ITestableTask {
+public interface  ITestableTask12 extends ITaskStorage.ITestableTask {
 
     /**
      * Преобразует целочисленный список таким образом, чтобы сначала шли числа меньшие value, затем большие.
