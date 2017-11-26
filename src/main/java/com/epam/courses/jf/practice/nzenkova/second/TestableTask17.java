@@ -12,36 +12,36 @@ public class TestableTask17 implements ITestableTask17 {
 
         if (segments == null || segments.size() == 0) return null;
 
-        //TreeMap с сортировкой по абсциссе
+        //TreeMap with sorting by abscissa
         TreeMap<Double, HashMap<I2DPoint, Integer>> map = new TreeMap<>(Double::compare);
 
-        //получаем все отрезки
+        //obtain all intervals
         ArrayList<double[]> lines = new ArrayList<>();
         for (ITestableTask17.ISegment segment : segments) {
             lines.add(findLine(segment.first(), segment.second()));
         }
-        //получаем все точки пересечения
+        //obtain the intersection points
         for (double[] line1 : lines) {
             for (double[] line2 : lines) {
                 I2DPoint point = IntersectionPoint(line1, line2);
                 if (point != null) {
                     map.computeIfAbsent(point.getX(), k -> new HashMap<>());
-                    //число повторяющихся точек (т.к. перечечение <=> больше 1 точки)
+                    //the amount of repeated points (intersection <=> more one point)
                     Integer num = map.get(point.getX()).get(point);
                     if (num == null) num = 0;
-                    //добавление точек в HashMap
+                    //add the point into HashMap
                     map.get(point.getX()).put(point, num + 1);
                 }
             }
         }
         if (map.size() == 0) return null;
 
-        //минимальная абсцисса
+        //the minimum abscissa
         Double minKey = map.firstKey();
         HashSet<I2DPoint> points = new HashSet<>();
-        //обход точек с минимальной абсциссой. Если > 1, то добавляем в результативное множество
+        //rounding the points with minimum of  abscissa. If > 1 add to the resultant set
         for (I2DPoint i2DPoint : map.get(minKey).keySet()) {
-            //т.к. каждая прямая была рассмотрена по 2 раза
+            //each straight line was examined 2 times
             if (map.get(minKey).get(i2DPoint) >= 2) points.add(i2DPoint);
         }
         return points;
@@ -49,7 +49,7 @@ public class TestableTask17 implements ITestableTask17 {
 
 
     private I2DPoint IntersectionPoint(double[] line1, double[] line2) {
-        //метод крамера для {a1y-b1x=c1; a2y-b2x=c2}
+        //Cramer's rule for {a1y-b1x=c1; a2y-b2x=c2}
         double delta = -line1[0] * line2[1] + line1[1] * line2[0];
         if (Double.compare(delta, 0) == 0) return null;
         double delta1 = line1[0] * line2[2] - line1[2] * line2[0];
@@ -77,4 +77,3 @@ public class TestableTask17 implements ITestableTask17 {
         return res;
     }
 }
-
