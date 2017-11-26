@@ -1,7 +1,6 @@
 package com.epam.courses.jf.practice.danilBay.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask14;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.AbstractCollection;
 import java.util.Collection;
@@ -9,12 +8,10 @@ import java.util.Iterator;
 import java.util.ArrayList;
 public class Task14 implements ITestableTask14 {
     class Col<T extends Number>extends AbstractCollection<T> implements INumberCollection<T> {
-        ArrayList<T>c;
-        Col(){
-            c=new ArrayList<>();
-        }
+        ArrayList<T>c=new ArrayList<>();
+
         @Override
-        public Number nearest(Number value) {
+        public T nearest(Number value) {
             double near=Math.abs(c.get(0).doubleValue()-value.doubleValue());
             int res=0;
             double buf;
@@ -35,14 +32,9 @@ public class Task14 implements ITestableTask14 {
         }
 
 
-        @Override
-        public boolean contains(Object o) {
 
-            if(c.contains((T)o))return true;
-            else return false;
-        }
 
-        @NotNull
+
         @Override
         public Iterator iterator() {
             return c.iterator();
@@ -52,7 +44,7 @@ public class Task14 implements ITestableTask14 {
 
         @Override
         public boolean add(T  o) {
-            return add(o);
+            return c.add(o);
 
         }
 
