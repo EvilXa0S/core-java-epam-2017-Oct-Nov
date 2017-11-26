@@ -15,15 +15,12 @@ public class Task16 implements ITestableTask16 {
     public IFileWithPoints analyze(I2DPoint center, int radius, File output) {
         double centerY = center.getY();
         double centerX = center.getX();
-        Queue<I2DPoint> queue = new PriorityQueue<>();
         SortedMap<I2DPoint, Double> sortedMap = new TreeMap<>(new Comparator<I2DPoint>() {
 
             @Override
             public int compare(I2DPoint o1, I2DPoint o2) {
-                double o1Radius = Math.sqrt( Math.pow(o1.getX() - centerX, 2)
-                        + Math.pow(o1.getY() - centerY, 2));
-                double o2Radius = Math.sqrt( Math.pow(o2.getX() - centerX, 2)
-                        + Math.pow(o2.getY() - centerY, 2));
+                double o1Radius = Math.sqrt( Math.pow(o1.getX() - centerX, 2) + Math.pow(o1.getY() - centerY, 2));
+                double o2Radius = Math.sqrt( Math.pow(o2.getX() - centerX, 2) + Math.pow(o2.getY() - centerY, 2));
                 return o1Radius > o2Radius ? 1 : -1;
             }
         });
