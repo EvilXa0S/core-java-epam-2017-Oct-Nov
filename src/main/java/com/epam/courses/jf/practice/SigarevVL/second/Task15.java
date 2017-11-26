@@ -26,18 +26,18 @@ public class Task15 implements ITestableTask15 {
     @Override
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {
 
-        List<ILineImpl> list = new ArrayList<>();
+        //List<ILineImpl> list = new ArrayList<>();
         Set<ILine> setLines = new HashSet<>();
 
         for (I2DPoint point : points) {
             for (I2DPoint anotherPoint : points) {
                 if (!point.equals(anotherPoint)) {
-                    list.add(new ILineImpl(point, anotherPoint));
+                    setLines.add(new ILineImpl(point, anotherPoint));
                 }
             }
         }
 
-        for (ILineImpl line : list) {
+        for (ILine line : setLines) {
 
             List<I2DPoint> linePoints = new ArrayList<>(line.getPoints());
             double x1 = linePoints.get(0).getX();
@@ -54,7 +54,7 @@ public class Task15 implements ITestableTask15 {
                 }
             }
         }
-        setLines.addAll(list);
+        //setLines.addAll(list);
         return new IFileWithLinesImpl(output, setLines);
     }
 
