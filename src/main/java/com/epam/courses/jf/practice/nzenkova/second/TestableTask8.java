@@ -15,7 +15,7 @@ import java.util.Stack;
 public class TestableTask8 implements ITestableTask8 {
     /**
      * Check balanced brackets.
-     * Correct an arrangement:
+     * Correct the arrangement:
      *                          1) Each opening parenthesis corresponds to a closing of the same type.
      *                          2) There is no intersection of bracketed areas.
      * @param string The string being analyzed.
