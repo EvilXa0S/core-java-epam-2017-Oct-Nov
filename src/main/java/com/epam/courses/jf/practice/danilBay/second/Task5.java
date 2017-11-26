@@ -18,7 +18,9 @@ public class Task5 implements ITestableTask5 {
             resistance.add(voltage.divide(cur));
 
         }
-        double res=resistance.divide(new BigDecimal(measurements.size())).doubleValue();
+        resistance=resistance.divide(new BigDecimal(measurements.size()));
+        resistance.setScale(6, BigDecimal.ROUND_HALF_UP);
+        double res=resistance.doubleValue();
         return res;
 
     }
