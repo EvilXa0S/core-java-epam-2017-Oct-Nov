@@ -39,7 +39,7 @@ public class Task19 implements ITestableTask19 {
             car1RaceTime -= meetingTime;
             overtakeCount++;
         }
-
+/*
         while (car1RaceTime > car1LapTime) {
             meetingTime = (Math.abs(car2.getSpeed() * car1LapTime)
                     / (car1.getSpeed() - car2.getSpeed())) + car1LapTime;
@@ -49,7 +49,7 @@ public class Task19 implements ITestableTask19 {
                 overtakeCount++;
             }
         }
-
+*/
         return overtakeCount;
     }
 
