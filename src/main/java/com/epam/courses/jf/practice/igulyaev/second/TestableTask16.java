@@ -65,7 +65,7 @@ public class TestableTask16 implements ITestableTask16 {
                         points.put(entry.getKey(), entry.getValue());
                     }
                 } catch (IOException | ClassNotFoundException e) {
-                    e.printStackTrace();
+
                 }
             }
             return points;

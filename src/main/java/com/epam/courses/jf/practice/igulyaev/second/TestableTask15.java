@@ -76,7 +76,7 @@ public class TestableTask15 implements ITestableTask15 {
                                 lines.add(line);
                             }
                         } catch (IOException | ClassNotFoundException e) {
-                            e.printStackTrace();
+
                         }
                     }
                 }
