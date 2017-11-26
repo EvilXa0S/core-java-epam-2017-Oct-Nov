@@ -28,6 +28,9 @@ public class TestableTask15 implements ITestableTask15 {
                         line.addPoint(p);
                     }
                 }
+                if(line.points.size() > 2){
+                    lines.add(line);
+                }
             }
         }
         try(FileOutputStream fileOutputStream = new FileOutputStream(output);
