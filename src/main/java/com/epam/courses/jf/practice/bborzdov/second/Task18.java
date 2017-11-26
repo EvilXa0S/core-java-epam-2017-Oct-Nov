@@ -8,7 +8,18 @@ import java.util.Stack;
 /**
  * Created by bogdan on 24.11.17.
  */
+
+/**
+ * Дана матрица из целых чисел.
+ * Найти в ней прямоугольную подматрицу, состоящую из максимального количества одинаковых элементов.
+ * Использовать стек.
+ */
+
 public class Task18 implements ITestableTask18 {
+    /**
+     * @param matrix Анализируемая матрица.
+     * @return Подматрица, состоящая из максимального количества одинаковых элементов.
+     */
     @Override
     public IRectangularIntegerMatrix getMaxSubMatrix(IRectangularIntegerMatrix matrix) {
         Stack<int[]> cordMaxSubMatrix = new Stack<>();

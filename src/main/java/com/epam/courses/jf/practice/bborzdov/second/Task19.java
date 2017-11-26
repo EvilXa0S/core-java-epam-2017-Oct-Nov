@@ -7,7 +7,19 @@ import java.util.Set;
 /**
  * Created by bogdan on 24.11.17.
  */
+
+/**
+ * На кольцевой гоночной трассе стоит N автомобилей.
+ * Для каждого из них известны начальное положение и скорость.
+ * Определить, сколько произойдет обгонов за указанное количество кругов.
+ */
 public class Task19 implements ITestableTask19 {
+    /**
+     * @param cars Расположенные на трассе машины.
+     * @param lengthLap Длина трассы.
+     * @param numberLaps Количество кругов.
+     * @return Количество осуществленных обгонов.
+     */
     @Override
     public int getNumberOvertaking(Set<ICar> cars, long lengthLap, int numberLaps) {
         int numberOvertaking = 0;

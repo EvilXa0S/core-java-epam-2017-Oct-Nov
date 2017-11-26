@@ -8,7 +8,19 @@ import java.util.List;
 /**
  * Created by bogdan on 17.11.17.
  */
+
+/**
+ *  Умножить два многочлена заданной степени, если коэффициенты многочленов хранятся в различных списках.
+ * Элемент списка с индексом i соответствует коэффициенту i-й степени.
+ */
 public class Task7 implements ITestableTask7 {
+
+    /**
+     * Осуществляет перемножение двух многочленов.
+     * @param first Первый многочлен.
+     * @param second Второй многочлен.
+     * @return Многочлен, полученный в результате перемножения.
+     */
     @Override
     public List<Integer> multiplyPolynomials(List<Integer> first, List<Integer> second) {
         List<Integer> result = new ArrayList<>();

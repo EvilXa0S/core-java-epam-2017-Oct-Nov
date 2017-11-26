@@ -11,14 +11,28 @@ import java.util.TreeMap;
 /**
  * Created by bogdan on 22.11.17.
  */
+
+/**
+ *  На клетчатой бумаге нарисован круг.
+ * Вывести в файл описания всех клеток, целиком лежащих внутри круга.
+ * Выводить в порядке возрастания расстояния от клетки до центра круга.
+ * Использовать класс SortedMap.
+ */
 public class Task16 implements ITestableTask16 {
+    /**
+     * Осуществляет анализ переданных точек, находя среди них попавших внутрь круга.
+     * @param center Точка, в которой расположен центр круга.
+     * @param radius Радиус круга.
+     * @param output Файл для вывода результатов.
+     * @return Файл с результатами анализа.
+     */
     @Override
-    public IFileWithPoints analyze(I2DPoint center, int radiusInt, File output) {
+    public IFileWithPoints analyze(I2DPoint center, int radius, File output) {
         FileWithPoints file = new FileWithPoints(output);
-        double radius = (double) radiusInt / 2;
+        double radiusDouble = (double) radius / 2;
         SortedMap<I2DPoint, Double> points = new TreeMap<>();
-        for (int i = (int)(center.getY() + radius); i > (center.getY() - radius - 1) ; i--) {
-            for (int j = (int)(center.getX() - radius); j < (center.getX()+radius+1) ; j++) {
+        for (int i = (int)(center.getY() + radiusDouble); i > (center.getY() - radiusDouble - 1) ; i--) {
+            for (int j = (int)(center.getX() - radiusDouble); j < (center.getX()+radiusDouble+1) ; j++) {
                 Point2D point = new Point2D(j,i);
                 BigDecimal distance =new BigDecimal(Task15.distance(point,center));
                 distance = distance.setScale(4, BigDecimal.ROUND_DOWN);
@@ -39,16 +53,25 @@ public class Task16 implements ITestableTask16 {
         }
         return file;
     }
+    /**
+     * Представляет файл, содержащий информацию о найденных точках.
+     */
     private class FileWithPoints implements ITestableTask16.IFileWithPoints{
         private File output;
         public FileWithPoints(File output){
             this.output = output;
         }
+        /**
+         * @return Файл с результатами анализа.
+         */
         @Override
         public File getFile() {
             return output;
         }
-
+        /**
+         * Извлекает из файла информацию о хранящихся в нем точках.
+         * @return Множество пар: точка + расстояние до центра.
+         */
         @Override
         public SortedMap<I2DPoint, Double> getPoints() {
             SortedMap<I2DPoint, Double> points = new TreeMap<>();

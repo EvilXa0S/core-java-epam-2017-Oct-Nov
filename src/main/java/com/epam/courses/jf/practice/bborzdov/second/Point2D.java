@@ -7,6 +7,9 @@ import java.io.Serializable;
 /**
  * Created by bogdan on 22.11.17.
  */
+/**
+ * Точка на двумерной плоскости.
+ */
 public class Point2D implements I2DPoint, Serializable, Comparable<Point2D> {
     private double x;
     private double y;

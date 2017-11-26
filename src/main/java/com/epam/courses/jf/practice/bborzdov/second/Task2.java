@@ -11,7 +11,17 @@ import java.util.Set;
 /**
  * Created by bogdan on 15.11.17.
  */
+
+/**
+ * * Сформировать множество элементов, входящих в каталог и его подкаталоги.
+ */
 public class Task2 implements ITestableTask2 {
+
+    /**
+     * Формирует множество всех элементов, входящих в текущий каталог и во все вложенные.
+     * @param directory Корневой каталог.
+     * @return Множество элементов корневого каталога и подкаталогов.
+     */
     @Override
     public Set<File> getFiles(File directory) {
         File[] files = directory.listFiles();

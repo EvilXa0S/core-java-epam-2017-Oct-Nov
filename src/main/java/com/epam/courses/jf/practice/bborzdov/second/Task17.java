@@ -8,7 +8,18 @@ import java.util.*;
 /**
  * Created by bogdan on 23.11.17.
  */
+
+/**
+ * На плоскости задано N отрезков.
+ * Найти точку (возможно несколько) пересечения двух отрезков, имеющую минимальную абсциссу.
+ * Использовать класс TreeMap.
+ */
 public class Task17 implements ITestableTask17{
+    /**
+     * Осуществляет анализ переданных отрезков.
+     * @param segments Множество отрезков.
+     * @return Множество точек пересечения, имеющих минимальную абсциссу.
+     */
     @Override
     public Set<I2DPoint> analyze(Set<ISegment> segments) {
         TreeMap<I2DPoint, Set<ISegment>> map = new TreeMap<>();
@@ -40,6 +51,12 @@ public class Task17 implements ITestableTask17{
         }
         return map.keySet();
     }
+
+    /**
+     * Создаёт уравнение отрезка в виде массива double размера 3
+     * @param segment
+     * @return уравнение отрезка в виде массива double размера 3
+     */
     private double[] getSegmentEquation(ISegment segment){
         double k;
         double[] equation = new double[3];
@@ -58,6 +75,15 @@ public class Task17 implements ITestableTask17{
         }
         return equation;
     }
+
+    /**
+     * Находит из уравнения двух отрезков при условии их пересечения в виде массива
+     * double значение x или y для точки пересечения этих отрезков в зависимости
+     * от значения параметра isXZero.
+     * @param isXZero определяет равен ли нулю в переданном уравнении x или y
+     * @param equation уравнение двух отрезков при условии их пересечения
+     * @return значение x или y для точки пересечения двух отрезков
+     */
     private double getCoordinate(boolean isXZero, double[] equation){
         double xy;
         if(isXZero) {
@@ -70,6 +96,14 @@ public class Task17 implements ITestableTask17{
         }
         return -(equation[2] / xy);
     }
+
+    /**
+     * Находит точку пересечения между двух отрезков
+     * @param first первый отрезок
+     * @param second второй отрезок
+     * @return если отрезки пересекаются, возвращает объект Point2D,
+     * представляющий точку пересечения двух отрезков, иначе null
+     */
     private Point2D getPoint(ISegment first, ISegment second) {
         double[] firstEquation = getSegmentEquation(first);
         double[] secondEquation = getSegmentEquation(second);

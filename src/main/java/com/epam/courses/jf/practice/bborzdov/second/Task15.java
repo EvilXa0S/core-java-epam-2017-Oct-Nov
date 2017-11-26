@@ -9,7 +9,19 @@ import java.util.*;
 /**
  * Created by bogdan on 21.11.17.
  */
+
+/**
+ * На плоскости задано N точек.
+ * Вывести в файл описания всех прямых, которые проходят более чем через 2 точки из заданных.
+ */
 public class Task15 implements ITestableTask15 {
+
+    /**
+     * Осуществляет анализ переданных точек, вычисляя линии, которые проходят более чем через 2 точки.
+     * @param points Множество точек на плоскости.
+     * @param output Файл для вывода результатов.
+     * @return Файл с результатами анализа.
+     */
     @Override
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {
         FileWithLines fileWithLines = new FileWithLines(output);
@@ -55,12 +67,22 @@ public class Task15 implements ITestableTask15 {
 
         return fileWithLines;
     }
+
+    /**
+     * Считает расстояние между двумя точками
+     * @param a - первая точка
+     * @param b - вторая точка
+     * @return расстояние между двумя точками
+     */
     static double distance(I2DPoint a, I2DPoint b){
         double x = a.getX() - b.getX();
         double y = a.getY() - b.getY();
         double res = Math.abs(Math.pow(x,2) + Math.pow(y,2));
         return Math.sqrt(res);
     }
+    /**
+     * Представляет файл, содержащий информацию о найденных линиях.
+     */
     private class FileWithLines implements IFileWithLines{
         private File output;
 
@@ -68,11 +90,18 @@ public class Task15 implements ITestableTask15 {
             this.output = output;
         }
 
+        /**
+         * @return Файл с результатами анализа.
+         */
         @Override
         public File getFile() {
             return output;
         }
 
+        /**
+         * Извлекает из файла информацию о хранящихся в нем линиях.
+         * @return Множество линий, найденных в результате анализа.
+         */
         @Override
         public Set<ILine> getLines() {
             Set<ILine> lines = new HashSet<>();
@@ -94,11 +123,18 @@ public class Task15 implements ITestableTask15 {
             return lines;
         }
     }
+    /**
+     * Прямая, заданная точками, входящими в исходное множество.
+     */
     private class Line implements ILine{
         private Set<I2DPoint> points;
         private Line(Set<I2DPoint> points){
             this.points = points;
         }
+
+        /**
+         *  @return Точки, через которые проходит прямая
+         */
         @Override
         public Set<I2DPoint> getPoints() {
             return points;

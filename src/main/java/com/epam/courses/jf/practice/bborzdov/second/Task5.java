@@ -9,7 +9,18 @@ import java.util.List;
 /**
  * Created by bogdan on 16.11.17.
  */
+
+/**
+ * Список содержит результаты измерений тока и напряжения на неизвестном сопротивлении R.
+ * Найти приближенное число R методом наименьших квадратов.
+ * Для повышения точности вычислений использовать класс {@link java.math.BigDecimal}
+ */
 public class Task5 implements ITestableTask5 {
+    /**
+     * Вычисляет сопротивление методом наименьших квадратов.
+     * @param measurements Измерения в ходе эксперимента.
+     * @return Вычисленное по исходным данным сопротивление.
+     */
     @Override
     public double calcResistance(List<IMeasurement> measurements) {
         BigDecimal voltAmper = new BigDecimal(0);
