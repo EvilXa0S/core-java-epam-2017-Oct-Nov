@@ -742,7 +742,57 @@ public class Solver implements ISolver{
 
     @Override
     public void task26() {
+        Scanner scanner = new Scanner(System.in);
+        int[][] matrix = matrixInput(scanner);
+        boolean localMaxExists = false;
+        int result = 0;
+        if (matrix.length == 1) {
+            System.out.println(matrix[0][0]);
+            return;
+        }
 
+        int[][] servMatrix = new int[matrix.length + 2][matrix.length + 2];
+        int min = matrix[0][0];
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                servMatrix[i + 1][j + 1] = matrix[i][j];
+                min = min(min, matrix[i][j]);
+            }
+        }
+
+        for (int i = 0; i < servMatrix.length; i++) {
+            servMatrix[i][0] = min;
+            servMatrix[i][servMatrix.length - 1] = min;
+            servMatrix[0][i] = min;
+            servMatrix[servMatrix.length - 1][i] = min;
+        }
+
+        for (int i = 1; i < matrix.length + 1; i++) {
+            for (int j = 1; j < matrix.length + 1; j++) {
+                if (servMatrix[i][j] > servMatrix[i - 1][j - 1] &&
+                        servMatrix[i][j] > servMatrix[i - 1][j] &&
+                        servMatrix[i][j] > servMatrix[i - 1][j + 1] &&
+                        servMatrix[i][j] > servMatrix[i][j - 1] &&
+                        servMatrix[i][j] > servMatrix[i][j + 1] &&
+                        servMatrix[i][j] > servMatrix[i + 1][j - 1] &&
+                        servMatrix[i][j] > servMatrix[i + 1][j] &&
+                        servMatrix[i][j] > servMatrix[i + 1][j + 1]) {
+                    if (!localMaxExists) {
+                        result = servMatrix[i][j];
+                        localMaxExists = true;
+                    } else {
+                        result = max(result, servMatrix[i][j]);
+                    }
+                }
+            }
+        }
+
+        if (localMaxExists) {
+            System.out.println(result);
+        } else {
+            System.out.println("NOT_FOUND");
+        }
     }
 
     @Override
