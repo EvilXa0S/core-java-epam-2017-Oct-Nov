@@ -24,12 +24,12 @@ public class TestableTask18 implements ITestableTask18 {
     }
 
     /**
-     * @return максимальную подматрицу влево вниз от элемента (i,j)
+     * @return The maximum submatrix ( to the left down from the element (i,j))
      */
     private RectangularIntegerMatrix getMaxSubMatrix(int i, int j, int n,  int m, IRectangularIntegerMatrix matrix) {
         int[][] resArray;
-        int max; //максимальная подматрица
-        int x = i, y = i; //коорднаты правого нижнего угла
+        int max; //the maximum submatrix
+        int x = i, y = i; //the coordinates of the lower right corner
         int up = i + 1;
         int down;
         while (up < n && matrix.getValue(up, j) == matrix.getValue(up - 1, j)) up++;
@@ -57,7 +57,7 @@ public class TestableTask18 implements ITestableTask18 {
     }
 
     /**
-     * задание массива из подматрицы
+     * Specify the array from submatrix
      */
     private void setMatrix(int i, int j, int x, int y, int[][] arrMatrix, IRectangularIntegerMatrix matrix) {
         for (int k = 0; k <= x - i; k++) {
