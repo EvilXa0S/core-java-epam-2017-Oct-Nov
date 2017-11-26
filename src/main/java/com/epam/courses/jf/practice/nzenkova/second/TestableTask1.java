@@ -17,7 +17,7 @@ public class TestableTask1 implements ITestableTask1{
     /**
      * @param input The input file.
      * @param output The output file.
-     * @return The list of strings in direct order.
+     * @return The list of the strings in direct order.
      */
     @Override
     public List<String> reverseFile(File input, File output) {
