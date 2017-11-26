@@ -169,7 +169,6 @@ public class Solver implements ISolver {
 
         for (String word: words) {
             if (word.length() == 1) {
-                result = word;
                 break;
             }
 
@@ -198,7 +197,6 @@ public class Solver implements ISolver {
         Scanner in = new Scanner(System.in);
         int numberOfWords = Integer.valueOf(in.nextLine());
         int wordsSize;
-        numberOfWords = Integer.valueOf(in.nextLine());
 
         String[] strings = new String[numberOfWords];
         for (int j = 0; j < numberOfWords; j++) {
@@ -210,12 +208,12 @@ public class Solver implements ISolver {
 
         StringBuilder result;
         result = new StringBuilder("");
-//        Set<String> words = new LinkedHashSet<>();
-        Set<String> wordsSet = new HashSet<>();
+        Set<String> wordsSet = new LinkedHashSet<>();
+//        Set<String> wordsSet = new HashSet<>();
 
         for (String word: strings) {
-//            charSet = new LinkedHashSet();
-            charSet = new HashSet();
+            charSet = new LinkedHashSet();
+//            charSet = new HashSet();
             length = word.length();
 
             for (Character ch : word.toCharArray()) {
@@ -243,7 +241,7 @@ public class Solver implements ISolver {
 
         System.out.println(result.toString());
     }   // DOING!
-    
+
     public void task8() {
         Scanner in = new Scanner(System.in);
         int n = Integer.valueOf(in.nextLine());
