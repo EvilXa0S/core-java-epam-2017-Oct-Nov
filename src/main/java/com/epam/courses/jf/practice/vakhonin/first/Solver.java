@@ -10,7 +10,7 @@ public class Solver implements ISolver {
     public void task1() {
         Scanner in= new Scanner(System.in);
         int numberOfStrings = Integer.valueOf(in.nextLine());
-        int minLength = 0;
+        int minLength = Integer.MAX_VALUE;
         int maxLength = 0;
         String minString = "";
         String maxString = "";
