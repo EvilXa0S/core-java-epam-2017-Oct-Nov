@@ -46,7 +46,7 @@ public class Task17 implements ITestableTask17 {
                             minX = X;
                             crossPointsSet.add(new I2DPointImpl(X, Y));
                             firstTime = false;
-                        } else if (minX <= X) {
+                        } else if (minX >= X) {
                             minX = X;
                             crossPointsSet.add(new I2DPointImpl(X, Y));
                         }
