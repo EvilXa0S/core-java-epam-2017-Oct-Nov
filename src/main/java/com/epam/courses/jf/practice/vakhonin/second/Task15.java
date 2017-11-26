@@ -50,10 +50,10 @@ public class Task15 implements ITestableTask15{
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 for (ILine line : lines) {
                     for (I2DPoint point : line.getPoints()) {
-                        writer.write(String.valueOf(point.getX()));
+                        writer.write("" + point.getX());
                         writer.write(" ");
-                        writer.write(String.valueOf(point.getY()));
-                        writer.write(" ");
+                        writer.write("" + point.getY());
+                        writer.write("\t");
                     }
                     writer.write("\n");
                 }
@@ -70,7 +70,7 @@ public class Task15 implements ITestableTask15{
                 while ((string = reader.readLine()) != null) {
                     String[] row = string.split("\\s");
                     Set<I2DPoint> currentPoints = new HashSet<>();
-                    for (int i = 0; i < row.length; i+=3) {
+                    for (int i = 0; i < row.length; i+=2) {
                         Point currentPoint = new Point(Double.parseDouble(row[i]), Double.parseDouble(row[i+1]));
                         currentPoints.add(currentPoint);
                     }
@@ -83,7 +83,6 @@ public class Task15 implements ITestableTask15{
             return lines;
         }
     }
-
 
     class Point implements I2DPoint{
 
@@ -136,7 +135,6 @@ public class Task15 implements ITestableTask15{
                 }
             }
         }
-
         return new FileWithLines(linesSet, output);
     }
 }
