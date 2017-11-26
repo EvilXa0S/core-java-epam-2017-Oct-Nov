@@ -1,4 +1,4 @@
-package com.epam.courses.jf.practice.bborzdov;
+package com.epam.courses.jf.practice.bborzdov.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask1;
 
