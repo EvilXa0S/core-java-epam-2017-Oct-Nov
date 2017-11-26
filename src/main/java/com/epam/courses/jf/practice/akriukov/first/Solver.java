@@ -5,15 +5,12 @@ import com.epam.courses.jf.practice.common.first.ISolver;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.*;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
-import static java.math.BigDecimal.ROUND_HALF_UP;
 
 public class Solver implements ISolver{
 
@@ -797,7 +794,56 @@ public class Solver implements ISolver{
 
     @Override
     public void task27() {
+        class Struct {
+            private int[] column;
+            private int sumInColumn;
+            private int columnId;
 
+            private Struct(int[] column, int sumInColumn, int columnIndex) {
+                this.column = column;
+                this.sumInColumn = sumInColumn;
+                this.columnId = columnIndex;
+            }
+
+            private int getSumInColumn() {
+                return sumInColumn;
+            }
+
+            private int[] getColumn() {
+                return column.clone();
+            }
+
+            private int getColumnId() {
+                return columnId;
+            }
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        int[][] matrix = matrixInput(scanner);
+        List<Struct> structList = new ArrayList<>();
+
+        for (int j = 0; j < matrix[0].length; j++) {
+            int sum = 0;
+            int[] column = new int[matrix.length];
+            for (int i = 0; i < matrix.length; i++) {
+                column[i] = matrix[i][j];
+                sum += abs(matrix[i][j]);
+            }
+            structList.add(new Struct(column, sum, j));
+        }
+
+        structList.sort(Comparator.comparingInt(Struct::getSumInColumn).reversed()
+                .thenComparing(Struct::getColumnId));
+
+        int[][] result = new int[matrix.length][matrix[0].length];
+        for (int j = 0; j < result[0].length; j++) {
+            int[] column = structList.get(j).getColumn();
+            for (int i = 0; i < result.length; i++) {
+                result[i][j] = column[i];
+            }
+        }
+
+        matrixOutput(result);
     }
 
     /**
