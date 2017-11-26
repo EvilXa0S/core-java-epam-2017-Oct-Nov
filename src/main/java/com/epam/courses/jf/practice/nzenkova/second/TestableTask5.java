@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
+ *
  * The list contains the result of current and voltage measurements on the unknown resistance R.
  * Find the approximate number R by the method of least squares.
  * Use the class {@link java.math.BigDecimal} for increasing accuracy of the calculation.
