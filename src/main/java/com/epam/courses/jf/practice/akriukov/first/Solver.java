@@ -13,6 +13,10 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 public class Solver implements ISolver{
+    public static void main(String [] args) {
+        Solver solver = new Solver();
+        solver.task7();
+    }
 
     @Override
     public void task1() {
@@ -161,6 +165,7 @@ public class Solver implements ISolver{
     public void task7() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int numberOfWords = Integer.parseInt(readLineFromConsole(reader));
+        StringBuilder resultString = new StringBuilder();
         String[] strings = readLineFromConsole(reader).split(" ");
         Set<String> printedWords = new HashSet<>();
         for (String str : strings) {
@@ -172,13 +177,16 @@ public class Solver implements ISolver{
                     word.add(str.charAt(i)); //if non-register sensitive algorithm is needed Use Character.toLowerCase(str.charAt(i))
                 }
                 if (str.length() == word.size()) {
-                    System.out.print(str + " "); //" " in the end of line may be a problem
+                    resultString.append(str);
+                    resultString.append(" ");
                     printedWords.add(str);
                 }
             }
         }
         if (printedWords.size() == 0) {
             System.out.println("NOT FOUND");
+        } else {
+            System.out.println(resultString.toString().trim());
         }
     }
 
