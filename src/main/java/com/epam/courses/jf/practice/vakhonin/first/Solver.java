@@ -169,10 +169,10 @@ public class Solver implements ISolver {
 
         for (String word: words) {
             for (char ch: word.toCharArray()) {
-//                if (word.length() == 1) {
-//                    break;
-//                }
-//
+                if (word.length() == 1) {
+                    break;
+                }
+
                 code = (int) ch;
 
                 if (code > previousCode) {
