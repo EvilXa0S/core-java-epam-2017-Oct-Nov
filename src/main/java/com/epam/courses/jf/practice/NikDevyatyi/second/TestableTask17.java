@@ -34,10 +34,10 @@ public class TestableTask17 implements ITestableTask17 {
                         continue;
                     }
                 }
-                if((A1+A2)==0 ){
+                if((Math.abs(A1)+Math.abs(A2))==0){
                     continue;
                 }
-                if((B1+B2)==0 ){
+                if((Math.abs(B1)+Math.abs(B2))==0  ){
                     continue;
                 }
 
