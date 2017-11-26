@@ -33,9 +33,6 @@ public class Task14 implements ITestableTask14 {
         List<T> list = new ArrayList<>();
         @Override
         public T nearest(Number value) {
-//            if (list.isEmpty()) {
-//                return null;
-//            }
 
             double subMod = Math.abs(list.get(0).doubleValue() - value.doubleValue());
             T minimal = list.get(0);
