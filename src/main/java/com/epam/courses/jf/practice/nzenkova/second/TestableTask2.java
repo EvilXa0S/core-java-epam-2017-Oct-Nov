@@ -16,7 +16,7 @@ public class TestableTask2 implements ITestableTask2 {
 
     /**
      * @param directory The root directory.
-     * @return The bunch of files and directories.
+     * @return The bunch of the files and the directories.
      */
     @Override
     public Set<File> getFiles(File directory) {
