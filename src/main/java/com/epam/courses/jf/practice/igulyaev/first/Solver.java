@@ -162,6 +162,7 @@ public class Solver implements ISolver {
         }
         System.out.print(stringBuilder);
     }
+
     @Override
     public void task10(){
         final Scanner scanner = new Scanner(System.in);
@@ -243,6 +244,7 @@ public class Solver implements ISolver {
         }
         System.out.println(str);
     }
+
     @Override
     public void task12(){
         final Scanner scanner = new Scanner(System.in);
@@ -319,6 +321,7 @@ public class Solver implements ISolver {
         System.out.println(matrix.length);
         System.out.print(matrixToString(matrix));
     }
+
     @Override
     public void task18(){
         final Scanner scanner = new Scanner(System.in);
