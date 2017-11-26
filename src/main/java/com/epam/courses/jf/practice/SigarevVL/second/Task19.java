@@ -24,7 +24,7 @@ public class Task19 implements ITestableTask19 {
     public int overtakeCountBetweenTwoCars (ICar car1, ICar car2, long lengthLap, int numberLaps) {
         int overtakeCount = 0;
 
-        if(car1.getSpeed() == car2.getSpeed()) {
+        if(car1.getSpeed() <= car2.getSpeed()) {
             return overtakeCount;
         }
         double car1LapTime = lengthLap / car1.getSpeed();
