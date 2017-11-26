@@ -71,5 +71,27 @@ public class TestableTask18 implements ITestableTask18 {
         }
         return new RectangularIntegerMatrix(resArr);
     }
+    public class RectangularIntegerMatrix implements IRectangularIntegerMatrix {
+        public int[][] matrix;
+
+        public RectangularIntegerMatrix(int[][] matrix) {
+            this.matrix = Arrays.copyOf(matrix, matrix.length);
+        }
+
+        @Override
+        public int getWidth() {
+            return matrix[0].length;
+        }
+
+        @Override
+        public int getHeight() {
+            return matrix.length;
+        }
+
+        @Override
+        public int getValue(int indexWidth, int indexHeight) {
+            return matrix[indexWidth][indexHeight];
+        }
+    }
 
 }
