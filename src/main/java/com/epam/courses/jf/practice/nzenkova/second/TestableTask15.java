@@ -1,5 +1,6 @@
 package com.epam.courses.jf.practice.nzenkova.second;
 
+
 import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask15;
 
@@ -7,8 +8,17 @@ import java.io.*;
 import java.util.HashSet;
 import java.util.Set;
 
-
-public class TestableTask15 implements ITestableTask15 {
+/**
+ * Specify N points on the plane.
+ * Output to the file the description all lines, which are passed through more than two initial points.
+ */
+public class TestableTask15 implements ITestableTask15{
+    /**
+     * Analyze points, which is passed into the method,
+     *      calculate the lines, which are passed through more than two points.
+     * @param points A set of the points on the plane.
+     * @param output The output file.
+     */
     @Override
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {
         FileWithLines lines = new FileWithLines(output, points);
@@ -29,6 +39,7 @@ public class TestableTask15 implements ITestableTask15 {
         private File output;
         private Set<I2DPoint> points;
 
+
         FileWithLines(File output, Set<I2DPoint> points) {
             this.output = output;
             this.points = points;
@@ -43,6 +54,10 @@ public class TestableTask15 implements ITestableTask15 {
             return output;
         }
 
+        /**
+         * Extract the information on the lines from the file.
+         * @return  A set of the lines.
+         */
         @Override
         public Set<ITestableTask15.ILine> getLines() {
             Set<ITestableTask15.ILine> lines = new HashSet<>();
@@ -94,6 +109,7 @@ public class TestableTask15 implements ITestableTask15 {
             this.points = points;
         }
 
+       
         @Override
         public Set<I2DPoint> getPoints() {
             Set<I2DPoint> resPoints = new HashSet<>();
@@ -108,4 +124,3 @@ public class TestableTask15 implements ITestableTask15 {
         }
     }
 }
-
