@@ -30,7 +30,7 @@ public class TestableTask17 implements ITestableTask17 {
                 double A1 = coefs(allSegments.get(i))[0];double B1 = coefs(allSegments.get(i))[1];double C1 = coefs(allSegments.get(i))[2];
                 double A2 = coefs(allSegments.get(j))[0];double B2 = coefs(allSegments.get(j))[1];double C2 = coefs(allSegments.get(j))[2];
                 if(A1!=0 && B1!= 0){
-                    if(A2/A1==B2/A1){
+                    if(A2/A1==B2/B1){
                         continue;
                     }
                 }
