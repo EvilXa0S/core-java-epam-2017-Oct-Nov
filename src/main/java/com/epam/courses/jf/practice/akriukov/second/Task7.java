@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Task7 implements ITestableTask7 {
+
     @Override
     public List<Integer> multiplyPolynomials(List<Integer> first, List<Integer> second) {
         List<Integer> result = new ArrayList<>();

@@ -631,8 +631,47 @@ public class Solver implements ISolver{
     }
 
     @Override
-    //TODO
     public void task23() {
+        Scanner scanner = new Scanner(System.in);
+        int matrix[][] = matrixInput(scanner);
+        int minElement;
+        int maxElement;
+        int saddlePointsNumber = 0;
+
+        for (int i = 0; i < matrix.length; i++) {
+            minElement = matrix[i][0];
+            int minElementInColumn = 0;
+            boolean minFlag = true;
+
+            for (int j = 1; j < matrix.length; j++) {
+                if (minElement >= matrix[i][j]) {
+                    if (minElement == matrix[i][j]) {
+                        minFlag = false;
+                    } else {
+                        minElement = matrix[i][j];
+                        minElementInColumn = j;
+                        minFlag = true;
+                    }
+                }
+            }
+
+            if (minFlag) {
+                boolean maxFlag = true;
+                maxElement = matrix[i][minElementInColumn];
+
+                for (int j = 0; j < matrix.length; j++) {
+                    if (j != i && maxElement <= matrix[j][minElementInColumn]) {
+                        maxFlag = false;
+                        break;
+                    }
+                }
+                if (maxFlag) {
+                    saddlePointsNumber++;
+                }
+            }
+        }
+
+        System.out.println(saddlePointsNumber);
     }
 
     @Override
