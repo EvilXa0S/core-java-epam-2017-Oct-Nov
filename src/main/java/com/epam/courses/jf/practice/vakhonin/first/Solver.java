@@ -64,69 +64,62 @@ public class Solver implements ISolver {
         for (String s: list) {
             System.out.printf("(%d): \"%s\"%n", s.length(), s);
         }
-    }   // DOING!
-//
-    public void task3() {
-        Scanner in;
-        int length, numberOfStrings, averageLength, sumLength = 0;
-        Object[][] stringsWithLength;
-        String string;
+    }   // READY!
 
-        in = new Scanner(System.in);
-        numberOfStrings = Integer.valueOf(in.nextLine());
-        stringsWithLength = new Object[numberOfStrings][2];
-//        in = new Scanner(System.in);
+    public void task3() {
+        Scanner in = new Scanner(System.in);
+        int numberOfStrings = Integer.valueOf(in.nextLine());
+        int length, averageLength, sumLength = 0;
+        String string;
+        String[] strings = new String[numberOfStrings];
 
         for (int j = 0; j < numberOfStrings; j++) {
-            string = in.nextLine();
-            length = string.length();
-            stringsWithLength[j][0] = length;
-            stringsWithLength[j][1] = string;
-            sumLength += length;
+            strings[j] = in.nextLine();
+            sumLength += strings[j].length();
         }
 
         averageLength = sumLength / numberOfStrings;
         System.out.printf("AVERAGE (%d)%n", averageLength);
 
         for (int j = 0; j < numberOfStrings; j++) {
-            length = (int) stringsWithLength[j][0];
-            string = (String) stringsWithLength[j][1];
-
+            string = strings[j];
+            length = string.length();
             if (length < averageLength) {
                 System.out.printf("(%d): \"%s\"%n", length, string);
             }
         }
     }   // DOING!
-//
+
     public void task4() {
         Scanner in = new Scanner(System.in);
         int n = Integer.valueOf(in.nextLine());
-//        in = new Scanner(System.in);
-        List<String> stringList = new ArrayList<String>();
+        List<String> wordList = new ArrayList<>();
+
         for (int j = 0; j < n; j++) {
-            stringList.add(in.next());
+            wordList.add(in.next());
         }
-        Set<Character> characterSet = new HashSet<Character>();
+
         Set<Character> tempSet;
         int tempSize;
-        int counter = 0;
-        int number = 0;
-        int size = stringList.get(0).length();
-        for (String s : stringList) {
-            tempSet = new HashSet<Character>();
+        int size = Integer.MAX_VALUE;
+        String word = "";
+
+        for (String s : wordList) {
+            tempSet = new HashSet<>();
+
             for (Character ch : s.toCharArray()) {
                 tempSet.add(ch);
             }
-            tempSize = tempSet.size();
-            if (size > tempSize) {
-                size = tempSize;
-                characterSet = tempSet;
-                number = counter;
-            }
 
-            counter++;
+            tempSize = tempSet.size();
+
+            if (tempSize < size) {
+                size = tempSize;
+                word = s;
+            }
         }
-        System.out.println(stringList.get(number));
+
+        System.out.println(word);
     }   // DOING!
 //
     public void task5() {
