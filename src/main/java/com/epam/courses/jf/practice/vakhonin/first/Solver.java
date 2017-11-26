@@ -5,76 +5,64 @@ import com.epam.courses.jf.practice.common.first.ISolver;
 import java.math.BigDecimal;
 import java.util.*;
 
-
-/**
- * Created by igorvahonin on 03.11.17.
- */
 public class Solver implements ISolver {
-    public void task1() {
-        Scanner in;
-        int numberOfStrings, length, minLength, maxLength;
-        int numberOfShortestString = 0;
-        int numberOfLongestString = 0;
-        String s, minString, maxString;
-        String[] strings;
 
-        in = new Scanner(System.in);
-        numberOfStrings = Integer.valueOf(in.nextLine());
-        strings = new String[numberOfStrings];
+    public void task1() {
+        Scanner in= new Scanner(System.in);
+        int numberOfStrings = Integer.valueOf(in.nextLine());
+        int minLength = 0;
+        int maxLength = 0;
+        String minString = "";
+        String maxString = "";
+        String[] strings = new String[numberOfStrings];
+        int length;
 
         for (int j = 0; j < numberOfStrings; j++) {
             strings[j] = in.nextLine();
         }
 
-        numberOfShortestString = 0;
-        numberOfLongestString = 0;
-        minLength = strings[0].length();
-        maxLength = minLength;
-        for (int j = 1; j < numberOfStrings; j++) {
-            s = strings[j];
-            length = s.length();
+        for (String str: strings) {
+            length = str.length();
             if (length <= minLength) {
                 minLength = length;
-                numberOfShortestString = j;
+                minString = str;
             }
             if (length >= maxLength) {
                 maxLength = length;
-                numberOfLongestString = j;
+                maxString = str;
             }
         }
-        minString = strings[numberOfShortestString];
-        maxString = strings[numberOfLongestString];
+
         System.out.printf("MIN (%d): \"%s\"%n", minLength, minString);
         System.out.printf("MAX (%d): \"%s\"%n", maxLength, maxString);
-    }   // DOING!
+    }   //READY!
 
     public void task2() {
-        int numberOfStrings, length;
-        Map<Integer, ArrayList<String>> stringsMap;
-        Scanner in;
+        List<String> list = new ArrayList<>();
+        Comparator<String> comparator = (s1, s2) -> {
+            int length1 = s1.length();
+            int length2 = s2.length();
+            int result;
+            if (length1 == length2) {
+                result =  s1.compareToIgnoreCase(s2);
+            }
+            else {
+                result =  (length1 - length2);
+            }
+            return result;
+        };
 
-        in = new Scanner(System.in);
-        numberOfStrings = Integer.valueOf(in.nextLine());
-        String[] strings = new String[numberOfStrings];
-//        in = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
+        int numberOfStrings = Integer.valueOf(in.nextLine());
+
         for (int j = 0; j < numberOfStrings; j++) {
-            strings[j] = in.nextLine();
-        }
-        stringsMap = new TreeMap();
-        for (String string : strings) {
-            length = string.length();
-            if (!stringsMap.containsKey(length)) {
-                stringsMap.put(length, new ArrayList());
-            }
-            stringsMap.get(length).add(string);
+            list.add(in.nextLine());
         }
 
-        for (Map.Entry<Integer, ArrayList<String>> entry : stringsMap.entrySet()) {
-            List<String> stringListWithSameLength = entry.getValue();
-            stringListWithSameLength.sort(String::compareToIgnoreCase);
-            for (String s : stringListWithSameLength) {
-                System.out.printf("(%d): \"%s\"%n", entry.getKey(), s);
-            }
+        list.sort(comparator);
+
+        for (String s: list) {
+            System.out.printf("(%d): \"%s\"%n", s.length(), s);
         }
     }   // DOING!
 //
@@ -981,117 +969,7 @@ public class Solver implements ISolver {
     }   // DOING!
 
 //
-//    HashMap<Integer, Integer> task2_6_addPolynomials(HashMap<Integer, Integer> first, HashMap<Integer, Integer> second) {
-//        HashMap<Integer, Integer> result = second;
-//        Integer temp;
-//        Integer key;
-//        Integer value;
-//        Integer sum;
-//        for (Map.Entry<Integer, Integer> entry : first.entrySet()) {
-//            key = entry.getKey();
-//            value = entry.getValue();
-//            temp = result.put(key, value);
-//            if(temp == null){
-//                temp = 0;
-//            }
-//            sum = temp + value;
-//            if (sum == 0) {
-//                result.remove(key);
-//            } else {
-//                result.put(key, sum);
-//            }
-//        }
-//        return result;
-//    }
-//
-//    List<Integer> task2_7_multiplyPolynomials(List<Integer> first, List<Integer> second){
-//
-//        List<Integer> result = new ArrayList<>();
-//
-//        int size1 = first.size();
-//        int size2 = second.size();
-//        int val1, val2;
-//
-//        while(first.get(size1-1) == 0){
-//            size1--;
-//        }
-//
-//        while(second.get(size2-1) == 0){
-//            size2--;
-//        }
-//
-//
-//
-//
-//        for(int j = 0; j < (size1 + size2 - 1); j++){
-//            result.add(0);
-//        }
-//
-//
-//        for(int j = 0; j < size1; j++){
-//            for(int k = 0; k < size2; k++){
-//                val1 = first.get(j);
-//                val2 = second.get(k);
-//                System.out.println(j+k);
-//                result.set(j+k, val1*val2 + result.get(j+k));
-//                System.out.println(result + "");
-//            }
-//        }
-//        return result;
-//    }
-//
-//    //    TODO: найти задание, где нужно было найти второе. Там возможно и первое подойдет
-//    void task1_8(){
-//        Scanner in = new Scanner(System.in);
-//        int n = in.nextInt();
-//        in = new Scanner(System.in);
-//        List<String> stringList = new ArrayList<>();
-//        for (int j = 0; j < n; j++) {
-//            stringList.add(in.next());
-//        }
-//        int counter = 0;
-//        String result = "NOT FOUND"; // TODO: применить такое везде, сразу нот фаунд
-//        StringBuffer strBuf;
-//        for(String str: stringList){
-//            if(str.matches("^\\d+$")){
-//                strBuf = new StringBuffer(str);
-//                strBuf.reverse();
-//                if(strBuf.toString().equals(str)){
-//                    result = str;
-//                    counter++;
-//                    if(counter == 2){
-//                        break;
-//                    }
-//                }
-//
-//            }
-//
-//
-//        }
-//
-//        System.out.println(result);
-//    }
-//
-//    Set<Integer> intersection(Set<Integer> first, Set<Integer> second){
-//        Set<Integer> intersectionSet = new HashSet<>();
-//        for(Integer j: first){
-//            if(second.contains(j)){
-//                intersectionSet.add(j);
-//            }
-//        }
-//        return intersectionSet;
-//    }
-//
-//    Set<Integer> union(Set<Integer> first, Set<Integer> second){
-//        Set<Integer> unionSet = new HashSet<>();
-//        for(Integer j: first){
-//            for(Integer k: second){
-//                unionSet.add(j);
-//                unionSet.add(k);
-//            }
-//        }
-//        return unionSet;
-//    }
+
 //
 //
 //    String emulate(ArrayList<String> peoples){
