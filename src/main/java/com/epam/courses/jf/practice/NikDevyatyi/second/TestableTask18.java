@@ -81,7 +81,7 @@ public class TestableTask18 implements ITestableTask18 {
                 subMatrix[j - secondStart][i - secondFinish] = matrix.getValue(i, j);
             }
         }*/
-        return  generateSubMatrix(matrix,ferstStart,ferstFinish,secondFinish,secondStart);//generateSubMatrix(matrix, ferstStart, ferstFinish, secondStart, secondFinish);
+        return  generateSubMatrix(matrix,ferstStart,ferstFinish,secondStart,secondFinish);//generateSubMatrix(matrix, ferstStart, ferstFinish, secondStart, secondFinish);
     }
     IRectangularIntegerMatrix generateSubMatrix(IRectangularIntegerMatrix matrix, int iStart, int iFinish, int jStart, int jFinish) {
         int n = iFinish - iStart + 1;
