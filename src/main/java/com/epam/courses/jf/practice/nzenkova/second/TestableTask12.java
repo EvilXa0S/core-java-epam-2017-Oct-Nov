@@ -2,6 +2,7 @@ package com.epam.courses.jf.practice.nzenkova.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask12;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class TestableTask12 implements ITestableTask12 {
      */
     @Override
     public List<Integer> transform(List<Integer> integers, int value) {
-        int last = integers.size() - 1;
+     /*  int last = integers.size() - 1;
         int i = 0;
         //all integers  >= value -- at the end of the list
         while (i <= last) {
@@ -39,7 +40,8 @@ public class TestableTask12 implements ITestableTask12 {
                 i--;
             }
             i++;
-        }
+        }*/
+         Collections.sort(integers);
         return integers;
     }
 
@@ -49,9 +51,10 @@ public class TestableTask12 implements ITestableTask12 {
      * @param i The index of the element.
      * @param j The index of the element.
      */
-    private void swap(List<Integer> integers, int i, int j) {
+   /* private void swap(List<Integer> integers, int i, int j) {
         Integer temp = integers.get(i);
         integers.set(i, integers.get(j));
         integers.set(j, temp);
-    }
+    }*/
+
 }
