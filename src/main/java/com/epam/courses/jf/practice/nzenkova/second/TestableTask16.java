@@ -16,9 +16,8 @@ public class TestableTask16 implements ITestableTask16 {
     }
 
     /**
-     * записывает в файл найденные точки
-     *
-     * @param output файл для записи
+     * Output the points into the file.
+     * @param output The output file.
      */
     private void findPoints(File output, int radius, I2DPoint center) {
         try (BufferedWriter out = new BufferedWriter(new FileWriter(output.getAbsoluteFile()))) {
@@ -35,20 +34,20 @@ public class TestableTask16 implements ITestableTask16 {
     }
 
     /**
-     * @param radius радиус круга
-     * @param x      абсцисса точки
-     * @param y      ордината точки
-     * @param center центр круга
-     * @return true, если точка в круге, false иначе
+     * @param radius The circle radius.
+     * @param x     x-coordinate.
+     * @param y      y-coordinate
+     * @param center The circle center.
+     * @return true, if the point in the circle, false -- otherwise.
      */
     private boolean isInCircle(int radius, int x, int y, I2DPoint center) {
         return Double.compare(Math.pow(x - center.getX(), 2) + Math.pow(y - center.getY(), 2), Math.pow(radius, 2)) < 0;
     }
 
     /**
-     * @param point  точка
-     * @param center центр круга
-     * @return расстояние от точки до центра
+     * @param point  The point.
+     * @param center The circle center.
+     * @return The distance between the point and the center.
      */
     private double dist(I2DPoint point, I2DPoint center) {
         return Math.sqrt(Math.pow(point.getX() - center.getX(), 2) + Math.pow(point.getY() - center.getY(), 2));
@@ -92,7 +91,7 @@ public class TestableTask16 implements ITestableTask16 {
         }
 
         /**
-         * расстояние от точки до центра
+         * the distance between the point and the center
          */
         private double dist(I2DPoint point) {
             return Math.sqrt(Math.pow(point.getX() - center.getX(), 2) + Math.pow(point.getY() - center.getY(), 2));
