@@ -3,6 +3,7 @@ package com.epam.courses.jf.practice.bborzdov;
 import com.epam.courses.jf.practice.common.second.ITestableTask12;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -11,7 +12,6 @@ import java.util.List;
 public class Task12 implements ITestableTask12 {
     @Override
     public List<Integer> transform(List<Integer> integers, int value) {
-        integers.add(value);
         Collections.sort(integers);
         return integers;
     }
