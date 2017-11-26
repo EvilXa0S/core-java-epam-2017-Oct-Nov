@@ -26,7 +26,6 @@ public class Task15 implements ITestableTask15 {
     @Override
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {
 
-        //List<ILineImpl> list = new ArrayList<>();
         Set<ILine> setLines = new HashSet<>();
 
         for (I2DPoint point : points) {
@@ -54,7 +53,7 @@ public class Task15 implements ITestableTask15 {
                 }
             }
         }
-        //setLines.addAll(list);
+
         return new IFileWithLinesImpl(output, setLines);
     }
 
@@ -96,17 +95,11 @@ public class Task15 implements ITestableTask15 {
 
         Set<I2DPoint> setLinePoint = new HashSet<>();
 
-
         public ILineImpl(I2DPoint firstPoint, I2DPoint secondPoint) {
 
             setLinePoint.add(firstPoint);
             setLinePoint.add(secondPoint);
         }
-
-
-
-
-
 
         /** @return Точки, через которые проходит прямая */
         @Override
