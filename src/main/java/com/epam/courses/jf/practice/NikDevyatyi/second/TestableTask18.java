@@ -7,75 +7,95 @@ import java.util.*;
 public class TestableTask18 implements ITestableTask18 {
     @Override
     public IRectangularIntegerMatrix getMaxSubMatrix(IRectangularIntegerMatrix matrix) {
-        Set<Integer> res = new HashSet<>();
-        int ansMax = 0;
-        int[] rowsCols = new int[4];
-        int[] resRowsCols = new int[4];
-        int ans = 0;
-        int[] d = new int [matrix.getHeight()];
-        int[] d1 = new int [matrix.getHeight()];
-        int[] d2 = new int [matrix.getHeight()];
-        IRectangularIntegerMatrix result;
-        Deque<Integer> stack  =  new ArrayDeque<>();
-        for(int i = 0; i < matrix.getHeight(); i++){
-            for(int j = 0; j < matrix.getWidth(); j++){
-                res.add(matrix.getValue(i,j));
+        IRectangularIntegerMatrix result = matrix;
+        int n = matrix.getHeight();
+        int m = matrix.getWidth();
+        int maxSize = 0;
+        Set<Integer> differentValues = new HashSet<>();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                differentValues.add(matrix.getValue(i, j));
             }
         }
-        Arrays.fill(d,-1);
-        for(Integer item:res){
-            for (int i = 0; i < matrix.getHeight(); i++) {
-                for (int j = 0; j < matrix.getWidth(); j++) {
-                    if (matrix.getValue(i,j) != item.intValue()) {
-                        d[j] = i;
-                    }
-                }
-                stack.clear();
-                for (int j = 0; j < matrix.getHeight(); j++) {
-                    while (!stack.isEmpty() && d[stack.peek()] <= d[j]) {
-                        stack.pop();
-                    }
-                    d1[j] = stack.isEmpty() ? -1 : stack.peek();
-                    stack.push(j);
-                }
-                stack.clear();
-                for (int j = matrix.getHeight() - 1; j >= 0; j--) {
-                    while (!stack.isEmpty() && d[stack.peek()] <= d[j])  stack.pop();
-                    d2[j] = stack.isEmpty() ? matrix.getHeight() : stack.peek();
-                    stack.push(j);
-                }
-                //int max =  Math.max (ans, (i - d[0]) * (d2[0] - d1[0] - 1));
-                for (int j=0; j<matrix.getWidth(); ++j){
-                    int max = ans;
-                    ans = Math.max (ans, (i - d[j]) * (d2[j] - d1[j] - 1));
-                    if(ans-max!=0){
-
-                        rowsCols[0] =d[j]+1;
-                        rowsCols[1] = i;
-                        rowsCols[2] =d1[j]+1;
-                        rowsCols[3] =d2[j]-1;
-                        max = ans;
-                    }
-                 }
-            }
-            if (ans >ansMax){
-                resRowsCols = Arrays.copyOf(rowsCols,rowsCols.length);
-                ansMax = ans;
+        for (Integer element : differentValues) {
+            IRectangularIntegerMatrix currentSubMatrix = getMaxSubMatrixOfValue(matrix, element);
+            int size = currentSubMatrix.getHeight() * currentSubMatrix.getWidth();
+            if (size > maxSize) {
+                maxSize = size;
+                result = currentSubMatrix;
             }
         }
-        int [][]resArr = new int[resRowsCols[1]-resRowsCols[0]+1][resRowsCols[3]-resRowsCols[2]+1];
-        for(int i = 0;i<resArr.length;i++){
-            for (int j = 0;j<resArr[0].length;j++){
-                resArr[i][j] = matrix.getValue(resRowsCols[0],resRowsCols[2]);
-            }
-        }
-        return new RectangularIntegerMatrix(resArr);
+        return result;
     }
-    public class RectangularIntegerMatrix implements IRectangularIntegerMatrix {
-        public int[][] matrix;
 
-        public RectangularIntegerMatrix(int[][] matrix) {
-            this.matrix = Arrays.copyOf(matrix, matrix.length);
+    IRectangularIntegerMatrix getMaxSubMatrixOfValue(IRectangularIntegerMatrix matrix, int value) {
+        int n = matrix.getHeight();
+        int m = matrix.getWidth();
+        Deque<Integer> stack = new ArrayDeque<>();
+        int[] d = new int[m];
+        Arrays.fill(d, -1);
+        int[] d1 = new int[m];
+        int[] d2 = new int[m];
+        int size = 0;
+        int ferstStart = 0;
+        int ferstFinish = 0;
+        int secondStart = 0;
+        int secondFinish = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (matrix.getValue(i, j) != value) {
+                    d[j] = i;
+                }
+            }
+            stack.clear();
+            for (int j = 0; j < m; j++) {
+                while (!stack.isEmpty() && d[stack.peek()] <= d[j]) {
+                    stack.pop();
+                }
+                d1[j] = stack.isEmpty() ? -1 : stack.peek();
+                stack.push(j);
+            }
+            stack.clear();
+            for (int j = m - 1; j >= 0; j--) {
+                while (!stack.isEmpty() && d[stack.peek()] <= d[j])  stack.pop();
+                d2[j] = stack.isEmpty() ? m : stack.peek();
+                stack.push(j);
+            }
+            for (int j = 0; j < m; j++) {
+                int oldSize = size;
+                size = Math.max(size, (i - d[j]) * (d2[j] - d1[j] - 1));
+                if ((oldSize - size) != 0) {
+                    ferstStart = d[j] + 1;
+                    ferstFinish = i;
+                    secondStart = d1[j] + 1;
+                    secondFinish = d2[j] - 1;
+                }
+            }
+
+        }
+        int k = ferstFinish - ferstStart + 1;
+        int l = secondFinish - secondStart + 1;
+        int[][] subMatrix = new int[k][l];
+        for (int i = ferstStart; i <= ferstFinish; i++) {
+            for (int j = secondStart; j <= secondFinish; j++) {
+                subMatrix[j - secondStart][i - secondFinish] = matrix.getValue(i, j);
+            }
+        }
+        return new RectangularIntegerMatrix(subMatrix);//generateSubMatrix(matrix, ferstStart, ferstFinish, secondStart, secondFinish);
+    }
+
+
+
+
+
+
+
+    private class RectangularIntegerMatrix implements IRectangularIntegerMatrix {
+
+        private int[][] matrix;
+
+        RectangularIntegerMatrix(int[][] array) {
+            matrix = Arrays.copyOf(array, array.length);
         }
 
         @Override
@@ -90,8 +110,11 @@ public class TestableTask18 implements ITestableTask18 {
 
         @Override
         public int getValue(int indexWidth, int indexHeight) {
-            return matrix[indexWidth][indexHeight];
+            return matrix[indexHeight][indexWidth];
         }
+
+
+
     }
 
 }
