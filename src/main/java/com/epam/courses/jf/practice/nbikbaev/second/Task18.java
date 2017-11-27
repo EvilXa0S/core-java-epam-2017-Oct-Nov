@@ -17,39 +17,6 @@ public class Task18 implements ITestableTask18 {
         return new RectangularIntegerMatrix(b);
     }
 
-    private class RectangularIntegerMatrix implements IRectangularIntegerMatrix {
-
-        private int[][] a;
-        private int width;
-        private int height;
-
-        public RectangularIntegerMatrix() {
-        }
-
-        public RectangularIntegerMatrix(int[][] a) {
-            this.a = a;
-            width = a[0].length;
-            height = a.length;
-        }
-
-        @Override
-        public int getWidth() {
-            return width;
-        }
-
-        @Override
-        public int getHeight() {
-            return height;
-        }
-
-        @Override
-        public int getValue(int indexWidth, int indexHeight) {
-            return a[indexHeight][indexWidth];
-        }
-
-
-    }
-
     private static int[][] getMatrix(int[][] matrix) {
         int width = matrix.length;
         int length = matrix[0].length;
@@ -63,7 +30,6 @@ public class Task18 implements ITestableTask18 {
                 }
             }
         }
-
 
         Map.Entry<Integer, Integer> maxEntry =
                 Collections.max(map.entrySet(), Comparator.comparingInt(Map.Entry::getValue));
