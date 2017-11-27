@@ -20,7 +20,7 @@ public class Task17 implements ITestableTask17 {
         I2DPoint min = Collections.min(map.values(), Comparator.comparingDouble(I2DPoint::getX));
         Set<I2DPoint> points = new HashSet<>();
         for (I2DPoint point : map.values()) {
-            if (point.getX() == min.getX()) {
+            if (Double.compare(point.getX(), min.getX()) == 0) {
                 points.add(point);
             }
         }
