@@ -15,10 +15,12 @@ public class TestableTask15 implements ITestableTask15 {
         Set<ILine> lines = new HashSet<>();
         if(iterator.hasNext()){
             I2DPoint vectorStart = iterator.next();
+            whileLoop:
             while (iterator.hasNext()) {
-              I2DPoint vectorEnd = iterator.next();
+                I2DPoint vectorEnd = iterator.next();
                 I2DPoint start = vectorStart; //need to use in lambda, because vectorStart is changed every loop
-                if(lines.stream().noneMatch(line -> line.getPoints().containsAll(Arrays.asList(start, vectorEnd)))){
+
+                if(lines.stream().anyMatch(line -> line.getPoints().containsAll(Arrays.asList(start, vectorEnd)))){
                     continue;
                 }
                 Line line = new Line(vectorStart, vectorEnd);
@@ -80,6 +82,7 @@ public class TestableTask15 implements ITestableTask15 {
                         } catch (IOException | ClassNotFoundException e) {
 
                         }
+                        return lines;
                     }
                 }
             }
@@ -90,11 +93,11 @@ public class TestableTask15 implements ITestableTask15 {
     /**
      * Прямая, заданная точками, входящими в исходное множество.
      */
-    private static class Line implements ILine {
+    private static class Line implements ILine, Serializable{
         Set<I2DPoint> points;
         /** @return Точки, через которые проходит прямая */
         public Set<I2DPoint> getPoints(){
-            return null;
+            return points;
         }
         boolean addPoint(I2DPoint p){
             return points.add(p);
