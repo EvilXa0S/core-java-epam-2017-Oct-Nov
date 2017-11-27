@@ -629,14 +629,14 @@ public class Solver implements ISolver{
                         matrix[line][column];
             }
         }
-
-        System.out.println(matrix.length);
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix.length; j++) {
-                System.out.print(newMatrix[i][j] + "\t");
-            }
-            System.out.println();
-        }
+        printIntMatrix(matrix);
+//        System.out.println(matrix.length);
+//        for (int i = 0; i < matrix.length; i++) {
+//            for (int j = 0; j < matrix.length; j++) {
+//                System.out.print(newMatrix[i][j] + "\t");
+//            }
+//            System.out.println();
+//        }
     }
 
     /**
@@ -830,14 +830,14 @@ public class Solver implements ISolver{
             matrix[k][minElementPosition[1]] = matrix[k][columnNumber];
             matrix[k][columnNumber] = empty;
         }
-
-        System.out.println(matrixDimension);
-        for (int i[] : matrix) {
-            for (int j : i) {
-                System.out.print(j + "\t");
-            }
-            System.out.println();
-        }
+        printIntMatrix(matrix);
+//        System.out.println(matrixDimension);
+//        for (int i[] : matrix) {
+//            for (int j : i) {
+//                System.out.print(j + "\t");
+//            }
+//            System.out.println();
+//        }
         scanner.close();
     }
 
@@ -874,13 +874,14 @@ public class Solver implements ISolver{
             }
         }
 
-        System.out.println(matrixDimension);
-        for (int i[] : matrix) {
-            for (int j : i) {
-                System.out.print(j + "\t");
-            }
-            System.out.println();
-        }
+        printIntMatrix(matrix);
+//        System.out.println(matrixDimension);
+//        for (int i[] : matrix) {
+//            for (int j : i) {
+//                System.out.print(j + "\t");
+//            }
+//            System.out.println();
+//        }
         scanner.close();
     }
 
@@ -1210,7 +1211,14 @@ public class Solver implements ISolver{
                 }
             }
         }
-        printIntMatrix(newMatrix);
+        System.out.println(matrixDimension);
+        for (int i = 0; i < matrixDimension; i++) {
+            for (int j : newMatrix[i]){
+                System.out.print(j + "\t");
+            }
+            System.out.println();
+        }
+
         scanner.close();
     }
 
@@ -1243,9 +1251,9 @@ public class Solver implements ISolver{
      */
     private static void printIntMatrix(int[][] matrix) {
         System.out.println(matrix.length);
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix.length; j++){
-                System.out.print(matrix[i][j] + "\t");
+        for (int[] i : matrix) {
+            for (int j : i){
+                System.out.print(j + "\t");
             }
             System.out.println();
         }
