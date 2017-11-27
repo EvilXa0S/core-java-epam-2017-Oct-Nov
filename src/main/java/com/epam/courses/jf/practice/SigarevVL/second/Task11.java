@@ -7,23 +7,21 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
- * Интерфейс для юнит-тестирования задания №11.
- *
- * В кругу стоят N человек.
- * На каждой итерации цикла выбывает человек (через одного, начиная с первого), пока не останется единственный.
- * Разработать два решения, моделирующие процесс.
- * Первое должно использовать класс ArrayList, а второе – LinkedList.
+ * There are N people in the circle.
+ * At each iteration of the cycle, a person drops out (through one,
+ * starting from the first person), until the only one remains.
+ * Develop two solutions modeling the process.
+ * The first solution is to use the ArrayList class,
+ * and the second solution is to use the LinkedList.
  */
-
 public class Task11 implements ITestableTask11 {
 
     /**
-     * Выполняет эмуляцию поставленной задачи.
+     * Performs an emulation of the task.
      *
-     * @param peoples Список с именами участников.
-     * @return Имя последнего оставшегося.
+     * @param peoples List with the names of the participants.
+     * @return The name of the last person.
      */
-
     @Override
     public String emulate(ArrayList<String> peoples) {
         int i = 1;
@@ -42,12 +40,11 @@ public class Task11 implements ITestableTask11 {
     }
 
     /**
-     * Выполняет эмуляцию поставленной задачи.
+     * Performs an emulation of the task.
      *
-     * @param peoples Список с именами участников.
-     * @return Имя последнего оставшегося.
+     * @param peoples List with the names of the participants.
+     * @return The name of the last person.
      */
-
     @Override
     public String emulate(LinkedList<String> peoples) {
         int i = 1;

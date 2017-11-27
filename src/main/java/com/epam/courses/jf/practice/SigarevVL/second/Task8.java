@@ -4,11 +4,27 @@ import com.epam.courses.jf.practice.common.second.ITestableTask8;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.NoSuchElementException;
-import java.util.Queue;
 
-public class Task8 implements ITestableTask8{
 
+/**
+ * A string is specified and possibly contained characters
+ * '(', ')', '[', ']', '{', '}'.
+ * Check that the brackets are correctly aligned.
+ * Need to use Stack.
+ */
+public class Task8 implements ITestableTask8 {
+
+    /**
+     * Verifies that the parentheses are correctly positioned.
+     * <p>
+     * Correct arrangement:
+     * 1) Each opening brackets corresponds to a closing
+     * of the same type.
+     * 2) Brackets do not intersect.
+     *
+     * @param string The analyzed string.
+     * @return true - all the correct, else - false.
+     */
     @Override
     public boolean isNormalBrackets(String string) {
 
@@ -49,7 +65,6 @@ public class Task8 implements ITestableTask8{
                     break;
             }
         }
-
         return brackets.isEmpty();
     }
 }

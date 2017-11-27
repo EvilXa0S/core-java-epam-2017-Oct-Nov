@@ -2,22 +2,25 @@ package com.epam.courses.jf.practice.SigarevVL.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask14;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 import static java.lang.Math.abs;
 
 /**
- * Интерфейс для юнит-тестирования задания №14.
- *
- * На базе коллекций реализовать структуру хранения чисел с поддержкой следующих операций:
- *       1) Добавление/удаление числа.
- *       2) Поиск числа, наиболее близкого к заданному (т.е. модуль разницы минимален).
+ * On the basis of collections the structure of storage of numbers
+ * with support of following operations is realized:
+ * 1) Add and delete operation.
+ * 2)Search for the number closest to the given.
  */
 public class Task14 implements ITestableTask14 {
 
     /**
-     * @param required Тип, которым типизируется создаваемая коллекция.
-     * @return Коллекция для хранения чисел с поддержкой операций добавления/удаления и поиска числа.
+     * @param required The type by which the collection is typed.
+     * @return A collection for storing numbers with support for
+     * adding, removing operations and searching for numbers.
      */
 
     @Override
@@ -26,15 +29,18 @@ public class Task14 implements ITestableTask14 {
     }
 
     /**
-     * Коллекция для хранения чисел.
+     * Collection for storing numbers.
      */
-    private class INumberCollectionImpl <T extends Number> extends ArrayList<T> implements  INumberCollection<T> {
+    private class INumberCollectionImpl<T extends Number>
+            extends ArrayList<T> implements INumberCollection<T> {
 
         List<T> list = new ArrayList<>();
+
         @Override
         public T nearest(Number value) {
+            double subMod = Math.abs(list.get(0).doubleValue()
+                    - value.doubleValue());
 
-            double subMod = Math.abs(list.get(0).doubleValue() - value.doubleValue());
             T minimal = list.get(0);
             for (T element : list) {
 
@@ -43,7 +49,7 @@ public class Task14 implements ITestableTask14 {
                     minimal = element;
                 }
             }
-            return minimal ;
+            return minimal;
 
         }
 

@@ -2,7 +2,7 @@ package com.epam.courses.jf.practice.SigarevVL.second;
 
 import com.epam.courses.jf.practice.common.second.I2DPoint;
 
-public class I2DPointImpl implements I2DPoint{
+public class I2DPointImpl implements I2DPoint {
 
     private double x;
     private double y;

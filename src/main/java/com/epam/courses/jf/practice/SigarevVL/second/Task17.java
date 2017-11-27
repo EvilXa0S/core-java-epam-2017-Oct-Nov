@@ -6,8 +6,19 @@ import com.epam.courses.jf.practice.common.second.ITestableTask17;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * There are N segments on the plane.
+ * finds a point (possibly several) of the intersection
+ * of two segments, having a minimal abscissa.
+ */
 public class Task17 implements ITestableTask17 {
 
+    /**
+     * Carries out the analysis of the transferred segments.
+     *
+     * @param segments The set of Line segments.
+     * @return A set of intersection points having minimal abscissa.
+     */
     @Override
     public Set<I2DPoint> analyze(Set<ISegment> segments) {
 
@@ -27,9 +38,14 @@ public class Task17 implements ITestableTask17 {
                     double x4 = anotherSegment.second().getX();
                     double y4 = anotherSegment.second().getY();
 
-                    double divider = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1);
-                    double numenatorA = (x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3);
-                    double numenatorB = (x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3);
+                    double divider = (y4 - y3) * (x2 - x1)
+                            - (x4 - x3) * (y2 - y1);
+
+                    double numenatorA = (x4 - x3) * (y1 - y3)
+                            - (y4 - y3) * (x1 - x3);
+
+                    double numenatorB = (x2 - x1) * (y1 - y3)
+                            - (y2 - y1) * (x1 - x3);
 
                     if (divider == 0) {
                         continue;
@@ -38,11 +54,11 @@ public class Task17 implements ITestableTask17 {
                     double kA = numenatorA / divider;
                     double kB = numenatorB / divider;
 
-                    if (0 <= kA && kA <= 1 && 0 <= kB && kB <=1) {
+                    if (0 <= kA && kA <= 1 && 0 <= kB && kB <= 1) {
                         double X = x1 + kA * (x2 - x1);
                         double Y = y1 + kA * (y2 - y1);
 
-                        if (firstTime){
+                        if (firstTime) {
                             minX = X;
                             crossPointsSet.add(new I2DPointImpl(X, Y));
                             firstTime = false;
@@ -57,10 +73,12 @@ public class Task17 implements ITestableTask17 {
                 }
             }
         }
-
         return crossPointsSet;
     }
 
+    /**
+     * Line segment.
+     */
     public class ISegmentImpl implements ISegment {
 
         private I2DPoint firstPoint;
@@ -71,11 +89,17 @@ public class Task17 implements ITestableTask17 {
             this.secondPoint = secondPoint;
         }
 
+        /**
+         * @return The first point of the segment.
+         */
         @Override
         public I2DPoint first() {
             return firstPoint;
         }
 
+        /**
+         * @return The second point of the segment.
+         */
         @Override
         public I2DPoint second() {
             return secondPoint;

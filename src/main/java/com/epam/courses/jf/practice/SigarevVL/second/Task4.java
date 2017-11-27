@@ -6,19 +6,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Интерфейс для юнит-тестирования задания №4.
- * Определить множество на основе множества целых чисел.
- * Создать методы для определения пересечения и объединения множеств.
+ * Define a set based on a set of integers.
+ * Create methods for defining the intersection and union of sets.
  */
 
 public class Task4 implements ITestableTask4 {
 
     /**
-     * Операция пересечения целочисленных множеств.
+     * The operation of intersection of integer sets.
      *
-     * @param first  Первое множество.
-     * @param second Второе множество.
-     * @return Результат пересечения множеств.
+     * @param first  The first set.
+     * @param second The second set.
+     * @return The result of intersection of sets.
      */
 
     @Override
@@ -29,11 +28,11 @@ public class Task4 implements ITestableTask4 {
     }
 
     /**
-     * Операция объединения целочисленных множеств.
+     * The operation of intersection of integer sets.
      *
-     * @param first  Первое множество.
-     * @param second Второе множество.
-     * @return Результат объединения множеств.
+     * @param first  The first set.
+     * @param second The second set.
+     * @return The result of intersection of sets.
      */
 
     @Override

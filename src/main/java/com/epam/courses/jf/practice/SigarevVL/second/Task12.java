@@ -8,21 +8,22 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Интерфейс для юнит-тестирования задания №12.
- * <p>
- * Задан список целых чисел и число X.
- * Не используя вспомогательных объектов и не изменяя размера списка,
- * переставить элементы списка так, чтобы сначала шли числа, не превосходящие X, а затем числа, большие X.
+ * There is a list of integers and a number X.
+ * You can not use auxiliary objects and change the size of the list.
+ * It is necessary to rearrange the elements of the list so
+ * that numbers that do not exceed X are first
+ * followed by numbers larger than X.
  */
 
 public class Task12 implements ITestableTask12 {
 
     /**
-     * Преобразует целочисленный список таким образом, чтобы сначала шли числа меньшие value, затем большие.
+     * Converts an integer list in such a way that first the numbers
+     * are less than value, other numbers are larger than value.
      *
-     * @param integers Целочисленный список.
-     * @param value    Разделительное значение.
-     * @return Преобразованный список.
+     * @param integers Integer list.
+     * @param value    Separating value.
+     * @return Converted list.
      */
 
     @Override

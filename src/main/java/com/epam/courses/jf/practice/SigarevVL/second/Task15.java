@@ -10,18 +10,19 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Интерфейс для юнит-тестирования задания №15.
- *
- * На плоскости задано N точек.
- * Вывести в файл описания всех прямых, которые проходят более чем через 2 точки из заданных.
+ * There are N points on the plane.
+ * Outputs in the file descriptions of all the lines that pass more
+ * than 2 points from the specified.
  */
 public class Task15 implements ITestableTask15 {
 
     /**
-     * Осуществляет анализ переданных точек, вычисляя линии, которые проходят более чем через 2 точки.
-     * @param points Множество точек на плоскости.
-     * @param output Файл для вывода результатов.
-     * @return Файл с результатами анализа.
+     * Performs analysis of the transmitted points,
+     * calculating lines that pass more than 2 points.
+     *
+     * @param points The set of points on the plane.
+     * @param output File for outputting results.
+     * @return File with the results of the analysis.
      */
     @Override
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {
@@ -58,7 +59,7 @@ public class Task15 implements ITestableTask15 {
     }
 
     /**
-     * Представляет файл, содержащий информацию о найденных линиях.
+     * Represents a file containing information about found lines.
      */
     public class IFileWithLinesImpl implements IFileWithLines {
 
@@ -71,7 +72,7 @@ public class Task15 implements ITestableTask15 {
         }
 
         /**
-         * @return Файл с результатами анализа.
+         * @return File with the results of the analysis.
          */
         @Override
         public File getFile() {
@@ -79,8 +80,9 @@ public class Task15 implements ITestableTask15 {
         }
 
         /**
-         * Извлекает из файла информацию о хранящихся в нем линиях.
-         * @return Множество линий, найденных в результате анализа.
+         * Extracts from the file information about the lines.
+         *
+         * @return The set of lines found after the analysis.
          */
         @Override
         public Set<ILine> getLines() {
@@ -89,7 +91,7 @@ public class Task15 implements ITestableTask15 {
     }
 
     /**
-     * Прямая, заданная точками, входящими в исходное множество.
+     * A straight line defined by points in the original set.
      */
     public class ILineImpl implements ILine {
 
@@ -101,7 +103,9 @@ public class Task15 implements ITestableTask15 {
             setLinePoint.add(secondPoint);
         }
 
-        /** @return Точки, через которые проходит прямая */
+        /**
+         * @return Points through which the straight line passes.
+         */
         @Override
         public Set<I2DPoint> getPoints() {
             return setLinePoint;
