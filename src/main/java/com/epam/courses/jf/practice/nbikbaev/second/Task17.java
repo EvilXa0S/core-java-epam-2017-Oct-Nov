@@ -13,6 +13,9 @@ public class Task17 implements ITestableTask17 {
         Map<Integer, I2DPoint> map = new TreeMap<Integer, I2DPoint>();
         for (int i = 0; i < segments.size(); i++) {
             for (int j = 0; j < segmentList.size(); j++) {
+                if (equals(segmentList.get(i), segmentList.get(j))) {
+                    continue;
+                }
                 I2DPoint point = getIntersectionPoint(segmentList.get(i), segmentList.get(j));
                 map.put(i + j, point);
             }
@@ -51,6 +54,15 @@ public class Task17 implements ITestableTask17 {
         double pX = (segment1XY * (x3 - x4) - (x1 - x2) * segment2XY) / commonDenominator;
         double pY = (segment1XY * (y3 - y4) - (y1 - y2) * segment2XY) / commonDenominator;
         return new Point2DImpl(pX, pY);
+    }
+
+    private static boolean equals(ISegment segment1, ISegment segment2) {
+        boolean result;
+        result = (segment1.first().getX() == segment2.first().getX())
+                && (segment1.first().getY() == segment2.first().getY());
+        result = result && (segment1.second().getX() == segment2.second().getX())
+                && (segment1.second().getY() == segment2.second().getY());
+        return result;
     }
 
 }
