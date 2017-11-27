@@ -296,10 +296,27 @@ public class Utils {
         array[j] = tmp;
     }
 
+    /**
+     * Returns minor of the specified square matrix
+     *
+     * @param matrix    Target matrix
+     * @param dimension Matrix dimension
+     * @param row       Index of row to be removed
+     * @param column    Index of column to be removed
+     * @return Minor of the specified matrix
+     */
     private static int[][] getMinor(int[][] matrix, int dimension, int row, int column) {
         return removeColumnsAndRows(matrix, dimension, Collections.singleton(row), Collections.singleton(column));
     }
 
+    /**
+     * Returns true if the specified element is local minimum
+     *
+     * @param matrix Matrix that contains element with row index i and column index j
+     * @param i      Elements row index
+     * @param j      Elements column index
+     * @return true, if element specified element is local minimum, otherwise returns false
+     */
     public static boolean isLocalMinimum(int[][] matrix, int i, int j) {
         boolean lowerRowNeighbors;
         boolean lowerColumnsNeighbors;
@@ -315,6 +332,14 @@ public class Utils {
         return lowerColumnsNeighbors && lowerRowNeighbors && lowerThanDiagonalNeighbors;
     }
 
+    /**
+     * Returns true if matrix element e[i][j] lower than e[i+1][j+1], e[i-1][j+1], e[i-1][j-1] and e[i+1][j-1] otherwise returns false.
+     *
+     * @param matrix Matrix that contains element with row index i and column index j
+     * @param i      Element row index
+     * @param j      Element column index
+     * @return True, if matrix element is lower than his diagonal neighbors, false if not
+     */
     private static boolean isLowerThanDiagonalNeighbors(int[][] matrix, int i, int j) {
         int dimension = matrix.length;
         boolean result = true;
@@ -333,6 +358,15 @@ public class Utils {
         return result;
     }
 
+    /**
+     * Returns true if matrix element e[i][j] lower than e[i+1][j] and e[i-1][j], otherwise returns false.
+     * If one of the neighbors does not exist compares with e[i+1][j] or e[i-1][j]
+     *
+     * @param matrix Matrix that contains element with row index i and column index j
+     * @param i      Element row index
+     * @param j      Element column index
+     * @return true, if matrix element is lower column neighbors, false if not
+     */
     private static boolean isLowerThanColumnNeighbors(int[][] matrix, int i, int j) {
         boolean result;
         if (j == 0) {
@@ -345,6 +379,15 @@ public class Utils {
         return result;
     }
 
+    /**
+     * Returns true if matrix element e[i][j] lower than e[i+1][j] and e[i-1][j], otherwise returns false.
+     * If one of the neighbors does not exist compares with e[i+1][j] or e[i-1][j]
+     *
+     * @param matrix Matrix that contains element with row index i and column index j
+     * @param i      Element row index
+     * @param j      Element column index
+     * @return true, if matrix element is lower row neighbors, false if not
+     */
     private static boolean isLowerThanRowNeighbors(int[][] matrix, int i, int j) {
         boolean result;
         if (i == 0) {
@@ -358,6 +401,14 @@ public class Utils {
     }
 
 
+    /**
+     * Returns true if the specified element is local maximum
+     *
+     * @param matrix Matrix that contains element with row index i and column index j
+     * @param i      Elements row index
+     * @param j      Elements column index
+     * @return true, if element specified element is local maximum, otherwise returns false
+     */
     public static boolean isLocalMaximum(int[][] matrix, int i, int j) {
         boolean greaterColumnNeighbors;
         boolean greaterRowNeighbors;
@@ -374,11 +425,12 @@ public class Utils {
     }
 
     /**
+     * Returns true if matrix element e[i][j] greater than e[i+1][j+1], e[i-1][j+1], e[i-1][j-1] and e[i+1][j-1] otherwise returns false.
      *
-     * @param matrix
-     * @param i
-     * @param j
-     * @return
+     * @param matrix Matrix that contains element with row index i and column index j
+     * @param i      Element row index
+     * @param j      Element column index
+     * @return True, if matrix element is greater than his diagonal neighbors, false if not
      */
     private static boolean isGreaterThanDiagonalNeighbors(int[][] matrix, int i, int j) {
         int dimension = matrix.length;
