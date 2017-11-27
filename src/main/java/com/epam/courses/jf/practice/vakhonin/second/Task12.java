@@ -20,8 +20,8 @@ public class Task12 implements ITestableTask12{
     public List<Integer> transform(List<Integer> integers, int value){
         int k = 0;
         for(int j = integers.size()-1; j > k; j--) {
-            while(integers.get(j) <= value){
-//                System.out.println("integers[j] = " + integers.get(integers.size() - 1 - j));
+            while((integers.get(j) <= value) && (j>k)){
+//                System.out.println("integers[j] = " + integers.get(j));
 //                System.out.println("j = " + j + "  k = " + k);
 //                System.out.println(integers);
                 integers.set(j, integers.get(j) ^ integers.get(k));
@@ -30,6 +30,10 @@ public class Task12 implements ITestableTask12{
 //                System.out.println(integers);
                 k++;
             }
+            k--;
+//            if(j==k){
+//                break;
+//            }
         }
 
 //        integers.sort(Comparator.naturalOrder()); // Maybe this method (in one line) also fits to do this task... :-)
