@@ -629,14 +629,7 @@ public class Solver implements ISolver{
                         matrix[line][column];
             }
         }
-        printIntMatrix(matrix);
-//        System.out.println(matrix.length);
-//        for (int i = 0; i < matrix.length; i++) {
-//            for (int j = 0; j < matrix.length; j++) {
-//                System.out.print(newMatrix[i][j] + "\t");
-//            }
-//            System.out.println();
-//        }
+        printIntMatrix(newMatrix);
     }
 
     /**
@@ -831,13 +824,6 @@ public class Solver implements ISolver{
             matrix[k][columnNumber] = empty;
         }
         printIntMatrix(matrix);
-//        System.out.println(matrixDimension);
-//        for (int i[] : matrix) {
-//            for (int j : i) {
-//                System.out.print(j + "\t");
-//            }
-//            System.out.println();
-//        }
         scanner.close();
     }
 
@@ -875,13 +861,6 @@ public class Solver implements ISolver{
         }
 
         printIntMatrix(matrix);
-//        System.out.println(matrixDimension);
-//        for (int i[] : matrix) {
-//            for (int j : i) {
-//                System.out.print(j + "\t");
-//            }
-//            System.out.println();
-//        }
         scanner.close();
     }
 
