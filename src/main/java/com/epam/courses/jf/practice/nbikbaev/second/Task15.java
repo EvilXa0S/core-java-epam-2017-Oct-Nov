@@ -25,6 +25,12 @@ public class Task15 implements ITestableTask15 {
         return new FileWithLines(output, lines);
     }
 
+    /**
+     * Finds every possible lines that can be drawn through specified points
+     *
+     * @param points Set of point on plane
+     * @param lines  Target set
+     */
     private void findLines(Set<I2DPoint> points, Set<ILine> lines) {
         for (ILine line : lines) {
             for (I2DPoint testingPoint : points) {
@@ -59,6 +65,13 @@ public class Task15 implements ITestableTask15 {
         }
     }
 
+    /**
+     * Checks point belonging to the specified line
+     *
+     * @param testingPoint Point to be checked
+     * @param line         Target line
+     * @return True if point belongs to line, otherwise false
+     */
     private boolean isBelongsToLine(I2DPoint testingPoint, ILine line) {
         List<I2DPoint> pointList = new ArrayList<>(line.getPoints());
         I2DPoint point1 = pointList.get(0);
