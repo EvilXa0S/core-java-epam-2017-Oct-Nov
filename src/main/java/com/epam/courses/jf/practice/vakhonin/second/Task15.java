@@ -69,8 +69,10 @@ public class Task15 implements ITestableTask15{
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 for (ILine line : lines) {
                     for (I2DPoint point : line.getPoints()) {
-                        writer.write(point.toString() + "\t");
-//                        writer.write(" ");
+                        writer.write(String.valueOf(point.getX()));
+                        writer.write(" ");
+                        writer.write(String.valueOf(point.getY()));
+                        writer.write(" ");
                     }
 
                     writer.write("\n");
