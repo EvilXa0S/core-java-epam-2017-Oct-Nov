@@ -21,6 +21,13 @@ public class Task16 implements ITestableTask16 {
         return new FileWithPoints(output, map);
     }
 
+    /**
+     * Finds all points which are within circle and puts into {@link Map}
+     *
+     * @param center Circle center coordinate
+     * @param radius Circle radius
+     * @param map    Target map
+     */
     private void findPoints(I2DPoint center, int radius, SortedMap<I2DPoint, Double> map) {
         for (int i = (int) (center.getY() - radius); i <= center.getY() + radius; i++) {
             for (int j = (int) (center.getX() - radius); j <= center.getX() + radius; j++) {
@@ -33,6 +40,13 @@ public class Task16 implements ITestableTask16 {
         }
     }
 
+    /**
+     * Calculates distance between two specified points
+     *
+     * @param point1 First point
+     * @param point2 Seconds point
+     * @return Distance points
+     */
     private double distance(I2DPoint point1, I2DPoint point2) {
         double x = Math.pow(point1.getX() - point2.getX(), 2);
         double y = Math.pow(point1.getY() - point2.getY(), 2);

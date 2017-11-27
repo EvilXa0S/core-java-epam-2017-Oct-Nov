@@ -27,6 +27,13 @@ public class Task17 implements ITestableTask17 {
         return points;
     }
 
+    /**
+     * Returns intersection point of the two intersecting segments
+     *
+     * @param segment1 First segment
+     * @param segment2 Second segment
+     * @return Intersection point of the two segments
+     */
     private I2DPoint getIntersectionPoint(ISegment segment1, ISegment segment2) {
         double x1 = segment1.first().getX();
         double y1 = segment1.first().getY();
