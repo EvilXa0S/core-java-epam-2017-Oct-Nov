@@ -1224,9 +1224,11 @@ public class Solver implements ISolver{
     }
 
     /**
-     * Вывод матрицы на экран
+     * Matrix output to the console
      *
-     * @param matrix матрица типа int
+     *  Method outputs to console matrix length and matrix with "\t" symbol
+     *  between elements, every row prints from new line.
+     * @param matrix double - dimension array of type int
      */
     private static void printIntMatrix(int[][] matrix) {
         System.out.println(matrix.length);
