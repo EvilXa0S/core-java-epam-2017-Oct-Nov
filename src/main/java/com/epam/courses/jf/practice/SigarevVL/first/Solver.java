@@ -15,20 +15,17 @@ import java.util.regex.Pattern;
 public class Solver implements ISolver{
 
     /**
-     * Ввести N строк, найти самую короткую и самую длинную строки.
-     * Вывести найденные строки и их длину. Если строк, удовлетворяющих условию,
-     * более одной - вывести последнюю из них.
+     * To input N lines, find the shortest and longest lines.
+     * Output the found lines and their length.
+     * If the rows satisfying the conditions more than one
+     * output the last one.
      * <p>
-     * N (целое число, 0 < N < 100) - количество доступных для чтения строк
-     * N строк
+     * N (integer, 0 < N < 100) - count of input lines
      */
 
     @Override
     public void task1() {
-
-
         Scanner scanner = new Scanner(System.in);
-
         int stringNumber = Integer.parseInt(scanner.nextLine());
 
         String[] string = new String[stringNumber];
@@ -61,21 +58,15 @@ public class Solver implements ISolver{
     }
 
     /**
-     * Ввести N строк. Упорядочить и вывести строки в порядке возрастания значений их длины.
-     * В случае, если длины строк совпадают - упорядочить их в лексикографическом порядке.
+     * To input N lines. To sort and output the rows
+     * in ascending order of their length values.
+     * If lines have same length,
+     * you need to sort them in a lexicographical order.
      */
     @Override
     public void task2() {
         Scanner scanner = new Scanner(System.in);
-
-        int stringNumber = Integer.parseInt(scanner.nextLine());
-
-        String strings[] = new String[stringNumber];
-
-        for (int i = 0; i < stringNumber; i++) {
-            strings[i] = scanner.nextLine();
-        }
-
+        String strings[] = getStrings(scanner);
         Arrays.sort(strings, (aStr, bStr) -> {
             if ((aStr.length() - bStr.length()) == 0) {
                 return aStr.compareTo(bStr);
@@ -91,25 +82,42 @@ public class Solver implements ISolver{
     }
 
     /**
-     * Ввести N строк. Вывести те строки, длина которых меньше средней.
-     * Под 'средней' подразумевается среднеарифметическая величина длины
-     * всех строк, округленная до целого в меньшую сторону.
+     * Recording srings from the console
+     *
+     * Method reads from the console int number of input strings and
+     * puts all input string into array of type String.
+     * @param scanner
+     * @return array of input strings
+     */
+    private String[] getStrings(Scanner scanner) {
+        int n = Integer.parseInt(scanner.nextLine());
+
+        String[] strings = new String[n];
+        for (int i = 0; i < n; i++) {
+            strings[i] = scanner.nextLine();
+        }
+        return strings;
+    }
+
+    /**
+     * Enter N lines.
+     * Output those lines whose length is less than the average.
+     * 'Average' means the arithmetic value of the length
+     * All lines, rounded down to the whole in the smaller side.
      */
     @Override
     public void task3() {
+
         Scanner scanner = new Scanner(System.in);
-        int stringNumber = Integer.parseInt(scanner.nextLine());
-        String strings[] = new String[stringNumber];
+
+        String strings[] = getStrings(scanner);
         int averageLength = 0;
 
-        for (int i = 0; i < stringNumber; i++) {
-            strings[i] = scanner.nextLine();
-            averageLength += strings[i].length();
+        for (String string : strings) {
+            averageLength += string.length();
         }
-
-        averageLength /= stringNumber;
+        averageLength /= strings.length;
         System.out.printf("AVERAGE (%d)%n", averageLength);
-
         for (String str : strings) {
             if (str.length() < averageLength) {
                 System.out.printf("(%d): \"%s\"%n", str.length(), str);
@@ -120,12 +128,15 @@ public class Solver implements ISolver{
     }
 
     /**
-     * Ввести N слов, состоящих из символов английского алфавита. Найти слово, в котором
-     * число различных символов минимально. Символы верхнего и нижнего регистра считать
-     * различными. Если таких слов несколько, найти первое из них.
+     * Enter N words consisting of characters
+     * from the English alphabet. Find the word in which
+     * the number of different characters is minimal.
+     * The upper and lower case letters are various.
+     * If there are several such words, find the first one.
      */
     @Override
     public void task4() {
+
         Scanner scanner = new Scanner(System.in);
 
         int wordNumber = Integer.parseInt(scanner.nextLine());
@@ -160,11 +171,14 @@ public class Solver implements ISolver{
     }
 
     /**
-     * Ввести N слов. Найти количество слов, содержащих только символы латинского алфавита,
-     * а среди них – количество слов с равным числом гласных и согласных букв.
+     * Enter N words. Find the number of words
+     * containing only Latin characters,
+     * among them to find the number of words
+     * with an equal number of vowels and consonants.
      */
     @Override
     public void task5() {
+
         Scanner scanner = new Scanner(System.in);
 
         int wordNumber = Integer.parseInt(scanner.nextLine());
@@ -173,7 +187,8 @@ public class Solver implements ISolver{
         String string[] = new String[wordNumber];
 
         Pattern patternLatinWords = Pattern.compile("[A-z]+");
-        Matcher matcherLatinWords = patternLatinWords.matcher(scanner.nextLine());
+        Matcher matcherLatinWords =
+                patternLatinWords.matcher(scanner.nextLine());
 
         Pattern patternVowel = Pattern.compile("[aeiou]");
 
@@ -191,7 +206,6 @@ public class Solver implements ISolver{
             while (matcherVowel.find()) {
                 vowel++;
             }
-
             if (vowel == (string[i].length() - vowel)) {
                 result++;
             }
@@ -204,11 +218,13 @@ public class Solver implements ISolver{
     }
 
     /**
-     * Ввести N слов. Найти слово, символы в котором идут в строгом порядке возрастания их кодов.
-     * Если таких слов несколько, найти первое из них.
+     * Enter N words. Find the word which the characters stay
+     * in the strict order of increasing their codes.
+     * If there are several such words, to find the first one.
      */
     @Override
     public void task6() {
+
         Scanner scanner = new Scanner(System.in);
 
         int wordNumber = Integer.parseInt(scanner.nextLine());
@@ -221,12 +237,10 @@ public class Solver implements ISolver{
             int count = 1;
 
             while (count < word[i].length()) {
-
                 if ((word[i].charAt(count - 1) >= word[i].charAt(count))) {
                     break;
                 }
                 count++;
-
                 if (count == word[i].length()) {
                     System.out.println(word[i]);
                     findWord = true;
@@ -244,11 +258,13 @@ public class Solver implements ISolver{
     }
 
     /**
-     * Ввести N слов. Найти слова, состоящие только из различных символов.
-     * В случае, если слово встречается более одного раза - вывести его единожды.
+     * Enter N words.
+     * Find words are consisting of only different characters.
+     * In case the word occurs more than once - output it once.
      */
     @Override
     public void task7() {
+
         Scanner scanner = new Scanner(System.in);
         int wordNumber = Integer.parseInt(scanner.nextLine());
 
@@ -264,7 +280,6 @@ public class Solver implements ISolver{
         boolean countOfUniqueWords = true;
 
         for (String string : set) {
-
             for (int i = 0; i < string.length(); i++) {
                 characterSet.add(string.charAt(i));
             }
@@ -284,13 +299,15 @@ public class Solver implements ISolver{
     }
 
     /**
-     * Ввести N слов. Помимо обычных слов, во входной последовательности могут встречаться
-     * целые числа. Среди них необходимо найти число-палиндром (одинаково читающееся в обоих
-     * направлениях). Если таких чисел больше одного, найти второе из них. Ограничения на
-     * размер числа нет. Одна цифра является палиндромом.
+     * Enter N words. The input sequence can occur whole numbers.
+     * It is necessary to find a number-palindrome from the numbers.
+     * If there are more than one such number, find the second one.
+     * There are no restrictions on the size of the number.
+     * One number is a palindrome.
      */
     @Override
     public void task8() {
+
         Scanner scanner = new Scanner(System.in);
 
         int wordNumber = Integer.parseInt(scanner.nextLine());
@@ -303,12 +320,13 @@ public class Solver implements ISolver{
             try {
                 bigInteger = new BigInteger(str);
                 String number = bigInteger.toString();
-                String reverseNumber = new StringBuilder(number).reverse().toString();
+                String reverseNumber = new StringBuilder(number).
+                        reverse().toString();
 
                 if (number.equals(reverseNumber)) {
                     palindrom.replace(0, palindrom.length(), number);
                 }
-            } catch (java.lang.NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 System.err.println(e);
             }
         }
@@ -319,11 +337,12 @@ public class Solver implements ISolver{
     }
 
     /**
-     * Написать программу, которая выводит числа от 1 до N^2 в виде матрицы NxN
-     * слева направо и сверху вниз.
+     * This progamm outputs numbers fron 1 to N^2
+     * in the matrix format from left to right and from up to bottom.
      */
     @Override
     public void task9() {
+
         Scanner scanner = new Scanner(System.in);
 
         int matrixDimension = scanner.nextInt();
@@ -343,11 +362,12 @@ public class Solver implements ISolver{
     }
 
     /**
-     * Написать программу, позволяющую корректно находить корни квадратного уравнения.
-     * Параметры уравнения должны задаваться из стандартного входа.
+     * The programm allows to find the root of the quadratic equation.
+     * Equation parametrs must be given from the standart input.
      */
     @Override
     public void task10() {
+
         Scanner scanner = new Scanner(System.in);
 
         double a = scanner.nextInt();
@@ -363,7 +383,6 @@ public class Solver implements ISolver{
             x = x.setScale(2, RoundingMode.HALF_UP);
             System.out.println("One solution: " + x);
         } else {
-
             BigDecimal x1 = new BigDecimal((-b - Math.sqrt(D)) / (2 * a));
             x1 = x1.setScale(2, RoundingMode.HALF_UP);
             BigDecimal x2 = new BigDecimal((-b + Math.sqrt(D)) / (2 * a));
@@ -375,8 +394,11 @@ public class Solver implements ISolver{
     }
 
     /**
-     * Ввести число от 1 до 12. Вывести на консоль название месяца, соответствующего данному числу.
-     * При реализации использовать оператор switch. Осуществить проверку корректности ввода числа.
+     * Enter number from 1 to 12.
+     * The programm outputs to the console a name of month,
+     * which correspond to input number.
+     * It is necessary to use a switch operator
+     * and to check the correct input.
      */
     @Override
     public void task11() {
@@ -423,19 +445,20 @@ public class Solver implements ISolver{
                 default:
                     System.out.println("INCORRECT INPUT DATA");
             }
-
         } catch (InputMismatchException e) {
             System.out.println("INCORRECT INPUT DATA");
         }
     }
 
     /**
-     * Упорядочить строки матрицы размерности N в порядке возрастания
-     * значений элементов k-го столбца.
+     * Need to sort row of matrix with N dimension
+     * in ascending order of k column element.
      */
     @Override
     public void task12() {
+
         Scanner scanner = new Scanner(System.in);
+
         int columnNumber = scanner.nextInt();
         int matrixDimension = scanner.nextInt();
         int matrix[][] = new int[matrixDimension][matrixDimension];
@@ -470,10 +493,12 @@ public class Solver implements ISolver{
     }
 
     /**
-     * Выполнить циклический сдвиг матрицы размерности N на k позиций вниз.
+     * Perform a cyclic shift of the matrix
+     * of dimension N by k positions down.
      */
     @Override
     public void task13() {
+
         Scanner scanner = new Scanner(System.in);
 
         int shiftNumber = scanner.nextInt();
@@ -526,12 +551,14 @@ public class Solver implements ISolver{
     }
 
     /**
-     * Найти наибольшее число строго возрастающих элементов последовательности, идущих подряд.
-     * Оператор отношения можно определить на множестве, включающем более одного элемента.
+     * To find the biggest count of strictly increasing elements
+     * of the sequence which stays in succession.
+     * The many musts to have more then 1 element.
      */
     @Override
     public void task14() {
         Scanner scanner = new Scanner(System.in);
+
         int arraySize = scanner.nextInt();
         int array[] = new int[arraySize];
         int count = 0;
@@ -540,17 +567,13 @@ public class Solver implements ISolver{
         if (arraySize < 2) {
             System.out.println(0);
         } else {
-
             for (int i = 0; i < arraySize; i++) {
                 array[i] = scanner.nextInt();
-
                 if ((i > 0) && (array[i - 1] < array[i])) {
                     count++;
-
                     if (count >= sequence) {
                         sequence = count + 1;
                     }
-
                 } else {
                     count = 0;
                 }
@@ -563,29 +586,20 @@ public class Solver implements ISolver{
 
 
     /**
-     * Найти сумму элементов матрицы, расположенных между первым и
-     * вторым положительными элементами каждой строки.
-     * <p>
-     * Если в строке нет двух положительных элементов - сумма от этой строки равной нулю.
-     * Сумма между двумя рядом расположенными элементами равна нулю.
+     * To find the sum of matrux elements, which locates from
+     * the first and the second positive elements in every row.
+     * If a row does not have two positive elements,
+     * the sum equals to zero
+     * as the sum between two neighbour elements.
      */
     @Override
     public void task15() {
-        Scanner scanner = new Scanner(System.in);
-        final int matrixDimension = scanner.nextInt();
-        int matrix[][] = new int[matrixDimension][matrixDimension];
+        int matrix[][] = readIntMatrix();
+        int sum = 0;
 
-        for (int i = 0; i < matrixDimension; i++) {
-            for (int j = 0; j < matrixDimension; j++) {
-                matrix[i][j] = scanner.nextInt();
-            }
-        }
-
-        int summa = 0;
-
-        for (int i = 0; i < matrixDimension; i++) {
+        for (int i = 0; i < matrix.length; i++) {
             boolean flag = false;
-            for (int j = 0; j < matrixDimension; j++) {
+            for (int j = 0; j < matrix.length; j++) {
                 if (matrix[i][j] > 0) {
                     if (flag) {
                         break;
@@ -593,51 +607,44 @@ public class Solver implements ISolver{
                     flag = true;
                 } else {
                     if (flag)
-                        summa += matrix[i][j];
+                        sum += matrix[i][j];
                 }
             }
-
         }
 
-        System.out.println(summa);
-        scanner.close();
+        System.out.println(sum);
     }
 
     /**
-     * Повернуть матрицу на 90 градусов против часовой стрелки.
+     * Rotates the matrix counterclockwise 90 degrees.
      */
     @Override
     public void task16() {
-        Scanner scanner = new Scanner(System.in);
+        int matrix[][] = readIntMatrix();
+        int newMatrix[][] = new int[matrix.length][matrix.length];
 
-        final int matrixDimension = scanner.nextInt();
-        int matrix[][] = new int[matrixDimension][matrixDimension];
-        int newMatrix[][] = new int[matrixDimension][matrixDimension];
-
-        for (int i = 0; i < matrixDimension; i++) {
-            for (int j = 0; j < matrixDimension; j++) {
-                matrix[i][j] = scanner.nextInt();
+        for (int column = 0; column < matrix.length; column++) {
+            for (int line = 0; line < matrix.length; line++) {
+                newMatrix[matrix.length - 1 - column][line] =
+                        matrix[line][column];
             }
         }
 
-        for (int column = 0; column < matrixDimension; column++) {
-            for (int line = 0; line < matrixDimension; line++) {
-                newMatrix[matrixDimension - 1 - column][line] = matrix[line][column];
-            }
-        }
-
-        System.out.println(matrixDimension);
-        for (int i = 0; i < matrixDimension; i++) {
-            for (int j = 0; j < matrixDimension; j++) {
+        System.out.println(matrix.length);
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
                 System.out.print(newMatrix[i][j] + "\t");
             }
             System.out.println();
         }
-        scanner.close();
     }
 
+    /**
+     * Find the determinant of the square matrix.
+     */
     @Override
     public void task17() {
+
         Scanner scanner = new Scanner(System.in);
 
         final int matrixDimension = scanner.nextInt();
@@ -701,41 +708,33 @@ public class Solver implements ISolver{
     }
 
     /**
-     * Найти максимальный элемент(ы) в матрице и удалить из матрицы все строки и столбцы,
-     * его содержащие.
+     * Find the maximal elements in matrix and delete from matrix
+     * all rows and columns which consists maximal element.
      */
     @Override
     public void task18() {
-        Scanner scanner = new Scanner(System.in);
-        final int matrixDimension = scanner.nextInt();
-        int matrix[][] = new int[matrixDimension][matrixDimension];
-
-        for (int i = 0; i < matrixDimension; i++) {
-            for (int j = 0; j < matrixDimension; j++) {
-                matrix[i][j] = scanner.nextInt();
-            }
-        }
+        int matrix[][] = readIntMatrix();
 
         HashSet<Integer> lineSet = new HashSet<>();
         HashSet<Integer> columnSet = new HashSet<>();
 
-        for (int i = 0; i < matrixDimension; i++) {
+        for (int i = 0; i < matrix.length; i++) {
             lineSet.add(i);
             columnSet.add(i);
         }
 
         int max = matrix[0][0];
 
-        for (int i = 0; i < matrixDimension; i++) {
-            for (int j = 0; j < matrixDimension; j++) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
                 if (matrix[i][j] > max) {
                     max = matrix[i][j];
                 }
             }
         }
 
-        for (int i = matrixDimension - 1; i >= 0; i--) {
-            for (int j = matrixDimension - 1; j >= 0; j--) {
+        for (int i = matrix.length - 1; i >= 0; i--) {
+            for (int j = matrix.length - 1; j >= 0; j--) {
                 if (matrix[i][j] == max) {
                     lineSet.remove(i);
                     columnSet.remove(j);
@@ -743,8 +742,8 @@ public class Solver implements ISolver{
             }
         }
 
-        System.out.println(lineSet.size());        //number of lines
-        System.out.println(columnSet.size());      //number of colomns
+        System.out.println(lineSet.size());
+        System.out.println(columnSet.size());
 
         for (Integer line : lineSet) {
             for (Integer column : columnSet) {
@@ -752,29 +751,21 @@ public class Solver implements ISolver{
             }
             System.out.println();
         }
-        scanner.close();
-
     }
+
     /**
-     * Уплотнить матрицу, удаляя из нее строки и столбцы, заполненные нулями.
+     * Seal the matrix, removing the rows and columns
+     * filled with zeros from it.
      */
     @Override
     public void task19() {
-        Scanner scanner = new Scanner(System.in);
-        final int matrixDimension = scanner.nextInt();
-        int matrix[][] = new int[matrixDimension][matrixDimension];
-
-        for (int i = 0; i < matrixDimension; i++) {
-            for (int j = 0; j < matrixDimension; j++) {
-                matrix[i][j] = scanner.nextInt();
-            }
-        }
+        int matrix[][] = readIntMatrix();
 
         HashSet<Integer> lineSet = new HashSet<>();
         HashSet<Integer> colomnSet = new HashSet<>();
 
-        for (int i = 0; i < matrixDimension; i++) {
-            for (int j = 0; j < matrixDimension; j++) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
                 if (matrix[i][j] != 0) {
                     lineSet.add(i);
                     colomnSet.add(j);
@@ -782,8 +773,8 @@ public class Solver implements ISolver{
             }
         }
 
-        System.out.println(lineSet.size());        //number of lines
-        System.out.println(colomnSet.size());      //number of colomns
+        System.out.println(lineSet.size());
+        System.out.println(colomnSet.size());
 
         for (Integer line : lineSet) {
             for (Integer colomn : colomnSet) {
@@ -794,13 +785,14 @@ public class Solver implements ISolver{
     }
 
     /**
-     * В матрице найти минимальный элемент и переместить его на место заданного элемента
-     * путем перестановки строк и столбцов. Гарантируется, что минимальный элемент в матрице
-     * встречается ровно один раз.
+     * Find the minimal element and replace it to necessary place
+     * by replacing rows and columns. The minimal element is unique.
      */
     @Override
     public void task20() {
+
         Scanner scanner = new Scanner(System.in);
+
         int lineNumber = scanner.nextInt();
         int columnNumber = scanner.nextInt();
         int matrixDimension = scanner.nextInt();
@@ -820,7 +812,6 @@ public class Solver implements ISolver{
                         minElement = matrix[line][column];
                         minElementPosition[0] = line;
                         minElementPosition[1] = column;
-
                     }
                 }
             }
@@ -851,8 +842,8 @@ public class Solver implements ISolver{
     }
 
     /**
-     * Преобразовать строки матрицы таким образом, чтобы элементы, равные нулю,
-     * располагались после всех остальных.
+     * Convert the rows of the matrix in such a way that
+     * the elements equal to zero are located after all the others.
      */
 
     public void task21() {
@@ -870,7 +861,6 @@ public class Solver implements ISolver{
             for (int column = matrixDimension - 1; column >= 0; column--) {
                 if (matrix[line][column] == 0) {
                     int k = column;
-
                     while (k < matrixDimension - 1) {
                         if (matrix[line][k + 1] == 0) {
                             break;
@@ -895,8 +885,10 @@ public class Solver implements ISolver{
     }
 
     /**
-     * Округлить все элементы матрицы до целого числа.
-     * Использовать округление к ближайшему целому — число округляется до целого с использованием Math.round();
+     * Round all the elements of the matrix to an integer.
+     * Use rounding to the nearest integer -
+     * the number is rounded to the nearest integer
+     * using Math.round ().
      */
 
     @Override
@@ -925,36 +917,31 @@ public class Solver implements ISolver{
 
 
     /**
-     * Найти количество всех седловых точек матрицы. Матрица А имеет седловую точку (i, j),
-     * если А[i, j] является минимальным элементом в i-й строке и максимальным в j-м столбце.
+     *
+     * Find the number of all saddle points of the matrix.
+     * The matrix A has a saddle point (i, j)
+     * if A [i, j] is the minimal element in the i-th row
+     * and the maximal in the j-th column.
      */
     @Override
     public void task23() {
-        Scanner scanner = new Scanner(System.in);
-        final int matrixDimension = scanner.nextInt();
-        int matrix[][] = new int[matrixDimension][matrixDimension];
+        int matrix[][] = readIntMatrix();
         int minElement;
         int maxElement;
-
-        for (int i = 0; i < matrixDimension; i++) {
-            for (int j = 0; j < matrixDimension; j++) {
-                matrix[i][j] = scanner.nextInt();
-            }
-        }
 
         boolean flagMin = true;
         int saddle = 0;
 
-        for (int i = 0; i < matrixDimension; i++) {
+        for (int i = 0; i < matrix.length; i++) {
             minElement = matrix[i][0];
             int minElementColumn = 0;
-            for (int colomn = 1; colomn < matrixDimension; colomn++) {
-                if (minElement >= matrix[i][colomn]) {
-                    if (minElement == matrix[i][colomn]) {
+            for (int column = 1; column < matrix.length; column++) {
+                if (minElement >= matrix[i][column]) {
+                    if (minElement == matrix[i][column]) {
                         flagMin = false;
                     } else {
-                        minElement = matrix[i][colomn];
-                        minElementColumn = colomn;
+                        minElement = matrix[i][column];
+                        minElementColumn = column;
                         flagMin = true;
                     }
                 }
@@ -963,9 +950,9 @@ public class Solver implements ISolver{
             if (flagMin) {
                 boolean flagMax = true;
                 maxElement = matrix[i][minElementColumn];
-                for (int line = 0; line < matrixDimension; line++) {
-                    if (line != i && maxElement <= matrix[line][minElementColumn]) {
-
+                for (int line = 0; line < matrix.length; line++) {
+                    if (line != i && maxElement
+                            <= matrix[line][minElementColumn]) {
                         flagMax = false;
                         break;
                     }
@@ -976,16 +963,12 @@ public class Solver implements ISolver{
                 flagMin = true;
             }
         }
-
         System.out.println(saddle);
-        scanner.close();
     }
 
-
-
     /**
-     * Перестроить матрицу, переставляя в ней строки так, чтобы сумма элементов в строках
-     * полученной матрицы возрастала.
+     * Rebuild the matrix, rearranging the rows in it so that the sum
+     * of the elements in the rows of the resulting matrix increases.
      */
     @Override
     public void task24() {
@@ -1017,30 +1000,25 @@ public class Solver implements ISolver{
     }
 
     /**
-     * Найти число локальных минимумов. Соседями элемента матрицы назовем элементы,
-     * имеющие с ним общую сторону или угол. Элемент матрицы называется локальным минимумом,
-     * если он строго меньше всех своих соседей.
+     * Find the number of local minimal.
+     * Neighbors of the matrix element are elements
+     * that have a common side or angle with it.
+     * An element of a matrix is called a local minimum
+     * if it is strictly less than all its neighbors.
      */
     @Override
     public void task25() {
-        Scanner scanner = new Scanner(System.in);
-        int matrixDimension = scanner.nextInt();
-        int matrix[][] = new int[matrixDimension][matrixDimension];
+
+        int matrix[][] = readIntMatrix();
         int localMin = 0;
 
-        for (int i = 0; i < matrixDimension; i++) {
-            for (int j = 0; j < matrixDimension; j++) {
-                matrix[i][j] = scanner.nextInt();
-            }
-        }
-
-        for (int i = 0; i < matrixDimension; i++) {
-            for (int j = 0; j < matrixDimension; j++) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
 
                 boolean leftY = (j - 1) >= 0;
-                boolean rightY = (j + 1) < matrixDimension;
+                boolean rightY = (j + 1) < matrix.length;
                 boolean toptX = (i - 1) >= 0;
-                boolean bottomX = (i + 1) < matrixDimension;
+                boolean bottomX = (i + 1) < matrix.length;
 
                 boolean s1 = true;
                 boolean s2 = true;
@@ -1090,34 +1068,27 @@ public class Solver implements ISolver{
         }
 
         System.out.println(localMin);
-        scanner.close();
     }
 
     /**
-     * Найти наибольший среди локальных максимумов. Соседями элемента матрицы назовем элементы,
-     * имеющие с ним общую сторону или угол. Элемент матрицы называется локальным максимумом,
-     * если он строго больше всех своих соседей.
+     * Find the largest among the local maximal.
+     * Neighbors of the matrix element are elements
+     * that have a common side or angle with it.
+     * An element of a matrix is called a local maximum
+     * if it is strictly greater than all its neighbors.
      */
     @Override
     public void task26() {
-        Scanner scanner = new Scanner(System.in);
-        int matrixDimension = scanner.nextInt();
-        int matrix[][] = new int[matrixDimension][matrixDimension];
+        int matrix[][] = readIntMatrix();
         ArrayList<Integer> localMax = new ArrayList<>();
 
-        for (int i = 0; i < matrixDimension; i++) {
-            for (int j = 0; j < matrixDimension; j++) {
-                matrix[i][j] = scanner.nextInt();
-            }
-        }
-
-        for (int i = 0; i < matrixDimension; i++) {
-            for (int j = 0; j < matrixDimension; j++) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
 
                 boolean leftY = (j - 1) >= 0;
-                boolean rightY = (j + 1) < matrixDimension;
+                boolean rightY = (j + 1) < matrix.length;
                 boolean toptX = (i - 1) >= 0;
-                boolean bottomX = (i + 1) < matrixDimension;
+                boolean bottomX = (i + 1) < matrix.length;
 
                 boolean s1 = true;
                 boolean s2 = true;
@@ -1173,15 +1144,16 @@ public class Solver implements ISolver{
         } else {
             System.out.println("NOT FOUND");
         }
-        scanner.close();
     }
 
     /**
-     * Перестроить заданную матрицу, переставляя в ней столбцы так, чтобы значения
-     * их характеристик убывали.
-     * Характеристикой столбца прямоугольной матрицы называется сумма модулей его элементов.
-     * Если значения характеристики совпадают - столбцы должны следовать в том же порядке,
-     * что и в исходной матрице.
+     * Rebuild the given matrix by rearranging the columns in it so
+     * that the values of their characteristics will be decrease.
+     * The characteristic of a column of a rectangular matrix
+     * is the sum of the modules of its elements.
+     * If the characteristic values are the same,
+     * the columns should follow the same order
+     * as in the original matrix.
      */
     @Override
     public void task27() {
@@ -1217,39 +1189,66 @@ public class Solver implements ISolver{
             }
         }
 
-        int colomnNumber = 0;
+        int columnNumber = 0;
         for(int position = 0; position < matrixDimension; position++) {
-
             if (position > 0 && characteristicsValue[position - 1]
                     == characteristicsValue[position]) {
-                colomnNumber++;
+                columnNumber++;
             } else {
-                colomnNumber = 0;
+                columnNumber = 0;
             }
 
-            for(int i = colomnNumber; i < matrixDimension; i++) {
+            for(int i = columnNumber; i < matrixDimension; i++) {
+                if (characteristicsValue[position] ==
+                        matrix[matrixDimension][i]) {
 
-                if (characteristicsValue[position] == matrix[matrixDimension][i]) {
                     for (int j = 0; j < matrixDimension; j++) {
                         newMatrix[j][position] = matrix[j][i];
                     }
-                    colomnNumber = i;
+                    columnNumber = i;
                     break;
                 }
             }
         }
+        printIntMatrix(newMatrix);
+        scanner.close();
+    }
 
-        System.out.println(matrixDimension);
-        for (int i = 0; i < matrixDimension; i++) {
-            for (int j : newMatrix[i]){
+    /**
+     * Input an array element by element
+     *
+     * Input the array size from the console.
+     * To create the two-dimensional array
+     * and fills it with elements from the console.
+     * @return array of int type
+     */
+    private static int[][] readIntMatrix() {
+        Scanner scanner = new Scanner(System.in);
+        int matrixSize = scanner.nextInt();
+
+        int[][] matrix = new int[matrixSize][matrixSize];
+        for (int i = 0; i < matrixSize; i++) {
+            for (int j = 0; j < matrixSize; j++) {
+                matrix[i][j] = scanner.nextInt();
+            }
+        }
+        scanner.close();
+        return matrix;
+    }
+
+    /**
+     * Вывод матрицы на экран
+     *
+     * @param matrix матрица типа int
+     */
+    private static void printIntMatrix(int[][] matrix) {
+        System.out.println(matrix.length);
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++){
                 System.out.print(j + "\t");
             }
             System.out.println();
         }
-
-        scanner.close();
     }
-
-
 }
 

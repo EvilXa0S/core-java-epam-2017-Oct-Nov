@@ -46,7 +46,6 @@ public class Task19 implements ITestableTask19 {
                 overtakeCount++;
             }
         }
-
          do {
             meetingTime = ((double)Math.abs(car2.getSpeed() * car1LapTime)
                     / (car1.getSpeed() - car2.getSpeed())) + car1LapTime;
