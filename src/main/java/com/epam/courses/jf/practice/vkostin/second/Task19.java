@@ -18,18 +18,6 @@ import static java.lang.Math.ceil;
 
 public class Task19 implements ITestableTask19 {
 
-    /* example of use
-    public static void main(String[] args) {
-        Set<ICar> cars = new HashSet<>();
-        cars.add(new Car(0, 10));
-        cars.add(new Car(5, 4));
-        cars.add(new Car(5, 4));
-
-        Task19 task19 = new Task19();
-        System.out.println(task19.getNumberOvertaking(cars, 20, 5));
-    }
-    */
-
     @Override
     public int getNumberOvertaking(Set<ICar> cars, long lengthLap, int numberLaps) {
 
@@ -42,7 +30,6 @@ public class Task19 implements ITestableTask19 {
 
             for (int j = i + 1; j < listCars.size(); j++) {
                 ICar secondCar = listCars.get(j);
-
 
                 if (firstCar.getSpeed() > secondCar.getSpeed()) {
                     handicap = (firstCar.getStartPosition() >= secondCar.getStartPosition()) ? 1 : 0;
@@ -63,18 +50,11 @@ public class Task19 implements ITestableTask19 {
         return numberOvertaking;
     }
 
-    /**
-     * Машина.
-     */
+
     private static class Car implements ICar {
 
         private int startPosition;
         private int speed;
-
-        Car(int startPosition, int speed) {
-            this.startPosition = startPosition;
-            this.speed = speed;
-        }
 
         @Override
         public int getStartPosition() {

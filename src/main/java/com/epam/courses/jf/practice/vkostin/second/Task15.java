@@ -12,24 +12,6 @@ import java.util.Set;
 
 public class Task15 implements ITestableTask15 {
 
-    /*
-    public static void main(String[] args) {
-        Task15 task = new Task15();
-
-        File file = new File("outputPath");
-
-        Set<I2DPoint> points = new HashSet<>();
-        points.add(new TwoDPoint(2, 3));
-        points.add(new TwoDPoint(4, 5));
-        points.add(new TwoDPoint(1, 6));
-        points.add(new TwoDPoint(1, 4));
-        points.add(new TwoDPoint(1, 2));
-        points.add(new TwoDPoint(6, 7));
-
-        task.analyze(points, file);
-    }
-    */
-
     @Override
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {
         Set<ILine> lines = new HashSet<>();

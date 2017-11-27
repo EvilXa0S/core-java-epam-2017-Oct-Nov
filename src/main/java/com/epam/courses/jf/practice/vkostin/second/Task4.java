@@ -7,20 +7,6 @@ import java.util.Set;
 
 public class Task4 implements ITestableTask4 {
 
-    /*
-    public static void main(String[] args) {
-        Set<Integer> first = new HashSet<>();
-        Set<Integer> second = new HashSet<>();
-        Task4 task = new Task4();
-
-        first.add(4); first.add(8); first.add(7);
-        second.add(8); second.add(5); second.add(9);
-
-        System.out.println(task.intersection(first, second));
-        System.out.println(task.union(first, second));
-    }
-    */
-
     @Override
     public Set<Integer> intersection(Set<Integer> first, Set<Integer> second) {
         Set<Integer> intersectionSet = new HashSet<>(first);

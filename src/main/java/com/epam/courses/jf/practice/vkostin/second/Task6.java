@@ -7,24 +7,7 @@ import java.util.Map;
 
 public class Task6 implements ITestableTask6 {
 
-    /*
-    public static void main(String[] args) {
-        HashMap<Integer,Integer> poly1 = new HashMap<>();
-        HashMap<Integer,Integer> poly2 = new HashMap<>();
-
-        poly1.put(4, 5);
-        poly1.put(2, 10);
-        poly1.put(0, 7);
-
-        poly2.put(5, 8);
-        poly2.put(3, 9);
-        poly2.put(2, 2);
-
-        Task6 task = new Task6();
-        System.out.println(task.addPolynomials(poly1, poly2));
-    }
-    */
-
+    // + put if absent method
     @Override
     public HashMap<Integer, Integer> addPolynomials(HashMap<Integer, Integer> first, HashMap<Integer, Integer> second) {
         HashMap<Integer,Integer> resultPoly = new HashMap<>();
@@ -34,11 +17,10 @@ public class Task6 implements ITestableTask6 {
 
         for (Map.Entry<Integer,Integer> pair : second.entrySet()) {
             currentKey = pair.getKey();
-            if (resultPoly.containsKey(currentKey)) {
+
+            if (null != resultPoly.putIfAbsent(currentKey, pair.getValue())) {
                 resultPoly.put(currentKey,
                         pair.getValue() + resultPoly.get(currentKey));
-            } else {
-                resultPoly.put(currentKey, pair.getValue());
             }
         }
 

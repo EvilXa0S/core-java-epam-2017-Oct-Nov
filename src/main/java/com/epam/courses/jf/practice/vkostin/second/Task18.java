@@ -6,17 +6,6 @@ import java.util.*;
 
 public class Task18 implements ITestableTask18 {
 
-    /*
-    public static void main(String[] args) {
-        Task18 task = new Task18();
-
-        IRectangularIntegerMatrix matrix = new RectangularIntegerMatrix(
-                new int[][] { {1, 1, 2}, {1, 1, 0}, {1, 1, 3}, {3, 2, 2} });
-
-        task.getMaxSubMatrix(matrix);
-    }
-    */
-
     @Override
     public IRectangularIntegerMatrix getMaxSubMatrix(IRectangularIntegerMatrix matrix) {
 

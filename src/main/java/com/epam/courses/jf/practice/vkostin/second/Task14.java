@@ -6,18 +6,6 @@ import java.util.*;
 
 public class Task14 implements ITestableTask14 {
 
-    /*
-    public static void main(String[] args) {
-        Task14 task = new Task14();
-
-        INumberCollection<Integer> exampleSet = task.createCollection(Integer.class);
-
-        exampleSet.add(6); exampleSet.add(8); exampleSet.add(55);
-        System.out.println(exampleSet);
-        System.out.println(exampleSet.nearest(7));
-    }
-    */
-
     @Override
     public <T extends Number> INumberCollection<T> createCollection(Class<T> required) {
         return new NumberCollection<T>();

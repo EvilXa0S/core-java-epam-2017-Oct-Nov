@@ -7,24 +7,6 @@ import java.util.*;
 
 public class Task17 implements ITestableTask17 {
 
-    /*
-    public static void main(String[] args) {
-        Task17 task = new Task17();
-
-        Set<ISegment> testSet = new HashSet<>();
-        testSet.add(new Segment(new TwoDPoint(1,4), new TwoDPoint(3, 2)));
-        testSet.add(new Segment(new TwoDPoint(2,1), new TwoDPoint(5, 4)));
-        testSet.add(new Segment(new TwoDPoint(1,8), new TwoDPoint(4, 6)));
-        testSet.add(new Segment(new TwoDPoint(-1,6), new TwoDPoint(5, 7)));
-        testSet.add(new Segment(new TwoDPoint(7,7), new TwoDPoint(7, 3)));
-
-        testSet.add(new Segment(new TwoDPoint(2,5), new TwoDPoint(3, 4)));
-        testSet.add(new Segment(new TwoDPoint(3,4), new TwoDPoint(4, 5)));
-
-        task.analyze(testSet);
-    }
-    */
-
     private static TwoDPoint findIntersection(ISegment line1, ISegment line2) {
         /**
          * Search for the point of intersection of two straight lines.

@@ -8,23 +8,6 @@ import java.util.Map;
 
 public class Task13 implements ITestableTask13 {
 
-    /*
-    public static void main(String[] args) {
-        Task13 task = new Task13();
-        AbstractGraph graph = task.createGraph(6);
-        graph.addEdge(0, 1);
-        graph.addEdge(0, 4);
-        graph.addEdge(0, 5);
-        graph.addEdge(2, 1);
-        graph.addEdge(5, 2);
-        graph.addEdge(3, 1);
-        graph.addEdge(4, 3);
-        System.out.println(graph.isExistEdge(0, 4));
-        graph.removeEdge(0, 4);
-        System.out.println(graph.isExistEdge(0, 4));
-    }
-    */
-
     @Override
     public AbstractGraph createGraph(int numberNodes) {
         return new Graph(numberNodes);

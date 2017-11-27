@@ -2,18 +2,11 @@ package com.epam.courses.jf.practice.vkostin.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask8;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Stack;
 
 public class Task8 implements ITestableTask8 {
-
-    /*
-    public static void main(String[] args) {
-        String exampleString = "({[]}[(){()()}])";
-
-        Task8 task = new Task8();
-        System.out.println(task.isNormalBrackets(exampleString));
-    }
-    */
 
     @Override
     public boolean isNormalBrackets(String string) {
@@ -23,7 +16,8 @@ public class Task8 implements ITestableTask8 {
         }
 
         char[] brackets = string.toCharArray();
-        Stack<Character> stack = new Stack<>();
+        // + use non blocking Queue impl
+        Deque<Character> stack = new ArrayDeque<>();
 
         char lastLiteral = brackets[0];
         stack.push(lastLiteral);
@@ -40,7 +34,7 @@ public class Task8 implements ITestableTask8 {
                     || (((int) currentLiteral - 1) == lastLiteral)) {
                 stack.pop();
                 stack.pop();
-                if (!stack.empty()) {
+                if (!stack.isEmpty()) {
                     lastLiteral = stack.peek();
                 }
             } else {
@@ -48,6 +42,6 @@ public class Task8 implements ITestableTask8 {
             }
         }
 
-        return stack.empty();
+        return stack.isEmpty();
     }
 }

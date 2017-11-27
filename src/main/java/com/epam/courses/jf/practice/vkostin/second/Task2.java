@@ -8,16 +8,6 @@ import java.util.Set;
 
 public class Task2 implements ITestableTask2 {
 
-    /*
-    public static void main(String[] args) {
-
-        Task2 task = new Task2();
-        File directoryPath = new File("..\\vkostin");
-
-        System.out.println(task.getFiles(directoryPath));
-    }
-    */
-
     @Override
     public Set<File> getFiles(File directory) {
 

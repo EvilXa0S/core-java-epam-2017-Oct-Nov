@@ -9,15 +9,10 @@ import java.util.Scanner;
 
 public class Task10 implements ITestableTask10 {
 
-    /*
-    public static void main(String[] args) {
-        Task10 task = new Task10();
-        System.out.println(task.countNumberWords(new File("full pathname")));
-    }
-    */
-
     @Override
     public HashMap<String, Integer> countNumberWords(File input) {
+        // use interface
+        //  [ i can't, because it will violate the method contract. ]
         HashMap<String, Integer> dictionary = new HashMap<>();
 
         String currentWord;
@@ -26,11 +21,9 @@ public class Task10 implements ITestableTask10 {
 
             while (scanner.hasNext()) {
                 currentWord = scanner.next().trim();
-                if (!dictionary.containsKey(currentWord)) {
-                    dictionary.put(currentWord, 1);
-                } else {
-                    dictionary.put(currentWord, dictionary.get(currentWord) + 1);
-                }
+                // + try to avoid if
+                //      [ .compute() is a very good method, thank you very much ]
+                dictionary.compute(currentWord, (k, v) -> v == null ? 1 : v + 1);
             }
 
         } catch (FileNotFoundException e) {

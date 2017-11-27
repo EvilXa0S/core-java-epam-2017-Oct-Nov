@@ -10,17 +10,14 @@ import java.util.Scanner;
 
 public class Task9 implements ITestableTask9 {
 
-    /*
-    public static void main(String[] args)
-    throws IOException {
-        Task9 task = new Task9();
-        System.out.println(task.getUniqueWords(new File("pathname")));
-    }
-    */
-
     @Override
     public HashSet<String> getUniqueWords(File input) {
+        // use interface
+        //  [ i can't, because it will violate the method contract. ]
         HashSet<String> set = new HashSet<>();
+
+        // remove try/catch
+        //   [ on the last review we decided that we would leave it. ]
         try (Scanner scanner = new Scanner(input)) {
             while (scanner.hasNext()) {
                 set.add(scanner.next()

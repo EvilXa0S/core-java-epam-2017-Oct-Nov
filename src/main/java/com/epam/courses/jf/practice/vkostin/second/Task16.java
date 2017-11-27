@@ -12,18 +12,6 @@ import java.util.TreeMap;
 
 public class Task16 implements ITestableTask16 {
 
-    /*
-    public static void main(String[] args) {
-        Task16 task = new Task16();
-
-        I2DPoint centerPoint = new TwoDPoint(3.0, 2.0);
-        File outputFile = new File("outputFilePath");
-
-        task.analyze(centerPoint, 4, outputFile);
-    }
-    */
-
-
     private double checkDistance(I2DPoint center, I2DPoint current) {
         return Math.sqrt((center.getX() - current.getX()) * (center.getX() - current.getX())
                 + (center.getY() - current.getY()) * (center.getY() - current.getY()));
