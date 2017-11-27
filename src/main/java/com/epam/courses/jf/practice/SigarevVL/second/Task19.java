@@ -32,8 +32,8 @@ public class Task19 implements ITestableTask19 {
         double car1RaceTime = car1LapTime * numberLaps;
 
 
-        double meetingTime = ((car2.getStartPosition() - car1.getStartPosition())
-                / (car1.getSpeed() - car2.getSpeed()));
+        double meetingTime = ((double)(car2.getStartPosition() - car1.getStartPosition())
+                / (double)(car1.getSpeed() - car2.getSpeed()));
 
         if (meetingTime > 0) {
             if (car1RaceTime > meetingTime) {
@@ -48,7 +48,7 @@ public class Task19 implements ITestableTask19 {
         }
 
          do {
-            meetingTime = (Math.abs(car2.getSpeed() * car1LapTime)
+            meetingTime = ((double)Math.abs(car2.getSpeed() * car1LapTime)
                     / (car1.getSpeed() - car2.getSpeed())) + car1LapTime;
 
             if (car1RaceTime > meetingTime) {
