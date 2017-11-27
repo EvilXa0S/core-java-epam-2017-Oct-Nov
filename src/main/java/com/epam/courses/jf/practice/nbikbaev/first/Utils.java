@@ -11,6 +11,7 @@ public class Utils {
      *
      * @param scanner   Scanner
      * @param dimension Matrix dimension
+     * @param matrix    Target matrix
      */
     public static void readMatrix(Scanner scanner, int dimension, int[][] matrix) {
         for (int row = 0; row < dimension; ++row) {
@@ -25,6 +26,7 @@ public class Utils {
      *
      * @param scanner   Scanner
      * @param dimension Matrix dimension
+     * @param matrix    Target matrix
      */
     public static void readMatrix(Scanner scanner, int dimension, float[][] matrix) {
         for (int row = 0; row < dimension; ++row) {
