@@ -28,13 +28,6 @@ public class Task15 implements ITestableTask15{
         public double getY() {
             return y;
         }
-
-        @Override
-        public String toString(){
-            String str = "" + x + " " + y;
-
-            return str;
-        }
     }
 
     class Line implements ILine{
@@ -69,11 +62,7 @@ public class Task15 implements ITestableTask15{
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 for (ILine line : lines) {
                     for (I2DPoint point : line.getPoints()) {
-//                        writer.write(point.toString() + " ");
                         writer.write("" + point.getX() + " " + point.getY() + " ");
-//                        writer.write(" ");
-//                        writer.write(String.valueOf(point.getY()));
-//                        writer.write(" ");
                     }
 
                     writer.write("\n");
