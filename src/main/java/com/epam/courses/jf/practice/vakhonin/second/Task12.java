@@ -18,13 +18,21 @@ public class Task12 implements ITestableTask12{
 //    }
 
     public List<Integer> transform(List<Integer> integers, int value){
-        for(int j = integers.size()-1; j > 0; j--) {
-            if(integers.get(j) <= value) {
-                integers.set(j, integers.get(j) ^ integers.get(0));
-                integers.set(0, integers.get(j) ^ integers.get(0));
-                integers.set(j, integers.get(j) ^ integers.get(0));
+        int k = 0;
+        for(int j = integers.size()-1; j > k; j--) {
+            while(integers.get(j) <= value){
+//                System.out.println("integers[j] = " + integers.get(integers.size() - 1 - j));
+//                System.out.println("j = " + j + "  k = " + k);
+//                System.out.println(integers);
+                integers.set(j, integers.get(j) ^ integers.get(k));
+                integers.set(k, integers.get(j) ^ integers.get(k));
+                integers.set(j, integers.get(j) ^ integers.get(k));
+//                System.out.println(integers);
+                k++;
             }
         }
+
+//        integers.sort(Comparator.naturalOrder()); // Maybe this method (in one line) also fits to do this task... :-)
 
         return integers;
     }
