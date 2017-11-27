@@ -55,7 +55,7 @@ public class Task15 implements ITestableTask15{
 
         FileWithLines (Set<ILine> lines, File file) {
             this.file = file;
-            putLines(lines);
+            writeLines(lines);
         }
 
         @Override
@@ -65,11 +65,12 @@ public class Task15 implements ITestableTask15{
 
 
 
-        public void putLines(Set<ILine> lines) {
+        public void writeLines(Set<ILine> lines) {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 for (ILine line : lines) {
                     for (I2DPoint point : line.getPoints()) {
-                        writer.write(point.toString() + "\t");
+                        writer.write(point.toString());
+                        writer.write(" ");
                     }
 
                     writer.write("\n");
@@ -79,33 +80,33 @@ public class Task15 implements ITestableTask15{
             }
         }
 
+
         @Override
         public Set<ILine> getLines() {
-            Set<ILine> lines = new HashSet<>();
-            String line;
+            Set<ILine> linesSet = new HashSet<>();
+            String s;
             String[] strPoints;
-            I2DPoint point;
             Set<I2DPoint> pointsSet;
+            I2DPoint point;
 
             try (BufferedReader reader = new BufferedReader(new FileReader(file))){
-                while ((line = reader.readLine()) != null) {
-                    strPoints = line.split("\\t");
+                while ((s = reader.readLine()) != null) {
+                    strPoints = s.split("\\s");
                     pointsSet = new HashSet<>();
 
-                    for(String strPoint: strPoints){
-                        String[] coord = strPoint.split(" ");
-                        point = new Point(Double.parseDouble(coord[0]), Double.parseDouble(coord[1]));
+                    for (int j = 0; j < strPoints.length; j += 2) {
+                        point = new Point(Double.parseDouble(strPoints[j]), Double.parseDouble(strPoints[j + 1]));
                         pointsSet.add(point);
                     }
 
-                    lines.add(new Line(pointsSet));
+                    linesSet.add(new Line(pointsSet));
                 }
-                return lines;
+
+                return linesSet;
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            return lines;
+            return null;
         }
     }
 
