@@ -4,13 +4,13 @@ import com.epam.courses.jf.practice.common.second.ITestableTask18.IRectangularIn
 
 import java.util.Arrays;
 
-public class RectangularIntegerMatrix implements IRectangularIntegerMatrix {
+public class RectangularIntegerMatrixImpl implements IRectangularIntegerMatrix {
     private int[][] a;
     private int width;
     private int height;
 
 
-    public RectangularIntegerMatrix(int[][] a) {
+    public RectangularIntegerMatrixImpl(int[][] a) {
         this.a = a;
         width = a[0].length;
         height = a.length;
@@ -36,7 +36,7 @@ public class RectangularIntegerMatrix implements IRectangularIntegerMatrix {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        RectangularIntegerMatrix that = (RectangularIntegerMatrix) o;
+        RectangularIntegerMatrixImpl that = (RectangularIntegerMatrixImpl) o;
 
         if (width != that.width) return false;
         if (height != that.height) return false;
