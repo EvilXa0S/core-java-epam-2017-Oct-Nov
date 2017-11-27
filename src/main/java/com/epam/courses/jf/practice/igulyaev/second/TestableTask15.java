@@ -17,7 +17,8 @@ public class TestableTask15 implements ITestableTask15 {
             I2DPoint vectorStart = iterator.next();
             while (iterator.hasNext()) {
               I2DPoint vectorEnd = iterator.next();
-                if(lines.stream().noneMatch(line -> line.getPoints().containsAll(Arrays.asList(vectorStart, vectorEnd)))){
+                I2DPoint start = vectorStart; //need to use in lambda, because vectorStart is changed every loop
+                if(lines.stream().noneMatch(line -> line.getPoints().containsAll(Arrays.asList(start, vectorEnd)))){
                     continue;
                 }
                 Line line = new Line(vectorStart, vectorEnd);
@@ -31,6 +32,7 @@ public class TestableTask15 implements ITestableTask15 {
                 if(line.points.size() > 2){
                     lines.add(line);
                 }
+                vectorStart = vectorEnd;
             }
         }
         try(FileOutputStream fileOutputStream = new FileOutputStream(output);
