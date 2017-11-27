@@ -14,7 +14,7 @@ public class Task18 implements ITestableTask18 {
             }
         }
         int[][] b = getMatrix(a);
-        return new RectangularIntegerMatrix(b);
+        return new RectangularIntegerMatrixImpl(b);
     }
 
     private static int[][] getMatrix(int[][] matrix) {
