@@ -9,16 +9,21 @@ public class Task11 implements ITestableTask11 {
     public String emulate(ArrayList<String> peoples) {
         while (peoples.size() != 1) {
             if (peoples.size() % 2 == 0) {
-                excludeEachSecond(peoples);
+                removeEachSecondElement(peoples);
             } else {
-                excludeEachSecond(peoples);
+                removeEachSecondElement(peoples);
                 Collections.rotate(peoples, -1);
             }
         }
         return peoples.get(0);
     }
 
-    private void excludeEachSecond(List<String> peoples) {
+    /**
+     * Removes every second element from specified list starting from zero index
+     *
+     * @param peoples Target list
+     */
+    private void removeEachSecondElement(List<String> peoples) {
         for (int i = 0; i < peoples.size(); ++i) {
             peoples.remove(i);
         }
