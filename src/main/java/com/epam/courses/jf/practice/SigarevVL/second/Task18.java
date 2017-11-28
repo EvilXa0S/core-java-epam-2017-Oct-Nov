@@ -6,27 +6,28 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 /**
- * Дана матрица из целых чисел.
- * Найти в ней прямоугольную подматрицу, состоящую из максимального количества одинаковых элементов.
- * Использовать стек.
+ * Searches in a matrix a square matrix
+ * which is consist of the maximum number of identical elements.
+ * Uses stack.
  */
 public class Task18 implements ITestableTask18 {
 
     /**
-     * @param matrix Анализируемая матрица.
-     * @return Подматрица, состоящая из максимального количества одинаковых элементов.
+     * @param matrix Analyzed matrix.
+     * @return Submatrix consisting of the maximum number of identical elements.
      */
     @Override
     public IRectangularIntegerMatrix getMaxSubMatrix(IRectangularIntegerMatrix matrix) {
         int minColumn = matrix.getHeight() + 1;
-        int row  = 1;
+        int countRowElements  = 1;
         Deque<IRectangularIntegerMatrixImpl> deque = new ArrayDeque<>();
 
         for (int i = 0; i < matrix.getHeight(); i++) {
             for (int j = 0; j < matrix.getWidth(); j++) {
                 int k = i + 1;
                 int column = 1;
-                while (k < matrix.getHeight() && matrix.getValue(j,k) == matrix.getValue(j,i)) {
+                while (k < matrix.getHeight() && matrix.getValue(j,k)
+                        == matrix.getValue(j,i)) {
                     column++;
                     k++;
                 }
@@ -38,17 +39,22 @@ public class Task18 implements ITestableTask18 {
                 if (minColumn > column) {
                     minColumn = column;
                 }
-                if (column > row * minColumn || row == 1) {
-                    deque.push(new IRectangularIntegerMatrixImpl(row,column ,matrix.getValue(j,i)));
+                if (column > countRowElements * minColumn
+                        || countRowElements == 1) {
+
+                    deque.push(new IRectangularIntegerMatrixImpl(countRowElements,
+                            column, matrix.getValue(j,i)));
                 }
-                if (j == matrix.getWidth() - 1 || matrix.getValue(j,i) != matrix.getValue(j + 1,i)) {
-                    if (row > 1) {
-                        deque.push(new IRectangularIntegerMatrixImpl(row, column, matrix.getValue(j,i)));
+                if (j == matrix.getWidth() - 1 || matrix.getValue(j,i)
+                        != matrix.getValue(j + 1,i)) {
+                    if (countRowElements > 1) {
+                        deque.push(new IRectangularIntegerMatrixImpl(countRowElements,
+                                column, matrix.getValue(j,i)));
                     }
-                    row = 1;
+                    countRowElements = 1;
                     minColumn = matrix.getHeight() + 1;
                 } else {
-                    row++;
+                    countRowElements++;
                 }
             }
         }
@@ -63,19 +69,25 @@ public class Task18 implements ITestableTask18 {
         return maxMatrix;
     }
 
-    public class IRectangularIntegerMatrixImpl implements IRectangularIntegerMatrix {
+    /**
+     * Rectangular matrix of integers.
+     */
+    public class IRectangularIntegerMatrixImpl
+            implements IRectangularIntegerMatrix {
 
         private int wigth;
         private int height;
         private int matrix[][];
 
-        public IRectangularIntegerMatrixImpl(int wigth, int height, int[][] matrix) {
+        public IRectangularIntegerMatrixImpl(int wigth, int height,
+                                             int[][] matrix) {
             this.wigth = wigth;
             this.height = height;
             this.matrix = matrix;
         }
 
-        public IRectangularIntegerMatrixImpl(int wigth, int height, int element) {
+        public IRectangularIntegerMatrixImpl(int wigth, int height,
+                                             int element) {
             this.wigth = wigth;
             this.height = height;
             matrix = new int[this.height][this.wigth];
@@ -86,20 +98,34 @@ public class Task18 implements ITestableTask18 {
             }
         }
 
+        /**
+         * @return Width of the matrix.
+         */
         @Override
         public int getWidth() {
             return wigth;
         }
 
+        /**
+         * @return The height of the matrix.
+         */
         @Override
         public int getHeight() {
             return height;
         }
 
+        /**
+         * @return The square of the matrix.
+         */
         public int getSquare() {
             return wigth * height;
         }
 
+        /**
+         * @param indexWidth Index by width.
+         * @param indexHeight Index for height.
+         * @return A value is located in the specified cell.
+         */
         @Override
         public int getValue(int indexWidth, int indexHeight) {
             return matrix[indexHeight][indexWidth];
