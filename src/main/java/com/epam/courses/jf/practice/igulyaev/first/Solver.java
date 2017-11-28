@@ -429,6 +429,33 @@ public class Solver implements ISolver {
     }
 
     @Override
+    public void task23(){
+        final Scanner scanner = new Scanner(System.in);
+        final int[][] matrix = readMatrix(scanner);
+        List<Integer> minInRow = Stream.of(matrix).map(row -> IntStream.of(row).min().getAsInt())
+                .collect(Collectors.toList());
+        List<Integer> maxInCol = new ArrayList<>(matrix.length);
+        for(int col = 0; col < matrix.length; ++col){
+            int max = Integer.MIN_VALUE;
+            for(int row = 0; row < matrix.length; ++row){
+                if(matrix[row][col] > max){
+                    max = matrix[row][col];
+                }
+            }
+            maxInCol.add(max);
+        }
+        int count = 0;
+        for(int col = 0; col < matrix.length; ++col){
+            for(int row = 0; row < matrix.length; ++row){
+                if(matrix[row][col] == minInRow.get(row) && matrix[row][col] == maxInCol.get(col)){
+                    ++count;
+                }
+            }
+        }
+        System.out.println(count);
+    }
+
+    @Override
     public void task24(){
         final Scanner scanner = new Scanner(System.in);
         int[][] matrix = readMatrix(scanner);
