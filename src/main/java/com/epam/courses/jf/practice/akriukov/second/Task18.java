@@ -5,7 +5,7 @@ import com.epam.courses.jf.practice.common.second.ITestableTask18;
 import static java.lang.Math.min;
 
 public class Task18 implements ITestableTask18{
-    
+
     @Override
     public IRectangularIntegerMatrix getMaxSubMatrix(IRectangularIntegerMatrix matrix) {
         int matrixHeight = matrix.getHeight();
