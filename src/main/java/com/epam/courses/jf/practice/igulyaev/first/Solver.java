@@ -1,6 +1,7 @@
 package com.epam.courses.jf.practice.igulyaev.first;
 
 import com.epam.courses.jf.practice.common.first.ISolver;
+import javafx.collections.transformation.SortedList;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -35,17 +36,16 @@ public class Solver implements ISolver {
     @Override
     public void task2(){
         final Reader reader = new Reader(System.in);
-        Set<String> stringSet = new TreeSet<>((s1,s2) ->
-                s1.length() < s2.length() ? -1 : (s1.length() > s2.length() ? 1 : s1.compareTo(s2))
-        );
-
         int n = Integer.parseInt(reader.readLine());
+        List<String> stringList = new ArrayList<>(n);
 
         for(int i = 0; i < n; ++i){
-            stringSet.add(reader.readLine());
+            stringList.add(reader.readLine());
         }
+        stringList.sort((s1,s2) ->
+                s1.length() < s2.length() ? -1 : (s1.length() > s2.length() ? 1 : s1.compareTo(s2)));
 
-        stringSet.forEach(s -> System.out.printf("(%d): \"%s\"%n", s.length(), s));
+        stringList.forEach(s -> System.out.printf("(%d): \"%s\"%n", s.length(), s));
     }
 
     @Override
