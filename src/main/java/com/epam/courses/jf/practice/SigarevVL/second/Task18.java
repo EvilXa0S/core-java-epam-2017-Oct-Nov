@@ -18,46 +18,8 @@ public class Task18 implements ITestableTask18 {
      */
     @Override
     public IRectangularIntegerMatrix getMaxSubMatrix(IRectangularIntegerMatrix matrix) {
-        int minColumn = matrix.getHeight() + 1;
-        int countRowElements  = 1;
-        Deque<IRectangularIntegerMatrixImpl> deque = new ArrayDeque<>();
 
-        for (int i = 0; i < matrix.getHeight(); i++) {
-            for (int j = 0; j < matrix.getWidth(); j++) {
-                int k = i + 1;
-                int column = 1;
-                while (k < matrix.getHeight() && matrix.getValue(j,k)
-                        == matrix.getValue(j,i)) {
-                    column++;
-                    k++;
-                }
-                k = i - 1;
-                while (k >= 0 && matrix.getValue(j,k) == matrix.getValue(j,i)) {
-                    column++;
-                    k--;
-                }
-                if (minColumn > column) {
-                    minColumn = column;
-                }
-                if (column > countRowElements * minColumn
-                        || countRowElements == 1) {
-
-                    deque.push(new IRectangularIntegerMatrixImpl(countRowElements,
-                            column, matrix.getValue(j,i)));
-                }
-                if (j == matrix.getWidth() - 1 || matrix.getValue(j,i)
-                        != matrix.getValue(j + 1,i)) {
-                    if (countRowElements > 1) {
-                        deque.push(new IRectangularIntegerMatrixImpl(countRowElements,
-                                column, matrix.getValue(j,i)));
-                    }
-                    countRowElements = 1;
-                    minColumn = matrix.getHeight() + 1;
-                } else {
-                    countRowElements++;
-                }
-            }
-        }
+        Deque<IRectangularIntegerMatrixImpl> deque = new ArrayDeque<>(getAllSubmatrix(matrix));
         IRectangularIntegerMatrixImpl maxMatrix = deque.pop();
         for (int i = 0; i < deque.size(); i++) {
             if (maxMatrix.getSquare() < deque.peek().getSquare()) {
@@ -68,6 +30,58 @@ public class Task18 implements ITestableTask18 {
         }
         return maxMatrix;
     }
+
+    /**
+     * Performs the division of the matrix into submatrix of identical elements
+     *
+     * @param matrix Analyzed matrix.
+     * @return returns a queue containing submatrix
+     * of identical elements of the input matrix
+     */
+    private Deque getAllSubmatrix(IRectangularIntegerMatrix matrix) {
+        Deque<IRectangularIntegerMatrixImpl> deque = new ArrayDeque<>();
+
+        int minColumn = matrix.getHeight() + 1;
+        int countRowElements = 1;
+        for (int i = 0; i < matrix.getHeight(); i++) {
+            for (int j = 0; j < matrix.getWidth(); j++) {
+                int k = i + 1;
+                int column = 1;
+                while (k < matrix.getHeight() && matrix.getValue(j, k)
+                        == matrix.getValue(j, i)) {
+                    column++;
+                    k++;
+                }
+                k = i - 1;
+                while (k >= 0 && matrix.getValue(j, k) == matrix.getValue(j, i)) {
+                    column++;
+                    k--;
+                }
+                if (minColumn > column) {
+                    minColumn = column;
+                }
+                if (column > countRowElements * minColumn
+                        || countRowElements == 1) {
+
+                    deque.push(new IRectangularIntegerMatrixImpl(countRowElements,
+                            column, matrix.getValue(j, i)));
+                }
+                if (j == matrix.getWidth() - 1 || matrix.getValue(j, i)
+                        != matrix.getValue(j + 1, i)) {
+                    if (countRowElements > 1) {
+                        deque.push(new IRectangularIntegerMatrixImpl(countRowElements,
+                                column, matrix.getValue(j, i)));
+                    }
+                    countRowElements = 1;
+                    minColumn = matrix.getHeight() + 1;
+                } else {
+                    countRowElements++;
+                }
+            }
+        }
+        return deque;
+    }
+
 
     /**
      * Rectangular matrix of integers.
@@ -122,7 +136,7 @@ public class Task18 implements ITestableTask18 {
         }
 
         /**
-         * @param indexWidth Index by width.
+         * @param indexWidth  Index by width.
          * @param indexHeight Index for height.
          * @return A value is located in the specified cell.
          */
