@@ -9,8 +9,22 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
+/**
+ * На клетчатой бумаге нарисован круг (задается центром и радиусом).
+ * Координаты центра круга могут быть дробными числами (например [0.3, 0.7]).
+ * Вывести в файл все точки с целочисленными координатами, лежащие внутри круга (лежащие на окружности не учитывать).
+ * Выводить в порядке возрастания расстояния от точки до центра круга.
+ * Использовать класс PriorityQueue.
+ */
 public class Task16 implements ITestableTask16 {
 
+    /**
+     * Осуществляет анализ точек, находя среди них попавших внутрь круга.
+     * @param center Точка, в которой расположен центр круга.
+     * @param radius Радиус круга.
+     * @param output Файл для вывода результатов.
+     * @return Файл с результатами анализа.
+     */
     @Override
     public IFileWithPoints analyze(I2DPoint center, int radius, File output) {
         double centerY = center.getY();

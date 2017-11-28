@@ -5,8 +5,18 @@ import com.epam.courses.jf.practice.common.second.ITestableTask17;
 
 import java.util.*;
 
+/**
+ * На плоскости задано N отрезков (2 <= N <= 20).
+ * Найти точку (возможно несколько) пересечения двух отрезков, имеющую минимальную абсциссу.
+ * Использовать класс TreeMap.
+ */
 public class Task17 implements ITestableTask17 {
 
+    /**
+     * Осуществляет анализ переданных отрезков.
+     * @param segments Множество отрезков.
+     * @return Множество точек пересечения, имеющих минимальную абсциссу.
+     */
     @Override
     public Set<I2DPoint> analyze(Set<ISegment> segments) {
         TreeMap<Double, I2DPoint> map = new TreeMap<>();

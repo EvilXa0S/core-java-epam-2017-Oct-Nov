@@ -6,16 +6,29 @@ public class Point2D implements I2DPoint{
     private double x;
     private double y;
 
+    /**
+     * Point on XY plane
+     * @param x
+     * @param y
+     */
     public Point2D(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
+    /**
+     * Abscissa value
+     * @return x
+     */
     @Override
     public double getX() {
         return x;
     }
 
+    /**
+     * Ordinate value
+     * @return
+     */
     @Override
     public double getY() {
         return y;
