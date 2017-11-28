@@ -36,6 +36,10 @@ public class Task14 implements ITestableTask14 {
 
         List<T> list = new ArrayList<>();
 
+        /**
+         * @param value Reference value.
+         * @return The number closest to the given.
+         */
         @Override
         public T nearest(Number value) {
             double subMod = Math.abs(list.get(0).doubleValue()
@@ -92,11 +96,11 @@ public class Task14 implements ITestableTask14 {
         public boolean remove(Object o) {
             return list.remove(o);
         }
-
-        @Override
-        public boolean containsAll(Collection<?> c) {
-            return list.containsAll(c);
-        }
+//
+//        @Override
+//        public boolean containsAll(Collection<?> c) {
+//            return list.containsAll(c);
+//        }
 
         @Override
         public boolean addAll(Collection<? extends T> c) {
@@ -107,11 +111,11 @@ public class Task14 implements ITestableTask14 {
         public boolean removeAll(Collection<?> c) {
             return list.removeAll(c);
         }
-
-        @Override
-        public boolean retainAll(Collection<?> c) {
-            return retainAll(c);
-        }
+//
+//        @Override
+//        public boolean retainAll(Collection<?> c) {
+//            return retainAll(c);
+//        }
 
         @Override
         public void clear() {
