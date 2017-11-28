@@ -96,11 +96,6 @@ public class Task14 implements ITestableTask14 {
         public boolean remove(Object o) {
             return list.remove(o);
         }
-//
-//        @Override
-//        public boolean containsAll(Collection<?> c) {
-//            return list.containsAll(c);
-//        }
 
         @Override
         public boolean addAll(Collection<? extends T> c) {
@@ -111,11 +106,6 @@ public class Task14 implements ITestableTask14 {
         public boolean removeAll(Collection<?> c) {
             return list.removeAll(c);
         }
-//
-//        @Override
-//        public boolean retainAll(Collection<?> c) {
-//            return retainAll(c);
-//        }
 
         @Override
         public void clear() {
