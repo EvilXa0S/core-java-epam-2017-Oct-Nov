@@ -13,10 +13,6 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 public class Solver implements ISolver{
-    public static void main(String [] args) {
-        Solver solver = new Solver();
-        solver.task9();
-    }
 
     @Override
     public void task1() {
@@ -379,7 +375,11 @@ public class Solver implements ISolver{
             }
             previous = current;
         }
-        System.out.println(maxLength);
+        if (elementsCount <= 0) {
+            System.out.println(0);
+        } else {
+            System.out.println(maxLength);
+        }
 
     }
 
