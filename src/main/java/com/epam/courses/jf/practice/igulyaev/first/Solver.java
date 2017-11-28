@@ -323,6 +323,13 @@ public class Solver implements ISolver {
     }
 
     @Override
+    public void task17(){
+        final Scanner scanner = new Scanner(System.in);
+        int[][] matrix = readMatrix(scanner);
+        System.out.println(determinant(matrix));
+    }
+
+    @Override
     public void task18(){
         final Scanner scanner = new Scanner(System.in);
         final int[][] matrix = readMatrix(scanner);
@@ -614,5 +621,36 @@ public class Solver implements ISolver {
             matrix[i][c1] = matrix[i][c2];
             matrix[i][c2] = temp;
         }
+    }
+    Map<String, Long> determinantMap = new HashMap<>();
+    public long determinant(int matrix[][]) {
+        String key = matrixToString(matrix);
+        Long determinant = determinantMap.get(key);
+        if(determinant != null){
+            return determinant;
+        }
+        long det = 0;
+        if(matrix.length == 1) {
+            det = matrix[0][0];
+        } else if (matrix.length == 2) {
+            det = matrix[0][0]*matrix[1][1] - matrix[1][0]*matrix[0][1];
+        } else {
+            for(int skippedCol = 0; skippedCol < matrix.length; ++skippedCol) {
+                int[][] m = new int[matrix.length - 1][matrix.length - 1];
+                for(int row = 1; row < matrix.length ; ++row) {
+                    int newCol = 0;
+                    for(int col = 0; col < matrix.length; ++col) {
+                        if(col == skippedCol) {
+                            continue;
+                        }
+                        m[row - 1][newCol] = matrix[row][col];
+                        newCol++;
+                    }
+                }
+                det += Math.pow(-1, skippedCol) * matrix[0][skippedCol] * determinant(m);
+            }
+        }
+        determinantMap.put(key, det);
+        return det;
     }
 }
