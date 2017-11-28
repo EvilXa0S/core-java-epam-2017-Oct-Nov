@@ -8,141 +8,72 @@ public class TestableTask18 implements ITestableTask18 {
     @Override
     public IRectangularIntegerMatrix getMaxSubMatrix(IRectangularIntegerMatrix matrix) {
         IRectangularIntegerMatrix result = matrix;
-        Set<Integer> res = new HashSet<>();
-        int ansMax = 0;
-        int[] rowsCols = new int[4];
-        int[] resRowsCols = new int[4];
-        int ans = 0;
-        int[] d = new int [matrix.getWidth()];
-        int[] d1 = new int [matrix.getWidth()];
-        int[] d2 = new int [matrix.getWidth()];
-        int firstStart = 0;
-        int firstFinish = 0;
-        int secondStart = 0;
-        int secondFinish = 0;
-        //IRectangularIntegerMatrix result;
-        Deque<Integer> stack  =  new ArrayDeque<>();
-        for(int i = 0; i < matrix.getHeight(); i++){
-            for(int j = 0; j < matrix.getWidth(); j++){
-                res.add(matrix.getValue(i,j));
+        int n = matrix.getHeight();
+        int m = matrix.getWidth();
+        int maxSize = 0;
+        Set<Integer> differentValues = new HashSet<>();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                differentValues.add(matrix.getValue(i, j));
             }
         }
-        Arrays.fill(d,-1);
-        for(Integer item:res){
-            for (int i = 0; i < matrix.getHeight(); i++) {
-                for (int j = 0; j < matrix.getWidth(); j++) {
-                    if (matrix.getValue(i,j) != item.intValue()) {
-                        d[j] = i;
-                    }
-                }
-                stack.clear();
-                for (int j = 0; j < matrix.getWidth(); j++) {
-                    while (!stack.isEmpty() && d[stack.peek()] <= d[j]) {
-                        stack.pop();
-                    }
-                    d1[j] = stack.isEmpty() ? -1 : stack.peek();
-                    stack.push(j);
-                }
-                stack.clear();
-                for (int j = matrix.getWidth() - 1; j >= 0; j--) {
-                    while (!stack.isEmpty() && d[stack.peek()] <= d[j])  stack.pop();
-                    d2[j] = stack.isEmpty() ? matrix.getWidth() : stack.peek();
-                    stack.push(j);
-                }
-
-                for (int j = 0; j < matrix.getWidth(); j++) {
-                    int current = ans;
-                    ans = Math.max(ans, (i - d[j]) * (d2[j] - d1[j] - 1));
-                    if ((current - ans) != 0) {
-                        firstStart = d[j] + 1;
-                        firstFinish = i;
-                        secondStart = d1[j] + 1;
-                        secondFinish = d2[j] - 1;
-                    }
-
-                }
+        for (Integer element : differentValues) {
+            IRectangularIntegerMatrix currentSubMatrix = getMaxSubMatrixOfValue(matrix, element);
+            int size = currentSubMatrix.getHeight() * currentSubMatrix.getWidth();
+            if (size > maxSize) {
+                maxSize = size;
+                result = currentSubMatrix;
             }
         }
-
-        int [][]resArr = new int[firstFinish-firstStart+1][secondFinish-secondStart+1];
-        for (int i = 0; i < firstFinish-firstStart+1; i++) {
-            for (int j = 0; j < secondFinish-secondStart+1; j++) {
-                resArr[i][j] =matrix.getValue(firstStart, secondStart);// matrix.getValue(firstStart, secondStart);
-            }
-        }
-        result = getMaxSubMatrixOfValue(new RectangularIntegerMatrix(resArr));
         return result;
     }
 
-    IRectangularIntegerMatrix getMaxSubMatrixOfValue(IRectangularIntegerMatrix matrix) {
-        Set<Integer> res = new HashSet<>();
-        int ansMax = 0;
-        int[] rowsCols = new int[4];
-        int[] resRowsCols = new int[4];
-        int ans = 0;
-        int[] d = new int [matrix.getWidth()];
-        int[] d1 = new int [matrix.getWidth()];
-        int[] d2 = new int [matrix.getWidth()];
-        int firstStart = 0;
-        int firstFinish = 0;
+    IRectangularIntegerMatrix getMaxSubMatrixOfValue(IRectangularIntegerMatrix matrix, int value) {
+        int n = matrix.getHeight();
+        int m = matrix.getWidth();
+        Deque<Integer> stack = new ArrayDeque<>();
+        int[] d = new int[m];
+        Arrays.fill(d, -1);
+        int[] d1 = new int[m];
+        int[] d2 = new int[m];
+        int size = 0;
+        int ferstStart = 0;
+        int ferstFinish = 0;
         int secondStart = 0;
         int secondFinish = 0;
-        IRectangularIntegerMatrix result;
-        Deque<Integer> stack  =  new ArrayDeque<>();
-        for(int i = 0; i < matrix.getHeight(); i++){
-            for(int j = 0; j < matrix.getWidth(); j++){
-                res.add(matrix.getValue(i,j));
-            }
-        }
-        //System.out.println(Arrays.toString(res.toArray()));
-        Arrays.fill(d,-1);
-        for(Integer item:res){
-            for (int i = 0; i < matrix.getHeight(); i++) {
-                for (int j = 0; j < matrix.getWidth(); j++) {
-                    if (matrix.getValue(i,j) != item.intValue()) {
-                        d[j] = i;
-                    }
-                }
-                stack.clear();
-                for (int j = 0; j < matrix.getWidth(); j++) {
-                    while (!stack.isEmpty() && d[stack.peek()] <= d[j]) {
-                        stack.pop();
-                    }
-                    d1[j] = stack.isEmpty() ? -1 : stack.peek();
-                    stack.push(j);
-                }
-                stack.clear();
-                for (int j = matrix.getWidth() - 1; j >= 0; j--) {
-                    while (!stack.isEmpty() && d[stack.peek()] <= d[j])  stack.pop();
-                    d2[j] = stack.isEmpty() ? matrix.getWidth() : stack.peek();
-                    stack.push(j);
-                }
-
-                for (int j = 0; j < matrix.getWidth(); j++) {
-                    int current = ans;
-                    ans = Math.max(ans, (i - d[j]) * (d2[j] - d1[j] - 1));
-                    if ((current - ans) != 0) {
-                        firstStart = d[j] + 1;
-                        firstFinish = i;
-                        secondStart = d1[j] + 1;
-                        secondFinish = d2[j] - 1;
-                    }
-
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (matrix.getValue(i, j) != value) {
+                    d[j] = i;
                 }
             }
-        }
-        //System.out.println(Arrays.toString(rowsCols));
-
-        //int n = firstFinish - firstStart + 1;
-        //int m = secondFinish - secondStart + 1;
-        //int[][] subMatrix = new int[n][m];
-        int [][]resArr = new int[firstFinish-firstStart+1][secondFinish-secondStart+1];
-        for (int i = 0; i < firstFinish-firstStart+1; i++) {
-            for (int j = 0; j < secondFinish-secondStart+1; j++) {
-                resArr[i][j] =matrix.getValue(firstStart, secondStart);// matrix.getValue(firstStart, secondStart);
+            stack.clear();
+            for (int j = 0; j < m; j++) {
+                while (!stack.isEmpty() && d[stack.peek()] <= d[j]) {
+                    stack.pop();
+                }
+                d1[j] = stack.isEmpty() ? -1 : stack.peek();
+                stack.push(j);
             }
+            stack.clear();
+            for (int j = m - 1; j >= 0; j--) {
+                while (!stack.isEmpty() && d[stack.peek()] <= d[j])  stack.pop();
+                d2[j] = stack.isEmpty() ? m : stack.peek();
+                stack.push(j);
+            }
+            for (int j = 0; j < m; j++) {
+                int oldSize = size;
+                size = Math.max(size, (i - d[j]) * (d2[j] - d1[j] - 1));
+                if ((oldSize - size) != 0) {
+                    ferstStart = d[j] + 1;
+                    ferstFinish = i;
+                    secondStart = d1[j] + 1;
+                    secondFinish = d2[j] - 1;
+                }
+            }
+
         }
-        return new RectangularIntegerMatrix(resArr);
+        return  generateSubMatrix(matrix,ferstStart,ferstFinish,secondStart,secondFinish);//generateSubMatrix(matrix, ferstStart, ferstFinish, secondStart, secondFinish);
     }
     IRectangularIntegerMatrix generateSubMatrix(IRectangularIntegerMatrix matrix, int iStart, int iFinish, int jStart, int jFinish) {
         int n = iFinish - iStart + 1;
@@ -181,7 +112,7 @@ public class TestableTask18 implements ITestableTask18 {
         }
 
         @Override
-        public int getValue(int indexHeight, int indexWidth) {
+        public int getValue(int indexWidth, int indexHeight) {
             return matrix[indexHeight][indexWidth];
         }
         @Override
