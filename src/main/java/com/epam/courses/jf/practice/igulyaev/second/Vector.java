@@ -23,7 +23,7 @@ class Vector{
         return x * v.x + y * v.y;
     }
 
-    private double crossProduct(Vector v){
+    public double crossProduct(Vector v){
         return x * v.y - y * v.x;
     }
 
