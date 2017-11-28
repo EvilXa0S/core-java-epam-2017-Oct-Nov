@@ -50,11 +50,11 @@ public class TestableTask17 implements ITestableTask17 {
 
         double xi = ((x3-x4)*(x1*y2-y1*x2)-(x1-x2)*(x3*y4-y3*x4))/d;
         double yi = ((y3-y4)*(x1*y2-y1*x2)-(y1-y2)*(x3*y4-y3*x4))/d;
-        if(xi == -0.0){
-            xi = -xi;
+        if(xi == -0.0D){
+            xi = 0.0D;
         }
-        if(yi == -0.0){
-            yi = -yi;
+        if(yi == -0.0D){
+            yi = 0.0D;
         }
         return new Point2D(xi,yi);
     }
