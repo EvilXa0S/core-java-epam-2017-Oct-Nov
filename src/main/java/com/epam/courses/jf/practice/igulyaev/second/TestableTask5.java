@@ -3,6 +3,8 @@ package com.epam.courses.jf.practice.igulyaev.second;
 import com.epam.courses.jf.practice.common.second.ITestableTask5;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.util.Arrays;
 import java.util.List;
 
 public class TestableTask5 implements ITestableTask5 {
@@ -16,6 +18,6 @@ public class TestableTask5 implements ITestableTask5 {
             numerator    = numerator.add(I.multiply(U));
             denominator  = denominator.add(I.pow(2));
         }
-        return numerator.divide(denominator).doubleValue();
+        return numerator.divide(denominator, MathContext.DECIMAL64).doubleValue();
     }
 }
