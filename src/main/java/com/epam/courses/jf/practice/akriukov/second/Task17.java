@@ -27,10 +27,14 @@ public class Task17 implements ITestableTask17 {
             for (int j = i + 1; j < list.size(); j++) {
                 ISegment firstSegment = list.get(i);
                 ISegment secondSegment = list.get(j);
-                double slope1 = slope(firstSegment.first().getX(), firstSegment.second().getX(), firstSegment.first().getY(), firstSegment.second().getY());
-                double intercept1 = intercept(firstSegment.first().getX(), firstSegment.second().getX(), firstSegment.first().getY(), firstSegment.second().getY());
-                double slope2 = slope(secondSegment.first().getX(), secondSegment.second().getX(), secondSegment.first().getY(), secondSegment.second().getY());
-                double intercept2 = intercept(secondSegment.first().getX(), secondSegment.second().getX(), secondSegment.first().getY(), secondSegment.second().getY());
+                double slope1 = slope(firstSegment.first().getX(), firstSegment.second().getX(),
+                        firstSegment.first().getY(), firstSegment.second().getY());
+                double intercept1 = intercept(firstSegment.first().getX(), firstSegment.second().getX(),
+                        firstSegment.first().getY(), firstSegment.second().getY());
+                double slope2 = slope(secondSegment.first().getX(), secondSegment.second().getX(),
+                        secondSegment.first().getY(), secondSegment.second().getY());
+                double intercept2 = intercept(secondSegment.first().getX(), secondSegment.second().getX(),
+                        secondSegment.first().getY(), secondSegment.second().getY());
                 double x = x(slope1, slope2, intercept1, intercept2);
                 double y = y(slope1, slope2, intercept1, intercept2);
 

@@ -36,10 +36,7 @@ public class Point2D implements I2DPoint{
 
     @Override
     public String toString() {
-        return "Point2D{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
+        return "Point2D{" + "x=" + x +  ", y=" + y + '}';
     }
 
     @Override
@@ -48,7 +45,6 @@ public class Point2D implements I2DPoint{
         if (!(o instanceof Point2D)) return false;
 
         Point2D i2DPoint = (Point2D) o;
-
         if (Double.compare(i2DPoint.x, x) != 0) return false;
         return Double.compare(i2DPoint.y, y) == 0;
     }

@@ -45,7 +45,8 @@ public class Task19 implements ITestableTask19 {
                     difference = lengthLap + difference;
                 }
                 double timeForFirst = (double) (lengthLap * numberLaps + startPosition1) / speed1;
-                int numberOfThatPairOvertaking = (int) floor(1 + (timeForFirst * (speed1 - speed2) - difference) / lengthLap);
+                int numberOfThatPairOvertaking = (int) floor(1 + (timeForFirst
+                        * (speed1 - speed2) - difference) / lengthLap);
                 result += numberOfThatPairOvertaking;
             }
         }
