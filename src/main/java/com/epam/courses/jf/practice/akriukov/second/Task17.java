@@ -8,7 +8,7 @@ import java.util.*;
 public class Task17 implements ITestableTask17 {
 
     @Override
-    public TreeSet<I2DPoint> analyze(Set<ISegment> segments) {
+    public Set<I2DPoint> analyze(Set<ISegment> segments) {
         TreeMap<Double, I2DPoint> map = new TreeMap<>();
         List<ISegment> list = new ArrayList<>(segments);
         double minX = Integer.MAX_VALUE;
@@ -39,7 +39,7 @@ public class Task17 implements ITestableTask17 {
             }
         }
 
-        return new TreeSet<I2DPoint>(map.values());
+        return new HashSet<I2DPoint>(map.values());
     }
 
     private double slope(double x1, double x2, double y1, double y2) {
@@ -49,8 +49,8 @@ public class Task17 implements ITestableTask17 {
     }
 
     private double intercept(double x1, double x2, double y1, double y2) {
-        double a = slope(x1, x2, y1, y2);
-        return y1 - a * x1;
+        double slope = slope(x1, x2, y1, y2);
+        return y1 - slope * x1;
     }
 
     private double x(double slope1, double slope2, double intercept1, double intercept2) {
