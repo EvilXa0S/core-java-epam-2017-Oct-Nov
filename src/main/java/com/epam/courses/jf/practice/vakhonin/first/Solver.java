@@ -9,6 +9,23 @@ public class Solver implements ISolver {
 
     static final String NOT_FOUND = "NOT FOUND";
 
+    /**
+    * task1:
+    *
+    * Ввести N строк, найти самую короткую и самую длинную строки. Вывести найденные строки и их длину.
+    * Если строк, удовлетворяющих условию, более одной - вывести последнюю из них.
+    *
+    * Формат входных данных:
+    * -N (целое число, 0 < N < 100) - количество доступных для чтения строк
+    * -N строк
+    *
+    * Формат выходных данных:
+    * В результате выполнения метода task1 в выходной поток должны быть выведены две строки следующего вида:
+    * System.out.printf("MIN (%d): \"%s\"%n", minLength, minString);
+    * System.out.printf("MAX (%d): \"%s\"%n", maxLength, maxString);
+    */
+
+    @Override
     public void task1() {
         Scanner in = new Scanner(System.in);
         int numberOfStrings = Integer.valueOf(in.nextLine());
@@ -37,8 +54,24 @@ public class Solver implements ISolver {
 
         System.out.printf("MIN (%d): \"%s\"%n", minLength, minString);
         System.out.printf("MAX (%d): \"%s\"%n", maxLength, maxString);
-    }   //READY!
+    }
 
+    /**
+    * task2:
+    *
+    * Ввести N строк. Упорядочить и вывести строки в порядке возрастания значений их длины.
+    * В случае, если длины строк совпадают - упорядочить их в лексикографическом порядке.
+    *
+    * Формат входных данных:
+    * -N (целое число) - количество доступных для чтения строк
+    * -N строк
+    *
+    * Формат выходных данных:
+    * В результате выполнения метода task2 в выходной поток должны быть выведены строки следующего вида:
+    * System.out.printf("(%d): \"%s\"%n", length, string);
+    */
+
+    @Override
     public void task2() {
         List<String> list = new ArrayList<>();
         Comparator<String> comparator = (s1, s2) -> {
@@ -65,8 +98,29 @@ public class Solver implements ISolver {
         for (String s : list) {
             System.out.printf("(%d): \"%s\"%n", s.length(), s);
         }
-    }   // READY!
+    }
 
+    /**
+    * task3:
+    *
+    * Ввести N строк. Вывести те строки, длина которых меньше средней.
+    * Под 'средней' подразумевается среднеарифметическая величина длины всех строк,
+    * округленная до целого в меньшую сторону.
+    *
+    * Формат входных данных:
+    * -N (целое число) - количество доступных для чтения строк
+    * -N строк
+    *
+    * Формат выходных данных:
+    * В результате выполнения метода task3 в выходной поток должна быть выведена средняя длина
+    * округленная до целого в меньшую сторону) и строки,
+    * удовлетворяющие условию.
+    * Порядок появления строк в выходном потоке должен совпадать с порядком их появления во входном.
+    * System.out.printf("AVERAGE (%d)%n", averageLength);
+    * System.out.printf("(%d): \"%s\"%n", string.length(), string);
+    */
+
+    @Override
     public void task3() {
         Scanner in = new Scanner(System.in);
         int numberOfStrings = Integer.valueOf(in.nextLine());
@@ -89,8 +143,26 @@ public class Solver implements ISolver {
                 System.out.printf("(%d): \"%s\"%n", length, string);
             }
         }
-    }   // READY!
+    }
 
+    /**
+    * task4:
+    *
+    * Ввести N слов, состоящих из символов английского алфавита.
+    * Найти слово, в котором число различных символов минимально.
+    * Символы верхнего и нижнего регистра считать различными.
+    * Если таких слов несколько, найти первое из них.
+    *
+    * Формат входных данных:
+    * -N (целое число) - количество слов в строке.
+    * -N строка, содержащая указанное количество слов, разделенных пробелами
+    *
+    * Формат выходных данных:
+    * В результате выполнения метода task4 в выходной поток должно быть выведено слово,
+    * содержащее наименьшее число различных символов.
+    */
+
+    @Override
     public void task4() {
         Scanner in = new Scanner(System.in);
         int numberOfWords = Integer.valueOf(in.nextLine());
@@ -121,8 +193,26 @@ public class Solver implements ISolver {
         }
 
         System.out.println(word);
-    }   // READY!
+    }
 
+    /**
+     * task5:
+     *
+     * Ввести N слов.
+     * Найти количество слов, содержащих только символы латинского алфавита,
+     * а среди них – количество слов с равным числом гласных и согласных букв.
+     *
+     * Формат входных данных:
+     * -N (целое число) - количество слов в строке.
+     * -N строка, содержащая указанное количество слов, разделенных пробелами
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task5 в выходной поток должно быть выведено количество слов,
+     * состоящих только из символов латинского алфавита и содержащих равное количество гласных и согласных букв
+     * (количество различных вхождений одной буквы в слове учитывается).
+     */
+
+    @Override
     public void task5() {
         Scanner in = new Scanner(System.in);
         int length;
@@ -152,8 +242,27 @@ public class Solver implements ISolver {
         }
 
         System.out.println(countOfWords);
-    }   // READY!
+    }
 
+    /**
+     * task6:
+     *
+     * Ввести N слов.
+     * Найти слово, символы в котором идут в строгом порядке возрастания их кодов.
+     * Если таких слов несколько, найти первое из них.
+     *
+     * Формат входных данных:
+     * -N (целое число) - количество слов в строке.
+     * -N строка, содержащая указанное количество слов, разделенных пробелами
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task6 в выходной поток должно быть выведено слово,
+     * коды символов которого следуют в порядке возрастания (каждый следующий строго больше предыдущего).
+     * В случае, если такое слово не найдено, в поток должно быть выведено "NOT FOUND".
+     * Слова состоящие из одного символа не учитывать.
+     */
+
+    @Override
     public void task6() {
         Scanner in = new Scanner(System.in);
 
@@ -189,8 +298,27 @@ public class Solver implements ISolver {
         }
 
         System.out.printf("%s%n", result);
-    }   // READY!
+    }
 
+    /**
+     * task7:
+     *
+     * Ввести N слов.
+     * Ввести N слов. Найти слова, состоящие только из различных символов.
+     * В случае, если слово встречается более одного раза - вывести его единожды.
+     *
+     * Формат входных данных:
+     * -N (целое число) - количество слов в строке.
+     * -N строка, содержащая указанное количество слов, разделенных пробелами
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task7 в выходной поток должна быть выведена строка,
+     * содержащая найденные слова, разделенные пробелами.
+     * В случае, если не найдено ни одного слова,
+     * удовлетворяющего условию - в поток должно быть выведено "NOT FOUND".
+     */
+
+    @Override
     public void task7() {
         Scanner in = new Scanner(System.in);
         int numberOfWords = Integer.valueOf(in.nextLine());
@@ -234,8 +362,26 @@ public class Solver implements ISolver {
         }
 
         System.out.println(result.toString());
-    }   // READY!
+    }
 
+    /**
+     * task8:
+     *
+     * Ввести N слов. Помимо обычных слов, во входной последовательности могут встречаться целые числа.
+     * Среди них необходимо найти число-палиндром (одинаково читающееся в обоих направлениях).
+     * Если таких чисел больше одного, найти второе из них. Ограничения на размер числа нет.
+     * Одна цифра является палиндромом.
+     *
+     * Формат входных данных:
+     * -N (целое число) - количество слов в строке.
+     * -N строка, содержащая указанное количество слов, разделенных пробелами
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task8 в выходной поток должны быть выведено найденное число-палиндром.
+     * В случае, если не найдено ни одного такого числа - в поток должно быть выведено "NOT FOUND".
+     */
+
+    @Override
     public void task8() {
         Scanner in = new Scanner(System.in);
         int n = Integer.valueOf(in.nextLine());
@@ -266,8 +412,23 @@ public class Solver implements ISolver {
         }
 
         System.out.printf("%s%n", result);
-    }   // READY!
+    }
 
+    /**
+     * task9:
+     *
+     * Написать программу, которая выводит числа от 1 до N^2 в виде матрицы NxN слева направо и сверху вниз.
+     *
+     * Формат входных данных:
+     * - N (целое число) - размерность матрицы
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task9 в выходной поток должны быть выведены N строк,
+     * соответствующие строкам матрицы.
+     * Внутри строки элементы матрицы разделяются знаком табуляции ('\t').
+     */
+
+    @Override
     public void task9() {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
@@ -280,8 +441,30 @@ public class Solver implements ISolver {
         }
 
         printMatrix(matrix);
-    }   // READY!
+    }
 
+    /**
+     * task10:
+     *
+     * Написать программу, позволяющую корректно находить корни квадратного уравнения.
+     * Параметры уравнения должны задаваться с командной строки.
+     *
+     * Формат входных данных:
+     * Во входном потоке последовательно расположены три целочисленных коэффициента A, B и C, задающие уравнение в общем виде.
+     *
+     * Формат выходных данных:
+     * В результате решения уравнения может быть получено три варианта ответа:
+     *
+     * 1) No solution
+     * 2) One solution: корень уравнения
+     * 3) Two solutions: первый корень уравнения, второй корень уравнения
+     *
+     * В результате выполнения метода task10, в выходной поток посылается строка, соответствующая найденному решению.
+     * Значения корней округляются до 2 знаков после запятой.
+     * В качестве десятичного разделителя используется точка.
+     */
+
+    @Override
     public void task10() {
         Scanner in = new Scanner(System.in);
         double d;
@@ -317,8 +500,30 @@ public class Solver implements ISolver {
         }
 
         System.out.println(result);
-    }   // READY!
+    }
 
+    /**
+     * task11:
+     *
+     * Ввести число от 1 до 12.
+     * Вывести на консоль название месяца, соответствующего данному числу.
+     * При реализации использовать оператор switch.
+     * Осуществить проверку корректности ввода числа.
+     *
+     * Формат входных данных:
+     * Во входном потоке расположена строка.
+     * Необходимо проверить, что она является целым числом в диапазоне 1-12.
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task11,
+     * в выходной поток посылается строка, соответствующая названию месяца
+     * (на английском языке) с указанным порядковым номером (регистр букв не важен).
+     * В случае,
+     * если введенная строка не удовлетворяет заданным условиям -
+     *  - в выходной поток посылается сообщение "INCORRECT INPUT DATA".
+     */
+
+    @Override
     public void task11() {
         Scanner in = new Scanner(System.in);
         String month = "";
@@ -375,8 +580,24 @@ public class Solver implements ISolver {
         }
 
         System.out.println(result);
-    }   // READY!
+    }
 
+    /**
+     * task12:
+     *
+     * Упорядочить строки матрицы размерности N
+     * в порядке возрастания значений элементов k-го столбца.
+     *
+     * Формат входных данных:
+     * - k (целое число, 0 <= k < N) - номер столбца
+     * - Матрица
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task12
+     * в выходной поток должна быть выведена преобразованная матрица.
+     */
+
+    @Override
     public void task12() {
         Scanner in = new Scanner(System.in);
         int numberOfColumn = in.nextInt();
@@ -384,8 +605,26 @@ public class Solver implements ISolver {
         Arrays.sort(matrix, Comparator.comparingInt(row -> row[numberOfColumn]));
         System.out.println(matrix.length);
         printMatrix(matrix);
-    }   // READY!
+    }
 
+    /**
+     * task13:
+     *
+     * Выполнить циклический сдвиг матрицы размерности N на k позиций вниз.
+     *
+     * Формат входных данных:
+     * - k (целое число) - количество сдвигов:
+     * 1) Если k > 0 - производится циклический сдвиг матрицы вниз
+     * 2) Если k < 0 - производится циклический сдвиг матрицы вверх
+     * 3) Если k = 0 - матрица остается без изменений
+     * - Матрица
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task13
+     * в выходной поток должна быть выведена преобразованная матрица.
+     */
+
+    @Override
     public void task13() {
         Scanner in = new Scanner(System.in);
         int k, shift;
@@ -404,8 +643,24 @@ public class Solver implements ISolver {
 
         System.out.println(size);
         printMatrix(newMatrix);
-    }   // READY!
+    }
 
+    /**
+     * task14:
+     *
+     * Найти наибольшее число строго возрастающих элементов последовательности, идущих подряд.
+     * Оператор отношения можно определить на множестве, включающем более одного элемента.
+     *
+     * Формат входных данных:
+     * - N (целое число) - количество элементов последовательности
+     * - N целых чисел - элементы последовательности
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task14 в выходной поток должно быть выведено число,
+     * отображающее количество элементов на самом большом возрастающем участке последовательности.
+     */
+
+    @Override
     public void task14() {
         Scanner in = new Scanner(System.in);
         int n = Integer.valueOf(in.nextLine());
@@ -440,8 +695,25 @@ public class Solver implements ISolver {
         }
 
         System.out.println(result);
-    }   // READY!
+    }
 
+    /**
+     * task15:
+     *
+     * Найти сумму элементов матрицы,
+     * расположенных между первым и вторым положительными элементами каждой строки.
+     *
+     * Формат входных данных:
+     * - Матрица
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task15 в выходной поток должна быть выведена указанная сумма.
+     * В случае, если в строке нет двух положительных элементов -
+     * - сумма от это строки полагается равной нулю.
+     * Сумма между двумя рядом расположенными элементами также равна нулю.
+     */
+
+    @Override
     public void task15() {
         Scanner in = new Scanner(System.in);
         int sumOfRow;
@@ -478,8 +750,22 @@ public class Solver implements ISolver {
             totalSum += sumOfRow;
         }
         System.out.println(totalSum);
-    }   // READY!
+    }
 
+    /**
+     * task16:
+     *
+     * Повернуть матрицу на 90 градусов против часовой стрелки.
+     *
+     * Формат входных данных:
+     * - Матрица
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task16
+     * в выходной поток должна быть выведена преобразованная матрица.
+     */
+
+    @Override
     public void task16() {
         Scanner in = new Scanner(System.in);
         int[][] matrix = enterMatrix(in);
@@ -494,8 +780,23 @@ public class Solver implements ISolver {
 
         System.out.println(size);
         printMatrix(matrixNew);
-    }   // READY!
+    }
 
+    /**
+     * task17:
+     *
+     * Вычислить определитель матрицы.
+     *
+     * Формат входных данных:
+     * - Матрица
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task17
+     * в выходной поток должен быть выведен определитель матрицы,
+     * представленный целым числом.
+     */
+
+    @Override
     public void task17() {
         Scanner in = new Scanner(System.in);
         int[][] matrix = enterMatrix(in);
@@ -536,8 +837,29 @@ public class Solver implements ISolver {
         }
 
         System.out.println(det);
-    }   // READY!
+    }
 
+    /**
+     * task18:
+     *
+     * Найти максимальный элемент(ы) в матрице и удалить из матрицы все строки и столбцы,
+     * его содержащие.
+     *
+     * Формат входных данных:
+     * - Матрица
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task18
+     * в выходной поток должна быть выведена преобразованная матрица.
+     * Так как матрица в результате преобразования может перестать быть квадратной -
+     * - несколько изменяется формат её представления при выводе в выходной поток:
+     *
+     * - N (целое число) - количество строк;
+     * - M (целое число) - количество столбцов;
+     * - N * M целых чисел, являющихся элементами матрицы.
+     */
+
+    @Override
     public void task18() {
         Scanner in = new Scanner(System.in);
         int[][] matrix = enterMatrix(in);
@@ -582,8 +904,23 @@ public class Solver implements ISolver {
         System.out.println(matrixNew.length);
         System.out.println(matrixNew[0].length);
         printMatrix(matrixNew);
-    }   // READY!
+    }
 
+    /**
+     * task19:
+     *
+     * Уплотнить матрицу, удаляя из нее строки и столбцы, заполненные нулями.
+     *
+     * Формат входных данных:
+     * - Матрица
+     *
+     * В результате выполнения метода task19
+     * в выходной поток должна быть выведена преобразованная матрица.
+     * Так как матрица в результате преобразования может перестать быть квадратной -
+     * - несколько изменяется формат её представления при выводе в выходной поток:
+     */
+
+    @Override
     public void task19() {
         Scanner in = new Scanner(System.in);
         int[][] matrix = enterMatrix(in);
@@ -592,8 +929,26 @@ public class Solver implements ISolver {
         System.out.println(resultMatrix.length);
         System.out.println(resultMatrix[0].length);
         printMatrix(resultMatrix);
-    }   // READY!
+    }
 
+    /**
+     * task20:
+     *
+     * В матрице найти минимальный элемент
+     * и переместить его на место заданного элемента путем перестановки строк и столбцов.
+     * Гарантируется, что минимальный элемент в матрице встречается ровно один раз.
+     *
+     * Формат входных данных:
+     * X (целое число, 0 <= X < N) - номер строки
+     * Y (целое число, 0 <= Y < N) - номер столбца
+     * - Матрица
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task20
+     * в выходной поток должна быть выведена преобразованная матрица.
+     */
+
+    @Override
     public void task20() {
         Scanner in = new Scanner(System.in);
         int targetRow = in.nextInt();
@@ -621,8 +976,23 @@ public class Solver implements ISolver {
         int[][] resultMatrix = transposeMatrix(matrixT);
         System.out.println(size);
         printMatrix(resultMatrix);
-    }   // READY!
+    }
 
+    /**
+     * task21:
+     *
+     * Преобразовать строки матрицы таким образом,
+     * чтобы элементы, равные нулю, располагались после всех остальных.
+     *
+     * Формат входных данных:
+     * - Матрица
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task21
+     * в выходной поток должна быть выведена преобразованная матрица.
+     */
+
+    @Override
     public void task21() {
         Scanner in = new Scanner(System.in);
         Integer[][] matrix = enterMatrixInteger(in);
@@ -648,14 +1018,32 @@ public class Solver implements ISolver {
 
         System.out.println(size);
         printMatrix(matrix);
-    }   // READY!
+    }
 
+    /**
+     * task22:
+     *
+     * Округлить все элементы матрицы до целого числа.
+     * Использовать округление к ближайшему целому — число округляется до целого,
+     * модуль разности с которым у этого числа минимален.
+     *
+     * Формат входных данных:
+     * - Матрица
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task22
+     * в выходной поток должна быть выведена преобразованная матрица,
+     * в которой элементы являются целыми числами.
+     * Вывод матрицы осуществляется по обычным правилам.
+     */
+
+    @Override
     public void task22() {
         Scanner in = new Scanner(System.in);
         double[][] matrix = enterMatrixDouble(in);
         int size = matrix.length;
-        int[][] matrixNew;
-        matrixNew = new int[size][size];
+        int[][] matrixNew = new int[size][size];
+
         for (int j = 0; j < size; j++) {
             for (int k = 0; k < size; k++) {
                 matrixNew[j][k] = (int) Math.round(matrix[j][k]);
@@ -664,8 +1052,25 @@ public class Solver implements ISolver {
 
         System.out.println(size);
         printMatrix(matrixNew);
-    }   // READY!
+    }
 
+    /**
+     * task23:
+     *
+     * Найти количество всех седловых точек матрицы.
+     * Матрица А имеет седловую точку (i, j),
+     * если А[i, j] является минимальным элементом в i-й строке и максимальным в j-м столбце.
+     *
+     * Формат входных данных:
+     * - Матрица
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task23
+     * в выходной поток должна быть выведено целое число,
+     * отображающее количество седловых точек в матрице.
+     */
+
+    @Override
     public void task23() {
         Scanner in = new Scanner(System.in);
         int[][] matrix = enterMatrix(in);
@@ -687,8 +1092,25 @@ public class Solver implements ISolver {
         }
 
         System.out.println(number);
-    }   // READY!
+    }
 
+    /**
+     * task24:
+     *
+     * Перестроить матрицу, переставляя в ней строки так,
+     * чтобы сумма элементов в строках полученной матрицы возрастала.
+     *
+     * Формат входных данных:
+     * - Матрица
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task24
+     * в выходной поток должна быть выведена преобразованная матрица.
+     * Если сумма нескольких строк совпадает -
+     * - в результирующей матрицы они должны следовать в том же порядке что и в исходной.
+     */
+
+    @Override
     public void task24() {
         Scanner in = new Scanner(System.in);
         int[][] matrix = enterMatrix(in);
@@ -714,8 +1136,27 @@ public class Solver implements ISolver {
         Arrays.sort(matrix, comparator);
         System.out.println(size);
         printMatrix(matrix);
-    }   // READY!
+    }
 
+    /**
+     * task25
+     *
+     * Найти число локальных минимумов.
+     * Соседями элемента матрицы назовем элементы,
+     * имеющие с ним общую сторону или угол.
+     * Элемент матрицы называется локальным минимумом,
+     * если он строго меньше всех своих соседей.
+     *
+     * Формат входных данных:
+     * - Матрица
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task25
+     * в выходной поток должно быть выведено число,
+     * соответствующее количеству локальных минимумов в матрице.
+     */
+
+    @Override
     public void task25() {
         Scanner in = new Scanner(System.in);
         int[][] matrix = enterMatrix(in);
@@ -747,8 +1188,29 @@ public class Solver implements ISolver {
         }
 
         System.out.println(numberOfMinimum);
-    }   // READY!
+    }
 
+    /**
+     * task26:
+     *
+     * Найти наибольший среди локальных максимумов.
+     * Соседями элемента матрицы назовем элементы,
+     * имеющие с ним общую сторону или угол.
+     * Элемент матрицы называется локальным максимумом,
+     * если он строго больше всех своих соседей.
+     *
+     * Формат входных данных:
+     * - Матрица
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task26
+     * в выходной поток должно быть выведено число,
+     * соответствующее наибольшему локальному максимуму.
+     * Если локальные максимумы в матрице отсутствуют -
+     * - выводится строка "NOT FOUND".
+     */
+
+    @Override
     public void task26() {
         Scanner in = new Scanner(System.in);
         int size = in.nextInt();
@@ -784,8 +1246,28 @@ public class Solver implements ISolver {
         }
 
         System.out.println(result);
-    }   // READY!
+    }
 
+    /**
+     * task27:
+     *
+     * Перестроить заданную матрицу,
+     * переставляя в ней столбцы так,
+     * чтобы значения их характеристик убывали.
+     * Характеристикой столбца прямоугольной матрицы называется сумма модулей его элементов.
+     * Если значения характеристики совпадают - столбцы должны следовать в том же порядке,
+     * что и в исходной матрице.
+     *
+     * Формат входных данных:
+     * - Матрица
+     *
+     * Формат выходных данных:
+     * В результате выполнения метода task27
+     * в выходной поток должна быть выведена преобразованная матрица,
+     * в которой столбцы отсортированы по убыванию их характеристики.
+     */
+
+    @Override
     public void task27() {
         Scanner in = new Scanner(System.in);
         int[][] matrix = transposeMatrix(enterMatrix(in));
@@ -795,7 +1277,13 @@ public class Solver implements ISolver {
         int[][] resultMatrix = transposeMatrix(matrix);
         System.out.println(size);
         printMatrix(resultMatrix);
-    }   // READY!
+    }
+
+    /**
+     computation characteristic
+     @param line - int array
+     @return - characteristic
+     */
 
     int characteristic(int[] line) {
         int result = 0;
@@ -807,6 +1295,12 @@ public class Solver implements ISolver {
         return result;
     }
 
+    /**
+     sum of int array elements
+     @param arr - int array
+     @return - sum of arr elements
+     */
+
     int sum(int[] arr) {
         int sum = 0;
 
@@ -817,11 +1311,24 @@ public class Solver implements ISolver {
         return sum;
     }
 
+    /**
+     swap two rows in int matrix
+     @param matrix - int matrix
+     @param j - index of first row
+     @param k - index of second row
+     */
+
     void swapRows(int[][] matrix, int j, int k) {
         int[] temp = matrix[j];
         matrix[j] = matrix[k];
         matrix[k] = temp;
     }
+
+    /**
+     method for reading matrix help us Scanner
+     @param in - Scanner(System.in)
+     @return Integer[][] matrix
+     */
 
     Integer[][] enterMatrixInteger(Scanner in) {
         int size = in.nextInt();
@@ -836,6 +1343,12 @@ public class Solver implements ISolver {
         return matrix;
     }
 
+    /**
+     method for reading matrix help us Scanner
+     @param in - Scanner(System.in)
+     @return int[][] matrix
+     */
+
     int[][] enterMatrix(Scanner in) {
         int size = in.nextInt();
         int[][] matrix = new int[size][size];
@@ -849,6 +1362,12 @@ public class Solver implements ISolver {
         return matrix;
     }
 
+    /**
+     method for reading matrix help us Scanner
+     @param in - Scanner(System.in)
+     @return double[][] matrix
+     */
+
     double[][] enterMatrixDouble(Scanner in) {
         int size = in.nextInt();
         double[][] matrix = new double[size][size];
@@ -861,6 +1380,11 @@ public class Solver implements ISolver {
 
         return matrix;
     }
+
+    /**
+     Printing Integer[][] matrix
+     @param matrix of Integer's
+     */
 
     void printMatrix(Integer[][] matrix) {
         StringBuilder stringMatrix = new StringBuilder();
@@ -883,6 +1407,11 @@ public class Solver implements ISolver {
         System.out.println(stringMatrix);
     }
 
+    /**
+     Printing int[][] matrix
+     @param matrix of int's
+     */
+
     void printMatrix(int[][] matrix) {
         StringBuilder stringMatrix = new StringBuilder();
         int height = matrix.length;
@@ -904,6 +1433,12 @@ public class Solver implements ISolver {
         System.out.println(stringMatrix);
     }
 
+    /**
+     transpose matrix
+     @param matrix
+     @return tMatrix
+     */
+
     int[][] transposeMatrix(int[][] matrix) {
         int height = matrix.length;
         int width = matrix[0].length;
@@ -917,6 +1452,12 @@ public class Solver implements ISolver {
 
         return tMatrix;
     }
+
+    /**
+     Find minimum in int array
+     @param arr - int array
+     @return Map - minimum and index of this
+     */
 
     Map<String, Integer> minElementOfArrayWithIndex(int[] arr) {
         Map<String, Integer> map = new HashMap<>();
@@ -940,6 +1481,12 @@ public class Solver implements ISolver {
         return map;
     }
 
+    /**
+     Find maximum in int array
+     @param arr - int array
+     @return max - maximum
+     */
+
     int maxElementOfArray(int[] arr) {
         int max = Integer.MIN_VALUE;
         for (Integer el : arr) {
@@ -950,6 +1497,12 @@ public class Solver implements ISolver {
 
         return max;
     }
+
+    /**
+     Remove zero rows from matrix and complete new suitable matrix
+     @param matrix - int matrix
+     @return new matrix wthout zero rows
+     */
 
     int[][] matrixWithoutZeroRows(int[][] matrix){
         List<int[]> listOfRows = new ArrayList<>();
