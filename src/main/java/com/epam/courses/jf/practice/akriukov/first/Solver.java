@@ -15,7 +15,7 @@ import static java.lang.Math.min;
 public class Solver implements ISolver{
     public static void main(String [] args) {
         Solver solver = new Solver();
-        solver.task7();
+        solver.task9();
     }
 
     @Override
@@ -247,7 +247,11 @@ public class Solver implements ISolver{
         int counter = 1;
         for (int i = 0; i < matrixDim; i++) {
             for (int j = 0; j <matrixDim; j++) {
-                System.out.print(counter + "\t");
+                if (j == 0) {
+                    System.out.print(counter);
+                } else {
+                    System.out.print("\t" + counter);
+                }
                 counter++;
             }
             System.out.println();
