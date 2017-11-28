@@ -181,7 +181,7 @@ public class TestableTask18 implements ITestableTask18 {
         }
 
         @Override
-        public int getValue(int indexWidth, int indexHeight) {
+        public int getValue(int indexHeight, int indexWidth) {
             return matrix[indexHeight][indexWidth];
         }
         @Override
