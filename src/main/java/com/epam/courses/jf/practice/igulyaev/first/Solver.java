@@ -370,6 +370,28 @@ public class Solver implements ISolver {
     }
 
     @Override
+    public void task20(){
+        final Scanner scanner = new Scanner(System.in);
+        final int x2 = scanner.nextInt();
+        final int y2 = scanner.nextInt();
+        final int[][] matrix = readMatrix(scanner);
+        int x1 = 0;
+        int y1 = 0;
+        for (int row = 0; row < matrix.length; ++row) {
+            for (int col = 0; col < matrix.length; ++col) {
+                if(matrix[row][col] < matrix[x1][y1]){
+                    x1 = row;
+                    y1 = col;
+                }
+            }
+        }
+        replaceColumns(matrix, y1, y2);
+        replaceRows(matrix, x1, x2);
+        System.out.println(matrix.length);
+        System.out.println(matrixToString(matrix));
+    }
+
+    @Override
     public void task21(){
         final Scanner scanner = new Scanner(System.in);
         final int[][] matrix = readMatrix(scanner);
@@ -576,5 +598,21 @@ public class Solver implements ISolver {
             }
         }
         return resultMatrix;
+    }
+
+    public void replaceRows(int[][] matrix, int r1, int r2){
+        int[] temp = new int[matrix[0].length];
+        System.arraycopy(matrix[r1], 0, temp, 0, matrix[0].length);
+        System.arraycopy(matrix[r2], 0, matrix[r1], 0, matrix[0].length);
+        System.arraycopy(temp, 0, matrix[r2], 0, matrix[0].length);
+    }
+
+    public void replaceColumns(int[][] matrix, int c1, int c2){
+        int temp;
+        for(int i = 0;i< matrix.length;++i){
+            temp = matrix[i][c1];
+            matrix[i][c1] = matrix[i][c2];
+            matrix[i][c2] = temp;
+        }
     }
 }
