@@ -88,7 +88,7 @@ public class Task15 implements ITestableTask15{
         public void writeLines(Set<ILine> lines) {
 
 //            FileWriter fw = null;
-//            BufferedWriter bw = null;
+            BufferedWriter bw = null;
 
 //            try {
 //                FileWriter fw = new FileWriter(file);
@@ -101,7 +101,9 @@ public class Task15 implements ITestableTask15{
 //
 //                    bw.write("\n");
 //                }
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+            try {
+                FileWriter fw = new FileWriter(file);
+                bw = new BufferedWriter(fw);
                 for (ILine line : lines) {
                     for (I2DPoint point : line.getPoints()) {
                         bw.write("" + point.getX() + " " + point.getY() + " ");
@@ -111,14 +113,14 @@ public class Task15 implements ITestableTask15{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-//              finally {
-//                try {
+              finally {
+                try {
 //                    fw.close();
-//                    bw.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
+                    bw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         /**
