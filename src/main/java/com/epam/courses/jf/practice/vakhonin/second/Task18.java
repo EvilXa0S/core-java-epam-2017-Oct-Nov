@@ -4,6 +4,7 @@ import com.epam.courses.jf.practice.common.second.ITestableTask18;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 /**
  * Дана матрица из целых чисел.
@@ -124,25 +125,48 @@ public class Task18 implements ITestableTask18{
         int height = matrix.getHeight();
         Map<String, Integer> map;
         Map<String, Integer> result = new HashMap<>();
+        Stack<int[][]> stack = new Stack<>();
+        int lastNumber;
         int maxNumber = 0;
         for (int j = 0; j < height; j++) {
             for (int k = 0; k < width; k++) {
                 map = getInfoAboutMaxSubMatrixFromIndexes(matrix, j, k);
-                if(map.get("maxNumber") > maxNumber){
-                    maxNumber = map.get("maxNumber");
-                    result = map;
+                if(!stack.isEmpty()){
+                    maxNumber = stack.peek().length * stack.peek()[0].length;
                 }
+                if(map.get("maxNumber") > maxNumber){
+                    stack.pop();
+                    stack.add(generateMatrix(map.get("subHeight"), map.get("subWidth"), map.get("value")));
+//                    maxNumber = map.get("maxNumber");
+//                    result = map;
+                }
+
+//                if(map.get("maxNumber") > maxNumber){
+//                    maxNumber = map.get("maxNumber");
+//                    result = map;
+//                }
             }
         }
 
-        int[][] resMatrix = new int[result.get("subHeight")][result.get("subWidth")];
+//        int[][] resMatrix = new int[result.get("subHeight")][result.get("subWidth")];
+//
+//        for (int j = 0; j < result.get("subHeight"); j++) {
+//            for (int k = 0; k < result.get("subWidth"); k++) {
+//                resMatrix[j][k] = result.get("value");
+//            }
+//        }
 
-        for (int j = 0; j < result.get("subHeight"); j++) {
-            for (int k = 0; k < result.get("subWidth"); k++) {
-                resMatrix[j][k] = result.get("value");
+        return new RectangularIntegerMatrix(stack.peek());
+    }
+
+    int[][] generateMatrix(int h, int w, int value){
+        int[][] resMatrix = new int[h][w];
+
+        for (int j = 0; j < h; j++) {
+            for (int k = 0; k < w; k++) {
+                resMatrix[j][k] = value;
             }
         }
-
-        return new RectangularIntegerMatrix(resMatrix);
+        return resMatrix;
     }
 }
