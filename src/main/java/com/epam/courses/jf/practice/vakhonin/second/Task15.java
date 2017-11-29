@@ -87,12 +87,12 @@ public class Task15 implements ITestableTask15{
 
         public void writeLines(Set<ILine> lines) {
 
-            FileWriter fw = null;
-            BufferedWriter bw = null;
+//            FileWriter fw = null;
+//            BufferedWriter bw = null;
 
             try {
-                fw = new FileWriter(file);
-                bw = new BufferedWriter(fw);
+                FileWriter fw = new FileWriter(file);
+                BufferedWriter bw = new BufferedWriter(fw);
 
                 for (ILine line : lines) {
                     for (I2DPoint point : line.getPoints()) {
@@ -103,14 +103,15 @@ public class Task15 implements ITestableTask15{
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-            } finally {
-                try {
-                    fw.close();
-                    bw.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
+//              finally {
+//                try {
+//                    fw.close();
+//                    bw.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
         }
 
         /**
@@ -126,12 +127,12 @@ public class Task15 implements ITestableTask15{
             Set<I2DPoint> pointsSet;
             I2DPoint point;
 
-            FileReader fr = null;
-            BufferedReader br = null;
+//            FileReader fr = null;
+//            BufferedReader br = null;
 
             try {
-                fr = new FileReader(file);
-                br = new BufferedReader(fr);
+                FileReader fr = new FileReader(file);
+                BufferedReader br = new BufferedReader(fr);
 
                 while ((s = br.readLine()) != null) {
                     strPoints = s.split("\\s");
@@ -148,14 +149,15 @@ public class Task15 implements ITestableTask15{
                 return linesSet;
             } catch (IOException e) {
                 e.printStackTrace();
-            } finally {
-                try{
-                    fr.close();
-                    br.close();
-                } catch (IOException e){
-                    e.printStackTrace();
-                }
             }
+//            finally {
+//                try{
+//                    fr.close();
+//                    br.close();
+//                } catch (IOException e){
+//                    e.printStackTrace();
+//                }
+//            }
             return null;
         }
     }
