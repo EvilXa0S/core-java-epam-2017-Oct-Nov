@@ -19,7 +19,9 @@ public class Task16 implements ITestableTask16 {
     private Double length(I2DPoint o, I2DPoint centre) {
 
         double A = Math.abs(o.getX()) - Math.abs(centre.getX());
+
         double B = Math.abs(o.getY()) - Math.abs(centre.getY());
+
         return Math.sqrt((A * A) + (B * B));
     }
 
@@ -101,7 +103,7 @@ public class Task16 implements ITestableTask16 {
                 }
             } catch (Exception e) {
 
-                System.out.println("Error read file");
+                System.out.println("Error while reading file");
             }
 
             return newMap;

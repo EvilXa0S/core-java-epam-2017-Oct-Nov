@@ -3,39 +3,64 @@ package com.epam.courses.jf.practice.hkryzhik.second;
 import com.epam.courses.jf.practice.common.second.ITestableTask11;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Task11 implements ITestableTask11 {
     @Override
     public String emulate(ArrayList<String> peoples) {
 
-        int index = 0;
+        if (peoples == null || peoples.isEmpty()) {
 
-        while (peoples.size() != 1) {
-
-            peoples.remove(index);
-
-            index++;
-
-            index = index%peoples.size();
-
+            throw new IllegalArgumentException("Linked list not provided!");
         }
-        return peoples.get(0);
+        if (peoples.size() == 1) {
+
+            return peoples.get(0);
+        }
+        int i = 0;
+
+        while (true) {
+
+            peoples.remove(i);
+
+            i++;
+
+            if (i >= peoples.size()) {
+
+                i %= peoples.size();
+            }
+            if (peoples.size() == 1) {
+
+                return peoples.get(0);
+            }
+        }
     }
 
     @Override
     public String emulate(LinkedList<String> peoples) {
 
-        int index = 0;
+        int i = 0;
 
-        while(peoples.size() != 1){
+        while (peoples.size() > 1) {
 
-            peoples.remove(index);
+            Iterator<String> iterator = peoples.iterator();
 
-            index++;
+            while (iterator.hasNext()) {
 
-            index = index%peoples.size();
+                iterator.next();
+
+                if (i == 0) iterator.remove();
+
+                if (iterator.hasNext()) {
+                    iterator.next();
+
+                    if (i == 1) iterator.remove();
+
+                } else i = (i == 0 ? 1 : 0);
+            }
         }
+
         return peoples.get(0);
 
     }

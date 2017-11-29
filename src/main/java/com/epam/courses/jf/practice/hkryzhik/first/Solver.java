@@ -1256,6 +1256,7 @@ public class Solver implements ISolver {
     @Override
     public void task25() {
 
+
         Scanner inputData = new Scanner(System.in);
 
         int size = 0;

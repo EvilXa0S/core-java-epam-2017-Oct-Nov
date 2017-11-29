@@ -25,5 +25,5 @@ public interface ITestableTask11 extends ITaskStorage.ITestableTask {
      * @param peoples Список с именами участников.
      * @return Имя последнего оставшегося.
      */
-    String emulate(LinkedList<String> peoples);
+    String emulate(LinkedList<String> peoples) throws InterruptedException;
 }

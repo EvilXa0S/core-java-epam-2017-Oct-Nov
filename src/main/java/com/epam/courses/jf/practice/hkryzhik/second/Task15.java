@@ -36,7 +36,7 @@ public class Task15 implements ITestableTask15 {
         }
 
         public boolean contains(I2DPoint point){
-            
+
             if (a * point.getX() + b == point.getY()) return true;
             return false;
         }
