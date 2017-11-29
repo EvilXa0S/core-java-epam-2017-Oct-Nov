@@ -127,12 +127,10 @@ public class Task16 implements ITestableTask16 {
      */
 
     List<String> readFile(File file) {
-        FileReader fr = null;
         BufferedReader br = null;
 
         try {
-            fr = new FileReader(file);
-            br = new BufferedReader(fr);
+            br = new BufferedReader(new FileReader(file));
             String str;
             List<String> result = new ArrayList<>();
 
@@ -145,7 +143,6 @@ public class Task16 implements ITestableTask16 {
             e.printStackTrace();
         } finally {
             try{
-                fr.close();
                 br.close();
             } catch (IOException e){
                 e.printStackTrace();
@@ -211,13 +208,11 @@ public class Task16 implements ITestableTask16 {
                 }
             }
         }
-
-        FileWriter fw = null;
+        
         BufferedWriter bw = null;
 
         try {
-            fw = new FileWriter(output);
-            bw = new BufferedWriter(fw);
+            bw = new BufferedWriter(new FileWriter(output));
             bw.write(toStringForFile(center, center));
 
             for (Map.Entry<I2DPoint, Double> entry : map.entrySet()) {
@@ -228,7 +223,6 @@ public class Task16 implements ITestableTask16 {
             e.printStackTrace();
         } finally {
             try {
-                fw.close();
                 bw.close();
             } catch (IOException e) {
                 e.printStackTrace();
