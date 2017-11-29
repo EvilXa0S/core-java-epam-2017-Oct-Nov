@@ -13,7 +13,14 @@ public class TestableTask16 implements ITestableTask16 {
         SortedMap<I2DPoint, Double> points = new TreeMap<>((p1, p2) -> {
             double r1 = Math.pow(p1.getX() - center.getX(), 2) + Math.pow(p1.getY() - center.getY(), 2);
             double r2 = Math.pow(p2.getX() - center.getX(), 2) + Math.pow(p2.getY() - center.getY(), 2);
-            return Double.compare(r1, r2);
+            int result = Double.compare(r1, r2);
+            if(result == 0){
+                result =  Double.compare(p1.getX(), p2.getX());
+            }
+            if(result == 0){
+                result =  Double.compare(p1.getY(), p2.getY());
+            }
+            return result;
         });
         for(long x = (long)(center.getX() - radius); x < Math.ceil(center.getX() + radius); ++x){
             for(long y = (long)(center.getY() - radius); y < Math.ceil(center.getY() + radius); ++y){
@@ -72,21 +79,6 @@ public class TestableTask16 implements ITestableTask16 {
                 }
             }
             return points;
-        }
-    }
-
-    public static void main(String[] args) {
-        TestableTask16 tt = new TestableTask16();
-        IFileWithPoints fileWithPoints = tt.analyze(new Point2D(0, 0), 1, prepareFile());
-        SortedMap<I2DPoint, Double> points = fileWithPoints.getPoints();
-        points.forEach((key, value) -> System.out.println(key.getX() + " " + key.getY() + " : " + value));
-    }
-    static protected File prepareFile() {
-        try {
-            File tmpFile = File.createTempFile("2-epam-spring-2016", ".tmp", new File("C:\\Users\\Таня\\Java\\EPAM"));
-            return tmpFile;
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
         }
     }
 }
