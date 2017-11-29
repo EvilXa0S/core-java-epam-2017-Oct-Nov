@@ -8,6 +8,7 @@ import java.util.List;
  * Список содержит результаты измерений тока и напряжения на неизвестном сопротивлении R.
  * Найти приближенное число R методом наименьших квадратов.
  * Для повышения точности вычислений использовать класс {@link java.math.BigDecimal}
+ * Гарантировать точность не менее 1e-6.
  */
 public interface ITestableTask5 extends ITaskStorage.ITestableTask {
 

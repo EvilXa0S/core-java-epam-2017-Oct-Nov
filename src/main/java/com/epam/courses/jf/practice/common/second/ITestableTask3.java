@@ -18,15 +18,20 @@ public interface ITestableTask3 extends ITaskStorage.ITestableTask {
      */
     List<String> sortPoems(Set<IPoem> poems, String author);
 
+
     /**
      * Стихотворение.
      */
     interface IPoem {
 
-        /** @return Список строк, составляющих стихотворение. */
+        /**
+         * @return Список строк, составляющих стихотворение.
+         */
         List<String> getLines();
 
-        /** @return Автор стихотворения. */
+        /**
+         * @return Автор стихотворения.
+         */
         String getAuthor();
     }
 }

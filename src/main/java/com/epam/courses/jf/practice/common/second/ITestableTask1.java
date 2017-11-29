@@ -18,5 +18,3 @@ public interface ITestableTask1 extends ITaskStorage.ITestableTask {
      */
     List<String> reverseFile(File input, File output);
 }
-
-
