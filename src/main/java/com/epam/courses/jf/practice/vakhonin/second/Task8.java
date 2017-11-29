@@ -5,22 +5,32 @@ import com.epam.courses.jf.practice.common.second.ITestableTask8;
 import java.util.*;
 
 /**
- * Created by igorvahonin on 13.11.17.
+ * Задана строка, возможно содержащая символы '(', ')', '[', ']', '{', '}'.
+ * Проверить правильность расстановки скобок.
+ * При реализации использовать стек.
  */
+
 public class Task8 implements ITestableTask8{
-
-
     Map<Character, Character> bracketsMap = new HashMap<>();
     List<Character> bracketsList = new ArrayList<>();
     Map<Character, Character> closedBracketsMap = new HashMap<>();
 
-    public void createClosedBracketsMap(){
+    /**
+     * Создание map с ключами - закрытыми скобками
+     */
+
+
+    public void createClosedBracketsMap() {
         closedBracketsMap.put(')','(');
         closedBracketsMap.put('}','{');
         closedBracketsMap.put(']','[');
     }
 
-    public void createBracketsMap(){
+    /**
+     * Создание map с ключами - скобками и знаечниями соответствующими скобками закрытия или открытия
+     */
+
+    public void createBracketsMap() {
         bracketsMap.put('{','}');
         bracketsMap.put('[',']');
         bracketsMap.put('(',')');
@@ -29,14 +39,29 @@ public class Task8 implements ITestableTask8{
         bracketsMap.put(')','(');
     }
 
-    public void stringToBracketsArray(String string){
+    /**
+     * Выделение из строки списка скобок.
+     * @param string строка символов
+     */
+
+    public void stringToBracketsArray(String string) {
         Set<Character> keySet = bracketsMap.keySet();
-        for(Character ch: string.toCharArray()){
-            if(keySet.contains(ch)){
+
+        for (Character ch: string.toCharArray()) {
+            if (keySet.contains(ch)) {
                 bracketsList.add(ch);
             }
         }
     }
+
+    /**
+     * Проверяет правильность расстановки скобок.
+     * Правильная расстановка:
+     *      1) Каждой открывающей скобке соответствует закрывающая того же типа.
+     *      2) Нет пересечения областей, обрамленных скобками.
+     * @param string Анализируемая строка.
+     * @return true - скобки расставлены верно, иначе - false.
+     */
 
     @Override
     public boolean isNormalBrackets(String string) {
@@ -46,23 +71,25 @@ public class Task8 implements ITestableTask8{
         Character temp;
         Stack<Character> stack = new Stack<>();
         stack.push('0');
-        for(Character bracket: bracketsList){
-            if(closedBracketsMap.keySet().contains(bracket)){
+
+        for (Character bracket: bracketsList) {
+            if (closedBracketsMap.keySet().contains(bracket)) {
                 temp = stack.peek();
-                if(bracket.equals(bracketsMap.get(temp))){
+                if (bracket.equals(bracketsMap.get(temp))) {
                     stack.pop();
                 }
-                else{
+                else {
                     return false;
                 }
             }
-            else{
+            else {
                 stack.push(bracket);
             }
         }
-        if(!stack.peek().equals('0')){
+        if (!stack.peek().equals('0')) {
             return false;
         }
+
         return true;
     }
 }

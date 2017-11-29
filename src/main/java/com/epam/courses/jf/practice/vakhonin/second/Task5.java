@@ -7,10 +7,19 @@ import java.util.List;
 import java.math.BigDecimal;
 
 /**
- * Created by igorvahonin on 13.11.17.
+ * Список содержит результаты измерений тока и напряжения на неизвестном сопротивлении R.
+ * Найти приближенное число R методом наименьших квадратов.
+ * Для повышения точности вычислений использовать класс {@link java.math.BigDecimal}
  */
-public class Task5 implements ITestableTask5{
-//    OLS - method degenerate into simple average resistance
+
+public class Task5 implements ITestableTask5 {
+
+    /**
+     * Вычисляет сопротивление методом наименьших квадратов.
+     * @param measurements Измерения в ходе эксперимента.
+     * @return Вычисленное по исходным данным сопротивление.
+     */
+
     @Override
     public double calcResistance(List<IMeasurement> measurements) {
         double averageResistance;
@@ -18,7 +27,7 @@ public class Task5 implements ITestableTask5{
         BigDecimal sumOfII = BigDecimal.ZERO;
         BigDecimal sumOfUI = BigDecimal.ZERO;
 
-        for(IMeasurement measurement: measurements){
+        for (IMeasurement measurement: measurements) {
             voltage = BigDecimal.valueOf(measurement.getVoltage());
             current = BigDecimal.valueOf(measurement.getCurrent());
             sumOfII = sumOfII.add(current.pow(2));
@@ -26,6 +35,7 @@ public class Task5 implements ITestableTask5{
         }
 
         averageResistance = sumOfUI.divide(sumOfII, 6, BigDecimal.ROUND_HALF_UP).doubleValue();
+
         return averageResistance;
     }
 

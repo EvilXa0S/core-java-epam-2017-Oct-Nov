@@ -2,22 +2,29 @@ package com.epam.courses.jf.practice.vakhonin.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask18;
 
-import java.util.Arrays;
-import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
+
+/**
+ * Дана матрица из целых чисел.
+ * Найти в ней прямоугольную подматрицу, состоящую из максимального количества одинаковых элементов.
+ * Использовать стек.
+ */
 
 public class Task18 implements ITestableTask18{
 
-    //TODO: ИСПРАВИТЬ СЛОВО ВЫСОТА НА АНГЛИЙСКОМ!!!
+    //TODO: STACK!!!
+
+    /**
+     * Прямоугольная матрица целых чисел.
+     */
 
     class RectangularIntegerMatrix implements IRectangularIntegerMatrix{
 
         private int[][] matrix;
 
-        RectangularIntegerMatrix(int height, int width){
-            matrix = new int[height][width];
+        RectangularIntegerMatrix(int[][] matrix){
+            this.matrix = matrix;
         }
 
         @Override
@@ -28,77 +35,72 @@ public class Task18 implements ITestableTask18{
 
         @Override
         public int getHeight() {
-            int hieght = matrix.length;
-            return hieght;
+            int height = matrix.length;
+            return height;
         }
 
-        //автор интерфейса явно линейную алгебру не изучал... СТРОКА-СТОЛБЕЦ, а не наоборот!!!!
+        /**
+         * @param indexWidth Индекс по ширине.
+         * @param indexHeight Индекс по высоте.
+         * @return Значение, располагающееся в указанной ячейке.
+         */
+
         @Override
         public int getValue(int indexWidth, int indexHeight) {
             int value = matrix[indexHeight][indexWidth];
             return value;
         }
-
-        RectangularIntegerMatrix(int[][] matrix){
-            this.matrix = matrix;
-        }
-
     }
+
+    /**
+     * Получение map с информацией о текущем элементе в матрице.
+     * От заданного в аргументах элемента двигаемся в право и вниз.
+     * Находим максимальное количество одинаоквых элементов, параметры подматрицы.
+     * @param matrix
+     * @param j Индекс по высоте.
+     * @param k Индекс по ширине.
+     * @return map с информацией
+     */
+
     Map<String, Integer> getInfoAboutMaxSubMatrixFromIndexes(IRectangularIntegerMatrix matrix, int j, int k){
         int value = matrix.getValue(k, j);
-        int colValue = value;
-        int rowValue = value;
         int indexJ = j;
         int indexK = k;
         int subWidth = 1;
-        int hieght = matrix.getHeight();
-        int subHieght = 0;
+        int height = matrix.getHeight();
+        int subHeight = 0;
         int width = matrix.getWidth();
         Map<String, Integer> map = new HashMap<>();
-        int numberOfCol = 1;
-        int number = 1;
 
-
-        while ((indexJ != (hieght)) && (matrix.getValue(indexK, indexJ) == value)) {
-            subHieght++;
-            System.out.println(subHieght);
+        while ((indexJ != (height)) && (matrix.getValue(indexK, indexJ) == value)) {
+            subHeight++;
             indexJ++;
-
-
         }
 
-        number = subHieght;
+        int number = subHeight;
         int maxNumber = number;
         map.put("maxNumber", maxNumber);
         map.put("subWidth", subWidth);
-        map.put("subHieght", subHieght);
+        map.put("subHeight", subHeight);
         map.put("value", value);
-        System.out.println(map);
-
-        subWidth++; // = 2
-        indexK++;   // = 1
-        indexJ = j; // = 0
-
-
-
-
+        subWidth++;
+        indexK++;
+        indexJ = j;
 
         while ((indexK != width) && ( matrix.getValue(indexK, indexJ) == value)) {
-
-            while ((indexJ != (j + subHieght)) && (matrix.getValue(indexK, indexJ) == value)) {
+            while ((indexJ != (j + subHeight)) && (matrix.getValue(indexK, indexJ) == value)) {
                 indexJ++;
-
             }
+
             indexJ--;
-            subHieght = indexJ - j + 1; // = 2
-            System.out.println("subHieght = " + subHieght);
-            number = subHieght * subWidth; // = 4
-            System.out.println("number = " + number);
-            if(number > maxNumber){
+            subHeight = indexJ - j + 1;
+            number = subHeight * subWidth;
+
+            if (number > maxNumber) {
                 maxNumber = number;
                 map.put("maxNumber", maxNumber);
                 map.put("subWidth", subWidth);
-                map.put("subHieght", subHieght);
+                map.put("subHeight", subHeight);
                 map.put("value", matrix.getValue(indexK, indexJ));
             }
 
@@ -106,78 +108,25 @@ public class Task18 implements ITestableTask18{
             indexK++;
             indexJ = j;
         }
+
         return map;
     }
-//    Map<String, Integer> getInfoAboutMaxSubMatrixFromIndexes(IRectangularIntegerMatrix matrix, int j, int k){
-//        int value = matrix.getValue(k, j);
-//        int colValue = value;
-//        int rowValue = value;
-//        int indexJ = j;
-//        int indexK = k;
-//        int subWidth = 1;
-//        int hieght = matrix.getHeight();
-//        int subHieght = 0;
-//        int width = matrix.getWidth();
-//        Map<String, Integer> map = new HashMap<>();
-//        int numberOfCol = 1;
-//        int number = 1;
-//
-//
-//        while ((rowValue == value) && (indexJ != (hieght - 1))) {
-//            subHieght++;
-//            indexJ++;
-//            rowValue = matrix.getValue(indexK, indexJ);
-//        }
-//
-//        number = subHieght;
-//        int maxNumber = number;
-//        map.put("maxNumber", maxNumber);
-//        map.put("subWidth", subWidth);
-//        map.put("subHieght", subHieght);
-//        map.put("value", matrix.getValue(indexK, indexJ));
-//
-//
-//        subWidth++;
-//        indexK++;
-//        indexJ = j;
-//
-//
-//
-//
-//
-//        while (( matrix.getValue(indexK, indexJ) == value) && (indexK != (width - 1))) {
-//            while ((matrix.getValue(indexK, indexJ) == value) && (indexJ != (j + subHieght - 1))) {
-//                indexJ++;
-//            }
-//            subHieght = indexJ - j + 1;
-//            number = subHieght * subWidth;
-//            if(number > maxNumber){
-//                map.put("maxNumber", maxNumber);
-//                map.put("subWidth", subWidth);
-//                map.put("subHieght", subHieght);
-//                map.put("value", matrix.getValue(indexK, indexJ));
-//            }
-//
-//            subWidth++;
-//            indexK++;
-//            indexJ = j;
-//        }
-//        return map;
-//    }
 
-    private static Logger log = Logger.getLogger(Task18.class.getName());
-
+    /**
+     * @param matrix Анализируемая матрица.
+     * @return Подматрица, состоящая из максимального количества одинаковых элементов.
+     */
 
     @Override
     public IRectangularIntegerMatrix getMaxSubMatrix(IRectangularIntegerMatrix matrix) {
 
-        int wigth = matrix.getWidth();
+        int width = matrix.getWidth();
         int height = matrix.getHeight();
-        Map<String, Integer> map = new HashMap<>();
+        Map<String, Integer> map;
         Map<String, Integer> result = new HashMap<>();
         int maxNumber = 0;
         for (int j = 0; j < height; j++) {
-            for (int k = 0; k < wigth; k++) {
+            for (int k = 0; k < width; k++) {
                 map = getInfoAboutMaxSubMatrixFromIndexes(matrix, j, k);
                 if(map.get("maxNumber") > maxNumber){
                     maxNumber = map.get("maxNumber");
@@ -186,18 +135,13 @@ public class Task18 implements ITestableTask18{
             }
         }
 
-        int[][] resMatrix;
-        resMatrix = new int[result.get("subHieght")][result.get("subWidth")];
+        int[][] resMatrix = new int[result.get("subHeight")][result.get("subWidth")];
 
-
-        for (int j = 0; j < result.get("subHieght"); j++) {
+        for (int j = 0; j < result.get("subHeight"); j++) {
             for (int k = 0; k < result.get("subWidth"); k++) {
                 resMatrix[j][k] = result.get("value");
             }
         }
-
-        log.info(Arrays.deepToString(resMatrix));
-
 
         return new RectangularIntegerMatrix(resMatrix);
     }

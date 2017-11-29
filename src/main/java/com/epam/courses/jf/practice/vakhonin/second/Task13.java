@@ -8,28 +8,38 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Created by igorvahonin on 13.11.17.
+ * Реализовать класс Graph, представляющий собой неориентированный граф.
+ * В конструкторе класса передается количество вершин в графе.
+ * Методы должны поддерживать быстрое добавление и удаление ребер.
  */
+
 public class Task13 implements ITestableTask13{
-    @Override
-    public AbstractGraph createGraph(int numberNodes) {
-        AbstractGraph graph = new Graph(numberNodes);
-        return graph;
-    }
+
+    /**
+     * Класс граф.
+     * При создании задается количество вершин.
+     * Нумерация вершин начинается с 0.
+     * Допустимы операции добавления, удаления и проверки существования ребер.
+     */
 
     class Graph extends AbstractGraph {
-
         Map<Integer, Set<Integer>> map = new HashMap<>();
 
         public Graph(int numberNodes) {
             super(numberNodes);
             Set<Integer> set;
+
             for(int j = 0; j < numberNodes; j++){
                 set = new HashSet<>();
-//                set.add(j);
                 map.put(j, new HashSet<>(set));
             }
         }
+
+        /**
+         * Добавление ребра в граф.
+         * @param first Первая связываемая вершина.
+         * @param second Вторая связываемая вершина.
+         */
 
         @Override
         public void addEdge(int first, int second) {
@@ -37,11 +47,23 @@ public class Task13 implements ITestableTask13{
             map.get(second).add(first);
         }
 
+        /**
+         * Удаление ребра из графа.
+         * @param first Первая освобождаемая от связи вершина.
+         * @param second Вторая освобождаемая от связи вершина.
+         */
+
         @Override
         public void removeEdge(int first, int second) {
             map.get(first).remove(second);
             map.get(second).remove(first);
         }
+
+        /**
+         * Проверка наличия ребра.
+         * @param first Первая вершина.
+         * @param second Вторая вершина.
+         */
 
         @Override
         public boolean isExistEdge(int first, int second) {
@@ -54,4 +76,17 @@ public class Task13 implements ITestableTask13{
         }
 
     }
+
+    /**
+     * @param numberNodes Количество вершин в графе.
+     * @return Граф указанной конфигурации.
+     */
+
+    @Override
+    public AbstractGraph createGraph(int numberNodes) {
+        AbstractGraph graph = new Graph(numberNodes);
+
+        return graph;
+    }
+
 }

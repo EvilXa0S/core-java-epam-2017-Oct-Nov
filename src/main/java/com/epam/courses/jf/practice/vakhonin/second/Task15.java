@@ -9,7 +9,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
+/**
+ * На плоскости задано N точек.
+ * Вывести в файл описания всех прямых, которые проходят более чем через 2 точки из заданных.
+ */
+
 public class Task15 implements ITestableTask15{
+
+    /**
+     * Точка, заданная координатами X, Y.
+     */
 
     class Point implements I2DPoint{
         private double x,y;
@@ -30,18 +40,28 @@ public class Task15 implements ITestableTask15{
         }
     }
 
+    /**
+     * Прямая, заданная точками, входящими в исходное множество.
+     */
+
     class Line implements ILine{
-        Set<I2DPoint> pointsSet;
+        private Set<I2DPoint> pointsSet;
 
         Line(Set<I2DPoint> pointsSet) {
             this.pointsSet = pointsSet;
         }
+
+        /** @return Точки, через которые проходит прямая */
 
         @Override
         public Set<I2DPoint> getPoints() {
             return pointsSet;
         }
     }
+
+    /**
+     * Представляет файл, содержащий информацию о найденных линиях.
+     */
 
     class FileWithLines implements IFileWithLines {
         private File file;
@@ -51,24 +71,52 @@ public class Task15 implements ITestableTask15{
             writeLines(lines);
         }
 
+        /**
+         * @return Файл с результатами анализа.
+         */
+
         @Override
         public File getFile() {
             return file;
         }
 
+        /**
+         * Осуществляет запись линий в file
+         * @param lines Множество линий.
+         */
+
         public void writeLines(Set<ILine> lines) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+
+            FileWriter fw = null;
+            BufferedWriter bw = null;
+
+            try {
+                fw = new FileWriter(file);
+                bw = new BufferedWriter(fw);
+
                 for (ILine line : lines) {
                     for (I2DPoint point : line.getPoints()) {
-                        writer.write("" + point.getX() + " " + point.getY() + " ");
+                        bw.write("" + point.getX() + " " + point.getY() + " ");
                     }
 
-                    writer.write("\n");
+                    bw.write("\n");
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    fw.close();
+                    bw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
+
+        /**
+         * Извлекает из файла информацию о хранящихся в нем линиях.
+         * @return Множество линий, найденных в результате анализа.
+         */
 
         @Override
         public Set<ILine> getLines() {
@@ -78,8 +126,14 @@ public class Task15 implements ITestableTask15{
             Set<I2DPoint> pointsSet;
             I2DPoint point;
 
-            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-                while ((s = reader.readLine()) != null) {
+            FileReader fr = null;
+            BufferedReader br = null;
+
+            try {
+                fr = new FileReader(file);
+                br = new BufferedReader(fr);
+
+                while ((s = br.readLine()) != null) {
                     strPoints = s.split("\\s");
                     pointsSet = new HashSet<>();
 
@@ -94,10 +148,24 @@ public class Task15 implements ITestableTask15{
                 return linesSet;
             } catch (IOException e) {
                 e.printStackTrace();
+            } finally {
+                try{
+                    fr.close();
+                    br.close();
+                } catch (IOException e){
+                    e.printStackTrace();
+                }
             }
             return null;
         }
     }
+
+    /**
+     * Осуществляет анализ переданных точек, вычисляя линии, которые проходят более чем через 2 точки.
+     * @param points Множество точек на плоскости.
+     * @param output Файл для вывода результатов.
+     * @return Файл с результатами анализа.
+     */
 
     @Override
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {

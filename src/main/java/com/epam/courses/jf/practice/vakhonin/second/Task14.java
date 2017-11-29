@@ -2,36 +2,52 @@ package com.epam.courses.jf.practice.vakhonin.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask14;
 
-import java.math.BigDecimal;
 import java.util.*;
+
+/**
+ * На базе коллекций реализовать структуру хранения чисел с поддержкой следующих операций:
+ *       1) Добавление/удаление числа.
+ *       2) Поиск числа, наиболее близкого к заданному (т.е. модуль разницы минимален).
+ */
 
 public class Task14 implements ITestableTask14{
 
-    class NumberCollection<T extends Number> implements INumberCollection<T> {
 
+    /**
+     * Коллекция для хранения чисел.
+     */
+
+    class NumberCollection<T extends Number> implements INumberCollection<T> {
         List<T> numbersList;
 
         NumberCollection(){
             numbersList = new ArrayList<>();
         }
 
+        /**
+         * @param value Эталонное значение.
+         * @return Число, наиболее близкое к заданному.
+         */
+
+        // but this solving not for all cases...
         @Override
         public T nearest(T value) {
-
-            // but this solving not for all cases...
             Double valueDouble = value.doubleValue();
             Double numberDouble;
             Double minDiff = Double.POSITIVE_INFINITY;
             Double diff;
             T result = null;
+
             for(T number: numbersList){
                 numberDouble = number.doubleValue();
                 diff = Math.abs(numberDouble - valueDouble);
+
                 if(diff < minDiff){
                     minDiff = diff;
                     result = number;
                 }
             }
+
             return result;
         }
 
@@ -101,6 +117,10 @@ public class Task14 implements ITestableTask14{
         }
     }
 
+    /**
+     * @param required Тип, которым типизируется создаваемая коллекция.
+     * @return Коллекция для хранения чисел с поддержкой операций добавления/удаления и поиска числа.
+     */
 
     @Override
     public <T extends Number> INumberCollection<T> createCollection(Class<T> required) {
