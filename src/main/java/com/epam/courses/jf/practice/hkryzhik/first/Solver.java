@@ -1,6 +1,3 @@
-/*Warning: Some kind of crappy code. Eyebleeding is possible. You've been warn.
-*/
-
 package com.epam.courses.jf.practice.hkryzhik.first;
 
 
@@ -15,6 +12,117 @@ import static java.lang.Math.abs;
 public class Solver implements ISolver {
 
     private static int index;
+
+    private static int checkMin(int[][] matrix, int DIMENSION, int row, int col) {
+        int k = 0;
+        if (row == 0){
+            if (col == 0){
+                for (int rowInd = 0; rowInd < row + 2; ++rowInd){
+                    for (int colInd = 0; colInd < col + 2; ++ colInd){
+                        if (matrix[rowInd][colInd] < matrix[row][col]){
+                            k++;
+                        }
+                    }
+                }
+                if (k == 3){
+                    return matrix[row][col];
+                }
+            } else if ( col == DIMENSION - 1){
+                for (int rowInd = 0; rowInd < row + 2; ++rowInd) {
+                    for (int colInd = col - 1; colInd < DIMENSION; ++colInd) {
+                        if (matrix[rowInd][colInd] < matrix[row][col]) {
+                            k++;
+                        }
+                    }
+                }
+                if (k == 3) {
+                    return matrix[row][col];
+                }
+            } else {
+                for (int rowInd = 0; rowInd < row + 2; ++rowInd) {
+                    for (int colInd = col - 1; colInd < col + 2; ++colInd) {
+                        if (matrix[rowInd][colInd] < matrix[row][col]) {
+                            k++;
+                        }
+                    }
+                }
+                if (k == 5) {
+                    return matrix[row][col];
+                }
+            }
+        } else if (row == DIMENSION - 1){
+            if (col == 0) {
+                for (int rowInd = row - 1; rowInd < DIMENSION; ++rowInd) {
+                    for (int colInd = 0; colInd < col + 2; ++colInd) {
+                        if (matrix[rowInd][colInd] < matrix[row][col]) {
+                            k++;
+                        }
+                    }
+                }
+                if (k == 3) {
+                    return matrix[row][col];
+                }
+            } else if (col == DIMENSION - 1) {
+                for (int rowInd = row - 1; rowInd < DIMENSION; ++rowInd) {
+                    for (int colInd = col - 1; colInd < DIMENSION; ++colInd) {
+                        if (matrix[rowInd][colInd] < matrix[row][col]) {
+                            k++;
+                        }
+                    }
+                }
+                if (k == 3) {
+                    return matrix[row][col];
+                }
+            } else {
+                for (int rowInd = row - 1; rowInd < DIMENSION; ++rowInd) {
+                    for (int colInd = col - 1; colInd < col + 2; ++colInd) {
+                        if (matrix[rowInd][colInd] < matrix[row][col]) {
+                            k++;
+                        }
+                    }
+                }
+                if (k == 5) {
+                    return matrix[row][col];
+                }
+            }
+        } else {
+            if (col == 0) {
+                for (int rowInd = row - 1; rowInd < row + 2; ++rowInd) {
+                    for (int colInd = 0; colInd < col + 2; ++colInd) {
+                        if (matrix[rowInd][colInd] < matrix[row][col]) {
+                            k++;
+                        }
+                    }
+                }
+                if (k == 5) {
+                    return matrix[row][col];
+                }
+            } else if (col == DIMENSION - 1) {
+                for (int rowInd = row - 1; rowInd < row + 2; ++rowInd) {
+                    for (int colInd = col - 1; colInd < DIMENSION; ++colInd) {
+                        if (matrix[rowInd][colInd] < matrix[row][col]) {
+                            k++;
+                        }
+                    }
+                }
+                if (k == 5) {
+                    return matrix[row][col];
+                }
+            } else {
+                for (int rowInd = row - 1; rowInd < row + 2; ++rowInd) {
+                    for (int colInd = col - 1; colInd < col + 2; ++colInd) {
+                        if (matrix[rowInd][colInd] < matrix[row][col]) {
+                            k++;
+                        }
+                    }
+                }
+                if (k == 8) {
+                    return matrix[row][col];
+                }
+            }
+        }
+        return matrix[row][col] - 1;
+    }
 
     private static boolean isSorted(char[] characters){
 
@@ -665,9 +773,9 @@ public class Solver implements ISolver {
 
         double determinant = 1;
 
-        for (int rowIndex = 0; rowIndex < size; ++rowIndex) {
+        for (int rowIndex = 0; rowIndex < size; rowIndex++) {
             int lead = -1;
-            for (int i = rowIndex; i < size; ++i) {
+            for (int i = rowIndex; i < size; i++) {
                 if (inputArray[i][rowIndex] != 0
                         && (lead == -1
                         || Math.abs(inputArray[i][rowIndex]) > Math.abs(inputArray[lead][rowIndex]))
@@ -689,9 +797,9 @@ public class Solver implements ISolver {
             }
             determinant *= inputArray[rowIndex][rowIndex];
 
-            for (int i = rowIndex + 1; i < size; ++i) {
+            for (int i = rowIndex + 1; i < size; i++) {
                 double multiplier = inputArray[i][rowIndex] / inputArray[rowIndex][rowIndex];
-                for (int j = rowIndex; j < size; ++j) {
+                for (int j = rowIndex; j < size; j++) {
                     inputArray[i][j] -= inputArray[rowIndex][j] * multiplier;
                 }
             }
@@ -1145,16 +1253,125 @@ public class Solver implements ISolver {
 
     }
 
-    //TODO: Shit to do here
     @Override
     public void task25() {
 
+        Scanner inputData = new Scanner(System.in);
+
+        int size = 0;
+
+        if (inputData.hasNextInt()) {
+
+            size = Integer.parseInt(inputData.nextLine());
+        }
+
+        if (size == 1) {
+
+            System.out.println(1);
+
+        } else {
+
+            int[][] inputArray = new int[size][size];
+
+            for (int i = 0; i < size; i++) {
+
+                String[] lineBuffer = inputData.nextLine().split(" ");
+
+                for (int j = 0; j < size; j++) {
+
+                    inputArray[i][j] = Integer.parseInt(lineBuffer[j]);
+
+                }
+            }
+
+            int qt = 0;
+
+            for (int row = 0; row < size; ++row) {
+
+                for (int col = 0; col < size; ++col) {
+
+                    if (checkMin(inputArray, size, row, col) == inputArray[row][col]) {
+
+                        qt++;
+
+                    }
+                }
+            }
+
+            System.out.println(qt);
+        }
     }
 
-    //TODO: So as here
     @Override
     public void task26() {
 
+        Scanner inputData = new Scanner(System.in);
+
+        int size = 0;
+
+        if (inputData.hasNextInt()) {
+
+            size = Integer.parseInt(inputData.nextLine());
+        }
+
+        if (size == 1) {
+
+            System.out.println(1);
+
+        } else {
+
+            int[][] inputArray = new int[size][size];
+
+            for (int i = 0; i < size; i++) {
+
+                String[] lineBuffer = inputData.nextLine().split(" ");
+
+                for (int j = 0; j < size; j++) {
+
+                    inputArray[i][j] = Integer.parseInt(lineBuffer[j]);
+
+                }
+            }
+
+            int qt = 0;
+
+            int max = 0;
+
+            for (int row = 0; row < size; ++row) {
+
+                for (int col = 0; col < size; ++col) {
+
+                    if (checkMin(inputArray, size, row, col) == inputArray[row][col]) {
+
+                        qt++;
+
+                        max = inputArray[row][col];
+                    }
+                }
+            }
+
+            if (qt == 0) {
+
+                System.out.println("NOT FOUND");
+
+            } else {
+
+                for (int row = 0; row < size; ++row) {
+
+                    for (int col = 0; col < size; ++col) {
+
+                        if (checkMin(inputArray, size, row, col) == inputArray[row][col]) {
+
+                            if (inputArray[row][col] > max) {
+
+                                max = inputArray[row][col];
+                            }
+                        }
+                    }
+                }
+                System.out.println(max);
+            }
+        }
     }
 
     @Override

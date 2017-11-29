@@ -31,7 +31,7 @@ public class Task1 implements ITestableTask1{
             } catch (IOException e) {
                 System.out.println(e);
             }
-
+            Collections.reverse(inputStringList);
         }
         return inputStringList;
     }

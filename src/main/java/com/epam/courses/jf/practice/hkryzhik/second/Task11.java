@@ -8,18 +8,35 @@ import java.util.LinkedList;
 public class Task11 implements ITestableTask11 {
     @Override
     public String emulate(ArrayList<String> peoples) {
-//
-//        while(peoples.size() != 1){
-//            for(int i = 0; i < peoples.size(); i += 2){
-//
-//            }
-//        }
 
-    return null;
+        int index = 0;
+
+        while (peoples.size() != 1) {
+
+            peoples.remove(index);
+
+            index++;
+
+            index = index%peoples.size();
+
+        }
+        return peoples.get(0);
     }
 
     @Override
     public String emulate(LinkedList<String> peoples) {
-        return null;
+
+        int index = 0;
+
+        while(peoples.size() != 1){
+
+            peoples.remove(index);
+
+            index++;
+
+            index = index%peoples.size();
+        }
+        return peoples.get(0);
+
     }
 }

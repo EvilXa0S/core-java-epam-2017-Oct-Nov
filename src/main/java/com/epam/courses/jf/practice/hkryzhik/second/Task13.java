@@ -16,7 +16,7 @@ public class Task13 implements ITestableTask13 {
 
     public class AbstractGraph extends ITestableTask13.AbstractGraph{
 
-        private Map<Integer, Set<Integer>> nodes = new HashMap<>();
+        private Map<Integer, HashSet<Integer>> nodes = new HashMap<>();
 
         public AbstractGraph(int numberNodes) {
 
@@ -32,9 +32,10 @@ public class Task13 implements ITestableTask13 {
         @Override
         public void addEdge(int first, int second) {
 
-            if(nodes.containsKey(first)){
+            if(nodes.containsKey(first) && !nodes.get(first).contains(second)){
 
                 nodes.get(first).add(second);
+
             }
         }
 
@@ -43,7 +44,7 @@ public class Task13 implements ITestableTask13 {
 
             if(nodes.containsKey(first)) {
 
-                if(nodes.containsValue(second)) {
+                if(nodes.get(first).contains(second)) {
 
                     nodes.get(first).remove(second);
 
