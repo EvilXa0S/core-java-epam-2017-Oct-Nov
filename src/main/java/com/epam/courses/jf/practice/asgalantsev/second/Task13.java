@@ -19,16 +19,21 @@ public class Task13 implements ITestableTask13 {
             super(numberNodes);
             nodes = new HashMap<>(numberNodes);
             for(int i=0; i < nodes.size(); i++)
-                nodes.put(i, Collections.emptySet());
+                nodes.put(i, null);
         }
 
         @Override
         public void addEdge(int first, int second) {
-            if (isExistEdge(first, second))
-                nodes.get(first).add(second);
+            if(nodes.get(first) == null) {
+                HashSet<Integer> set = new HashSet<>();
+                set.add(second);
+                nodes.put(first, set);
+            }
             else {
-                Set set = new HashSet(Arrays.asList(new int[]{second}));
-                nodes.replace(first, set);
+                Set<Integer> oldSet = nodes.get(first);
+                Set<Integer> newSet = new HashSet<>(oldSet);
+                oldSet.add(second);
+                nodes.put(first, oldSet);
             }
         }
 
@@ -43,10 +48,13 @@ public class Task13 implements ITestableTask13 {
 
         @Override
         public boolean isExistEdge(int first, int second) {
-            if (nodes.get(first) == null || nodes.get(first).isEmpty())
+            if (nodes.get(first) == null)
                 return false;
 
-            if(nodes.get(first).contains(second))
+            if(nodes.get(first).isEmpty())
+                return false;
+
+            if(nodes.get(first).contains(new Integer(second)))
                 return true;
             return false;
         }

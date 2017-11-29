@@ -737,7 +737,7 @@ public class Solver implements ISolver {
             System.out.println();
         }
     }
-    
+
     public void task25() {
         int[][] matrix = readMatrix(new Scanner(System.in));
         int counter = 0;
