@@ -90,15 +90,22 @@ public class Task15 implements ITestableTask15{
 //            FileWriter fw = null;
 //            BufferedWriter bw = null;
 
-            try {
-                FileWriter fw = new FileWriter(file);
-                BufferedWriter bw = new BufferedWriter(fw);
-
+//            try {
+//                FileWriter fw = new FileWriter(file);
+//                BufferedWriter bw = new BufferedWriter(fw);
+//
+//                for (ILine line : lines) {
+//                    for (I2DPoint point : line.getPoints()) {
+//                        bw.write("" + point.getX() + " " + point.getY() + " ");
+//                    }
+//
+//                    bw.write("\n");
+//                }
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
                 for (ILine line : lines) {
                     for (I2DPoint point : line.getPoints()) {
                         bw.write("" + point.getX() + " " + point.getY() + " ");
                     }
-
                     bw.write("\n");
                 }
             } catch (IOException e) {
@@ -130,9 +137,24 @@ public class Task15 implements ITestableTask15{
 //            FileReader fr = null;
 //            BufferedReader br = null;
 
-            try {
-                FileReader fr = new FileReader(file);
-                BufferedReader br = new BufferedReader(fr);
+//            try {
+//                FileReader fr = new FileReader(file);
+//                BufferedReader br = new BufferedReader(fr);
+//
+//                while ((s = br.readLine()) != null) {
+//                    strPoints = s.split("\\s");
+//                    pointsSet = new HashSet<>();
+//
+//                    for (int j = 0; j < strPoints.length; j += 2) {
+//                        point = new Point(Double.parseDouble(strPoints[j]), Double.parseDouble(strPoints[j + 1]));
+//                        pointsSet.add(point);
+//                    }
+//
+//                    linesSet.add(new Line(pointsSet));
+//                }
+//
+//                return linesSet;
+            try (BufferedReader br = new BufferedReader(new FileReader(file))){
 
                 while ((s = br.readLine()) != null) {
                     strPoints = s.split("\\s");
@@ -145,7 +167,6 @@ public class Task15 implements ITestableTask15{
 
                     linesSet.add(new Line(pointsSet));
                 }
-
                 return linesSet;
             } catch (IOException e) {
                 e.printStackTrace();
