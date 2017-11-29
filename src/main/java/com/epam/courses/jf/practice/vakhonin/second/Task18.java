@@ -135,7 +135,7 @@ public class Task18 implements ITestableTask18{
                     maxNumber = stack.peek().length * stack.peek()[0].length;
                 }
                 if(map.get("maxNumber") > maxNumber){
-                    stack.pop();
+//                    stack.pop();
                     stack.add(generateMatrix(map.get("subHeight"), map.get("subWidth"), map.get("value")));
 //                    maxNumber = map.get("maxNumber");
 //                    result = map;
