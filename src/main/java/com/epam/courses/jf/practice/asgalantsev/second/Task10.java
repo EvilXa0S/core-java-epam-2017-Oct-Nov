@@ -12,7 +12,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Задан файл, содержащий английские слова (без знаков препинания).
+ * Требуется выделить все различные слова и посчитать частоту их встречаемости.
+ * Слова, отличающиеся регистром букв, считать различными.
+ * Использовать класс HashMap.
+ */
+
 public class Task10 implements ITestableTask10{
+
+    /**
+     * Подсчитывает количество вхождений каждого слова в файле.
+     * @param input Файл с исходными данными.
+     * @return Множество пар <слово, количество вхождений в файле>.
+     */
+
     @Override
     public HashMap<String, Integer> countNumberWords(File input) {
         List<String> lines = new ArrayList<>();

@@ -6,7 +6,20 @@ import com.epam.courses.jf.practice.common.second.ITestableTask15;
 import java.io.File;
 import java.util.*;
 
+/**
+ * На плоскости задано N точек.
+ * Вывести в файл описания всех прямых, которые проходят более чем через 2 точки из заданных.
+ */
+
 public class Task15 implements ITestableTask15{
+
+    /**
+     * Осуществляет анализ переданных точек, вычисляя линии, которые проходят более чем через 2 точки.
+     * @param points Множество точек на плоскости.
+     * @param output Файл для вывода результатов.
+     * @return Файл с результатами анализа.
+     */
+
     @Override
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {
         File result = output;

@@ -6,7 +6,20 @@ import com.sun.org.apache.bcel.internal.generic.I2D;
 
 import java.util.*;
 
+/**
+ * На плоскости задано N отрезков.
+ * Найти точку (возможно несколько) пересечения двух отрезков, имеющую минимальную абсциссу.
+ * Использовать класс TreeMap.
+ */
+
 public class Task17 implements ITestableTask17 {
+
+    /**
+     * Осуществляет анализ переданных отрезков.
+     * @param segments Множество отрезков.
+     * @return Множество точек пересечения, имеющих минимальную абсциссу.
+     */
+
     @Override
     public TreeSet<I2DPoint> analyze(Set<ISegment> segments) {
         TreeSet<I2DPoint> result = new TreeSet<>();
