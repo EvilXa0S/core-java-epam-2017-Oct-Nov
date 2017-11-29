@@ -6,20 +6,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-/**
- * В кругу стоят N человек.
- * На каждой итерации цикла выбывает человек (через одного, начиная с первого), пока не останется единственный.
- * Разработать два решения, моделирующие процесс.
- * Первое должно использовать класс ArrayList, а второе – LinkedList.
- */
+///**
+// * В кругу стоят N человек.
+// * На каждой итерации цикла выбывает человек (через одного, начиная с первого), пока не останется единственный.
+// * Разработать два решения, моделирующие процесс.
+// * Первое должно использовать класс ArrayList, а второе – LinkedList.
+// */
 
 public class Task11 implements ITestableTask11 {
 
-    /**
-     * Выполняет эмуляцию поставленной задачи.
-     * @param peoples Список с именами участников.
-     * @return Имя последнего оставшегося.
-     */
+//    /**
+//     * Выполняет эмуляцию поставленной задачи.
+//     * @param peoples Список с именами участников.
+//     * @return Имя последнего оставшегося.
+//     */
 
     @Override
     public String emulate(ArrayList<String> peoples){
@@ -49,12 +49,11 @@ public class Task11 implements ITestableTask11 {
         return peoples.get(0);
     }
 
-
-    /**
-     * Выполняет эмуляцию поставленной задачи.
-     * @param peoples Список с именами участников.
-     * @return Имя последнего оставшегося.
-     */
+//    /**
+//     * Выполняет эмуляцию поставленной задачи.
+//     * @param peoples Список с именами участников.
+//     * @return Имя последнего оставшегося.
+//     */
 
     @Override
     public String emulate(LinkedList<String> peoples){
@@ -83,5 +82,4 @@ public class Task11 implements ITestableTask11 {
 
         return peoples.get(0);
     }
-
 }
