@@ -124,40 +124,32 @@ public class Task18 implements ITestableTask18{
         int width = matrix.getWidth();
         int height = matrix.getHeight();
         Map<String, Integer> map;
-        Map<String, Integer> result = new HashMap<>();
         Stack<int[][]> stack = new Stack<>();
-        int lastNumber;
         int maxNumber = 0;
         for (int j = 0; j < height; j++) {
             for (int k = 0; k < width; k++) {
                 map = getInfoAboutMaxSubMatrixFromIndexes(matrix, j, k);
+
                 if(!stack.isEmpty()){
                     maxNumber = stack.peek().length * stack.peek()[0].length;
                 }
-                if(map.get("maxNumber") > maxNumber){
-//                    stack.pop();
-                    stack.add(generateMatrix(map.get("subHeight"), map.get("subWidth"), map.get("value")));
-//                    maxNumber = map.get("maxNumber");
-//                    result = map;
-                }
 
-//                if(map.get("maxNumber") > maxNumber){
-//                    maxNumber = map.get("maxNumber");
-//                    result = map;
-//                }
+                if(map.get("maxNumber") > maxNumber){
+                    stack.add(generateMatrix(map.get("subHeight"), map.get("subWidth"), map.get("value")));
+                }
             }
         }
 
-//        int[][] resMatrix = new int[result.get("subHeight")][result.get("subWidth")];
-//
-//        for (int j = 0; j < result.get("subHeight"); j++) {
-//            for (int k = 0; k < result.get("subWidth"); k++) {
-//                resMatrix[j][k] = result.get("value");
-//            }
-//        }
-
         return new RectangularIntegerMatrix(stack.peek());
     }
+
+    /**
+     * Генерация матрицы заданых размеров с элементами значения.
+     * @param h высота матрица.
+     * @param w ширина матрица.
+     * @param value значение для элементов.
+     * @return Матрица из одинаковых элементов.
+     */
 
     int[][] generateMatrix(int h, int w, int value){
         int[][] resMatrix = new int[h][w];
