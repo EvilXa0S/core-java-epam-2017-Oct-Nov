@@ -1,13 +1,12 @@
 package com.epam.courses.jf.practice.igulyaev.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask11;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Iterator;
 
 public class TestableTask11 implements ITestableTask11 {
-
+    @Override
     public String emulate(ArrayList<String> peoples) {
         int n = peoples.size();
         int current_index = -1;
@@ -19,9 +18,11 @@ public class TestableTask11 implements ITestableTask11 {
         return peoples.get(0);
     }
 
+    @Override
     public String emulate(LinkedList<String> peoples) {
         int start = 0;
-        while(peoples.size() > 1){
+        int size;
+        while((size = peoples.size()) > 1){
             Iterator<String> i = peoples.iterator();
             if(start != 0){
                 i.next();
@@ -30,7 +31,7 @@ public class TestableTask11 implements ITestableTask11 {
                 i.next();
                 i.remove();
             } while(i.hasNext() && i.next() != null && i.hasNext());
-            start = (peoples.size() + 1) % 2;
+            start = (size + start) % 2;
         }
         return peoples.get(0);
     }
