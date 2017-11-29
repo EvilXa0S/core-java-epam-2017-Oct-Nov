@@ -4,7 +4,6 @@ import com.epam.courses.jf.practice.common.second.ITestableTask5;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.util.Arrays;
 import java.util.List;
 
 public class TestableTask5 implements ITestableTask5 {
