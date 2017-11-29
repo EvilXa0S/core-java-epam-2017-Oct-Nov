@@ -1256,7 +1256,6 @@ public class Solver implements ISolver {
     @Override
     public void task25() {
 
-
         Scanner inputData = new Scanner(System.in);
 
         int size = 0;
@@ -1272,26 +1271,47 @@ public class Solver implements ISolver {
 
         } else {
 
-            int[][] inputArray = new int[size][size];
+            int max = 0;
 
-            for (int i = 0; i < size; i++) {
+            int[][] inputArray = new int[size + 2][size + 2];
+
+            for (int i = 1; i <= size; i++) {
 
                 String[] lineBuffer = inputData.nextLine().split(" ");
 
-                for (int j = 0; j < size; j++) {
+                for (int j = 1; j <= size; j++) {
 
-                    inputArray[i][j] = Integer.parseInt(lineBuffer[j]);
+                    inputArray[i][j] = Integer.parseInt(lineBuffer[j - 1]);
 
+                    if(Integer.parseInt(lineBuffer[j - 1]) > max){
+                        max = Integer.parseInt(lineBuffer[j - 1]);
+                    }
+
+                }
+            }
+
+            for(int i = 0; i < size + 2; i++){
+                for(int j = 0; j < size + 2; j++){
+                    if(j == 0 || i == 0 || j == size + 1 || i == size + 1){
+                        inputArray[i][j] = max;
+                    }
                 }
             }
 
             int qt = 0;
 
-            for (int row = 0; row < size; ++row) {
+            for (int row = 1; row <= size; ++row) {
 
-                for (int col = 0; col < size; ++col) {
+                for (int col = 1; col <= size; ++col) {
 
-                    if (checkMin(inputArray, size, row, col) == inputArray[row][col]) {
+                    if (inputArray[row][col] < inputArray[row][col + 1]
+                            && inputArray[row][col] < inputArray[row + 1][col + 1]
+                            && inputArray[row][col] < inputArray[row - 1][col - 1]
+                            && inputArray[row][col] < inputArray[row + 1][col - 1]
+                            && inputArray[row][col] < inputArray[row - 1][col + 1]
+                            && inputArray[row][col] < inputArray[row][col - 1]
+                            && inputArray[row][col] < inputArray[row + 1][col]
+                            && inputArray[row][col] < inputArray[row - 1][col]){
 
                         qt++;
 
