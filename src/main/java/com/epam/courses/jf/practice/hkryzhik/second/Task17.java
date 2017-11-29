@@ -3,85 +3,108 @@ package com.epam.courses.jf.practice.hkryzhik.second;
 import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask17;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeMap;
 
 public class Task17 implements ITestableTask17 {
+
     @Override
-    public Set<I2DPoint> analyze(Set<ITestableTask17.ISegment> segments) {
+    public Set<I2DPoint> analyze(Set<ISegment> segments) {
 
-        if (segments == null || segments.size() == 0) return null;
+        TreeMap<Double, HashSet<I2DPoint>> points = new TreeMap<>(new MyComparator());
 
-        TreeMap<Double, HashMap<I2DPoint, Integer>> map = new TreeMap<>(Double::compare);
+        segments.stream().forEach((s1) -> {
 
-        ArrayList<double[]> lines = new ArrayList<>();
-        for (ITestableTask17.ISegment segment : segments) {
+            Line line1 = new Line(s1.first(), s1.second());
 
-            lines.add(findLine(segment.first(), segment.second()));
-        }
+            segments.stream().forEach((s2) -> {
 
-        for (double[] line1 : lines) {
+                Line line2 = new Line(s2.first(), s2.second());
 
-            for (double[] line2 : lines) {
+                if (line1.first() != line2.first()) {
 
-                I2DPoint point = IntersectionPoint(line1, line2);
-                if (point != null) {
-                    map.computeIfAbsent(point.getX(), k -> new HashMap<>());
+                    Point2D point = new Point2D((line2.second() - line1.second()) / (line1.first() - line2.first()),
+                            (line2.second() * line1.first() - line2.first() * line1.second()) / (line1.first() - line2.first()));
 
-                    Integer num = map.get(point.getX()).get(point);
+                    double maxX = Math.max(s1.first().getX(), Math.max(s1.second().getX(),
+                            Math.max(s2.first().getX(), s2.second().getX())));
 
-                    map.get(point.getX()).put(point, num + 1);
+                    double minX = Math.min(s1.first().getX(), Math.min(s1.second().getX(),
+                            Math.min(s2.first().getX(), s2.second().getX())));
+
+                    double maxY = Math.max(s1.first().getY(), Math.max(s1.second().getY(),
+                            Math.max(s2.first().getY(), s2.second().getY())));
+
+                    double minY = Math.min(s1.first().getY(), Math.min(s1.second().getY(),
+                            Math.min(s2.first().getY(), s2.second().getY())));
+
+                    if (point.getX() >= minX && point.getX() <= maxX && point.getY() >= minY && point.getY() <= maxY) {
+
+                        if (points.containsKey(point.getX())) {
+
+                            points.get(point.getX()).add(point);
+
+                        } else {
+                            HashSet<I2DPoint> pointsSet = new HashSet<>();
+
+                            pointsSet.add(point);
+
+                            points.put(point.getX(), pointsSet);
+                        }
+                    }
                 }
-            }
-        }
-        if (map.size() == 0) return null;
+            });
+        });
 
+        if (!points.isEmpty()) return points.firstEntry().getValue();
 
-        Double minKey = map.firstKey();
-        HashSet<I2DPoint> points = new HashSet<>();
-
-        for (I2DPoint i2DPoint : map.get(minKey).keySet()) {
-
-            if (map.get(minKey).get(i2DPoint) >= 2) points.add(i2DPoint);
-        }
-        return points;
+                          else return new HashSet<>();
     }
 
+    private class MyComparator implements Comparator<Double> {
 
-    private I2DPoint IntersectionPoint(double[] line1, double[] line2) {
+        @Override
+        public int compare(Double x1, Double x2) {
+            if (x1 > x2) return 1;
+            else if (x1 < x2) return -1;
+            else return 0;
 
-        double delta = -line1[0] * line2[1] + line1[1] * line2[0];
+        }
 
-        if (Double.compare(delta, 0) == 0) return null;
-
-        double delta1 = line1[0] * line2[2] - line1[2] * line2[0];
-
-        double delta2 = - line1[2] * line2[1] + line1[1] * line2[2];
-
-        return new Point2D(delta1 / delta, delta2 / delta);
+        @Override
+        public boolean equals(Object obj) {
+            return false;
+        }
     }
 
-    private double[] findLine(I2DPoint point1, I2DPoint point2) {
+    private class Line {
 
-        double a;
-        double b;
-        double c;
+        private Double a;
 
-        double[] res = new double[3];
+        private Double b;
 
-        double den = point2.getX() - point1.getX();
-        if (Double.compare(den, 0d) == 0) {
-            res[0] = 0;
+        private HashSet<I2DPoint> points;
 
-            res[1] = 1;
+        public Line(I2DPoint first, I2DPoint second) {
 
-            res[2] = -point1.getX();
-        } else {
-            res[0] = 1;
+            this.a = (first.getY() - second.getY())/(first.getX() - second.getX());
 
-            res[1] = (point2.getY() - point1.getY()) / den;
+            this.b = (second.getY() * first.getX() - first.getY() * second.getX())/(first.getX() - second.getX());
 
-            res[2] = point1.getY() - res[1] * point1.getX();
+            points = new HashSet<>();
+
+            points.add(first);
+            points.add(second);
         }
-        return res;
+
+        public Double first() {
+            return a;
+        }
+
+        public Double second() {
+            return b;
+        }
     }
 }
