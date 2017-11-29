@@ -13,9 +13,7 @@ import java.util.Stack;
  */
 
 public class Task18 implements ITestableTask18{
-
-    //TODO: STACK!!!
-
+    
     /**
      * Прямоугольная матрица целых чисел.
      */
