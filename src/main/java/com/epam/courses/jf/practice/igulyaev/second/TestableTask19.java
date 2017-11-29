@@ -2,10 +2,7 @@ package com.epam.courses.jf.practice.igulyaev.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask19;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class TestableTask19 implements ITestableTask19 {
     /**
@@ -24,13 +21,30 @@ public class TestableTask19 implements ITestableTask19 {
             for (int j = i + 1; j < carsList.size(); ++j) {
                 ICar second = carsList.get(j);
                 int closingSpeed = first.getSpeed() - second.getSpeed();
-                if(closingSpeed == 0){
-                    continue;
-                } else if(closingSpeed > 0){
-                    int distance = first.getStartPosition() - second.getStartPosition();
+                if(closingSpeed != 0){
+                    long distance = second.getStartPosition() - first.getStartPosition();
+                    ICar car = first;
+                    if(closingSpeed < 0){
+                        distance = lengthLap - distance;
+                        closingSpeed = -closingSpeed;
+                        car = second;
+                    }
+                    long overtakenPosition1 = overtakenPosition(car, car.getStartPosition(), distance, closingSpeed);
+                    if(overtakenPosition1 > lengthLap * numberLaps){
+                        continue;
+                    }
+                    count++;
+                    long overtakenPosition2 = overtakenPosition(car, overtakenPosition1, lengthLap, closingSpeed);
+                    long distanceForOneLoopOvertake = overtakenPosition2 - overtakenPosition1;
+                    count += (lengthLap * numberLaps - overtakenPosition1) / distanceForOneLoopOvertake;
                 }
             }
         }
-        return 0;
+        return count;
+    }
+
+    private long overtakenPosition(ICar car, long startPosition, long distance, int closingSpeed) {
+        double time = ((double)distance)/closingSpeed;
+        return (long)(startPosition + time * car.getSpeed());
     }
 }
