@@ -86,20 +86,8 @@ public class Task15 implements ITestableTask15{
          */
 
         public void writeLines(Set<ILine> lines) {
-
             BufferedWriter bw = null;
 
-//            try {
-//                FileWriter fw = new FileWriter(file);
-//                BufferedWriter bw = new BufferedWriter(fw);
-//
-//                for (ILine line : lines) {
-//                    for (I2DPoint point : line.getPoints()) {
-//                        bw.write("" + point.getX() + " " + point.getY() + " ");
-//                    }
-//
-//                    bw.write("\n");
-//                }
             try {
                 bw = new BufferedWriter(new FileWriter(file));
                 for (ILine line : lines) {
@@ -134,7 +122,7 @@ public class Task15 implements ITestableTask15{
             I2DPoint point;
 
 //            FileReader fr = null;
-//            BufferedReader br = null;
+            BufferedReader br = null;
 
 //            try {
 //                FileReader fr = new FileReader(file);
@@ -153,7 +141,9 @@ public class Task15 implements ITestableTask15{
 //                }
 //
 //                return linesSet;
-            try (BufferedReader br = new BufferedReader(new FileReader(file))){
+            try {
+//                FileReader fr = new FileReader(file);
+                br = new BufferedReader(new FileReader(file));
 
                 while ((s = br.readLine()) != null) {
                     strPoints = s.split("\\s");
@@ -170,14 +160,14 @@ public class Task15 implements ITestableTask15{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-//            finally {
-//                try{
+            finally {
+                try{
 //                    fr.close();
-//                    br.close();
-//                } catch (IOException e){
-//                    e.printStackTrace();
-//                }
-//            }
+                    br.close();
+                } catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
             return null;
         }
     }
