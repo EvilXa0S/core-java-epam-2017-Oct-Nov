@@ -22,14 +22,6 @@ public class Task18 implements ITestableTask18 {
 
             this.matrix = new int[height][width];
         }
-        RectangularIntegerMatrix(int[][] matrix) {
-
-            this.matrix = matrix;
-
-            this.height = matrix.length;
-
-            this.width = matrix[0].length;
-        }
 
         void setMatrix(int str, int column, int value) {
             this.matrix[str][column] = value;

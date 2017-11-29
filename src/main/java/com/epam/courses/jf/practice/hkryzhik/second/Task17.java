@@ -3,108 +3,76 @@ package com.epam.courses.jf.practice.hkryzhik.second;
 import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask17;
 
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeMap;
 
 public class Task17 implements ITestableTask17 {
 
     @Override
     public Set<I2DPoint> analyze(Set<ISegment> segments) {
 
-        TreeMap<Double, HashSet<I2DPoint>> points = new TreeMap<>(new MyComparator());
+        Set<I2DPoint> crossPointsSet = new HashSet<>();
+        double minX = 0.0;
+        boolean firstTime = true;
 
-        segments.stream().forEach((s1) -> {
+        for (ISegment segment : segments) {
 
-            Line line1 = new Line(s1.first(), s1.second());
+            for (ISegment anotherSegment : segments) {
 
-            segments.stream().forEach((s2) -> {
+                if (!segment.equals(anotherSegment)) {
 
-                Line line2 = new Line(s2.first(), s2.second());
+                    double x1 = segment.first().getX();
 
-                if (line1.first() != line2.first()) {
+                    double y1 = segment.first().getY();
 
-                    Point2D point = new Point2D((line2.second() - line1.second()) / (line1.first() - line2.first()),
-                            (line2.second() * line1.first() - line2.first() * line1.second()) / (line1.first() - line2.first()));
+                    double x2 = segment.second().getX();
 
-                    double maxX = Math.max(s1.first().getX(), Math.max(s1.second().getX(),
-                            Math.max(s2.first().getX(), s2.second().getX())));
+                    double y2 = segment.second().getY();
 
-                    double minX = Math.min(s1.first().getX(), Math.min(s1.second().getX(),
-                            Math.min(s2.first().getX(), s2.second().getX())));
+                    double x3 = anotherSegment.first().getX();
 
-                    double maxY = Math.max(s1.first().getY(), Math.max(s1.second().getY(),
-                            Math.max(s2.first().getY(), s2.second().getY())));
+                    double y3 = anotherSegment.first().getY();
 
-                    double minY = Math.min(s1.first().getY(), Math.min(s1.second().getY(),
-                            Math.min(s2.first().getY(), s2.second().getY())));
+                    double x4 = anotherSegment.second().getX();
 
-                    if (point.getX() >= minX && point.getX() <= maxX && point.getY() >= minY && point.getY() <= maxY) {
+                    double y4 = anotherSegment.second().getY();
 
-                        if (points.containsKey(point.getX())) {
+                    double divider = (y4 - y3) * (x2 - x1)
+                            - (x4 - x3) * (y2 - y1);
 
-                            points.get(point.getX()).add(point);
+                    double numenatorA = (x4 - x3) * (y1 - y3)
+                            - (y4 - y3) * (x1 - x3);
 
-                        } else {
-                            HashSet<I2DPoint> pointsSet = new HashSet<>();
+                    double numenatorB = (x2 - x1) * (y1 - y3)
+                            - (y2 - y1) * (x1 - x3);
 
-                            pointsSet.add(point);
+                    if (divider == 0) {
+                        continue;
+                    }
 
-                            points.put(point.getX(), pointsSet);
+                    double kA = numenatorA / divider;
+                    double kB = numenatorB / divider;
+
+                    if (0 <= kA && kA <= 1 && 0 <= kB && kB <= 1) {
+                        double X = x1 + kA * (x2 - x1);
+                        double Y = y1 + kA * (y2 - y1);
+
+                        if (firstTime) {
+                            minX = X;
+                            crossPointsSet.add(new Point2D(X, Y));
+                            firstTime = false;
+                        } else if (minX > X) {
+                            minX = X;
+                            crossPointsSet.clear();
+                            crossPointsSet.add(new Point2D(X, Y));
+                        } else if (minX == X) {
+                            crossPointsSet.add(new Point2D(X, Y));
                         }
                     }
                 }
-            });
-        });
-
-        if (!points.isEmpty()) return points.firstEntry().getValue();
-
-                          else return new HashSet<>();
+            }
+        }
+        return crossPointsSet;
     }
 
-    private class MyComparator implements Comparator<Double> {
-
-        @Override
-        public int compare(Double x1, Double x2) {
-            if (x1 > x2) return 1;
-            else if (x1 < x2) return -1;
-            else return 0;
-
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            return false;
-        }
-    }
-
-    private class Line {
-
-        private Double a;
-
-        private Double b;
-
-        private HashSet<I2DPoint> points;
-
-        public Line(I2DPoint first, I2DPoint second) {
-
-            this.a = (first.getY() - second.getY())/(first.getX() - second.getX());
-
-            this.b = (second.getY() * first.getX() - first.getY() * second.getX())/(first.getX() - second.getX());
-
-            points = new HashSet<>();
-
-            points.add(first);
-            points.add(second);
-        }
-
-        public Double first() {
-            return a;
-        }
-
-        public Double second() {
-            return b;
-        }
-    }
 }

@@ -4,107 +4,83 @@ import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask15;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Task15 implements ITestableTask15 {
 
-    private class Line implements ITestableTask15.ILine {
-
-        private Double a;
-
-        private Double b;
-
-        private HashSet<I2DPoint> points;
-
-        public Line(I2DPoint first, I2DPoint second) {
-
-            this.a = (first.getY() - second.getY())/(first.getX() - second.getX());
-
-            this.b = (second.getY() * first.getX() - first.getY() * second.getX())/(first.getX() - second.getX());
-
-            points = new HashSet<>();
-
-            points.add(first);
-
-            points.add(second);
-        }
-
-        @Override
-        public Set<I2DPoint> getPoints() {
-            return points;
-        }
-
-        public boolean contains(I2DPoint point){
-
-            if (a * point.getX() + b == point.getY()) return true;
-            return false;
-        }
-
-        public void addPoint(I2DPoint point){
-            points.add(point);
-        }
-    }
-
-    private class FileWithLines implements ITestableTask15.IFileWithLines{
+    public class IFileWithLinesImpl implements IFileWithLines {
 
         private File file;
+        private Set<ILine> set;
 
-        private Set<ILine> lines;
-
-        public FileWithLines(File file) {
-
-            lines = new HashSet<>();
-
+        public IFileWithLinesImpl(File file, Set<ILine> set) {
             this.file = file;
-        }
-
-        public void addLine(Line line){
-
-            lines.add(line);
+            this.set = new HashSet<>(set);
         }
 
         @Override
         public File getFile() {
-
             return file;
         }
 
         @Override
         public Set<ILine> getLines() {
-
-            return lines;
+            return set;
         }
+    }
+
+    public class ILineImpl implements ILine {
+
+        Set<I2DPoint> setLinePoint = new HashSet<>();
+
+        public ILineImpl(I2DPoint firstPoint, I2DPoint secondPoint) {
+
+            setLinePoint.add(firstPoint);
+            setLinePoint.add(secondPoint);
+        }
+
+        @Override
+        public Set<I2DPoint> getPoints() {
+            return setLinePoint;
+        }
+
     }
 
     @Override
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {
 
-        HashSet<Line> lines = new HashSet<>();
+        Set<ILine> setLines = new HashSet<>();
 
-        FileWithLines file = new FileWithLines(output);
-
-        points.stream().forEach((p1) -> {
-
-            points.stream().forEach((p2) -> {
-
-                if (!p1.equals(p2)){
-
-                    lines.add(new Line(p1, p2));
+        for (I2DPoint point : points) {
+            for (I2DPoint anotherPoint : points) {
+                if (!point.equals(anotherPoint)) {
+                    setLines.add(new ILineImpl(point, anotherPoint));
                 }
-            });
-        });
+            }
+        }
 
-        lines.stream().forEach((l) -> {
+        for (ILine line : setLines) {
 
-            points.stream().forEach((p) -> {
+            List<I2DPoint> linePoints = new ArrayList<>(line.getPoints());
+            double x1 = linePoints.get(0).getX();
+            double x2 = linePoints.get(1).getX();
+            double y1 = linePoints.get(0).getY();
+            double y2 = linePoints.get(1).getY();
 
-                if (l.contains(p)) l.addPoint(p);
-            });
+            //((x3 - x1) * (y2 - y1) == (x2 - x1) * (y3 - y1))
+            for (I2DPoint point : points) {
+                if ((point.getX() - x1) * (y2 - y1)
+                        == (x2 - x1) * (point.getY() - y1)) {
+                    line.getPoints().add(point);
 
-            if (l.getPoints().size() > 2) file.addLine(l);
-        });
+                }
+            }
+        }
 
-        return file;
+        return new IFileWithLinesImpl(output, setLines);
     }
+
 }
