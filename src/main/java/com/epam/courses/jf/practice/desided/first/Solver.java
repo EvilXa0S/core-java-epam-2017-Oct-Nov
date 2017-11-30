@@ -49,14 +49,12 @@ public class Solver implements ISolver {
     @Override
     public void task1() {
         Scanner in = new Scanner(System.in);
-        System.out.println("enter numbers of strings, from 0 - 100");
         int N = in.nextInt();
 
         TreeMap<Integer, String> treeMap = new TreeMap<>();
 
         if (N < 100 && N > 0){
             for (int i = 1; i <= N; i++){
-                System.out.printf("Enter %d str", i);
                 String str = in.next();
                 int length = str.length();
                 treeMap.put(length, str);
@@ -78,14 +76,12 @@ public class Solver implements ISolver {
     @Override
     public void task2() {
         Scanner in = new Scanner(System.in);
-        System.out.println("enter numbers of strings, from 0 - 100");
         int N = Integer.parseInt(in.nextLine());
 
 //        List<String> strings = new ArrayList<>();
         String[] strings = new String[N];
         if (N < 100 && N > 0){
             for (int i = 0; i < N; i++){
-                System.out.printf("Enter %d str ", i);
                 strings[i] = in.nextLine();
 //                System.out.println(strings[i]);
             }
