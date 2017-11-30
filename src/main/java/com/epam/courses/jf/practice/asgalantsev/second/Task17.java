@@ -2,7 +2,6 @@ package com.epam.courses.jf.practice.asgalantsev.second;
 
 import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask17;
-import com.sun.org.apache.bcel.internal.generic.I2D;
 
 import java.util.*;
 
