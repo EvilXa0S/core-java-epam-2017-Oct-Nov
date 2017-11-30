@@ -35,13 +35,15 @@ public class Task11 implements ITestableTask11 {
 
     public static String removeOneOverOne(List<String> list) {
 
-        while (list.size() > 1) {
+        int i = 1;
+        while (list.size() != 1) {
             Iterator iterator = list.iterator();
             while (iterator.hasNext()) {
+                i++;
                 iterator.next();
-                if (iterator.hasNext()) {
-                    iterator.next();
+                if (i == 2) {
                     iterator.remove();
+                    i = 0;
                 }
             }
         }
