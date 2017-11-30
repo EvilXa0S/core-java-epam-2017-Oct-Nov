@@ -603,8 +603,8 @@ public class Solver implements ISolver {
             }
             previous = current;
         }
-        if (elementsCount <= 0) {
-            System.out.println(0);
+        if (maxLength == 1) {
+            System.out.println(0); //weired logic
         } else {
             System.out.println(maxLength);
         }
