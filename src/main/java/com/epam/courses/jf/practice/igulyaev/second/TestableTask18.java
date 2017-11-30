@@ -27,7 +27,7 @@ public class TestableTask18 implements ITestableTask18 {
     }
 
     private int matrixSize(int [][] matrix){
-        if(matrix.length == 0 && matrix[0].length == 0){
+        if(matrix.length == 0 || matrix[0].length == 0){
             return 0;
         }
         return matrix.length * matrix[0].length;
