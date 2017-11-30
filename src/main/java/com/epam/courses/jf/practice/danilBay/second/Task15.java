@@ -4,7 +4,11 @@ import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask15;
 
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Task15 implements ITestableTask15 {
     @Override
@@ -77,7 +81,7 @@ public class Task15 implements ITestableTask15 {
                 for (I2DPoint point : line.getPoints()) {
                     writer.write(point.getX() + " " + point.getY() + "\t");
                 }
-                writer.write(System.lineSeparator());
+                writer.write("\n");
             }
             writer.close();
         } catch (IOException e) {
@@ -99,29 +103,52 @@ public class Task15 implements ITestableTask15 {
 
         @Override
         public Set<ILine> getLines() {
-            Set<ILine> res = new HashSet();
-
-            try{
-                FileInputStream fstream = new FileInputStream(output);
-                BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-                String strLine;
-                Set<I2DPoint> set ;
-                String[] strLineSplitted;
-                while ((strLine = br.readLine()) != null){
-                    strLineSplitted = strLine.split("\t");
-                    set = new HashSet<>();
-                    for(String line : strLineSplitted){
-                       String[] tmp=line.split(" ");
-                        set.add(new Point(Double.parseDouble(tmp[0]),Double.parseDouble(tmp[0])));
-
+            Set<ILine> result = new HashSet<>();
+            try {
+                List<String> interList = Files
+                        .lines(Paths.get(output.getPath()), Charset.forName("ISO-8859-1"))
+                        .collect(Collectors.toList());
+                for (String s : interList) {
+                    Set<I2DPoint> interSet = new HashSet<>();
+                    String[] interMas = s.split("\t");
+                    for (String inter : interMas) {
+                        String[] nextMas = inter.split(" ");
+                        interSet.add(new Point(Double.parseDouble(nextMas[0]), Double.parseDouble(nextMas[1])));
                     }
-                    res.add(new Line(set));
+                    result.add(new Line(interSet));
                 }
-            }catch (IOException e){
-                e.printStackTrace();
+            } catch (Exception e) {
+                System.out.println("Error read file");
+                return null;
             }
-            return res;
+            return result;
         }
+//        public Set<ILine> getLines() {
+//
+//
+//            Set<ILine> res = new HashSet();
+//
+//            try{
+//                FileInputStream fstream = new FileInputStream(output);
+//                BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+//                String strLine;
+//                Set<I2DPoint> set ;
+//                String[] strLineSplitted;
+//                while ((strLine = br.readLine()) != null){
+//                    strLineSplitted = strLine.split("\t");
+//                    set = new HashSet<>();
+//                    for(String line : strLineSplitted){
+//                       String[] tmp=line.split(" ");
+//                        set.add(new Point(Double.parseDouble(tmp[0]),Double.parseDouble(tmp[0])));
+//
+//                    }
+//                    res.add(new Line(set));
+//                }
+//            }catch (IOException e){
+//                e.printStackTrace();
+//            }
+//            return res;
+//        }
 
     }
 
