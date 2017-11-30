@@ -1,8 +1,8 @@
-package com.epam.courses.jf.practice.igulyaev.second;
+package com.epam.courses.jf.practice.igulyaev.model;
 
 import com.epam.courses.jf.practice.common.second.I2DPoint;
 
-class Vector{
+public class Vector{
     private double x;
     private double y;
 

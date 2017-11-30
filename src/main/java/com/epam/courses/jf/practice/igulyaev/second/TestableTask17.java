@@ -1,8 +1,9 @@
 package com.epam.courses.jf.practice.igulyaev.second;
 
 import com.epam.courses.jf.practice.common.second.I2DPoint;
-import com.epam.courses.jf.practice.common.second.ITestableTask15;
 import com.epam.courses.jf.practice.common.second.ITestableTask17;
+import com.epam.courses.jf.practice.igulyaev.model.Point2D;
+import com.epam.courses.jf.practice.igulyaev.model.Vector;
 
 import java.awt.geom.Line2D;
 import java.util.*;
@@ -35,7 +36,7 @@ public class TestableTask17 implements ITestableTask17 {
                 .collect(Collectors.toSet());
     }
     private I2DPoint intersection(ISegment a, ISegment b) {
-        double d = new Vector(a.first(), a.second()).crossProduct(new Vector(b.first(), b.second()));
+        double d = new com.epam.courses.jf.practice.igulyaev.model.Vector(a.first(), a.second()).crossProduct(new Vector(b.first(), b.second()));
         if (d == 0){
             return null;
         }

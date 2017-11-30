@@ -2,9 +2,9 @@ package com.epam.courses.jf.practice.igulyaev.second;
 
 import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask15;
+import com.epam.courses.jf.practice.igulyaev.model.Vector;
 
 import java.io.*;
-import java.math.BigDecimal;
 import java.util.*;
 
 public class TestableTask15 implements ITestableTask15 {
@@ -24,7 +24,7 @@ public class TestableTask15 implements ITestableTask15 {
                     continue;
                 }
                 Line line = new Line(vectorStart, vectorEnd);
-                Vector vector = new Vector(vectorStart, vectorEnd);
+                com.epam.courses.jf.practice.igulyaev.model.Vector vector = new com.epam.courses.jf.practice.igulyaev.model.Vector(vectorStart, vectorEnd);
                 for (Iterator<I2DPoint> iterator2 = pointList.listIterator(iterator.nextIndex()); iterator2.hasNext();){
                     I2DPoint p = iterator2.next();
                     if(vector.isCollinear(new Vector(vectorStart, p))){

@@ -2,6 +2,7 @@ package com.epam.courses.jf.practice.igulyaev.second;
 
 import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask16;
+import com.epam.courses.jf.practice.igulyaev.model.Point2D;
 
 import java.io.*;
 import java.util.*;

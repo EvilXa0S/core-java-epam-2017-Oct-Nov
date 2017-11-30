@@ -1,4 +1,4 @@
-package com.epam.courses.jf.practice.igulyaev.first;
+package com.epam.courses.jf.practice.igulyaev.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
