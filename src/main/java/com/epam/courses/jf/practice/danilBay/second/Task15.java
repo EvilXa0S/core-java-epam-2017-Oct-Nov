@@ -4,26 +4,24 @@ import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask15;
 
 import java.io.*;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Task15 implements ITestableTask15 {
     @Override
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {
 
-        List<I2DPoint> allPoints=new LinkedList<>(points);
+        List<I2DPoint> allPoints=new ArrayList<>(points);
         Set<ILine> resultSet=new HashSet<>();
         Set<I2DPoint> set=new HashSet<>();
         //для начала найдём все прямые, образуемые точками
         Set<I2DPoint> lineSet=new HashSet<>();
+        I2DPoint firstPoint;
+        I2DPoint secondPoint;
+        for( int i=0; i<allPoints.size(); i++){
+             firstPoint=allPoints.get(i);
 
-        for(I2DPoint firstPoint : allPoints){
-           
-            allPoints.remove(firstPoint);
-            for(I2DPoint secondPoint : allPoints){
-
+            for(int j=i+1;j<allPoints.size(); j++){
+                secondPoint=allPoints.get(j);
                 //выбираем 2 неравные точки
                 if (firstPoint.equals(secondPoint)) {
                     continue;
