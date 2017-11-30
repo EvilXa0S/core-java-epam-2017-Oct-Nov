@@ -5,19 +5,22 @@ import com.epam.courses.jf.practice.common.second.ITestableTask15;
 
 import java.io.*;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 public class Task15 implements ITestableTask15 {
     @Override
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {
 
-        Set<I2DPoint>allPoints=new HashSet<>(points);
+        List<I2DPoint> allPoints=new LinkedList<>(points);
         Set<ILine> resultSet=new HashSet<>();
         Set<I2DPoint> set=new HashSet<>();
         //для начала найдём все прямые, образуемые точками
         Set<I2DPoint> lineSet=new HashSet<>();
 
         for(I2DPoint firstPoint : allPoints){
+           
             allPoints.remove(firstPoint);
             for(I2DPoint secondPoint : allPoints){
 
