@@ -21,31 +21,24 @@ public class Task15 implements ITestableTask15 {
         Set<I2DPoint> lineSet=new HashSet<>();
         I2DPoint firstPoint;
         I2DPoint secondPoint;
+        I2DPoint thirdPoint;
         for( int i=0; i<allPoints.size(); i++){
              firstPoint=allPoints.get(i);
 
             for(int j=i+1;j<allPoints.size(); j++){
                 secondPoint=allPoints.get(j);
-                //выбираем 2 неравные точки
-                if (firstPoint.equals(secondPoint)) {
-                    continue;
-                }
-                double K =(secondPoint.getY()-firstPoint.getY())/(firstPoint.getX() - secondPoint.getX());
-                double B= firstPoint.getY()/(firstPoint.getX()*K);
-                lineSet.add(new Point(K,B));
-                //проходим по всем последующим точкам в наборе и выясняем, лежат ли они на прямой
-                set.clear();
-                for(I2DPoint thirdPoint : allPoints){
 
+                set=new HashSet<>();
+                for(int k=j+1;k<allPoints.size(); k++){
 
+                    thirdPoint = allPoints.get(k);
                     set.add(firstPoint);
                     set.add(secondPoint);
 
-                    double deltaY=secondPoint.getY()-firstPoint.getY();
-                    double deltaX=secondPoint.getX()-firstPoint.getX();
+                    double deltaY=thirdPoint.getY()-firstPoint.getY()/secondPoint.getY()-firstPoint.getY();
+                    double deltaX=thirdPoint.getX()-firstPoint.getX()/secondPoint.getX()-firstPoint.getX();
 
-                    if(!thirdPoint.equals(firstPoint) && !thirdPoint.equals(secondPoint) &&
-                        (thirdPoint.getX()-firstPoint.getX()*deltaY)==(thirdPoint.getY()-firstPoint.getY())*deltaX ){
+                    if(deltaY==deltaX || thirdPoint.getX()==firstPoint.getX() && firstPoint.getX()==secondPoint.getX()){
 
                         set.add(thirdPoint);
 
@@ -60,41 +53,29 @@ public class Task15 implements ITestableTask15 {
 
         }
 
-        for(I2DPoint line : lineSet){
-            double K = line.getX();
-            double B = line.getY();
 
-            for(I2DPoint isBelongToLine : points){
-                if( (isBelongToLine.getX()*K + B) == isBelongToLine.getY() ){
-                    set.add(isBelongToLine);
-                }
-            }
-            if(set.size()>2){
-                resultSet.add(new Line(set));
-            }
-            set.clear();
 
-        }
 
         try (PrintWriter writer = new PrintWriter(output)) {
             for (ILine line : resultSet) {
                 for (I2DPoint point : line.getPoints()) {
                     writer.write(point.getX() + " " + point.getY() + "\t");
                 }
-                writer.write("\n");
+                writer.write(System.lineSeparator());
             }
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new FileWithLines(output);
+        return new FileWithLines(output,resultSet);
     }
 
     class FileWithLines implements IFileWithLines{
         File output;
-
-        FileWithLines(File out){
+        Set<ILine> lineSet;
+        FileWithLines(File out, Set<ILine>l){
             output=out;
+            lineSet=l;
         }
         @Override
         public File getFile() {
@@ -102,30 +83,10 @@ public class Task15 implements ITestableTask15 {
         }
 
         @Override
+
         public Set<ILine> getLines() {
-            Set<ILine> result = new HashSet<>();
-            try {
-                List<String> interList = Files
-                        .lines(Paths.get(output.getPath()), Charset.forName("ISO-8859-1"))
-                        .collect(Collectors.toList());
-                for (String s : interList) {
-                    Set<I2DPoint> interSet = new HashSet<>();
-                    String[] interMas = s.split("\t");
-                    for (String inter : interMas) {
-                        String[] nextMas = inter.split(" ");
-                        interSet.add(new Point(Double.parseDouble(nextMas[0]), Double.parseDouble(nextMas[1])));
-                    }
-                    result.add(new Line(interSet));
-                }
-            } catch (Exception e) {
-                System.out.println("Error read file");
-                return null;
-            }
-            return result;
-        }
-//        public Set<ILine> getLines() {
-//
-//
+
+            return lineSet;
 //            Set<ILine> res = new HashSet();
 //
 //            try{
@@ -148,7 +109,7 @@ public class Task15 implements ITestableTask15 {
 //                e.printStackTrace();
 //            }
 //            return res;
-//        }
+        }
 
     }
 
@@ -169,6 +130,22 @@ public class Task15 implements ITestableTask15 {
 
     public static void main(String[] args) {
         Task15 m=new Task15();
+        Set<I2DPoint> d=new HashSet<>();
+        d.add(new Point(1,1));
+        d.add(new Point(2,2));
+        d.add(new Point(3,3));
+        d.add(new Point(3,0));
+        d.add(new Point(3,-3));
+        d.add(new Point(6,1));
+        File file = new File("C:\\Users\\dana\\Desktop\\СТАТ_функц\\s.txt");
+        FileWithLines f= (FileWithLines) m.analyze(d,file);
+        for(ILine l :f.getLines()){
+            for(I2DPoint p : l.getPoints()) {
+                System.out.print("x=" + p.getX()+" y=" + p.getY()+" ");
+            }
+            System.out.println();
+
+        }
 
     }
 }
