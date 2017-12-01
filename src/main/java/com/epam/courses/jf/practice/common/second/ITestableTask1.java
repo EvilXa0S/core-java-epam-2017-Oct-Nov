@@ -1,6 +1,7 @@
 package com.epam.courses.jf.practice.common.second;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ public interface ITestableTask1 extends ITaskStorage.ITestableTask {
      * @param output Файл с выходными данными.
      * @return Список строк, прочитанных из входного файла в прямом порядке.
      */
-    List<String> reverseFile(File input, File output);
+    List<String> reverseFile(File input, File output) throws IOException;
 }
 
 

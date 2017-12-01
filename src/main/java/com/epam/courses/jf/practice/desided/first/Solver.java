@@ -122,13 +122,12 @@ public class Solver implements ISolver {
     @Override
     public void task4() {
         Scanner scanner = new Scanner(System.in);
-        String in = scanner.nextLine();
-        List<String> stringList;
-        stringList = Arrays.asList(in.split(" "));
-        Map<Integer, String> map = new LinkedHashMap<>();
+        String[] in = Reader(scanner);
 
-        for (int i = 0; i < stringList.size(); i++) {
-            String string = stringList.get(i);
+        Map<String, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < in.length; i++) {
+            String string = in[i];
             int strLength = string.length();
             int endIntValue = strLength;
 
@@ -144,15 +143,16 @@ public class Solver implements ISolver {
                     endIntValue = endIntValue - countChar + 1;
                 }
             }
-            map.put(endIntValue, stringList.get(i));
+            map.put(in[i], endIntValue);
         }
+        System.out.println(map.keySet().stream().findFirst().get());
 
-        System.out.println(map.get(Collections.min(map.keySet())));
     }
 
     @Override
     public void task5() {
-        String str = "Язык программирования Java is widespread aaasdd really";
+        Scanner scanner = new Scanner(System.in);
+        String str = scanner.nextLine();
         Pattern p = Pattern.compile("[a-zA-Z].*");
         Matcher m = p.matcher(str);
         String outStr = new String();
@@ -181,11 +181,9 @@ public class Solver implements ISolver {
 
     @Override
     public void task6() {
-        Scanner in = new Scanner(System.in);
-        int N = Integer.parseInt(in.nextLine());
-
-        String stringOut = in.nextLine();
-        List<String> stringList = Arrays.asList(stringOut.split(" "));
+        Scanner scanner = new Scanner(System.in);
+        String str = scanner.nextLine();
+        List<String> stringList = Arrays.asList(str.split(" "));
 
         for(String string : stringList) {
 
@@ -225,7 +223,8 @@ public class Solver implements ISolver {
 
     @Override
     public void task7() {
-        String string = "The Java programming language is a general-purpose, concurrent, class-based, object-oriented language";
+        Scanner scanner = new Scanner(System.in);
+        String string = scanner.nextLine();
         List<String> list = new ArrayList<>();
         list = Arrays.asList(string.split(" "));
         List<String> listOut = new ArrayList<>();
@@ -254,7 +253,8 @@ public class Solver implements ISolver {
 
     @Override
     public void task8() {
-        String string = "Chapter 11 describes exceptions, chapter 13 describes binary compatibility... chapter 22 presents a syntactic grammar 1";
+        Scanner scanner = new Scanner(System.in);
+        String string = scanner.nextLine();
         Pattern pattern = Pattern.compile("\\d.*?\\b");
         Matcher matcher = pattern.matcher(string);
         List<String> arr = new ArrayList<>();
