@@ -4,11 +4,9 @@ import com.epam.courses.jf.practice.common.second.I2DPoint;
 import com.epam.courses.jf.practice.common.second.ITestableTask15;
 
 import java.io.*;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 public class Task15 implements ITestableTask15 {
     @Override
@@ -17,8 +15,6 @@ public class Task15 implements ITestableTask15 {
         List<I2DPoint> allPoints=new ArrayList<>(points);
         Set<ILine> resultSet=new HashSet<>();
         Set<I2DPoint> set=new HashSet<>();
-        //для начала найдём все прямые, образуемые точками
-        Set<I2DPoint> lineSet=new HashSet<>();
         I2DPoint firstPoint;
         I2DPoint secondPoint;
         I2DPoint thirdPoint;
@@ -39,22 +35,14 @@ public class Task15 implements ITestableTask15 {
                     double deltaX=thirdPoint.getX()-firstPoint.getX()/secondPoint.getX()-firstPoint.getX();
 
                     if(deltaY==deltaX || thirdPoint.getX()==firstPoint.getX() && firstPoint.getX()==secondPoint.getX()){
-
                         set.add(thirdPoint);
-
                     }
-
                 }
                 if(set.size()>2){
                     resultSet.add(new Line(set));
                 }
-
             }
-
         }
-
-
-
 
         try (PrintWriter writer = new PrintWriter(output)) {
             for (ILine line : resultSet) {
@@ -87,28 +75,7 @@ public class Task15 implements ITestableTask15 {
         public Set<ILine> getLines() {
 
             return lineSet;
-//            Set<ILine> res = new HashSet();
-//
-//            try{
-//                FileInputStream fstream = new FileInputStream(output);
-//                BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-//                String strLine;
-//                Set<I2DPoint> set ;
-//                String[] strLineSplitted;
-//                while ((strLine = br.readLine()) != null){
-//                    strLineSplitted = strLine.split("\t");
-//                    set = new HashSet<>();
-//                    for(String line : strLineSplitted){
-//                       String[] tmp=line.split(" ");
-//                        set.add(new Point(Double.parseDouble(tmp[0]),Double.parseDouble(tmp[0])));
-//
-//                    }
-//                    res.add(new Line(set));
-//                }
-//            }catch (IOException e){
-//                e.printStackTrace();
-//            }
-//            return res;
+
         }
 
     }

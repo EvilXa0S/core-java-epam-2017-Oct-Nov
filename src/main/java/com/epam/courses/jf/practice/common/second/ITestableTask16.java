@@ -27,6 +27,7 @@ public interface ITestableTask16 extends ITaskStorage.ITestableTask {
      */
     interface IFileWithPoints {
 
+
         /**
          * @return Файл с результатами анализа.
          */
