@@ -183,8 +183,7 @@ public class Solver implements ISolver {
      */
     public void task6() {
         Scanner scanner = new Scanner(System.in);
-        int words =scanner.nextInt();
-        scanner.nextLine();
+        int words = Integer.valueOf(scanner.nextLine());
 
         for (int i = 0; i < words; i++) {
             char[] word = scanner.next().toCharArray();
