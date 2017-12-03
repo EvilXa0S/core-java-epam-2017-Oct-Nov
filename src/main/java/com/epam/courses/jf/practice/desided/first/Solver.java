@@ -13,18 +13,22 @@ import java.util.stream.Stream;
 
 public class Solver implements ISolver {
 
-    private String[] Reader(Scanner scanner){
+    private String[] Reader(Scanner scanner) {
         int n = Integer.parseInt(scanner.nextLine());
         String[] strings = new String[n];
 
-        for(int i = 0; i < n; i++){
+        for (int i = 0; i < n; i++) {
             strings[i] = scanner.nextLine();
         }
         return strings;
     }
 
-    public int[][] readMatrix(Scanner scanner){
-        scanner = new Scanner(System.in);
+    private static String[] readedWords(Scanner scanner) {
+        int n = Integer.parseInt(scanner.nextLine());
+        return scanner.nextLine().split("\\s+", n);
+    }
+
+    private int[][] readMatrix(Scanner scanner) {
         int n = scanner.nextInt();
         int matrix[][] = new int[n][n];
 
@@ -36,10 +40,10 @@ public class Solver implements ISolver {
         return matrix;
     }
 
-    public void writeMatrix(int matrix[][]){
+    public void writeMatrix(int matrix[][]) {
         System.out.println(matrix.length);
-        for (int row = 0; row < matrix.length; row++){
-            for (int column = 0; column < matrix.length; column++){
+        for (int row = 0; row < matrix.length; row++) {
+            for (int column = 0; column < matrix.length; column++) {
                 System.out.print(matrix[row][column] + "\t");
             }
             System.out.println();
@@ -53,14 +57,13 @@ public class Solver implements ISolver {
 
         TreeMap<Integer, String> treeMap = new TreeMap<>();
 
-        if (N < 100 && N > 0){
-            for (int i = 1; i <= N; i++){
+        if (N < 100 && N > 0) {
+            for (int i = 1; i <= N; i++) {
                 String str = in.next();
                 int length = str.length();
                 treeMap.put(length, str);
             }
-        }
-        else {
+        } else {
             System.out.println("Please enter correct value");
         }
 
@@ -78,21 +81,18 @@ public class Solver implements ISolver {
         Scanner in = new Scanner(System.in);
         int N = Integer.parseInt(in.nextLine());
 
-//        List<String> strings = new ArrayList<>();
         String[] strings = new String[N];
-        if (N < 100 && N > 0){
-            for (int i = 0; i < N; i++){
+        if (N < 100 && N > 0) {
+            for (int i = 0; i < N; i++) {
                 strings[i] = in.nextLine();
-//                System.out.println(strings[i]);
             }
-        }
-        else {
+        } else {
             System.out.println("Please enter correct value");
         }
 
 
         Collections.sort(Arrays.asList(strings), Comparator.comparing(String::length).thenComparing(String::compareTo));
-        for(String s : strings){
+        for (String s : strings) {
             System.out.printf("(%d): \"%s\"%n", s.length(), s);
         }
     }
@@ -112,8 +112,8 @@ public class Solver implements ISolver {
         int averageLength = sumLength / N;
         System.out.printf("AVERAGE (%d)%n", averageLength);
 
-        for (int i = 0; i < N; i++){
-            if(strings[i].length() < averageLength){
+        for (int i = 0; i < N; i++) {
+            if (strings[i].length() < averageLength) {
                 System.out.printf("(%d): \"%s\"%n", strings[i].length(), strings[i]);
             }
         }
@@ -122,16 +122,15 @@ public class Solver implements ISolver {
     @Override
     public void task4() {
         Scanner scanner = new Scanner(System.in);
-        String[] in = Reader(scanner);
+        String[] strings = readedWords(scanner);
+        Map<String, Integer> map = new LinkedHashMap<>();
 
-        Map<String, Integer> map = new HashMap<>();
-
-        for (int i = 0; i < in.length; i++) {
-            String string = in[i];
+        for (int i = 0; i < strings.length; i++) {
+            String string = strings[i];
             int strLength = string.length();
             int endIntValue = strLength;
 
-            while (string.length() != 0){
+            while (string.length() != 0) {
                 char charAt = string.charAt(0);
                 int countChar = (int) string.
                         chars().
@@ -139,41 +138,41 @@ public class Solver implements ISolver {
                         count();
                 string = string.replaceAll(String.valueOf(charAt), "");
 
-                if(countChar >= 2){
+                if (countChar >= 2) {
                     endIntValue = endIntValue - countChar + 1;
                 }
             }
-            map.put(in[i], endIntValue);
+            map.put(strings[i], endIntValue);
         }
-        System.out.println(map.keySet().stream().findFirst().get());
 
+        for (Map.Entry entry : map.entrySet()) {
+            if (entry.getValue().equals(Collections.min(map.values()))) {
+                System.out.println(entry.getKey());
+                break;
+            }
+        }
     }
 
     @Override
     public void task5() {
+
         Scanner scanner = new Scanner(System.in);
-        String str = scanner.nextLine();
-        Pattern p = Pattern.compile("[a-zA-Z].*");
-        Matcher m = p.matcher(str);
-        String outStr = new String();
-
-        if(m.find()){
-            outStr = m.group(0);
-        }
-
-        List<String> stringList = Arrays.asList(outStr.split(" "));
+        String[] strings = readedWords(scanner);
+        List<String> stringList = Arrays.asList(strings);
 
         int numbsOfWords = 0;
-        for (String strList : stringList){
+        for (String strList : stringList) {
+            if (Pattern.matches("[a-zA-Z]+", strList)) {
 
-            int vawelsInt = (int)strList.
-                    chars().
-                    mapToObj(i -> (char) i).
-                    filter(c -> "aeiouy".contains(String.valueOf(c))).
-                    count();
+                int vawelsInt = (int) strList.
+                        chars().
+                        mapToObj(i -> (char) i).
+                        filter(c -> "aeiouy".contains(String.valueOf(c))).
+                        count();
 
-            if(strList.length() - vawelsInt == vawelsInt){
-                numbsOfWords++;
+                if (strList.length() - vawelsInt == vawelsInt) {
+                    numbsOfWords++;
+                }
             }
         }
         System.out.println(numbsOfWords);
@@ -182,71 +181,76 @@ public class Solver implements ISolver {
     @Override
     public void task6() {
         Scanner scanner = new Scanner(System.in);
-        String str = scanner.nextLine();
-        List<String> stringList = Arrays.asList(str.split(" "));
+        String[] strings = readedWords(scanner);
+        List<String> stringList = Arrays.asList(strings);
+        List slist = new ArrayList();
 
-        for(String string : stringList) {
+        for (String string : stringList) {
+            if (string.length() > 1) {
+                List<Integer> list = string.chars().
+                        mapToObj((i) -> i).
+                        collect(Collectors.toList());
 
-            List<Integer> list = string.chars().
-                    mapToObj((i) -> i).
-                    collect(Collectors.toList());
+                slist = list.stream().
+                        filter(inx -> {
+                            int buf = 0;
+                            for (int i = 0; i < list.size(); i++) {
 
-            List slist = list.stream().
-                    filter(inx -> {
-                        int buf = 0;
-
-                        for (int i = 0; i < list.size(); i++) {
-
-                            if (list.get(i) < buf) {
-                                return false;
+                                if (list.get(i) <= buf) {
+                                    return false;
+                                }
+                                buf = list.get(i);
                             }
-                            buf = list.get(i);
-                        }
-                        return true;
-                    }).collect(Collectors.toList());
+                            return true;
+                        }).collect(Collectors.toList());
 
 
-            if(!slist.isEmpty()){
+                if (!slist.isEmpty()) {
+                    StringBuffer buf = new StringBuffer();
 
-                StringBuffer buf = new StringBuffer();
-
-                for(int i = 0; i < slist.size(); i++){
-                    buf.append((char) Integer.parseInt(slist.get(i).toString()));
+                    for (int i = 0; i < slist.size(); i++) {
+                        buf.append((char) Integer.parseInt(slist.get(i).toString()));
+                    }
+                    System.out.println(buf);
+                    break;
                 }
-                System.out.println(buf);
-                break;
             }
-
         }
-
+        if (slist.isEmpty()) {
+            System.out.println("NOT FOUND");
+        }
     }
 
     @Override
     public void task7() {
         Scanner scanner = new Scanner(System.in);
-        String string = scanner.nextLine();
-        List<String> list = new ArrayList<>();
-        list = Arrays.asList(string.split(" "));
-        List<String> listOut = new ArrayList<>();
-        for (String str : list){
+        String[] strings = readedWords(scanner);
+        List<String> list = Arrays.asList(strings);
+        Set<String> listOut = new HashSet<>();
+
+        for (String str : list) {
             long i;
             boolean falseCount = true;
-
-            for (int in = 0; in < str.length(); in++){
-                int cha = (int)str.charAt(in);
+            for (int in = 0; in < str.length(); in++) {
+                int cha = (int) str.charAt(in);
                 i = str.chars()
                         .filter(ch -> ch == cha)
                         .count();
 
-                if(i > 1){
+                if (i > 1) {
                     falseCount = false;
                     break;
                 }
             }
-            if (falseCount == true){
+            if (falseCount == true) {
                 listOut.add(str);
             }
         }
+
+        if (listOut.isEmpty()) {
+            System.out.println("NOT FOUND");
+        }
+
         String strOut = String.join(" ", listOut);
         System.out.println(strOut);
     }
@@ -254,17 +258,11 @@ public class Solver implements ISolver {
     @Override
     public void task8() {
         Scanner scanner = new Scanner(System.in);
-        String string = scanner.nextLine();
-        Pattern pattern = Pattern.compile("\\d.*?\\b");
-        Matcher matcher = pattern.matcher(string);
-        List<String> arr = new ArrayList<>();
+        String[] strs = readedWords(scanner);
+        List<String> arr = new ArrayList<>(Arrays.asList(strs));
         List<String> arrOut = new ArrayList<>();
 
-        while (matcher.find()) {
-            arr.add(matcher.group());
-        }
-
-        while (arr.size() != 0) {
+        while (arr.size() != 0 && Pattern.matches("\\d.*?\\b", arr.get(0))) {
             char[] strings = arr.get(0).toCharArray();
             Stream<Character> stream = IntStream
                     .range(0, strings.length)
@@ -278,11 +276,11 @@ public class Solver implements ISolver {
                 if (stack.peekFirst() == stack.peekLast()) {
                     stack.removeFirst();
                     stack.removeLast();
-                    System.out.println("true");
                 } else {
                     check = false;
                     break;
                 }
+
             }
 
             if (check == true) {
@@ -292,11 +290,9 @@ public class Solver implements ISolver {
         }
         if (arrOut.size() == 1) {
             System.out.println(arrOut.get(0));
-        }
-        else if (arrOut.size() > 1){
+        } else if (arrOut.size() > 1) {
             System.out.println(arrOut.get(1));
-        }
-        else System.out.println("NOT FOUND");
+        } else System.out.println("NOT FOUND");
     }
 
     @Override
@@ -307,11 +303,20 @@ public class Solver implements ISolver {
         int[][] res = new int[n][n];
         int i = 1;
 
-        for (int row = 0; row < n; row++){
-            for (int column = 0; column < n; column++){
+        for (int row = 0; row < n; row++) {
+            for (int column = 0; column < n; column++) {
                 res[row][column] = i;
-//                System.out.print(i);
                 i++;
+            }
+        }
+
+        for (int[] row : res) {
+            for (int ind = 0; ind < row.length; ind++) {
+                if (ind != row.length - 1) {
+                    System.out.print(row[ind] + "\t");
+                } else {
+                    System.out.print(row[ind] + "\n");
+                }
             }
         }
     }
@@ -325,29 +330,32 @@ public class Solver implements ISolver {
 
         double D = B * B - 4 * A * C;
 
-        if(D > 0){
+        if (D > 0) {
             BigDecimal x1 = new BigDecimal((-B + Math.sqrt(D)) / (2 * A));
             BigDecimal x2 = new BigDecimal((-B - Math.sqrt(D)) / (2 * A));
             System.out.println("Two solutions: " + x1.setScale(2, RoundingMode.HALF_UP)
                     + ", " + x2.setScale(2, RoundingMode.HALF_UP));
-        }
-        else if (D == 0){
-            BigDecimal x1 = new BigDecimal((-B / (2 * A)));
+        } else if (D == 0) {
+            BigDecimal x1 = new BigDecimal(((double) -B / (2 * A)));
             System.out.println("One solution: " + x1.setScale(2, RoundingMode.HALF_UP));
-        }
-        else if (D < 0){
-            System.out.println("No solutions");
+        } else if (D < 0) {
+            System.out.println("No solution");
         }
     }
 
     @Override
     public void task11() {
         Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        String month;
+        String string = scanner.nextLine();
 
-        if (n < 13 && n > 0){
-            switch (n){
+        if (!Pattern.matches("\\d{1,2}", string)) {
+            System.out.println("INCORRECT INPUT DATA");
+            return;
+        }
+        int n = Integer.parseInt(string);
+
+        if (n < 13 && n > 0) {
+            switch (n) {
                 case 1:
                     System.out.println("January");
                     break;
@@ -388,15 +396,13 @@ public class Solver implements ISolver {
                     System.out.println("INCORRECT INPUT DATA");
                     break;
             }
-        }
-        else System.out.println("INCORRECT INPUT DATA");
+        } else System.out.println("INCORRECT INPUT DATA");
     }
 
     @Override
     public void task12() {
         Scanner scanner = new Scanner(System.in);
-        int k = scanner.nextInt();
-        readMatrix(scanner);
+        int k = Integer.parseInt(scanner.nextLine());
         int[][] matrix = readMatrix(scanner);
 
         Arrays.sort(matrix, Comparator.comparingInt(rows -> rows[k]));
@@ -407,15 +413,15 @@ public class Solver implements ISolver {
     @Override
     public void task13() {
         Scanner scanner = new Scanner(System.in);
-        int k = scanner.nextInt();
-        
+        int k = Integer.parseInt(scanner.nextLine());
+
         int[][] matrix = readMatrix(scanner);
         int[][] outMatrix = new int[matrix.length][];
 
         for (int i = 0; i < outMatrix.length; i++) {
-            int shift = Math.abs((i - k) % outMatrix.length);
+            int shift = (i - k) % outMatrix.length;
 
-            if(shift < 0) {
+            if (shift < 0) {
                 shift = shift + outMatrix.length;
             }
             outMatrix[i] = matrix[shift];
@@ -430,33 +436,81 @@ public class Solver implements ISolver {
         int N = scanner.nextInt();
         int[] nums = new int[N];
 
-        for (int i = 0; i < N; i++){
+        for (int i = 0; i < N; i++) {
             nums[i] = scanner.nextInt();
         }
-
         int count = 1;
         List<Integer> integerList = new ArrayList<>();
 
-        for (int i = 1; i < nums.length; i++){
+        for (int i = 1; i < nums.length; i++) {
 
-            if(nums[i - 1] < nums[i]){
+            if (nums[i - 1] < nums[i]) {
                 count++;
-            }
-
-            else {
+            } else {
                 integerList.add(count);
                 count = 1;
             }
-
         }
         integerList.add(count);
-        System.out.println(Collections.max(integerList));
+        if (Collections.max(integerList) == 1) {
+            System.out.println(0);
+        } else {
+            System.out.println(Collections.max(integerList));
+        }
     }
 
     @Override
     public void task15() {
         Scanner scanner = new Scanner(System.in);
-        
+        int[][] matrix = readMatrix(scanner);
+
+        int result = 0;
+        for (int[] row : matrix) {
+            int sum = 0;
+            boolean positive = false;
+
+            for (int element : row) {
+                if (!positive) {
+
+                    if (element > 0) {
+                        positive = true;
+                    }
+                } else {
+
+                    if (element > 0) {
+                        result += sum;
+                        break;
+                    } else {
+                        sum += element;
+                    }
+                }
+            }
+        }
+
+        System.out.println(result);
+//        int[][] matrix = readMatrix(scanner);
+//        int[][] result = new int[matrix.length][matrix.length];
+
+//        [0][0]  [0][1]  [0][2]  |   [0][2]  [1][2]  [2][2]
+//        [1][0]  [1][1]  [1][2]  |   [0][1]  [1][1]  [2][1]
+//        [2][0]  [2][1]  [2][2]  |   [0][0]  [1][0]  [2][0]
+
+//        System.out.println(matrix.length);
+//        for (int i = 0; i < matrix.length; i++){
+//            int column = matrix.length - 1;
+//
+//            for (int x = 0; x < matrix.length; x++){
+//                result[column--][i] = matrix[i][x];
+//                System.out.println(column + 1);
+//            }
+//        }
+//        writeMatrix(result);
+    }
+
+    @Override
+    public void task16() {
+        Scanner scanner = new Scanner(System.in);
+
         int[][] matrix = readMatrix(scanner);
         int[][] result = new int[matrix.length][matrix.length];
 
@@ -464,103 +518,100 @@ public class Solver implements ISolver {
 //        [1][0]  [1][1]  [1][2]  |   [0][1]  [1][1]  [2][1]
 //        [2][0]  [2][1]  [2][2]  |   [0][0]  [1][0]  [2][0]
 
-        System.out.println(matrix.length);
-        for (int i = 0; i < matrix.length; i++){
+        for (int i = 0; i < matrix.length; i++) {
             int column = matrix.length - 1;
-
-            for (int x = 0; x < matrix.length; x++){
+            for (int x = 0; x < matrix.length; x++) {
                 result[column--][i] = matrix[i][x];
-                System.out.println(column + 1);
             }
         }
         writeMatrix(result);
-    }
 
-    @Override
-    public void task16() {
-        Scanner scanner = new Scanner(System.in);
-        
-        int[][] matrix = readMatrix(scanner);
-        int[][] result = new int[matrix.length][matrix.length];
-
-        int a = 0;
-        int b = 0;
-        int max = 0;
-
-        for (int i = 0; i < matrix.length; i++){
-            for (int x = 0; x < matrix.length; x++){
-
-                if (matrix[i][x] > max){
-                    max = matrix[i][x];
-                    a = i;
-                    b = x;
-                }
-            }
-        }
-        System.out.println(max + " " + a + " "+ b);
-        int outM = matrix.length;
-        int outN = matrix.length;
-
-        for (int i = 0; i < matrix.length; i++){
-            for (int x = 0; x < matrix.length; x++){
-                if(i == a){
-                    outM--;
-                    break;
-                }
-                if(x == b){
-                    outN--;
-                    break;
-                }
-
-            }
-        }
-        System.out.println(outM + " " + outN);
+//        int[][] matrix = readMatrix(scanner);
+//        int[][] result = new int[matrix.length][matrix.length];
+//
+//        int a = 0;
+//        int b = 0;
+//        int max = 0;
+//
+//        for (int i = 0; i < matrix.length; i++){
+//            for (int x = 0; x < matrix.length; x++){
+//
+//                if (matrix[i][x] > max){
+//                    max = matrix[i][x];
+//                    a = i;
+//                    b = x;
+//                }
+//            }
+//        }
+//        System.out.println(max + " " + a + " "+ b);
+//        int outM = matrix.length;
+//        int outN = matrix.length;
+//
+//        for (int i = 0; i < matrix.length; i++){
+//            for (int x = 0; x < matrix.length; x++){
+//                if(i == a){
+//                    outM--;
+//                    break;
+//                }
+//                if(x == b){
+//                    outN--;
+//                    break;
+//                }
+//
+//            }
+//        }
+//        System.out.println(outM + " " + outN);
     }
 
     @Override
     public void task17() {
-        
+
         Scanner scanner = new Scanner(System.in);
         int[][] matrix = readMatrix(scanner);
-
-        int D = 0;
-
-        for (int i = 0; i < matrix.length; i++){
-            int N = i;
-            int sum = 1;
-
-            for (int z = 0; z < matrix.length; z++) {
-                int num = matrix[N][z];
-                sum = num * sum;
-                N++;
-
-                if (N >= matrix.length){
-                    N = N - matrix.length;
-                }
+        double[][] matrixRes = new double[matrix.length][matrix.length];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                matrixRes[i][j] = matrix[i][j];
             }
-            D += sum;
         }
 
-        for (int i = 0; i < matrix.length; i++){
-            int N = i;
-            int M = matrix.length - 1;
-            int sum = 1;
+        double result = 1.0;
 
-            for (int z = 0; z < matrix.length; z++) {
-                int num = matrix[N][M];
-                sum = num * sum;
-                N++;
-                M--;
-
-                if (N >= matrix.length){
-                    N = N - matrix.length;
+        for (int k = 0; k < matrix.length; k++) {
+            if (matrixRes[k][k] == 0) {
+                boolean checkDecrease = true;
+                for (int i = k; i < matrix.length; i++) {
+                    if (matrix[i][k] != 0) {
+                        checkDecrease = false;
+                        double[] swap = matrixRes[i];
+                        matrixRes[i] = matrixRes[k];
+                        matrixRes[k] = swap;
+                        result *= -1;
+                        break;
+                    }
+                }
+                if (checkDecrease) {
+                    System.out.println(0);
+                    return;
                 }
             }
-            D -= sum;
+
+            for (int i = k + 1; i < matrixRes.length; i++) {
+                double coefficient = matrixRes[i][k] / matrixRes[k][k];
+                for (int j = k; j < matrixRes[0].length; j++) {
+                    matrixRes[i][j] -= coefficient * matrixRes[k][j];
+                }
+            }
         }
 
-        System.out.println(D);
+        for (int i = 0; i < matrixRes.length; i++) {
+            result *= matrixRes[i][i];
+        }
+
+        System.out.println(Math.round(result));
     }
+
+
 
     @Override
     public void task18() {
@@ -591,49 +642,71 @@ public class Solver implements ISolver {
 
         int[][] outMatrix = new int[matrix.length - rows.size()][matrix.length - columns.size()];
 
+        System.out.println(matrix.length - rows.size());
+        System.out.println(matrix.length - columns.size());
         for (int i = 0; i < matrix.length; i++){
             int N = 0;
             int M = 0;
             for (int x = 0; x < matrix.length; x++) {
 
                 if(!rows.contains(i) && !columns.contains(x)) {
-                    System.out.println(matrix[i][x]);
+                    System.out.print(matrix[i][x] + "\t");
                     outMatrix[N][M] = matrix[i][x];
                     M++;
                 }
             }
+            System.out.println();
             N++;
         }
     }
+
+
 
     @Override
     public void task19() {
         
         Scanner scanner = new Scanner(System.in);
-        int[][] matrix = readMatrix(scanner);
-        Map<Integer, Integer> mapRows = new HashMap<>();
-        Map<Integer, Integer> mapColumns = new HashMap<>();
+        int N = scanner.nextInt();
 
-        for (int i = 0; i < matrix.length; i++){
-            for (int x = 0; x < matrix.length; x++){
+        int[][] matrix = new int[N][N];
 
-                if (matrix[i][x] == 0){
-                    if (mapRows.containsKey(0)){
-                        mapRows.put(i, x);
-                    }
-                    else if (mapColumns.containsValue(0)){
-                        mapColumns.put(x, i);
-                    }
-                    mapRows.put(i, x);
-                    mapColumns.put(x, i);
-
+        Set<Integer> delLines = new HashSet<>();
+        for (int i = 0; i < N; i++) {
+            boolean deleteLine = true;
+            for (int j = 0; j < N; j++) {
+                matrix[i][j] = scanner.nextInt();
+                if (matrix[i][j] != 0) {
+                    deleteLine = false;
                 }
+            }
+            if (deleteLine) {
+                delLines.add(i);
             }
         }
 
-        System.out.println(" ");
-        for (Map.Entry i : mapRows.entrySet()){
-            System.out.println(i);
+        Set<Integer> columnsDel = new HashSet<>();
+        for (int j = 0; j < N; j++) {
+            boolean delColumn = true;
+            for (int i = 0; i < N; i++) {
+                if (matrix[i][j] != 0) {
+                    delColumn = false;
+                }
+            }
+            if (delColumn) {
+                columnsDel.add(j);
+            }
+        }
+
+        System.out.println(matrix.length - delLines.size());
+        System.out.println(matrix.length - columnsDel.size());
+        for (Integer i = 0; i < matrix.length; i++) {
+            if (delLines.contains(i))
+                continue;
+            for (Integer j = 0; j < matrix.length; j++) {
+                if (columnsDel.contains(j))
+                    continue;
+                System.out.print(matrix[i][j] + (j.equals(matrix.length - 1) ? "\n" : "\t"));
+            }
         }
     }
 
@@ -744,10 +817,11 @@ public class Solver implements ISolver {
         Scanner scanner = new Scanner(System.in);
         int[][] matrix = readMatrix(scanner);
         int count = 0;
+        int outCount = 0;
         int N = 0;
         int M = 0;
 
-        /* for 1 element **/
+
         for (int i = 0; i < matrix.length; i++){
             int min = matrix[i][0];
             for (int x = 0; x < matrix.length; x++){
@@ -761,25 +835,22 @@ public class Solver implements ISolver {
 
             for (int z = 0; z < matrix.length; z++){
                 int max = min;
-
+//                System.out.println(matrix[z][M] + " x " + z + " M " + M);
                 if (max < matrix[z][M]){
                     break;
                 }
-                System.out.println(matrix[z][M]);
+                count++;
             }
-            count++;
-        }
-        count = count / (matrix.length - 1);
 
-        System.out.println(count);
+            count = count != matrix.length ? 0 : outCount++;
+        }
+        System.out.println(outCount);
     }
 
     @Override
     public void task24() {
-        
         Scanner scanner = new Scanner(System.in);
         int[][] matrix = readMatrix(scanner);
-
 
         List<Integer> sumArr = new ArrayList<>();
         Map<Integer, Integer> map = new TreeMap<>();
@@ -790,14 +861,20 @@ public class Solver implements ISolver {
             for (int x = 0; x < matrix.length; x++){
                 sum += matrix[i][x];
             }
-            map.put(sum, i);
+            map.put(i, sum);
         }
 
-        Iterator iter = map.entrySet().iterator();
+        LinkedHashMap<Integer, Integer> sortedMap =
+                map.entrySet().stream().
+                        sorted(Map.Entry.comparingByValue()).
+                        collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                                (e1, e2) -> e1, LinkedHashMap::new));
+
+        Iterator iter = sortedMap.entrySet().iterator();
         int[][] result = new int[matrix.length][matrix.length];
         for (int i = 0; i < matrix.length; i++){
             Map.Entry entry = (Map.Entry) iter.next();
-            result[i] = matrix[(int)entry.getValue()];
+            result[i] = matrix[(int)entry.getKey()];
         }
         writeMatrix(result);
     }
@@ -812,8 +889,6 @@ public class Solver implements ISolver {
         int count = 0;
         for (int i = 0; i < matrix.length; i++){
             for (int x = 0; x < matrix.length; x++){
-                System.out.println(" ");
-
                 boolean catchBreak = true;
                 int rowDecrease = i + 2;
                 int columnDecrease = x + 2;
@@ -900,27 +975,30 @@ public class Solver implements ISolver {
         Scanner scanner = new Scanner(System.in);
         int[][] matrix = readMatrix(scanner);
 
-
-        List<Integer> sumArr = new ArrayList<>();
         Map<Integer, Integer> map = new TreeMap<>(Collections.reverseOrder());
-
         for (int i = 0; i < matrix.length; i++){
             int sum = 0;
 
             for (int x = 0; x < matrix.length; x++){
                 sum += Math.abs(matrix[x][i]);
             }
-            map.put(sum, i);
+            map.put(i, sum);
         }
 
-        Iterator iter = map.entrySet().iterator();
+        LinkedHashMap<Integer, Integer> sortedMap =
+                map.entrySet().stream().
+                        sorted(Map.Entry.comparingByValue()).
+                        collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                                (e1, e2) -> e1, LinkedHashMap::new));
+
+
         int[][] result = new int[matrix.length][matrix.length];
+        ArrayList<Integer> intList = new ArrayList<>(sortedMap.keySet());
+        Collections.reverse(intList);
 
         for (int i = 0; i < matrix.length; i++){
-            Map.Entry entry = (Map.Entry) iter.next();
             for (int x = 0; x < matrix.length; x++) {
-
-                result[x][i] = matrix[x][(int) entry.getValue()];
+                result[x][i] = matrix[x][intList.get(i)];
             }
         }
         writeMatrix(result);
