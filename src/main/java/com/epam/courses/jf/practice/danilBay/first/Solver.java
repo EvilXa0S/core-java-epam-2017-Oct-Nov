@@ -182,38 +182,22 @@ public class Solver implements ISolver {
      * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.6">Задание №6</a>}
      */
     public void task6() {
-        int result=0;
-        int delta=32;
-        Pattern p = Pattern.compile("[\n ]");
-        ArrayList<String> words=new ArrayList<>();
-        String buf;
-        Scanner in = new Scanner(System.in);
-        int numOfWords=in.nextInt();
+        Scanner scanner = new Scanner(System.in);
+        int words =scanner.nextInt();
+        scanner.nextLine();
 
-        in.nextLine();
-        in.useDelimiter(p);
-        while (numOfWords!=0) {
-            buf=in.next();
-            boolean fag;
-            if(buf.length()>1)
-                fag=true;
-            else
-                fag=false;
-            for(int i=1;i<buf.length();i++){
-                if(buf.charAt(i)<buf.charAt(i-1)){
-                    fag=false;
-                    break;
+        for (int i = 0; i < words; i++) {
+            char[] word = scanner.next().toCharArray();
+
+            for (int j = 0; j < word.length - 1; j++) {
+                if (word[j] >= word[j + 1]) break;
+                if (j==word.length-2) {
+                    System.out.println(new String(word));
+                    return;
                 }
-
             }
-            if(fag ){
-                System.out.println(buf);
-                return;
-            }
-            numOfWords--;
-
         }
-        System.out.println("NOT FOUND");
+        System.out.println("NOT_FOUND");
     }
 
     /**
