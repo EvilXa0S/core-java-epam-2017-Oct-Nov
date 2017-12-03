@@ -9,19 +9,17 @@ import java.util.List;
 public class Task5 implements ITestableTask5 {
     @Override
     public double calcResistance(List<IMeasurement> measurements) {
-        BigDecimal voltage;
-        BigDecimal cur;
-        BigDecimal resistance=new BigDecimal(0);
-        for(IMeasurement x: measurements){
-            cur=new BigDecimal(x.getCurrent());
-            voltage=new BigDecimal(x.getVoltage());
-            resistance.add(voltage.divide(cur));
+        BigDecimal sum1 = new BigDecimal(0.0);
 
+        BigDecimal sum2 = new BigDecimal(0.0);
+
+        for (IMeasurement measurement : measurements) {
+
+            sum1 = sum1.add((new BigDecimal(measurement.getCurrent())).multiply(new BigDecimal(measurement.getVoltage())));
+            sum2 = sum2.add((new BigDecimal(measurement.getCurrent())).multiply(new BigDecimal(measurement.getCurrent())));
         }
-        resistance=resistance.divide(new BigDecimal(measurements.size()));
-        resistance.setScale(6, BigDecimal.ROUND_HALF_UP);
-        double res=resistance.doubleValue();
-        return res;
+        double result=(sum1.divide(sum2, BigDecimal.ROUND_HALF_UP)).doubleValue();
+        return result;
 
     }
 }
