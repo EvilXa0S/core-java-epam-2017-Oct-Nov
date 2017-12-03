@@ -183,7 +183,8 @@ public class Solver implements ISolver {
      */
     public void task6() {
         Scanner scanner = new Scanner(System.in);
-        int words = Integer.valueOf(scanner.nextLine());
+        int words =scanner.nextInt();
+        scanner.nextLine();
 
         for (int i = 0; i < words; i++) {
             char[] word = scanner.next().toCharArray();
@@ -196,7 +197,7 @@ public class Solver implements ISolver {
                 }
             }
         }
-        System.out.println("NOT_FOUND");
+        System.out.println("NOT FOUND");
     }
 
     /**
@@ -490,25 +491,25 @@ public class Solver implements ISolver {
         int velocity;
         Scanner in = new Scanner(System.in);
         int a = in.nextInt()-1;
-
         int maxPosl=1;
         int maxPosTemp=1;
         int first=in.nextInt();
         int second;
         if(a==0)
             maxPosl=0;
+
         while(a!=0){
             second=in.nextInt();
             if(second>first)
                 maxPosTemp++;
-
-            if(maxPosTemp>maxPosl)
+            else
+                if(maxPosTemp>maxPosl){
                 maxPosl=maxPosTemp;
-
-            else {
-
                 maxPosTemp = 1;
             }
+
+
+
             first=second;
             a--;
         }
@@ -920,9 +921,12 @@ public class Solver implements ISolver {
         }
 
     }
-//    public void task25(){
-//
-//    }
+
+
+    public void task25() {
+
+
+    }
 //    public void task26(){
 //
 //    }
@@ -1031,6 +1035,6 @@ public class Solver implements ISolver {
 //        Solver a=new Solver();
 //        a.task22();
         Solver m= new Solver();
-        m.task27();
+        m.task25();
     }
 }
