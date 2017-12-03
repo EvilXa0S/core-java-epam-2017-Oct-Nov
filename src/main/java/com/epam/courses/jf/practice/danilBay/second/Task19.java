@@ -18,7 +18,7 @@ public class Task19 implements ITestableTask19 {
                 double tSlowToFinish=(S-slowCar.getStartPosition())/slowCar.getSpeed();
                 double tFastToFinish=(S-fastCar.getStartPosition())/fastCar.getSpeed();
                 double curTime=0;
-                int startPosDif= Math.abs(slowCar.getStartPosition()-fastCar.getStartPosition());
+                int startPosDif= (slowCar.getStartPosition()-fastCar.getStartPosition())%(int)lengthLap;
                 double tFirstOvertake= startPosDif/velocity;
                 if(tFirstOvertake<tFastToFinish && tFirstOvertake<tSlowToFinish) {
                     curTime += tFirstOvertake;
