@@ -27,7 +27,7 @@ public class Solver implements ISolver {
         while((numOfStrings)!=0){
             tmp=in.nextLine();
             if(tmp.length()<=min.length())min=tmp;
-            else if(tmp.length()>=max.length())max=tmp;
+            if(tmp.length()>=max.length())max=tmp;
             numOfStrings--;
         }
 
@@ -207,7 +207,6 @@ public class Solver implements ISolver {
 
             }
             if(fag ){
-                System.out.println();
                 System.out.println(buf);
                 return;
             }
