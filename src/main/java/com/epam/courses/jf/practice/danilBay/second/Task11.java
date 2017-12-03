@@ -8,16 +8,16 @@ import java.util.LinkedList;
 public class Task11 implements ITestableTask11 {
     @Override
     public String emulate(ArrayList<String> peoples) {
-        for(int i=0; peoples.size()>1; i+=2){
+        for(int i=0; peoples.size()>1; i=(i++)%peoples.size()){
 
-            peoples.remove(i%peoples.size());
+            peoples.remove(i);
         }
         return peoples.get(0);
     }
 
     @Override
     public String emulate(LinkedList<String> peoples) {
-        for(int i=0; peoples.size()>1; i+=2){
+        for(int i=0; peoples.size()>1; i=(i++)%peoples.size()){
             peoples.remove(i%peoples.size());
         }
         return peoples.get(0);

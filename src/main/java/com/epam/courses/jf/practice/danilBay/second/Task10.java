@@ -11,20 +11,20 @@ import java.util.Scanner;
 public class Task10 implements ITestableTask10 {
     @Override
     public HashMap<String, Integer> countNumberWords(File input) {
-        HashMap<String,Integer> res=new HashMap();
+        HashMap<String,Integer> res=new HashMap<>();
         String temp;
         Integer integer;
-        try (Scanner fileScanner =new Scanner((new FileReader(input)));) {
+        try (Scanner fileScanner = new Scanner((new FileReader(input)))) {
             fileScanner.useDelimiter(" ");
 
             while (fileScanner.hasNext()){
                 temp=fileScanner.next();
-                integer=res.get(temp);
-                if(integer==null){
-                    integer=1;
+
+                if(res.containsKey(temp)){
+                    integer=res.get(temp)+1;
                 }
                 else {
-                    integer++;
+                    integer=1;
                 }
                 res.put(temp,integer);
             }

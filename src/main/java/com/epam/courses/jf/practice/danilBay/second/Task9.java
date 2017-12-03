@@ -17,10 +17,7 @@ public class Task9 implements ITestableTask9{
 
             while (fileScanner.hasNext()){
                 buf=fileScanner.next().toLowerCase();
-                if(res.contains(buf)){
-                    res.remove(buf);
-                }
-                else res.add(buf);
+                res.add(buf);
 
             }
             fileScanner.close();
