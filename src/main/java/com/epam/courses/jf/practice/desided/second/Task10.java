@@ -19,7 +19,6 @@ public class Task10 implements ITestableTask10{
 
                 String string = scanner.next();
                 if (hashMap.containsKey(string)){
-                    int count = hashMap.get(string) + 1;
                     hashMap.compute(string, (key, oldVal) -> oldVal + 1);
                 }
                 else {

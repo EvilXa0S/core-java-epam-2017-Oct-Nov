@@ -12,9 +12,8 @@ public class Task3 implements ITestableTask3 {
         List<String> list = new ArrayList<>();
 
         for (IPoem poem : poems){
-
             if (author.equals(poem.getAuthor())){
-                list = poem.getLines();
+                list.addAll(poem.getLines());
             }
         }
         list.sort(Comparator.comparingInt(String::length));

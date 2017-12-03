@@ -37,7 +37,11 @@ public class Task15 implements ITestableTask15 {
                     lines.add(new Line(setLines));
                 }
             }
+            if (setLines.size() > 2) {
+                lines.add(new Line(setLines));
+            }
         }
+
 
         return new FileWithLines(output, lines);
     }

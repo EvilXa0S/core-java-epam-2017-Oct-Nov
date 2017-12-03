@@ -10,25 +10,31 @@ public class Task11 implements ITestableTask11{
     @Override
     public String emulate(ArrayList<String> peoples) {
 
-        ArrayList<String> list = new ArrayList<String>(peoples);
+        if (peoples == null || peoples.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
         int del = 1;
-        if (list.size() % 2 == 0){
+        if (peoples.size() % 2 == 0){
             del = 0;
         }
-        for (int i =0 ; i <= list.size(); i++){
-            if (i == list.size()){
+        for (int i =0 ; i <= peoples.size(); i++){
+            if (i == peoples.size()){
                 i = del;
 
             }
-            list.remove(i);
+            peoples.remove(i);
         }
 
-        return list.get(0);
+        return peoples.get(0);
     }
 
     @Override
     public String emulate(LinkedList<String> peoples) {
 
+        if (peoples == null || peoples.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
 
         boolean check = true;
 

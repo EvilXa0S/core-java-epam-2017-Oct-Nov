@@ -25,6 +25,7 @@ public class Task8 implements ITestableTask8 {
                 if (!temp.equals('{') && ch.equals('}') ||
                         !temp.equals('(') && ch.equals(')') ||
                         !temp.equals('[') && ch.equals(']')){
+                    return false;
                 }
             }
         }

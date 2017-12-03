@@ -24,7 +24,7 @@ public class Task2 implements ITestableTask2 {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        fileSet.remove(directory);
         return fileSet;
     }
 }

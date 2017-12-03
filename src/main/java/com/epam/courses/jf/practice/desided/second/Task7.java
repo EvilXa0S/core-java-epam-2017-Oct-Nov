@@ -11,13 +11,19 @@ public class Task7 implements ITestableTask7{
 
         List<Integer> list = new ArrayList<>();
 
+        if (first.size() == 1 && first.get(0) == 0
+                || second.size() == 1 && second.get(0) == 0) {
+            list.add(0);
+            return list;
+        }
+
         for (int i = 0; i < first.size() + second.size() ; i++){
             list.add(0);
         }
 
         for (int i = 0; i < first.size(); i++){
             for (int x = 0; x < second.size(); x++){
-                list.set(i + x, first.get(i) + second.get(x));
+                list.set(i + x, list.get(i + x) + first.get(i) * second.get(x));
             }
         }
 

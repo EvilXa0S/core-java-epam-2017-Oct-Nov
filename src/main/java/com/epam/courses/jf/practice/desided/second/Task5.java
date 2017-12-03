@@ -20,6 +20,6 @@ public class Task5 implements ITestableTask5{
             sumI = sumI.add(I.multiply(I));
         }
 
-        return sumU.divide(sumI, 4, BigDecimal.ROUND_HALF_UP).doubleValue();
+        return sumU.divide(sumI, 8, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 }

@@ -24,7 +24,7 @@ public class Task13 implements ITestableTask13 {
 
         @Override
         public void addEdge(int first, int second) {
-            if (edges.containsKey(first) && edges.get(first).contains(second)){
+            if (edges.containsKey(first) && !edges.get(first).contains(second)){
                 edges.get(first).add(second);
                 edges.get(second).add(first);
             }
