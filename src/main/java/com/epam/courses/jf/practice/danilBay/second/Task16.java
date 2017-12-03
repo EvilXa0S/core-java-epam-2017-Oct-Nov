@@ -27,17 +27,17 @@ public class Task16 implements ITestableTask16 {
             }
         });
 
-        Double startX=center.getX()-radius;
-        Double startY=center.getY()-radius;
-        Double curX,curY;
-        Double distance;
+        double startX=center.getX()-radius;
+        double startY=center.getY()-radius;
+        double curX,curY;
+        double distance;
         int diam=2*radius;
         for(int x = 0; x<=diam; x++ ){
             for (int y = 0; y<=diam; y++){
-                curX=(startX)+x;
-                curY=startY+y;
+                curX=(int)(startX)+x;
+                curY=(int)(startY)+y;
                 distance=distance(new Point(curX,curY),center);
-                if(distance<=radius){
+                if(distance<radius){
                     res.put(new Point(curX,curY),distance);
                 }
 
