@@ -13,35 +13,25 @@ public class Task1 implements ITestableTask1 {
     @Override
     public List<String> reverseFile(File input, File output) throws IOException {
 
-        BufferedReader bufferedReader = null;
-        try {
-            bufferedReader = new BufferedReader(
-                    new FileReader(input)
-            );
+        List<String> arr = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(input))) {
+            String s;
+            while ((s = reader.readLine()) != null) {
+                arr.add(s);
+            }
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        String s;
-        List<String> arr = new ArrayList<>();
-
-        while ((s = bufferedReader.readLine()) != null){
-            System.out.println(s);
-            arr.add(s);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
+            for (int i = arr.size() - 1; i >= 0; i--) {
+                writer.write(arr.get(i));
+                writer.write("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        bufferedReader.close();
-        arr.sort(Collections.reverseOrder());
-        BufferedWriter bufferedWriter = new BufferedWriter(
-                new FileWriter(output)
-        );
-        Iterator iterator = arr.iterator();
-        while (iterator.hasNext()){
-            bufferedWriter.write((String) iterator.next());
-            bufferedWriter.newLine();
-        }
-        bufferedWriter.close();
-
         return arr;
     }
 }

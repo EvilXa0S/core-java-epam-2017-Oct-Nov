@@ -51,9 +51,10 @@ public class Task15 implements ITestableTask15 {
 
         private Set<I2DPoint> set = new HashSet<>();
 
-        private Line(Set<I2DPoint> set){
+        private Line(Set<I2DPoint> set) {
             this.set = set;
         }
+
         @Override
         public Set<I2DPoint> getPoints() {
             return set;
@@ -70,26 +71,28 @@ public class Task15 implements ITestableTask15 {
         }
 
         private FileWithLines(File file, Set<ILine> lines) {
-            this.file = file;
-            writeToFile(lines);
+            this(file);
+            writeLinesToFile(lines);
         }
 
-        private void writeToFile(Set<ILine> lines){
-            try {
-                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
-                for (ILine line : lines){
-                    for (I2DPoint point : line.getPoints()){
-                        bufferedWriter.write(String.valueOf(point.getX()));
-                        bufferedWriter.write(String.valueOf(point.getY()));
-                    }
-                    bufferedWriter.newLine();
-                }
 
+        private void writeLinesToFile(Set<ILine> lines) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                for (ILine line : lines) {
+                    writer.write("line:[");
+                    for (I2DPoint point : line.getPoints()) {
+                        writer.write("point:{ ");
+                        writer.write(String.valueOf(point.getX()));
+                        writer.write(" ");
+                        writer.write(String.valueOf(point.getY()));
+                        writer.write(" }");
+                    }
+                    writer.write("]\n");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-
 
         @Override
         public File getFile() {
@@ -98,7 +101,7 @@ public class Task15 implements ITestableTask15 {
 
         @Override
         public Set<ILine> getLines() {
-            Set<ILine> out = new HashSet<>();
+            Set<ILine> result = new HashSet<>();
 
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 String s;
@@ -110,12 +113,13 @@ public class Task15 implements ITestableTask15 {
                         Double y = Double.parseDouble(splited[i + 1]);
                         points.add(new Point2D(x, y));
                     }
-                    out.add(new Line(points));
+                    result.add(new Line(points));
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return out;
+
+            return result;
         }
     }
 }

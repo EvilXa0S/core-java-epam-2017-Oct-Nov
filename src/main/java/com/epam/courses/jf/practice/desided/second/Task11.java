@@ -14,16 +14,13 @@ public class Task11 implements ITestableTask11{
             throw new IllegalArgumentException();
         }
 
-        int del = 1;
-        if (peoples.size() % 2 == 0){
-            del = 0;
-        }
-        for (int i =0 ; i <= peoples.size(); i++){
-            if (i == peoples.size()){
-                i = del;
-
+        int del = 0;
+        while (peoples.size() != 1) {
+            peoples.remove(del);
+            del++;
+            if (del >= peoples.size()) {
+                del %= peoples.size();
             }
-            peoples.remove(i);
         }
 
         return peoples.get(0);
@@ -37,10 +34,10 @@ public class Task11 implements ITestableTask11{
         }
 
         boolean check = true;
-
         while (peoples.size() != 1){
             Iterator<String> iterator = peoples.iterator();
             while (iterator.hasNext()) {
+                iterator.next();
 
                 if (check) {
                     iterator.remove();
