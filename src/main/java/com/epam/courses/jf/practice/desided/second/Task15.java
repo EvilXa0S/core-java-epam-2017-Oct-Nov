@@ -10,7 +10,21 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
+
+/**
+ * На плоскости задано N точек.
+ * Вывести в файл описания всех прямых, которые проходят более чем через 2 точки из заданных.
+ */
 public class Task15 implements ITestableTask15 {
+
+
+    /**
+     * Осуществляет анализ переданных точек, вычисляя линии, которые проходят более чем через 2 точки.
+     *
+     * @param points Множество точек на плоскости.
+     * @param output Файл для вывода результатов.
+     * @return Файл с результатами анализа.
+     */
     @Override
     public IFileWithLines analyze(Set<I2DPoint> points, File output) {
         Set<ILine> lines = new HashSet<>();

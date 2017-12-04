@@ -12,7 +12,19 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+
+/**
+ * Сформировать множество файлов и каталогов, входящих в указанный каталог и его подкаталоги.
+ */
 public class Task2 implements ITestableTask2 {
+
+
+    /**
+     * Формирует множество всех файлов и каталогов, входящих в указанный каталог и во все вложенные.
+     *
+     * @param directory Корневой каталог.
+     * @return Полученное множество каталогов и файлов.
+     */
     @Override
     public Set<File> getFiles(File directory) {
         Set<File> fileSet = new HashSet<>();

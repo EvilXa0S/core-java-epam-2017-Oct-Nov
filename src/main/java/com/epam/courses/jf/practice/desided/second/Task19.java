@@ -6,7 +6,21 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Set;
 
+
+/**
+ * На кольцевой гоночной трассе стоит N автомобилей.
+ * Для каждого из них известны начальное положение и скорость.
+ * Определить, сколько произойдет обгонов за указанное количество кругов.
+ */
 public class Task19 implements ITestableTask19{
+
+
+    /**
+     * @param cars       Расположенные на трассе машины.
+     * @param lengthLap  Длина одного круга.
+     * @param numberLaps Количество кругов.
+     * @return Количество осуществленных обгонов.
+     */
     @Override
     public int getNumberOvertaking(Set<ICar> cars, long lengthLap, int numberLaps) {
         ArrayList<ICar> list = new ArrayList<>(cars);

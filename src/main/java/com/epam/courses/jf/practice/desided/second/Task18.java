@@ -4,7 +4,19 @@ import com.epam.courses.jf.practice.common.second.ITestableTask18;
 
 import static java.lang.Math.min;
 
+
+/**
+ * Дана матрица из целых чисел.
+ * Найти в ней прямоугольную подматрицу, состоящую из максимального количества одинаковых элементов.
+ * Использовать стек.
+ */
 public class Task18 implements ITestableTask18 {
+
+
+    /**
+     * @param matrix Анализируемая матрица.
+     * @return Подматрица, состоящая из максимального количества одинаковых элементов.
+     */
     public IRectangularIntegerMatrix getMaxSubMatrix(IRectangularIntegerMatrix matrix) {
         int matrixHeight = matrix.getHeight();
         int matrixWidth = matrix.getWidth();
