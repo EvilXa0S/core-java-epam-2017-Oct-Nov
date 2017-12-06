@@ -1053,8 +1053,11 @@ public class Solver implements ISolver {
 
                 }
             }
-            Arrays.sort(localMaxima.toArray());
-            System.out.println(localMaxima.get(localMaxima.size()-1));
+            if(localMaxima.size()!=0) {
+                Arrays.sort(localMaxima.toArray());
+                System.out.println(localMaxima.get(localMaxima.size() - 1));
+            }
+            else System.out.println("NOT FOUND");
         }
     }
     public void task27(){
