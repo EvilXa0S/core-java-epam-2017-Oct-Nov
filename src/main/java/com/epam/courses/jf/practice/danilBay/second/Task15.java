@@ -14,19 +14,17 @@ public class Task15 implements ITestableTask15 {
 
         List<I2DPoint> allPoints=new ArrayList<>(points);
         Set<ILine> resultSet=new HashSet<>();
-        Set<I2DPoint> set=new HashSet<>();
+        Set<I2DPoint> set;
         I2DPoint firstPoint;
         I2DPoint secondPoint;
         I2DPoint thirdPoint;
+
         for( int i=0; i<allPoints.size(); i++){
              firstPoint=allPoints.get(i);
-
             for(int j=i+1;j<allPoints.size(); j++){
                 secondPoint=allPoints.get(j);
-
                 set=new HashSet<>();
                 for(int k=j+1;k<allPoints.size(); k++){
-
                     thirdPoint = allPoints.get(k);
                     set.add(firstPoint);
                     set.add(secondPoint);
@@ -73,46 +71,22 @@ public class Task15 implements ITestableTask15 {
         @Override
 
         public Set<ILine> getLines() {
-
             return lineSet;
-
         }
 
     }
 
     class Line implements ILine{
-
-
         Set<I2DPoint> points=new HashSet<>();
-        Line(Set<I2DPoint> points){
 
+        Line(Set<I2DPoint> points){
             this.points = points;
         }
         @Override
         public Set<I2DPoint> getPoints() {
-
             return points;
         }
     }
 
-    public static void main(String[] args) {
-        Task15 m=new Task15();
-        Set<I2DPoint> d=new HashSet<>();
-        d.add(new Point(1,1));
-        d.add(new Point(2,2));
-        d.add(new Point(3,3));
-        d.add(new Point(3,0));
-        d.add(new Point(3,-3));
-        d.add(new Point(6,1));
-        File file = new File("C:\\Users\\dana\\Desktop\\СТАТ_функц\\s.txt");
-        FileWithLines f= (FileWithLines) m.analyze(d,file);
-        for(ILine l :f.getLines()){
-            for(I2DPoint p : l.getPoints()) {
-                System.out.print("x=" + p.getX()+" y=" + p.getY()+" ");
-            }
-            System.out.println();
 
-        }
-
-    }
 }

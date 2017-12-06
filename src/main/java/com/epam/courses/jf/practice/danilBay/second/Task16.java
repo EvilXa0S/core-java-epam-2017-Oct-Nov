@@ -44,7 +44,7 @@ public class Task16 implements ITestableTask16 {
                     writer.write(point.getX() + " " + point.getY());
                 }
                 writer.write(System.lineSeparator());
-            writer.close();
+                writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

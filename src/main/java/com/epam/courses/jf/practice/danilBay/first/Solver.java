@@ -3,6 +3,7 @@ package com.epam.courses.jf.practice.danilBay.first;
 import com.epam.courses.jf.practice.common.first.ISolver;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
@@ -927,9 +928,135 @@ public class Solver implements ISolver {
 
 
     public void task25() {
+        Scanner scanner= new Scanner(System.in);
+        int b = scanner.nextInt();
+        boolean s1,s2,s3,s4,s5,s6,s7,s8;
 
+        int matrix[][]=new int[b][b];
+        for (int i = 0; i < b; i++) {
+            for (int j = 0; j < b; j++) {
+                matrix[i][j] = scanner.nextInt();
+
+            }
+        }
+        int localMin = 0;
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+
+                boolean leftY = (j - 1) >= 0;
+                boolean rightY = (j + 1) < matrix.length;
+                boolean toptX = (i - 1) >= 0;
+                boolean bottomX = (i + 1) < matrix.length;
+
+                s1 = true;
+                s2 = true;
+                s3 = true;
+                s4 = true;
+                s5 = true;
+                s6 = true;
+                s7 = true;
+                s8 = true;
+
+                if (toptX && leftY)
+                    s1 = matrix[i][j] < matrix[i - 1][j - 1];
+
+                if (toptX)
+                    s2 = matrix[i][j] < matrix[i - 1][j];
+
+                if (toptX && rightY)
+                    s3 = matrix[i][j] < matrix[i - 1][j + 1];
+
+                if (rightY)
+                    s4 = matrix[i][j] < matrix[i][j + 1];
+
+                if (bottomX && rightY)
+                    s5 = matrix[i][j] < matrix[i + 1][j + 1];
+
+                if (bottomX)
+                    s6 = matrix[i][j] < matrix[i + 1][j];
+
+                if (bottomX && leftY)
+                    s7 = matrix[i][j] < matrix[i + 1][j - 1];
+
+                if (leftY)
+                    s8 = matrix[i][j] < matrix[i][j - 1];
+
+                if (s1 && s2 && s3 && s4 && s5 && s6 && s7 && s8)
+                    localMin++;
+
+            }
+        }
+
+        System.out.println(localMin);
     }
+    public void task26(){
+        {
+            Scanner scanner= new Scanner(System.in);
+            int b = scanner.nextInt();
+            boolean s1,s2,s3,s4,s5,s6,s7,s8;
 
+            int matrix[][]=new int[b][b];
+            for (int i = 0; i < b; i++) {
+                for (int j = 0; j < b; j++) {
+                    matrix[i][j] = scanner.nextInt();
+
+                }
+            }
+            int localMin = 0;
+            ArrayList<Integer>localMaxima=new ArrayList<>();
+
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix.length; j++) {
+
+                    boolean leftY = (j - 1) >= 0;
+                    boolean rightY = (j + 1) < matrix.length;
+                    boolean toptX = (i - 1) >= 0;
+                    boolean bottomX = (i + 1) < matrix.length;
+
+                    s1 = true;
+                    s2 = true;
+                    s3 = true;
+                    s4 = true;
+                    s5 = true;
+                    s6 = true;
+                    s7 = true;
+                    s8 = true;
+
+                    if (toptX && leftY)
+                        s1 = matrix[i][j] < matrix[i - 1][j - 1];
+
+                    if (toptX)
+                        s2 = matrix[i][j] < matrix[i - 1][j];
+
+                    if (toptX && rightY)
+                        s3 = matrix[i][j] < matrix[i - 1][j + 1];
+
+                    if (rightY)
+                        s4 = matrix[i][j] < matrix[i][j + 1];
+
+                    if (bottomX && rightY)
+                        s5 = matrix[i][j] < matrix[i + 1][j + 1];
+
+                    if (bottomX)
+                        s6 = matrix[i][j] < matrix[i + 1][j];
+
+                    if (bottomX && leftY)
+                        s7 = matrix[i][j] < matrix[i + 1][j - 1];
+
+                    if (leftY)
+                        s8 = matrix[i][j] < matrix[i][j - 1];
+
+                    if (s1 && s2 && s3 && s4 && s5 && s6 && s7 && s8){
+                        localMaxima.add(matrix[i][j]);
+                    }
+
+                }
+            }
+            Arrays.sort(localMaxima.toArray());
+            System.out.println(localMaxima.get(localMaxima.size()-1));
+        }
+    }
     public void task27(){
         Scanner in = new Scanner(System.in);
         LinkedList<Integer> conseq=new LinkedList<>();
@@ -987,6 +1114,6 @@ public class Solver implements ISolver {
     public static void main(String[] args) {
 
         Solver m= new Solver();
-        m.task8();
+        m.task25();
     }
 }
