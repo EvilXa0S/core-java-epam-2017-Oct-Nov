@@ -10,21 +10,17 @@ import java.util.*;
 
 public class Task16 implements ITestableTask16 {
 
-
     private double distance(I2DPoint p1, I2DPoint p2){
         return Math.sqrt(Math.pow(p1.getX()-p2.getX(),2)+ Math.pow(p1.getY()-p2.getY(),2));
     }
+
     @Override
     public IFileWithPoints analyze(I2DPoint center, int radius, File output) {
-
-        SortedMap<I2DPoint,Double> res= new TreeMap<>(new Comparator<I2DPoint>() {
-            @Override
-            public int compare(I2DPoint o1, I2DPoint o2) {
-                if(distance(o1,center)<distance(o2,center)){
-                    return -1;
-                }
-                else return 1;
+        SortedMap<I2DPoint,Double> res= new TreeMap<>((o1, o2) -> {
+            if(distance(o1,center)<distance(o2,center)){
+                return -1;
             }
+            else return 1;
         });
 
         double startX=center.getX()-radius;
@@ -40,17 +36,14 @@ public class Task16 implements ITestableTask16 {
                 if(distance<radius){
                     res.put(new Point(curX,curY),distance);
                 }
-
             }
         }
-
+        //запись в файл
         try (PrintWriter writer = new PrintWriter(output)) {
-
                 for (I2DPoint point : res.keySet()) {
                     writer.write(point.getX() + " " + point.getY());
                 }
                 writer.write(System.lineSeparator());
-
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -62,33 +55,25 @@ public class Task16 implements ITestableTask16 {
     class FileWithPoints implements IFileWithPoints{
         File output;
         SortedMap map;
+
         FileWithPoints(File out, SortedMap<I2DPoint,Double> map){
             this.output=out;
             this.map=map;
-
         }
+
         @Override
         public File getFile() {
             return output;
         }
 
         @Override
-
         public SortedMap<I2DPoint,Double> getPoints() {
-
             return map;
-
         }
 
     }
 
-    public static void main(String[] args) {
-        Task16 task16=new Task16();
-        for(I2DPoint p :task16.analyze(new Point(3,3),6,new File("ds")).getPoints().keySet()){
-            System.out.println(p.getX() + " " +p.getY());
-        };
 
-    }
 
 
 }
