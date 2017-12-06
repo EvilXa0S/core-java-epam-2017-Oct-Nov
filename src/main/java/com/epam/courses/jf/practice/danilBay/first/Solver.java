@@ -276,8 +276,9 @@ public class Solver implements ISolver {
                 numOfWords--;
                 continue;
             }
-            boolean flag=true;
 
+
+            boolean flag=true;
             for(int i=0,j=buf.length()-1;i<=j;i++,j--){
                 if(buf.charAt(i)!=buf.charAt(j)) {
                     flag = false;
@@ -285,7 +286,7 @@ public class Solver implements ISolver {
             }
 
 
-            if(flag && !resultat.contains(buf))
+            if(flag)
                 resultat.add(buf);
 
             numOfWords--;
@@ -428,7 +429,7 @@ public class Solver implements ISolver {
         for(int x=0;x<b;x++)
             r[x]=res[x][a];
 
-
+        System.out.println(b);
         for(int y=0;y<b;y++) {
             int min = res[y][a];
             int minAd=y;
@@ -442,7 +443,7 @@ public class Solver implements ISolver {
             int tmp[]=res[minAd];
             res[minAd]=res[y];
             res[y]=tmp;
-            System.out.println(b);
+
 
             for(int x : res[y])
                 System.out.print(x+"    ");
@@ -457,7 +458,7 @@ public class Solver implements ISolver {
      * {@see <a href="https://bitbucket.org/elefus/spring-java-school-epam-c-2017/wiki/Task%201.13">Задание №13</a>}
      */
     public void task13() {
-        int velocity;
+
         Scanner in = new Scanner(System.in);
         int a = in.nextInt();
         int b = in.nextInt();
@@ -471,14 +472,14 @@ public class Solver implements ISolver {
         if(a>=0)
             for (int x = 0; x < b; x++) {
                 for (int y = 0; y < b; y++)
-                    System.out.print(res[Math.abs((a + x) % b)][y]+" ");
+                    System.out.print(res[((a + x) % b)][y]+" ");
 
                 System.out.println();
             }
         else
-            for (int x = 0; x >-b; x--) {
+            for (int x = 0; x <b; x++) {
                 for (int y = 0; y < b; y++)
-                    System.out.print(res[Math.abs((a + x) % b)][y]+"    ");
+                    System.out.print(res[((-a + x) % b)][y]+"    ");
 
                 System.out.println();
             }
@@ -491,10 +492,13 @@ public class Solver implements ISolver {
         int velocity;
         Scanner in = new Scanner(System.in);
         int a = in.nextInt()-1;
+
         int maxPosl=1;
         int maxPosTemp=1;
+
         int first=in.nextInt();
         int second;
+
         if(a==0)
             maxPosl=0;
 
@@ -507,13 +511,12 @@ public class Solver implements ISolver {
                 maxPosl=maxPosTemp;
                 maxPosTemp = 1;
             }
-
-
-
             first=second;
             a--;
         }
-
+       if(maxPosl==1){
+            maxPosl=0;
+       }
         System.out.println(maxPosl);
     }
 
@@ -925,11 +928,8 @@ public class Solver implements ISolver {
 
     public void task25() {
 
-
     }
-//    public void task26(){
-//
-//    }
+
     public void task27(){
         Scanner in = new Scanner(System.in);
         LinkedList<Integer> conseq=new LinkedList<>();
@@ -985,56 +985,8 @@ public class Solver implements ISolver {
 
     }
     public static void main(String[] args) {
-//        try(FileInputStream fin=new FileInputStream("C:\\Users\\dana\\Desktop\\Новая папка (3)\\3D модель для МК\\vertexes1.bin");
-//            FileWriter fos=new FileWriter(new File("C:\\Users\\dana\\Desktop\\Новая папка (3)\\3D модель для МК\\vertC.c"));
-//           )
-//        {
-//            ArrayList<Byte> buffer = new ArrayList<>(fin.available());
-//            // считываем буфер
-//            short f= (short) 0xde00;
-//            int i=-1;
-//            int byteCounter=0;
-//            for(int j=0;j<fin.available();j++){
-//                buffer.add((byte)fin.read());
-//
-//            }
-//            ArrayList<Integer> res=new ArrayList<>();
-//            int tempa=0;
-//            int b1,b2,b3,b4;
-//            for(int k=0;k<buffer.size();k+=4){
-//                if(k%16==0){
-//
-//                    continue;
-//                }
-//                tempa=0;
-//                b1=buffer.get(k)<<24;
-//                b2=buffer.get(k+1)<<16;
-//                b3=buffer.get(k+2)<<8;
-//                b4=(int)buffer.get(k+3);
-//                tempa=b1|b2|b3|b4;
-//                res.add(tempa);
-//            }
-//
-//            StringBuilder str=new StringBuilder();
-//            str.append('{');
-//            for(int x: res){
-//                str.append(x);
-//                str.append(',');
-//            }
-//            str.append('}');
-//
-//            fos.write(str.toString());
-//
-//        }
-//
-//
-//        catch(IOException ex){
-//
-//            System.out.println(ex.getMessage());
-//        }
-//        Solver a=new Solver();
-//        a.task22();
+
         Solver m= new Solver();
-        m.task25();
+        m.task8();
     }
 }

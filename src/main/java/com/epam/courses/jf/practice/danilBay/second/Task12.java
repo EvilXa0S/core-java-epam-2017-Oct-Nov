@@ -29,19 +29,19 @@ public class Task12 implements ITestableTask12 {
     public static void main(String[] args) {
         Task12 d=new Task12();
         ArrayList <Integer> g=new ArrayList<>();
-        g.add(5);
-        g.add(1);
-        g.add(7);
+        g.add(11);
+        g.add(10);
+        g.add(9);
         g.add(8);
-        g.add(0);
-        g.add(-1);
+        g.add(9);
+        g.add(12);
         g.add(5);
         g.add(-4);
         g.add(55);
         g.add(335);
 
 
-        for(Integer x : d.transform(g,5)){
+        for(Integer x : d.transform(g,8)){
           System.out.println(x);
       };
     }

@@ -29,6 +29,6 @@ public class Task18 implements ITestableTask18 {
                 }
             }
         }
-        return null;
+      return null;
     }
 }
