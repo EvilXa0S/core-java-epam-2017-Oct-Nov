@@ -1022,28 +1022,28 @@ public class Solver implements ISolver {
                     s8 = true;
 
                     if (toptX && leftY)
-                        s1 = matrix[i][j] < matrix[i - 1][j - 1];
+                        s1 = matrix[i][j] > matrix[i - 1][j - 1];
 
                     if (toptX)
-                        s2 = matrix[i][j] < matrix[i - 1][j];
+                        s2 = matrix[i][j]> matrix[i - 1][j];
 
                     if (toptX && rightY)
-                        s3 = matrix[i][j] < matrix[i - 1][j + 1];
+                        s3 = matrix[i][j] > matrix[i - 1][j + 1];
 
                     if (rightY)
-                        s4 = matrix[i][j] < matrix[i][j + 1];
+                        s4 = matrix[i][j] > matrix[i][j + 1];
 
                     if (bottomX && rightY)
-                        s5 = matrix[i][j] < matrix[i + 1][j + 1];
+                        s5 = matrix[i][j] > matrix[i + 1][j + 1];
 
                     if (bottomX)
-                        s6 = matrix[i][j] < matrix[i + 1][j];
+                        s6 = matrix[i][j] > matrix[i + 1][j];
 
                     if (bottomX && leftY)
-                        s7 = matrix[i][j] < matrix[i + 1][j - 1];
+                        s7 = matrix[i][j] > matrix[i + 1][j - 1];
 
                     if (leftY)
-                        s8 = matrix[i][j] < matrix[i][j - 1];
+                        s8 = matrix[i][j] > matrix[i][j - 1];
 
                     if (s1 && s2 && s3 && s4 && s5 && s6 && s7 && s8){
                         localMaxima.add(matrix[i][j]);
@@ -1051,11 +1051,12 @@ public class Solver implements ISolver {
 
                 }
             }
-            if(localMaxima.size()!=0) {
+            if(localMaxima.size()>0) {
                 int max= localMaxima.get(0);
                 for(int i=1;i<localMaxima.size();i++){
-                    if(localMaxima.get(i)>max)
-                        max=localMaxima.get(i);
+                    if(localMaxima.get(i)>max) {
+                        max = localMaxima.get(i);
+                    }
                 }
                 System.out.println(max);
             }
