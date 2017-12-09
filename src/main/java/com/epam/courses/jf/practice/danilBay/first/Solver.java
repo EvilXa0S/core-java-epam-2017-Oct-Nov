@@ -1052,9 +1052,12 @@ public class Solver implements ISolver {
                 }
             }
             if(localMaxima.size()!=0) {
-                Integer[]res=(Integer[])localMaxima.toArray();
-                Arrays.sort(res);
-                System.out.println(res[res.length-1]);
+                int max= localMaxima.get(0);
+                for(int i=1;i<localMaxima.size();i++){
+                    if(localMaxima.get(i)>max)
+                        max=localMaxima.get(i);
+                }
+                System.out.println(max);
             }
             else System.out.println("NOT FOUND");
         }
