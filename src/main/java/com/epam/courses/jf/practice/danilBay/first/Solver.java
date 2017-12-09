@@ -1052,8 +1052,9 @@ public class Solver implements ISolver {
                 }
             }
             if(localMaxima.size()!=0) {
-                Arrays.sort(localMaxima.toArray());
-                System.out.println(localMaxima.get(localMaxima.size() - 1));
+                Integer[]res=(Integer[])localMaxima.toArray();
+                Arrays.sort(res);
+                System.out.println(res[res.length-1]);
             }
             else System.out.println("NOT FOUND");
         }
