@@ -987,7 +987,6 @@ public class Solver implements ISolver {
 
             }
         }
-
         System.out.println(localMin);
     }
     public void task26(){
@@ -1000,7 +999,6 @@ public class Solver implements ISolver {
             for (int i = 0; i < b; i++) {
                 for (int j = 0; j < b; j++) {
                     matrix[i][j] = scanner.nextInt();
-
                 }
             }
             int localMin = 0;
@@ -1115,7 +1113,6 @@ public class Solver implements ISolver {
 
     }
     public static void main(String[] args) {
-
         Solver m= new Solver();
         m.task25();
     }
