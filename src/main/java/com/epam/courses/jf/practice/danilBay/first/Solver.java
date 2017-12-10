@@ -505,11 +505,12 @@ public class Solver implements ISolver {
 
         while(a!=0){
             second=in.nextInt();
-            if(second>first)
+            if(second>first) {
                 maxPosTemp++;
-            else
-                if(maxPosTemp>maxPosl){
-                maxPosl=maxPosTemp;
+                if (maxPosTemp > maxPosl)
+                    maxPosl = maxPosTemp;
+            }
+            else{
                 maxPosTemp = 1;
             }
             first=second;
@@ -1119,6 +1120,6 @@ public class Solver implements ISolver {
     }
     public static void main(String[] args) {
         Solver m= new Solver();
-        m.task25();
+        m.task14();
     }
 }
