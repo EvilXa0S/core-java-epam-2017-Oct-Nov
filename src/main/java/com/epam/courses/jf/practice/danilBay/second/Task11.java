@@ -24,17 +24,5 @@ public class Task11 implements ITestableTask11 {
         return peoples.get(0);
     }
 
-    public static void main(String[] args) {
 
-
-        Task11 tsk11=new Task11();
-        LinkedList<String> d =new LinkedList<String>();
-        d.add(2+"");
-        d.add(6+"");
-        d.add(5+"");
-        d.add(8+"");
-        d.add(9+"");
-
-        System.out.println(tsk11.emulate(d));
-    }
 }
