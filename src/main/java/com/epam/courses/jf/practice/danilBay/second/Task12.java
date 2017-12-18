@@ -2,28 +2,31 @@ package com.epam.courses.jf.practice.danilBay.second;
 
 import com.epam.courses.jf.practice.common.second.ITestableTask12;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class Task12 implements ITestableTask12 {
     @Override
     public List<Integer> transform(List<Integer> integers, int value) {
-
-        for(int i=-1, g=integers.size();  ;){
-            do i++; while (integers.get(i)<=value);
-
-            do g--;
-               while (integers.get(g)> value);
-
-
-            if(i >= g) return integers;
-            {
-                int temp=integers.get(i);
-                integers.set(i,integers.get(g));
-                integers.set(g,temp);
-
-            }
-
-        }
+         Collections.sort(integers);
+        return integers;
+//        for(int i=-1, g=integers.size();  ;){
+//            do i++; while (integers.get(i)<=value);
+//
+//            do g--;
+//               while (integers.get(g)> value);
+//
+//
+//            if(i >= g) return integers;
+//            {
+//                int temp=integers.get(i);
+//                integers.set(i,integers.get(g));
+//                integers.set(g,temp);
+//
+//            }
+//
+//        }
     }
 
     public static void main(String[] args) {

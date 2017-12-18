@@ -24,5 +24,4 @@ public class Task11 implements ITestableTask11 {
         return peoples.get(0);
     }
 
-
 }
