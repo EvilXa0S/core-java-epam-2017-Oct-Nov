@@ -6,7 +6,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Task10 implements ITestableTask10 {
     @Override
@@ -35,5 +37,11 @@ public class Task10 implements ITestableTask10 {
 
         return res;
 
+    }
+
+    public static void main(String[] args) {
+        Task10 d=new Task10();
+         Map<String,Integer> hui=d.countNumberWords(new File("C:\\Users\\dana\\IdeaProjects\\d.txt"));
+        int b=0;
     }
 }

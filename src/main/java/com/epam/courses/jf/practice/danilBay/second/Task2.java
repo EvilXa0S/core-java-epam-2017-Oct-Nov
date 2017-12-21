@@ -11,7 +11,6 @@ public class Task2 implements ITestableTask2 {
     static private Set<File> fileSet = new HashSet<>();
 
     static private File[] deepDarkFantasy(File[] fileArrray) {
-
         for (File x : fileArrray) {
             fileSet.add(x);
             if (!(x.listFiles() == null)) {
@@ -20,12 +19,25 @@ public class Task2 implements ITestableTask2 {
         }
         return null;
     }
-
     @Override
     public Set<File> getFiles(File directory) {
-        deepDarkFantasy(directory.listFiles());
-        return fileSet;
+
+        Set<File> resultSet = new HashSet<>();
+
+        for (File unit : directory.listFiles()) {
+            if (unit.isDirectory()) {
+                resultSet.add(unit);
+                resultSet.addAll(getFiles(unit));
+            } else {
+                resultSet.add(unit);
+            }
+        }
+        return resultSet;
     }
+//    public Set<File> getFiles(File directory) {
+//        deepDarkFantasy(directory.listFiles());
+//        return fileSet;
+//    }
 
     public static void main(String[] args) {
         Task2 m = new Task2();

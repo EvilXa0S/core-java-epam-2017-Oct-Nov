@@ -11,17 +11,14 @@ public class Task9 implements ITestableTask9{
     @Override
     public HashSet<String> getUniqueWords(File input) {
         HashSet<String> res=new HashSet<>();
-        String buf;
-        try (Scanner fileScanner =new Scanner((new FileReader(input)));) {
-            fileScanner.useDelimiter(" ");
-
-            while (fileScanner.hasNext()){
-                buf=fileScanner.next().toLowerCase();
-                res.add(buf);
-
+        String line;
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(input))) {
+            while ((line = bufferedReader.readLine()) != null) {
+                for (String buf : line.split(" ")) {
+                    res.add(buf.toLowerCase());
+                }
             }
-            fileScanner.close();
-        } catch (FileNotFoundException e) {
+        }   catch (IOException e) {
             e.printStackTrace();
         }
 
