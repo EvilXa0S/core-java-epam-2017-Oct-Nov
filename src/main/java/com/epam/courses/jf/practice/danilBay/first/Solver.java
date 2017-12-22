@@ -255,52 +255,28 @@ public class Solver implements ISolver {
      */
     public void task8() {
 
-        ArrayList<Integer> gl=new ArrayList<>();
-        Pattern p = Pattern.compile("[\n ]");
-        ArrayList<String> words=new ArrayList<>();
-        ArrayList<String> resultat=new ArrayList<>();
-        String buf;
-        Scanner in = new Scanner(System.in);
-        int numOfWords=in.nextInt();
-        int result=0;
-        Set<Character> charSet=new HashSet<>();
-        in.nextLine();
-        in.useDelimiter(p);
-        while (numOfWords!=0){
+        Scanner stdIn = new Scanner(System.in);
+        String[] st;
+        String resultNumber = new String("");
+        stdIn.nextInt();
+        stdIn.nextLine();
+        String s = stdIn.nextLine();
 
-            buf=in.next();
-            try {
-                Integer.parseInt(buf);
+        st = s.split(" ");
 
-            }
-            catch (NumberFormatException e){
-                numOfWords--;
+        for(String word: st) {
+            if(word.matches("\\D*"))
                 continue;
+            String reversedNumber = new String((new StringBuffer(word)).reverse());
+            if(word.equals(reversedNumber)) {
+                resultNumber = word;
             }
-
-
-            boolean flag=true;
-            for(int i=0,j=buf.length()-1;i<=j;i++,j--){
-                if(buf.charAt(i)!=buf.charAt(j)) {
-                    flag = false;
-                }
-            }
-
-
-            if(flag)
-                resultat.add(buf);
-
-            numOfWords--;
-
         }
-        if(resultat.isEmpty())
+
+        if(resultNumber.equals(""))
             System.out.println("NOT FOUND");
-        else if(resultat.size()>1)
-            System.out.println(resultat.get(1));
         else
-            System.out.println(resultat.get(0));
-
-
+            System.out.println(resultNumber);
 
     }
 
@@ -473,7 +449,7 @@ public class Solver implements ISolver {
         if(a>=0)
             for (int x = 0; x < b; x++) {
                 for (int y = 0; y < b; y++)
-                    System.out.print(res[((a + x) % b)][y]+" ");
+                    System.out.print(res[((b-a%b + x) % b)][y]+" ");
 
                 System.out.println();
             }
@@ -1120,6 +1096,6 @@ public class Solver implements ISolver {
     }
     public static void main(String[] args) {
         Solver m= new Solver();
-        m.task14();
+        m.task13();
     }
 }
